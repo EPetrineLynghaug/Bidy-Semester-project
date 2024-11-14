@@ -1,4 +1,5 @@
 import { API_AUCTION_LISTINGS, createHeaders } from "../apiConfig.js";
+import { createAuctionCard } from "../ui/createAuctionCard.js";
 
 console.log("auctionListings.js lastet!");
 
@@ -39,26 +40,10 @@ export async function displayAuctions() {
   }
 
   listings.forEach((listing) => {
-    const listingCard = document.createElement("div");
-    listingCard.classList.add("listing-card");
-
-    const imageUrl =
-      listing.media?.[0]?.url || "https://via.placeholder.com/150";
-
-    listingCard.innerHTML = `
-      <h2>${listing.title}</h2>
-      <p>${listing.description}</p>
-      <small>Slutter: ${new Date(listing.endsAt).toLocaleDateString()}</small>
-      <div>
-        <img src="${imageUrl}" alt="${
-      listing.media?.[0]?.alt || "Bilde av auksjon"
-    }" />
-      </div>
-      <small>Antall bud: ${listing._count?.bids || 0}</small>
-    `;
-
+    const listingCard = createAuctionCard(listing);
     listingsContainer.appendChild(listingCard);
   });
 
   console.log("Auksjonsoppføringer vist.");
 }
+displayAuctions();
