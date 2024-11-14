@@ -2,11 +2,14 @@ import {
   API_AUTH_LOGIN,
   TOKEN_STORAGE_KEY,
   createHeaders,
-} from "./apiConfig.js";
+} from "../apiConfig.js";
 
 async function login(email, password) {
+  console.log("Login function called with email:", email);
+
   try {
     const reqBody = { email, password };
+    console.log("Sending request to API:", API_AUTH_LOGIN);
 
     const response = await fetch(API_AUTH_LOGIN, {
       method: "POST",
@@ -19,18 +22,15 @@ async function login(email, password) {
     }
 
     const result = await response.json();
-    console.log("Parsed result:", result); // Logg resultatet for feilsøking
+    console.log("Parsed result:", result);
 
-   
-    if (result.data && result.data.accessToken) {
+    if (result.data?.accessToken) {
       localStorage.setItem(TOKEN_STORAGE_KEY, result.data.accessToken);
       alert("Du er nå logget inn");
       window.location.href = "/index.html";
     } else {
       alert("Innlogging mislyktes: accessToken mangler i responsen");
     }
-
-    return result.data;
   } catch (error) {
     console.error("Innlogging feilet:", error.message);
     alert("Innlogging feilet. Vennligst prøv igjen.");
@@ -44,8 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
       event.preventDefault();
       const email = loginForm.querySelector("#email").value;
       const password = loginForm.querySelector("#password").value;
-      console.log("Form submitted with email and password");
-
       await login(email, password);
     });
   }

@@ -6,16 +6,19 @@ export const API_AUTH = `${API_BASE}/auth`;
 export const API_AUTH_LOGIN = `${API_AUTH}/login`;
 export const API_AUTH_REGISTER = `${API_AUTH}/register`;
 
+export const API_AUCTION_LISTINGS = `${API_BASE}/auction/listings`;
+
 export function createHeaders() {
   const headers = new Headers({
     "Content-Type": "application/json",
     "X-Noroff-API-Key": API_KEY,
   });
 
+  // Legg til Authorization-headeren kun hvis token finnes
   const token = localStorage.getItem(TOKEN_STORAGE_KEY);
   if (token) {
     headers.append("Authorization", `Bearer ${token}`);
   }
 
-  return headers;
+  return headers; 
 }
