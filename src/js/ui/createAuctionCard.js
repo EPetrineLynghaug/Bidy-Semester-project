@@ -1,5 +1,6 @@
-import { openModal } from "../components/DetailModal.js"; // Hvis vi bruker modal for detaljer
+import { openModal } from "../components/DetailModal.js"; 
 
+// Funksjon for å lage auksjonskort
 export function createAuctionCard(listing) {
   const card = document.createElement("div");
   card.className =
@@ -16,7 +17,7 @@ export function createAuctionCard(listing) {
     "auction-card__title text-lg font-bold text-gray-800 truncate";
   card.appendChild(title);
 
-  // --- Forfatter ---
+  // --- Forfatterseksjon (Selger) ---
   const authorSection = createAuthorSection(listing.seller);
   card.appendChild(authorSection);
 
@@ -30,6 +31,10 @@ export function createAuctionCard(listing) {
   description.className =
     "auction-card__description text-sm text-gray-700 line-clamp-3";
   card.appendChild(description);
+
+  // --- Siste bud ---
+  const bidSection = createBidSection(listing);
+  card.appendChild(bidSection);
 
   // --- "Bid Now"-knapp ---
   const bidButton = document.createElement("button");
@@ -90,15 +95,16 @@ function createImageCarousel(images) {
   return carousel;
 }
 
-// Forfatterseksjon
+// Forfatterseksjon (Selger)
 function createAuthorSection(seller) {
   const authorSection = document.createElement("div");
   authorSection.className = "auction-card__author flex items-center gap-2";
 
+  // Bruker avatar for bilde, fall tilbake til en plassholder om den ikke finnes
   const authorImage = document.createElement("img");
-  authorImage.src = seller?.image || "https://via.placeholder.com/50";
+  authorImage.src = seller?.avatar?.url || "https://via.placeholder.com/50"; 
   authorImage.alt = seller?.name || "Unknown Author";
-  authorImage.className = "auction-card__author-image w-8 h-8 rounded-full";
+  authorImage.className = "auction-card__author-image w-8 h-8 rounded-full"; 
 
   const authorLink = document.createElement("a");
   authorLink.href = `/profile/?name=${seller?.name || ""}`;
@@ -106,6 +112,7 @@ function createAuthorSection(seller) {
   authorLink.className =
     "auction-card__author-name text-sm text-blue-500 hover:underline";
 
+  // Legg til bilde og navn til seksjonen
   authorSection.appendChild(authorImage);
   authorSection.appendChild(authorLink);
 
@@ -136,4 +143,24 @@ function createDateSection(created, endsAt) {
   dateSection.appendChild(expiresDate);
 
   return dateSection;
+}
+
+// Siste budseksjon
+function createBidSection(listing) {
+  const bidSection = document.createElement("div");
+  bidSection.className = "auction-card__bid-section text-sm text-gray-500";
+
+  // Hvis det er bud, vis det siste budet
+  const currentBid =
+    listing.bids && listing.bids.length > 0
+      ? `Current bid: $${listing.bids[listing.bids.length - 1].amount}`
+      : "No bids yet"; 
+
+  const bidText = document.createElement("p");
+  bidText.textContent = currentBid;
+  bidText.className = "auction-card__current-bid";
+
+  bidSection.appendChild(bidText);
+
+  return bidSection;
 }

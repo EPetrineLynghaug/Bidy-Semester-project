@@ -3,9 +3,9 @@ import { API_AUCTION_LISTINGS, createHeaders } from "./apiConfig.js";
 console.log("auctionListings.js lastet!");
 
 // Funksjon for å hente auksjonsoppføringer fra API
-export async function fetchAuctionListings(limit = 10, page = 1) {
+export async function fetchAuctionListings(limit = 18, page = 1) {
   try {
-    const url = `${API_AUCTION_LISTINGS}?limit=${limit}&page=${page}`;
+    const url = `${API_AUCTION_LISTINGS}?limit=18&_seller=true&_bids=true`;
     const response = await fetch(url, {
       method: "GET",
       headers: createHeaders(),

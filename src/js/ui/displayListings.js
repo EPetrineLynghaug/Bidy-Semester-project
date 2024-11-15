@@ -1,3 +1,4 @@
+
 // Funksjon for å vise auksjonsoppføringer i en gitt container
 export function renderAuctionListings(container, listings, createAuctionCard) {
   container.innerHTML = ""; // Rens container
