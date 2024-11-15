@@ -8,17 +8,21 @@ export const API_AUTH_REGISTER = `${API_AUTH}/register`;
 
 export const API_AUCTION_LISTINGS = `${API_BASE}/auction/listings`;
 
-export function createHeaders() {
+export function createHeaders(requireAuth = false) {
   const headers = new Headers({
     "Content-Type": "application/json",
     "X-Noroff-API-Key": API_KEY,
   });
 
-  // Legg til Authorization-headeren kun hvis token finnes
-  const token = localStorage.getItem(TOKEN_STORAGE_KEY);
-  if (token) {
-    headers.append("Authorization", `Bearer ${token}`);
+  if (requireAuth) {
+    const token = localStorage.getItem(TOKEN_STORAGE_KEY);
+    if (token) {
+      headers.append("Authorization", `Bearer ${token}`);
+    } else {
+      console.error("Ingen token funnet. Brukeren er ikke logget inn.");
+      throw new Error("Autorisering kreves, men ingen token funnet.");
+    }
   }
 
-  return headers; 
+  return headers;
 }

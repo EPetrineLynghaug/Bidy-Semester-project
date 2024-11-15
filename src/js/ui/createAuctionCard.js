@@ -1,19 +1,139 @@
-// Funksjon som lager et auksjonskort basert på data
+import { openModal } from "../components/DetailModal.js"; // Hvis vi bruker modal for detaljer
+
 export function createAuctionCard(listing) {
-    const listingCard = document.createElement("div");
-    listingCard.classList.add("listing-card");
-  
-    const imageUrl = listing.media?.[0]?.url || "https://via.placeholder.com/150";
-  
-    listingCard.innerHTML = `
-      <h2>${listing.title}</h2>
-      <p>${listing.description}</p>
-      <small>Slutter: ${new Date(listing.endsAt).toLocaleDateString()}</small>
-      <div>
-        <img src="${imageUrl}" alt="${listing.media?.[0]?.alt || "Bilde av auksjon"}" />
-      </div>
-      <small>Antall bud: ${listing._count?.bids || 0}</small>
-    `;
-  
-    return listingCard;
-  }
+  const card = document.createElement("div");
+  card.className =
+    "auction-card border rounded-lg shadow-lg p-4 bg-white flex flex-col gap-4";
+
+  // --- Karusell for bilder ---
+  const carousel = createImageCarousel(listing.media || []);
+  card.appendChild(carousel);
+
+  // --- Tittel ---
+  const title = document.createElement("h1");
+  title.textContent = listing.title || "Untitled Auction";
+  title.className =
+    "auction-card__title text-lg font-bold text-gray-800 truncate";
+  card.appendChild(title);
+
+  // --- Forfatter ---
+  const authorSection = createAuthorSection(listing.seller);
+  card.appendChild(authorSection);
+
+  // --- Datoer ---
+  const dateSection = createDateSection(listing.created, listing.endsAt);
+  card.appendChild(dateSection);
+
+  // --- Beskrivelse ---
+  const description = document.createElement("p");
+  description.textContent = listing.description || "No description available.";
+  description.className =
+    "auction-card__description text-sm text-gray-700 line-clamp-3";
+  card.appendChild(description);
+
+  // --- "Bid Now"-knapp ---
+  const bidButton = document.createElement("button");
+  bidButton.textContent = "Bid Now";
+  bidButton.className =
+    "auction-card__button mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition";
+  bidButton.dataset.cardId = listing.id;
+  bidButton.addEventListener("click", () => {
+    openModal(`Details for Auction ID: ${listing.id}`); // Dynamisk modal (eller annen logikk)
+  });
+  card.appendChild(bidButton);
+
+  return card;
+}
+
+// --- Hjelpefunksjoner ---
+
+// Karusell for bilder
+function createImageCarousel(images) {
+  const carousel = document.createElement("div");
+  carousel.className =
+    "carousel relative w-full h-48 flex items-center justify-center overflow-hidden";
+
+  let currentIndex = 0;
+
+  const image = document.createElement("img");
+  image.src =
+    images[currentIndex]?.url || "https://via.placeholder.com/400x300";
+  image.alt = images[currentIndex]?.alt || "Auction image";
+  image.className = "w-full h-full object-cover rounded";
+  carousel.appendChild(image);
+
+  const prevButton = document.createElement("button");
+  prevButton.textContent = "❮";
+  prevButton.className =
+    "absolute left-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-2 py-1 rounded hover:bg-gray-700";
+  prevButton.addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    image.src =
+      images[currentIndex]?.url || "https://via.placeholder.com/400x300";
+    image.alt = images[currentIndex]?.alt || "Auction image";
+  });
+
+  const nextButton = document.createElement("button");
+  nextButton.textContent = "❯";
+  nextButton.className =
+    "absolute right-2 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-2 py-1 rounded hover:bg-gray-700";
+  nextButton.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % images.length;
+    image.src =
+      images[currentIndex]?.url || "https://via.placeholder.com/400x300";
+    image.alt = images[currentIndex]?.alt || "Auction image";
+  });
+
+  carousel.appendChild(prevButton);
+  carousel.appendChild(nextButton);
+
+  return carousel;
+}
+
+// Forfatterseksjon
+function createAuthorSection(seller) {
+  const authorSection = document.createElement("div");
+  authorSection.className = "auction-card__author flex items-center gap-2";
+
+  const authorImage = document.createElement("img");
+  authorImage.src = seller?.image || "https://via.placeholder.com/50";
+  authorImage.alt = seller?.name || "Unknown Author";
+  authorImage.className = "auction-card__author-image w-8 h-8 rounded-full";
+
+  const authorLink = document.createElement("a");
+  authorLink.href = `/profile/?name=${seller?.name || ""}`;
+  authorLink.textContent = seller?.name || "Unknown Author";
+  authorLink.className =
+    "auction-card__author-name text-sm text-blue-500 hover:underline";
+
+  authorSection.appendChild(authorImage);
+  authorSection.appendChild(authorLink);
+
+  return authorSection;
+}
+
+// Datoer
+function createDateSection(created, endsAt) {
+  const dateSection = document.createElement("div");
+  dateSection.className = "auction-card__dates text-sm text-gray-500";
+
+  const createdDate = created
+    ? new Date(created).toLocaleDateString()
+    : "Unknown date";
+  const endsDate = endsAt
+    ? new Date(endsAt).toLocaleDateString()
+    : "Unknown end date";
+
+  const postedDate = document.createElement("p");
+  postedDate.textContent = `Posted: ${createdDate}`;
+  postedDate.className = "auction-card__date-posted";
+
+  const expiresDate = document.createElement("p");
+  expiresDate.textContent = `Expires: ${endsDate}`;
+  expiresDate.className = "auction-card__date-expires";
+
+  dateSection.appendChild(postedDate);
+  dateSection.appendChild(expiresDate);
+
+  return dateSection;
+}

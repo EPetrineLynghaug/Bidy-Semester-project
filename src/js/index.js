@@ -1,33 +1,22 @@
-import { TOKEN_STORAGE_KEY } from "./apiConfig.js";
-import { displayAuctions } from "./api/auctionListings.js";
+import { renderAuthLinks } from "./components/authLinks.js";
+import { fetchAuctionListings } from "./api/auctionListings.js";
+import { renderAuctionListings } from "./ui/displayListings.js";
+import { createAuctionCard } from "./ui/createAuctionCard.js";
 
-document.addEventListener("DOMContentLoaded", () => {
-  const authLinks = document.getElementById("auth-links");
-  const token = localStorage.getItem(TOKEN_STORAGE_KEY);
+document.addEventListener("DOMContentLoaded", async () => {
+  // Oppdater autentiseringslenker
+  renderAuthLinks();
 
-  function updateAuthLinks() {
-    if (token) {
-      // Hvis brukeren er logget inn, vis en logg ut-knapp
-      authLinks.innerHTML = `<button id="logout">Logout</button>`;
-      const logoutButton = document.getElementById("logout");
-      logoutButton.addEventListener("click", () => {
-        localStorage.removeItem(TOKEN_STORAGE_KEY);
-        alert("Du er nå logget ut");
-        updateAuthLinks(); // Oppdater visningen
-      });
-      console.log("Displayed logout button");
-    } else {
-      // Hvis brukeren ikke er logget inn, vis login og register lenker
-      authLinks.innerHTML = `
-        <a href="auth/login.html">Login</a>
-        <a href="auth/register.html">Register</a>
-      `;
-      console.log("Displayed login/register links");
-    }
+  // Hent og vis auksjonsoppføringer
+  const listingsContainer = document.getElementById("listings-container");
+
+  if (!listingsContainer) {
+    console.error("Container for auksjonsoppføringer ikke funnet.");
+    return;
   }
 
-  updateAuthLinks(); 
-  displayAuctions(); 
+  const listings = await fetchAuctionListings(10, 1);
+  renderAuctionListings(listingsContainer, listings, createAuctionCard);
 });
 
 console.log("index.js lastet og kjører");

@@ -2,7 +2,7 @@ import {
   API_AUTH_LOGIN,
   TOKEN_STORAGE_KEY,
   createHeaders,
-} from "../apiConfig.js";
+} from "./apiConfig.js";
 
 async function login(email, password) {
   console.log("Login function called with email:", email);

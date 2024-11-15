@@ -19,7 +19,7 @@ async function register(name, email, password) {
 
     if (result.data) {
       alert("Registrering vellykket! Du kan nå logge inn.");
-      window.location.href = "/auth/login.html";
+      window.location.href = "/index.html";
     } else {
       alert("Registrering mislyktes.");
     }

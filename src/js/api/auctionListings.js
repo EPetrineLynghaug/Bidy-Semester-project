@@ -1,5 +1,4 @@
-import { API_AUCTION_LISTINGS, createHeaders } from "../apiConfig.js";
-import { createAuctionCard } from "../ui/createAuctionCard.js";
+import { API_AUCTION_LISTINGS, createHeaders } from "./apiConfig.js";
 
 console.log("auctionListings.js lastet!");
 
@@ -13,37 +12,15 @@ export async function fetchAuctionListings(limit = 10, page = 1) {
     });
 
     if (!response.ok) {
-      throw new Error(`Feil status fra API: ${response.status}`);
+      throw new Error(`API-feil med statuskode ${response.status}`);
     }
 
     const result = await response.json();
     console.log("API-respons for auksjonsoppføringer:", result);
-    return result.data;
+    return result.data || [];
   } catch (error) {
     console.error("Feil ved henting av auksjoner:", error.message);
-    return null;
+    alert("Kunne ikke hente auksjonsoppføringer. Prøv igjen senere.");
+    return [];
   }
 }
-
-// Funksjon for å vise auksjonsoppføringer på siden
-export async function displayAuctions() {
-  const listingsContainer = document.getElementById("listings-container");
-  listingsContainer.innerHTML = "";
-
-  const listings = await fetchAuctionListings(10, 1);
-
-  if (!listings || listings.length === 0) {
-    listingsContainer.innerHTML =
-      "<p>Ingen auksjonsoppføringer tilgjengelig.</p>";
-    console.log("Ingen oppføringer funnet eller tom respons.");
-    return;
-  }
-
-  listings.forEach((listing) => {
-    const listingCard = createAuctionCard(listing);
-    listingsContainer.appendChild(listingCard);
-  });
-
-  console.log("Auksjonsoppføringer vist.");
-}
-displayAuctions();
