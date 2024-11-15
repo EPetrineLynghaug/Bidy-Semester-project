@@ -1,4 +1,5 @@
-import { API_AUTH_REGISTER, createHeaders } from "../apiConfig.js";
+import { createHeaders } from "../utilities/header.utillities.js";
+import { API_AUTH_REGISTER } from "./constants.js";
 
 async function register(name, email, password) {
   try {

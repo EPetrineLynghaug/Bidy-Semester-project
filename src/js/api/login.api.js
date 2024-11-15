@@ -1,8 +1,5 @@
-import {
-  API_AUTH_LOGIN,
-  TOKEN_STORAGE_KEY,
-  createHeaders,
-} from "./apiConfig.js";
+import { createHeaders } from "../utilities/header.utillities.js";
+import { API_AUTH_LOGIN, TOKEN_STORAGE_KEY } from "./constants.js";
 
 async function login(email, password) {
   console.log("Login function called with email:", email);

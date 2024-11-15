@@ -1,5 +1,5 @@
 // components/AuthLinks.js
-import { TOKEN_STORAGE_KEY } from "../api/apiConfig.js";
+import { TOKEN_STORAGE_KEY } from "../api/constants.js";
 
 export function renderAuthLinks() {
   const authLinks = document.getElementById("auth-links");

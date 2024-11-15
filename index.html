@@ -1,36 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script type="module" src="../src/js/index.js"></script>
-  </head>
-  <body class="bg-gray-100">
-    <nav class="flex justify-end p-4 bg-gray-800 text-white">
-      <div id="auth-links" class="space-x-4"></div>
-    </nav>
-    <h1 class="text-3xl font-bold text-center my-4 text-gray-800">
-      Auction Listings
-    </h1>
-    <div
-      id="listings-container"
-      class="grid gap-6 p-4 sm:grid-cols-2 lg:grid-cols-3"
-    ></div>
-    <div
-      id="auction-detail-modal"
-      class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center"
-    >
-      <div class="bg-white rounded-lg shadow-lg max-w-2xl w-full p-6 relative">
-        <button
-          id="close-modal"
-          class="absolute top-2 right-2 bg-gray-300 hover:bg-gray-400 text-gray-800 px-2 py-1 rounded"
-        >
-          Close
-        </button>
-        <div id="modal-content" class="flex flex-col gap-4"></div>
-      </div>
-    </div>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Welcome</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script type="module" src="./src/js/views/index.view.js"></script>
+    </head>
+    <body class="bg-gray-100">
+        <!-- Navigasjonsmeny -->
+        <nav class="flex justify-end p-4 bg-gray-800 text-white">
+            <div id="auth-links" class="space-x-4"></div>
+        </nav>
+
+        <!-- Overskrift -->
+        <h1 class="text-3xl font-bold text-center my-4 text-gray-800">
+            Auction Listings
+        </h1>
+
+        <!-- Container for auksjonsoppføringer -->
+        <div
+            id="listings-container"
+            class="grid gap-6 p-4 sm:grid-cols-2 lg:grid-cols-3"
+        ></div>
+    </body>
 </html>

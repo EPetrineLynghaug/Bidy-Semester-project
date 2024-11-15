@@ -2,7 +2,7 @@ import {
   API_AUTH_LOGIN,
   TOKEN_STORAGE_KEY,
   createHeaders,
-} from "./apiConfig.js";
+} from "../api/constants.js";
 
 // Funksjon som viser tilpassede alerter
 function showCustomAlert(message, type) {
@@ -33,7 +33,7 @@ export async function onLogin(event) {
   if (!emailCheck(email)) {
     showCustomAlert(
       "Invalid email format. Please use a valid Noroff student email, such as 'user@stud.noroff.no' or 'user@noroff.no'.",
-      "error"
+      "error",
     );
     return;
   }
@@ -42,7 +42,7 @@ export async function onLogin(event) {
   if (!pswCheck(password)) {
     showCustomAlert(
       "Invalid password. Password must be 8-20 characters long and can only include letters and numbers.",
-      "error"
+      "error",
     );
     return;
   }
@@ -54,7 +54,7 @@ export async function onLogin(event) {
     if (!data) {
       showCustomAlert(
         "Login failed. Please check your email and password and try again.",
-        "error"
+        "error",
       );
       return;
     }
@@ -64,7 +64,7 @@ export async function onLogin(event) {
 
     showCustomAlert(
       "Login successful! Redirecting to your dashboard...",
-      "success"
+      "success",
     );
 
     // Omdirigere etter en kort pause
@@ -75,7 +75,7 @@ export async function onLogin(event) {
     // Håndter eventuelle feil under pålogging
     showCustomAlert(
       "An unexpected error occurred during login. Please try again later.",
-      "error"
+      "error",
     );
     console.error("Login error:", error);
   }
