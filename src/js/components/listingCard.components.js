@@ -193,6 +193,15 @@ export function listingCardComponent(listing) {
     <p class="text-sm text-gray-700 line-clamp-3">${
       listing.description || "No description available."
     }</p>
+    <div class="auction-card__author flex items-center gap-2">
+      <img src="${seller.avatar.url || "https://via.placeholder.com/50"}"
+           alt="${seller.name || "Unknown Author"}"
+           class="auction-card__author-image w-8 h-8 rounded-full">
+      <a href="/src/views/profile.html?name=${seller?.name || ""}"
+         class="auction-card__author-name text-sm text-blue-500 hover:underline">
+        ${seller.name || "Unknown Author"}
+      </a>
+    </div>
     <div class="text-sm text-gray-500">
       <p>Posted: ${new Date(listing.created).toLocaleDateString()}</p>
       <p>Expires: ${new Date(listing.endsAt).toLocaleDateString()}</p>
@@ -200,7 +209,7 @@ export function listingCardComponent(listing) {
     <p class="text-sm text-gray-500">
       Current bid: ${currentBid}
     </p>
-    <a href="/src/views/singleCard.html?id=${listing.id}"
+    <a href="./listing/index.html?id=${listing.id}"
        class="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition block text-center">
       View Details
     </a>
@@ -208,46 +217,3 @@ export function listingCardComponent(listing) {
 
   return card;
 }
-
-// index.html
-// => src/js/views/index.view.js (kjøres auto)
-// ==> Hent fra API => src/js/api/listings.api.js
-// ==> Lag kort     => src/js/components/listingCard.component.js
-// Rendre ut i HTML
-// addEventListener
-
-// index.html
-// script => index.js
-//            hent kort fra API => getAllListings.api.js
-//            lage html kort med info fra API => createListingCards.component.js
-//
-// index.html
-// => index.js !AUTO
-// => createAuctionCard.js
-
-//
-// about.html
-// => about.js
-//
-// index.html
-// auth/
-//  login/
-//  index.html
-// src
-//  - js
-//    - api
-//      - login.api.js
-//      - register.api.js
-//    - views
-//      - login.view.js
-//      - register.view.js
-//    - components
-//      - card.component.js
-//  - views
-//    - singleCard.html => domene.com/src/views/singleCard.html
-//
-// index.html
-// auth/
-//    login/
-//        index.html
-//        login.js
