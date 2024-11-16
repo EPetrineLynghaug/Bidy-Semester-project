@@ -1,4 +1,5 @@
-import { API_AUTH_REGISTER, createHeaders } from "./apiConfig.js";
+import { createHeaders } from "../utilities/header.utillities.js";
+import { API_AUTH_REGISTER } from "./constants.js";
 
 async function register(name, email, password) {
   try {
@@ -15,16 +16,14 @@ async function register(name, email, password) {
     }
 
     const result = await response.json();
-    console.log("Parsed result:", result); // Logg resultatet for feilsøking
+    console.log("Parsed result:", result);
 
     if (result.data) {
       alert("Registrering vellykket! Du kan nå logge inn.");
-      window.location.href = "/auth/login.html";
+      window.location.href = "/index.html";
     } else {
       alert("Registrering mislyktes.");
     }
-
-    return result.data;
   } catch (error) {
     console.error("Registrering feilet:", error.message);
     alert("Registrering feilet. Vennligst prøv igjen.");
@@ -39,7 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const name = registerForm.querySelector("#name").value;
       const email = registerForm.querySelector("#email").value;
       const password = registerForm.querySelector("#password").value;
-
       await register(name, email, password);
     });
   }

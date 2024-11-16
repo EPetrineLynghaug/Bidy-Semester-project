@@ -1,15 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome</title>
-    <script type="module" src="./src/js/index.js"></script>
-  </head>
-  <body>
-    <nav>
-      <div id="auth-links"></div>
-    </nav>
-    <h1>Welcome</h1>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Welcome</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script type="module" src="./src/js/views/index.view.js"></script>
+    </head>
+    <body class="bg-gray-100">
+        <!-- Navigasjonsmeny -->
+        <nav class="flex justify-end p-4 bg-gray-800 text-white">
+            <div id="auth-links" class="space-x-4"></div>
+        </nav>
+
+        <!-- Overskrift -->
+        <h1 class="text-3xl font-bold text-center my-4 text-gray-800">
+            Auction Listings
+        </h1>
+
+        <!-- Container for auksjonsoppføringer -->
+        <div
+            id="listings-container"
+            class="grid gap-6 p-4 sm:grid-cols-2 lg:grid-cols-3"
+        ></div>
+    </body>
 </html>
