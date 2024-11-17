@@ -18,3 +18,23 @@ export function generateBidRows(bids) {
     )
     .join("");
 }
+
+export function handleToggleButton(
+  toggleButton,
+  bidBody,
+  initialBids,
+  remainingBids,
+  generateBidRows
+) {
+  let isExpanded = false;
+
+  toggleButton.addEventListener("click", () => {
+    isExpanded = !isExpanded;
+
+    bidBody.innerHTML = isExpanded
+      ? generateBidRows([...initialBids, ...remainingBids])
+      : generateBidRows(initialBids);
+
+    toggleButton.textContent = isExpanded ? "Show Less" : "Show More";
+  });
+}
