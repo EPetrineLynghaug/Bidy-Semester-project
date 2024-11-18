@@ -1,11 +1,11 @@
-import { API_BASE } from "../api/constants.js"; 
-import { createHeaders } from "../utilities/header.utilities.js"; 
+import { API_AUCTION } from "../api/constants.js";
+import { createHeaders } from "../utilities/header.utilities.js";
 
-export async function fetchProfile(username) {
+export async function fetchProfile(name) {
   try {
-    if (!username) throw new Error("Username is required to fetch profile.");
+    if (!name) throw new Error("Username is required to fetch profile.");
 
-   const url = `${API_BASE}/auth/profile/${username}?_auctions=true&_followers=true`;
+    const url = `${API_AUCTION}/profiles/${name}?_auctions=true&_followers=true`;
     const response = await fetch(url, {
       method: "GET",
       headers: createHeaders(),
@@ -19,13 +19,14 @@ export async function fetchProfile(username) {
     const profile = result.data;
 
     if (profile && profile.auctions) {
-      
       console.log("Profile fetched with auctions:", profile.auctions);
     }
 
-    return profile; 
+    return profile;
   } catch (error) {
     console.error("Error fetching profile:", error.message);
-    return {}; 
+    return {};
   }
 }
+
+export async function upateprofile() {}
