@@ -1,4 +1,3 @@
-import { TOKEN_STORAGE_KEY } from "../api/constants.js";
 import { getToken, removeToken } from "../utilities/storage.js";
 
 export function renderAuthLinks() {
@@ -13,8 +12,8 @@ export function renderAuthLinks() {
         { name: "Logout", action: handleLogout },
       ]
     : [
-        { name: "Login", url: "../auth/login/index.html" },
-        { name: "Register", url: "./auth/register/index.html" },
+        { name: "Login", url: "/auth/login" },
+        { name: "Register", url: "/auth/register" },
       ];
 
   authLinks.innerHTML = "";

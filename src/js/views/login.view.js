@@ -26,10 +26,10 @@ async function handleLogin(event) {
     const user = await login(email, password);
     console.log("User logged in:", user);
 
-    localStorage.setItem("token", user.token);
+    localStorage.setItem("token", user.accessToken);
 
     renderAuthLinks();
-    window.location.href = "/index.html";
+    window.location.href = "/";
   } catch (error) {
     console.error("Login failed:", error.message);
 
