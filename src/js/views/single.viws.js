@@ -16,7 +16,7 @@ function renderSingleCard(container, listing) {
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    // renderAuthLinks();
+    renderAuthLinks();
 
     const listingsContainer = document.getElementById("single-card-container");
     if (!listingsContainer) throw new Error("single-card-container not found");

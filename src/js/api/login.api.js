@@ -34,14 +34,4 @@ async function login(email, password) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const loginForm = document.querySelector("form[name='login']");
-  if (loginForm) {
-    loginForm.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      const email = loginForm.querySelector("#email").value;
-      const password = loginForm.querySelector("#password").value;
-      await login(email, password);
-    });
-  }
-});
+
