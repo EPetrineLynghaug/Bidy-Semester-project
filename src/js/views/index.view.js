@@ -24,7 +24,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const listingsContainer = document.getElementById("listings-container");
     if (!listingsContainer) throw new Error("Listings container not found");
 
-    const listings = await fetchAuctionListings(10, 1);
+    const listings = await fetchAuctionListings(18, 1);
+    console.log("Fetched Listings:", listings);
     renderAuctionListings(listingsContainer, listings);
   } catch (error) {
     console.error("Error during initialization:", error.message);

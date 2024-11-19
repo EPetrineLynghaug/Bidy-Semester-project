@@ -1,5 +1,5 @@
 export function listingCardComponent(listing) {
-  const { bids, seller, media } = listing;
+  const { bids = [], seller = {}, media = [] } = listing;
 
   const card = document.createElement("div");
   card.className =
