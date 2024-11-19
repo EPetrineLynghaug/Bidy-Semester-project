@@ -1,5 +1,6 @@
 import { renderAuthLinks } from "../components/authLinks.js";
 import { login } from "../api/login.api.js";
+import { setToken, storeUserName } from "../utilities/storage.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   initializeLoginPage();
@@ -26,7 +27,8 @@ async function handleLogin(event) {
     const user = await login(email, password);
     console.log("User logged in:", user);
 
-    localStorage.setItem("token", user.accessToken);
+    setToken(user.accessToken);
+    storeUserName(user.name);
 
     renderAuthLinks();
     window.location.href = "/";

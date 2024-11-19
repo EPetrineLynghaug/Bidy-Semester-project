@@ -26,3 +26,16 @@ export function removeToken() {
     return false;
   }
 }
+
+export function storeUserName(username) {
+  if (!username) {
+    console.error("No username provided to store.");
+    return;
+  }
+  localStorage.setItem("username", JSON.stringify(username));
+}
+
+export function getStoredUserName() {
+  const storedUserName = localStorage.getItem("username");
+  return storedUserName ? storedUserName : null;
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile Page</title>
+    <script type="module" src="/src/js/views/profile.view.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100">
+    <header class="bg-gray-800 text-white p-4">
+      <nav id="auth-links" class="flex space-x-4"></nav>
+    </header>
+
+    <div class="container mx-auto p-6">
+      <section id="profile-details" class="bg-white rounded-lg shadow p-6 mb-6">
+        <div class="flex items-center gap-4">
+          <img
+            id="profile-avatar"
+            src="https://via.placeholder.com/100"
+            alt="Profile Avatar"
+            class="w-20 h-20 rounded-full"
+          />
+          <div>
+            <h2 id="profile-name" class="text-xl font-bold">Loading...</h2>
+            <p id="profile-email" class="text-gray-600">Loading...</p>
+          </div>
+        </div>
+        <p id="profile-bio" class="mt-4 text-gray-700">Loading bio...</p>
+      </section>
+
+      <section id="profile-auctions" class="bg-white rounded-lg shadow p-6">
+        <h2 class="text-xl font-bold mb-4">Auctions</h2>
+        <div
+          id="auctions-list"
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"
+        ></div>
+      </section>
+    </div>
+  </body>
+</html>

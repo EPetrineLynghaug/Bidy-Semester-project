@@ -1,14 +1,15 @@
-import { API_AUCTION } from "../api/constants.js";
-import { createHeaders } from "../utilities/header.utilities.js";
+import { API_AUCTION, API_PROFILE } from "../api/constants.js";
+import { createHeaders } from "../utilities/header.utillities.js";
 
 export async function fetchProfile(name) {
   try {
     if (!name) throw new Error("Username is required to fetch profile.");
 
-    const url = `${API_AUCTION}/profiles/${name}?_auctions=true&_followers=true`;
+    const url = `${API_PROFILE}/${name}`;
+    console.log(`Fetching profile for user: ${url}`);
     const response = await fetch(url, {
       method: "GET",
-      headers: createHeaders(),
+      headers: createHeaders(true),
     });
 
     if (!response.ok) {
@@ -16,16 +17,12 @@ export async function fetchProfile(name) {
     }
 
     const result = await response.json();
+    console.log(" result:", result);
     const profile = result.data;
-
-    if (profile && profile.auctions) {
-      console.log("Profile fetched with auctions:", profile.auctions);
-    }
 
     return profile;
   } catch (error) {
     console.error("Error fetching profile:", error.message);
-    return {};
   }
 }
 
