@@ -37,5 +37,8 @@ export function storeUserName(username) {
 
 export function getStoredUserName() {
   const storedUserName = localStorage.getItem("username");
-  return storedUserName ? storedUserName : null;
+  if (storedUserName) {
+    return JSON.parse(storedUserName);
+  }
+  return null;
 }
