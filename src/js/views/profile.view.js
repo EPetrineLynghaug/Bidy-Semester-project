@@ -21,41 +21,60 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    // document.getElementById("profile-avatar").src =
-    //   profile.avatar || "https://via.placeholder.com/100";
-    // document.getElementById("profile-name").textContent =
-    //   profile.name || "Unknown User";
-    // document.getElementById("profile-email").textContent =
-    //   profile.email || "No email available";
-    // document.getElementById("profile-bio").textContent =
-    //   profile.bio || "No bio provided.";
+    const bannerElement = document.querySelector("#banner-image");
+    if (bannerElement) {
+      bannerElement.src =
+        profile.banner.url || "https://via.placeholder.com/800x300";
+      bannerElement.alt = profile.banner.alt || "Banner image";
+    }
 
-    // const auctionsList = document.getElementById("auctions-list");
-    // if (profile.auctions && profile.auctions.length > 0) {
-    //   auctionsList.innerHTML = "";
-    //   profile.auctions.forEach((auction) => {
-    //     const auctionCard = document.createElement("div");
-    //     auctionCard.className = "border rounded-lg shadow p-4 bg-white";
-    //     auctionCard.innerHTML = `
-    //     <h3 class="text-lg font-bold">${
-    //       auction.title || "Untitled Auction"
-    //     }</h3>
-    //     <p class="text-gray-600">${
-    //       auction.description || "No description available."
-    //     }</p>
-    //     <p class="text-sm text-gray-500">Ends: ${new Date(
-    //       auction.endsAt
-    //     ).toLocaleDateString()}</p>
-    //   `;
-    //     auctionsList.appendChild(auctionCard);
-    //   });
-    // } else {
-    //   auctionsList.innerHTML = `<p class="text-center text-gray-500">No auctions found.</p>`;
-    // }
+    const avatarElement = document.querySelector("#profile-avatar");
+    if (avatarElement) {
+      avatarElement.src =
+        profile.avatar.url || "https://via.placeholder.com/100";
+      avatarElement.alt = profile.avatar.alt || "Profile Avatar";
+    }
+
+    const nameElement = document.querySelector("#profile-name");
+    nameElement.textContent = profile.name || "Unknown User";
+
+    const bioElement = document.querySelector("#profile-bio");
+    bioElement.textContent =
+      profile.bio ||
+      "Passionate about finding unique deals and rare items. Experienced in online auctions, with a focus on quality and customer satisfaction.";
+
+    const coinsElement = document.querySelector("#profile-coins");
+    coinsElement.textContent = profile.credits || "unkinown";
+
+
+
+
+
+    
+
+    const auctionsList = document.getElementById("auctions-list");
+    if (profile.auctions && profile.auctions.length > 0) {
+      auctionsList.innerHTML = "";
+      profile.auctions.forEach((auction) => {
+        const auctionCard = document.createElement("div");
+        auctionCard.className = "border rounded-lg shadow p-4 bg-white";
+        auctionCard.innerHTML = `
+        <h3 class="text-lg font-bold">${
+          auction.title || "Untitled Auction"
+        }</h3>
+        <p class="text-gray-600">${
+          auction.description || "No description available."
+        }</p>
+        <p class="text-sm text-gray-500">Ends: ${new Date(
+          auction.endsAt
+        ).toLocaleDateString()}</p>
+      `;
+        auctionsList.appendChild(auctionCard);
+      });
+    } else {
+      auctionsList.innerHTML = `<p class="text-center text-gray-500">No auctions found.</p>`;
+    }
   } catch (error) {
     console.error("Error fetching profile:", error.message);
-    alert(
-      "Something went wrong. Could not fetch profile. Please try again later."
-    );
   }
 });

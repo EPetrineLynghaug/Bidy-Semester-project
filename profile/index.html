@@ -6,27 +6,56 @@
     <title>Profile Page</title>
     <script type="module" src="/src/js/views/profile.view.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/src/css/style.css" />
   </head>
-  <body class="bg-gray-100">
+  <body class="bg-gray-100 m-0 p-0">
     <header class="bg-gray-800 text-white p-4">
       <nav id="auth-links" class="flex space-x-4"></nav>
     </header>
 
-    <div class="container mx-auto p-6">
-      <section id="profile-details" class="bg-white rounded-lg shadow p-6 mb-6">
-        <div class="flex items-center gap-4">
+    <div class="w-full">
+      <section class="w-full">
+        <div class="relative w-full h-[150px] md:h-[300px] lg:h-[300px]">
+          <img
+            id="banner-image"
+            src="https://via.placeholder.com/800x300"
+            alt="Banner image"
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </section>
+
+      <section
+        id="profile-details"
+        class="relative w-full shadow-lg rounded-lg p-2 z-10 flex flex-row items-center md:flex-row md:items-start"
+      >
+        <div class="">
           <img
             id="profile-avatar"
             src="https://via.placeholder.com/100"
             alt="Profile Avatar"
-            class="w-20 h-20 rounded-full"
+            class="object-cover -mt-[132px] md:-mt-[96px] lg:-mt-[96px] w-28 h-28 md:w-32 md:h-32 lg:w-36 lg:h-36 rounded-full overflow-hidden border-4 shadow-lg"
           />
-          <div>
-            <h2 id="profile-name" class="text-xl font-bold">Loading...</h2>
-            <p id="profile-email" class="text-gray-600">Loading...</p>
-          </div>
         </div>
-        <p id="profile-bio" class="mt-4 text-gray-700">Loading bio...</p>
+
+        <div class="md:text-left flex-1">
+          <h1
+            id="profile-name"
+            class="text-xl font-bold uppercase tracking-wide text-gray-800"
+          >
+            Loading...
+          </h1>
+          <p
+            id="profile-bio"
+            class="mt-2 text-gray-600 text-xs sm md:text-base lg:text-base leading-relaxed"
+          >
+            Loading bio...
+          </p>
+
+          <span id="profile-coins" class="mt-4 text-right block text-gray-500"
+            >Loading credits...</span
+          >
+        </div>
       </section>
 
       <section id="profile-auctions" class="bg-white rounded-lg shadow p-6">
