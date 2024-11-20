@@ -46,11 +46,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     const coinsElement = document.querySelector("#profile-coins");
     coinsElement.textContent = profile.credits || "unkinown";
 
+    //mobile menu//
+    let menuIsOpen = false;
+    const mobileMenu = document.querySelector("#mobile-menu");
 
-
-
-
-    
+    document.getElementById("toggle-menu").addEventListener("click", () => {
+      if (menuIsOpen) {
+        mobileMenu.classList.add("hidden");
+        mobileMenu.classList.remove("flex");
+      } else {
+        mobileMenu.classList.remove("hidden");
+        mobileMenu.classList.add("flex");
+      }
+      menuIsOpen = !menuIsOpen;
+    });
 
     const auctionsList = document.getElementById("auctions-list");
     if (profile.auctions && profile.auctions.length > 0) {
