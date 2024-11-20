@@ -27,7 +27,7 @@
 
       <section
         id="profile-details"
-        class="relative w-full  rounded-lg p-2 z-10 flex flex-row items-center md:flex-row md:items-start"
+        class="relative w-full  rounded-lg p-2  flex flex-row items-center md:flex-row md:items-start"
       >
         <div class="">
           <img
@@ -77,9 +77,10 @@
         <!-- Liste for Mobilmeny -->
         <ul id="mobile-menu" class=" hidden flex-col gap-4 rounded-lg p-4 list-none bg-gray-100">
           <li>
-            <a href="/create-auction.html" class="text-blue-600 hover:text-blue-800">
+            <!-- <a href="/create-auction.html" class="text-blue-600 hover:text-blue-800">
               Create New Auction
-            </a>
+            </a> -->
+            <button id="open-modal" class="text-blue-600">Create new Auction</button>
           </li>
           <li>
             <a href="/my-purchases.html" class="text-green-600 hover:text-green-800">
@@ -103,7 +104,8 @@
   <div class="hidden flex:md flex-col ">
     <div class="border-t border-gray-300 my-4"></div>
     <div class="flex justify-between items-center text-center">
-      <a href="/create-auction.html" class="text-blue-600 hover:text-blue-800">Create New Auction</a>
+      <!-- <a href="/create-auction.html" class="text-blue-600 hover:text-blue-800">Create New Auction</a> -->
+      <button id="open-modal" class="text-blue-600">Create new Auction</button>
       <a href="/my-purchases.html" class="text-green-600 hover:text-green-800">My Purchases</a>
       <a href="/edit-profile-picture.html" class="text-yellow-600 hover:text-yellow-800">Edit Profile Picture</a>
       <a href="/edit-banner.html" class="text-red-600 hover:text-red-800">Edit Banner</a>
@@ -111,6 +113,8 @@
     </div>
     <div class="border-t-2 border-blue-700 w-full mt-3"></div>
   </section>
+
+  
 
   </body>
 </html>
