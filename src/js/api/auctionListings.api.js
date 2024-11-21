@@ -2,7 +2,6 @@ import { API_AUCTION_LISTINGS } from "../api/constants.js";
 import { createHeaders } from "../utilities/header.utillities.js";
 
 // Funksjon for å hente auksjonsoppføringer fra API
-
 export async function fetchAuctionListings(limit = 18, page = 1) {
   const url = `${API_AUCTION_LISTINGS}?sort=created&sortOrder=desc&limit=${limit}&page=${page}&_seller=true&_bids=true&_active=true`;
   try {

@@ -1,4 +1,4 @@
-import { createauction } from "../api/editProfile.api.js";
+import { createauction } from "../api/profile.api.js";
 
 export function createNewAuction() {
   const modalContainer = document.createElement("section");
