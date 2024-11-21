@@ -2,6 +2,7 @@ import { API_AUCTION_LISTINGS } from "../api/constants.js";
 import { createHeaders } from "../utilities/header.utillities.js";
 
 export async function createauction(formData) {
+  console.log("Data sent to API:", formData);
   try {
     const response = await fetch(API_AUCTION_LISTINGS, {
       method: "POST",
@@ -14,7 +15,7 @@ export async function createauction(formData) {
     }
 
     const result = await response.json();
-    console.log("result:", result);
+    console.log("API response:", result);
     const data = result.data;
 
     return data;

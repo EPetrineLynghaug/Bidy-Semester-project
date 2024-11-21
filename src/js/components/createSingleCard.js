@@ -48,7 +48,7 @@ export function renderAuctionDetails(auctionData) {
     currentBid.textContent = `Current bid: ${
       auctionData.highestBid || "0 Coins"
     }`;
-  }
+  } //denne er feil. 
 
 
   const auctionImage = document.querySelector("#auction-image");

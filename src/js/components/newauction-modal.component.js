@@ -1,5 +1,8 @@
+import { createauction } from "../api/editProfile.api.js";
+
 export function createNewAuction() {
   const modalContainer = document.createElement("section");
+
   modalContainer.className =
     "modal-container fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center";
 
@@ -14,7 +17,7 @@ export function createNewAuction() {
  </button>
 
  <h1 class="font-semibold">New Auction</h1>
- <form name="createPost" class="space-y-4">
+ <form name="createPost" id="auction-form" class="space-y-4">
    <!-- Title Field -->
    <div class="flex flex-col ">
      <label
@@ -130,8 +133,8 @@ export function createNewAuction() {
          id="meeting-time"
          name="meeting-time"
          
-         min="2018-06-07T00:00"
-         max="2018-06-14T00:00"
+         min="2024-11-20T00:00"
+         max="2025-01-14T00:00"
          class="border border-gray-500 rounded-md p-2 bg-hoverGray text-textPrimary placeholder-gray-400 focus:border-linkColor focus:ring-2 focus:ring-linkColor focus:outline-none w-full" />
      </div>
    <!-- Submit Button -->
@@ -145,9 +148,37 @@ export function createNewAuction() {
 
   document.body.append(modalContainer);
 
+  const closeButton = modalContainer.querySelector("#close-button");
+  closeButton.addEventListener("click", () => {
+    modalContainer.classList.add("hidden");
+  });
 
+  // Lukk modal ved å klikke utenfor innholdet
+  modalContainer.addEventListener("click", (event) => {
+    if (event.target === modalContainer) {
+      modalContainer.classList.add("hidden");
+    }
+  });
 
- 
-      
-    
+  const form = modalContainer.querySelector("#auction-form");
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const formData = {
+      title: form.title.value,
+      description: form.body.value,
+      tags: form.tags.value.split(" "),
+      endsAt: form["meeting-time"].value,
+    };
+
+    try {
+      const result = await createauction(formData);
+      alert("Auction created successfully!");
+      console.log("Auction result:", result);
+      modalContainer.remove();
+    } catch (error) {
+      console.error("Error creating auction:", error.message);
+      alert("Failed to create auction. Please try again.");
+    }
+  });
 }
