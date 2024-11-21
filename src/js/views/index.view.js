@@ -31,5 +31,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("Error during initialization:", error.message);
   }
 });
-
-console.log("index.js initialized.");

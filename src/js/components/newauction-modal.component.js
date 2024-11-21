@@ -1,6 +1,19 @@
 import { createauction } from "../api/profile.api.js";
 
-export function createNewAuction() {
+export function createNewAuction(listing) {
+  let imageUrl = "";
+  let imageAlt = "";
+
+  if (listing && listing.media.length > 0) {
+    if (listing.media[0].url) {
+      imageUrl = listing.media[0].url;
+    }
+
+    if (listing.media[0].alt) {
+      imageAlt = listing.media[0].alt;
+    }
+  }
+
   const modalContainer = document.createElement("section");
 
   modalContainer.className =
@@ -26,6 +39,7 @@ export function createNewAuction() {
        >Title</label
      >
      <input
+      value="${listing ? listing.title : ``}" 
        id="title"
        type="text"
        name="title"
@@ -49,7 +63,7 @@ export function createNewAuction() {
        maxlength="200"
        placeholder="Enter post content"
        class="border border-gray-500 rounded-md p-2 bg-hoverGray text-textPrimary placeholder-gray-400 focus:border-linkColor focus:ring-2 focus:ring-linkColor focus:outline-none w-full"
-     ></textarea>
+     >${listing ? listing.description : ``}</textarea>
    </div>
 
    <!-- Tags Field -->
@@ -60,6 +74,7 @@ export function createNewAuction() {
        >Tags</label
      >
      <input
+     value="${listing ? listing.tags : ``}"
        id="tags"
        type="text"
        name="tags"
@@ -77,6 +92,7 @@ export function createNewAuction() {
        >Image URL</label
      >
      <input
+     value="${imageUrl}"
        id="media"
        type="text"
        name="media"
@@ -116,6 +132,7 @@ export function createNewAuction() {
        >Image ALT</label
      >
      <input
+       value="${imageAlt}"
        id="alt"
        type="text"
        name="alt"
@@ -129,12 +146,11 @@ export function createNewAuction() {
        <label for="meeting-time"> Auction Ending:</label>
 
        <input required
+       value="${listing ? listing.endsAt.slice(0, 16) : ``}"
          type="datetime-local"
          id="meeting-time"
          name="meeting-time"
          
-         min="2024-11-20T00:00"
-         max="2025-01-14T00:00"
          class="border border-gray-500 rounded-md p-2 bg-hoverGray text-textPrimary placeholder-gray-400 focus:border-linkColor focus:ring-2 focus:ring-linkColor focus:outline-none w-full" />
      </div>
    <!-- Submit Button -->

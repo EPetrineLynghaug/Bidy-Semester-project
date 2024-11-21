@@ -1,7 +1,7 @@
 import { API_AUCTION_LISTINGS, API_PROFILE } from "../api/constants.js";
 import { createHeaders } from "../utilities/header.utillities.js";
 
-//Get profile//
+//Get my  profile//
 export async function fetchProfile(name) {
   try {
     if (!name) throw new Error("Username is required to fetch profile.");
@@ -18,7 +18,7 @@ export async function fetchProfile(name) {
     }
 
     const result = await response.json();
-    console.log(" result:", result);
+
     const profile = result.data;
 
     return profile;
@@ -49,6 +49,27 @@ export async function createauction(formData) {
     return data;
   } catch (error) {
     console.log("error creating auction listings", error.message);
+  }
+}
+// update auction post//
+export async function updateAuction(name) {
+  try {
+    const response = await fetch(`${API_PROFILE}/${name}/listings`, {
+      method: "GET",
+      headers: createHeaders(true),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to update profile: ${response.status}`);
+    }
+
+    const result = await response.json();
+    console.log("API response:", result);
+    const updatedAuction = result.data;
+
+    return updatedAuction;
+  } catch (error) {
+    console.log("error updating profile", error.message);
   }
 }
 

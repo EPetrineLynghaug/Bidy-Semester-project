@@ -1,6 +1,7 @@
-import { fetchProfile } from "../api/profile.api.js";
+import { fetchProfile, updateAuction } from "../api/profile.api.js";
 
 import { renderAuthLinks } from "../components/authLinks.js";
+import { myAuctions } from "../components/myAuctions.component.js";
 import { createNewAuction } from "../components/newauction-modal.component.js";
 import { getStoredUserName } from "../utilities/storage.js";
 
@@ -17,9 +18,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     const profile = await fetchProfile(username);
     console.log("profile", profile);
 
+    const updatedAuction = await updateAuction(username);
+    console.log("updatedAuction", updatedAuction);
+
+    updatedAuction.map((listing) => {
+      const listIthem = myAuctions(listing);
+
+      const container = document.querySelector("#my-auctions");
+      container.appendChild(listIthem);
+    });
+
     if (!profile) {
       alert("Failed to fetch profile data!");
-      return;
+    }
+    if (!updatedAuction) {
+      alert("Failed to update post data!");
     }
 
     const bannerElement = document.querySelector("#banner-image");

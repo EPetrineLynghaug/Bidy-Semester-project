@@ -17,4 +17,4 @@ export async function fetchAuctionListings(limit = 18, page = 1) {
     console.error("Error fetching auction listings:", error.message);
   }
 }
-console.log("auctionListings.js lastet!");
+
