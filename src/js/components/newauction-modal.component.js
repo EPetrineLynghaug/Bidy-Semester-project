@@ -3,16 +3,29 @@ import { createauction } from "../api/profile.api.js";
 export function createNewAuction(listing) {
   let imageUrl = "";
   let imageAlt = "";
-
-  if (listing && listing.media.length > 0) {
-    if (listing.media[0].url) {
-      imageUrl = listing.media[0].url;
-    }
-
-    if (listing.media[0].alt) {
-      imageAlt = listing.media[0].alt;
+  let endTime = "";
+  let title = "";
+  let description = "";
+  let tags = "";
+  console.log("listing", listing);
+  if (listing) {
+    endTime = listing.endsAt;
+    endTime = String(endTime);
+    title = listing.title;
+    description = listing.description;
+    tags = listing.tags;
+    if (listing.media && listing.media.length > 0) {
+      if (listing.media[0].url) {
+        imageUrl = listing.media[0].url;
+      }
+      if (listing.media[0].alt) {
+        imageAlt = listing.media[0].alt;
+      }
     }
   }
+  //se om du klarer deg uten list media url og alt. heller kjøre en loop.
+  // oppdatert de harkodete feltene som brukes til input av formet som lager nye poster. 
+  
 
   const modalContainer = document.createElement("section");
 
@@ -39,7 +52,7 @@ export function createNewAuction(listing) {
        >Title</label
      >
      <input
-      value="${listing ? listing.title : ``}" 
+      value="${title}" 
        id="title"
        type="text"
        name="title"
@@ -63,7 +76,7 @@ export function createNewAuction(listing) {
        maxlength="200"
        placeholder="Enter post content"
        class="border border-gray-500 rounded-md p-2 bg-hoverGray text-textPrimary placeholder-gray-400 focus:border-linkColor focus:ring-2 focus:ring-linkColor focus:outline-none w-full"
-     >${listing ? listing.description : ``}</textarea>
+     >${description}</textarea>
    </div>
 
    <!-- Tags Field -->
@@ -74,7 +87,7 @@ export function createNewAuction(listing) {
        >Tags</label
      >
      <input
-     value="${listing ? listing.tags : ``}"
+     value="${tags}"
        id="tags"
        type="text"
        name="tags"
@@ -146,7 +159,7 @@ export function createNewAuction(listing) {
        <label for="meeting-time"> Auction Ending:</label>
 
        <input required
-       value="${listing ? listing.endsAt.slice(0, 16) : ``}"
+       value="${endTime}"
          type="datetime-local"
          id="meeting-time"
          name="meeting-time"

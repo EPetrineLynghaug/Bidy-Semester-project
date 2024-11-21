@@ -1,4 +1,5 @@
 import { getToken, removeToken } from "../utilities/storage.js";
+import { createNewAuction } from "./newauction-modal.component.js";
 
 export function renderAuthLinks() {
   const authLinks = document.getElementById("auth-links");
@@ -7,7 +8,7 @@ export function renderAuthLinks() {
   const meny = token
     ? [
         { name: "Home", url: "/" },
-        { name: "New Post", url: "/auction/create/" },
+        { name: "New Auction", action: createNewAuction },
         { name: "Profile", url: "/profile/" },
         { name: "Logout", action: handleLogout },
       ]
@@ -31,7 +32,9 @@ export function renderAuthLinks() {
         "hover:bg-red-700",
         "ml-4"
       );
-      button.addEventListener("click", item.action);
+      button.addEventListener("click", (e) => {
+        item.action();
+      });
       authLinks.appendChild(button);
     } else {
       const atag = document.createElement("a");

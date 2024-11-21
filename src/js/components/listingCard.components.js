@@ -9,8 +9,7 @@ export function listingCardComponent(listing) {
   if (bids.length > 0) {
     currentBid = bids[bids.length - 1].amount;
   }
-  console.log(listing.media);
-  console.log(listing);
+
   card.innerHTML = `
     <div class="carousel relative w-full h-48 flex items-center justify-center overflow-hidden">
       <img src="${
