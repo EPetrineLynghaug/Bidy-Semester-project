@@ -72,4 +72,32 @@ export async function updateAuction(name) {
   }
 }
 
+export async function deleteAuction(id) {
+  try {
+    const response = await fetch(`${API_AUCTION_LISTINGS}/${id}`, {
+      method: "DELETE",
+      headers: createHeaders(true),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to delete auction listing: ${response.status}`);
+    }
+    if (response.status === 204) {
+      return true;
+    }
+    return false;
+  } catch (error) {
+    if (error.name === "TypeError") {
+      console.error("Network error or request failed:", error.message);
+    } else if (error.message.includes("Response Status")) {
+      console.error(`Failed to delete post (ID: ${id}):`, error.message);
+    } else {
+      console.error(
+        "An unexpected error occurred while deleting the post:",
+        error.message
+      );
+    }
+    throw error;
+  }
+}
 export async function upateprofile() {}

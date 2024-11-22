@@ -1,3 +1,4 @@
+import { deleteAuction } from "../api/profile.api.js";
 import { createNewAuction } from "./newauction-modal.component.js";
 
 export function myAuctions(listing) {
@@ -46,11 +47,17 @@ export function myAuctions(listing) {
   editBtn.addEventListener("click", () => {
     createNewAuction(listing);
   });
+  const deleteBtn = listIthem.querySelector(".delete-btn");
 
-  // const deleteBtn = listIthem.querySelector(".delete-btn");
-  // deleteBtn.addEventListener("click", () => {
-
-  // });
+  deleteBtn.addEventListener("click", (event) => {
+    let deliteAuctionPost = confirm(
+      "Are you sure you want to delete this Auction?"
+    );
+    if (deliteAuctionPost) {
+      deleteAuction(listing.id);
+      listIthem.remove();
+    }
+  });
 
   return listIthem;
 }

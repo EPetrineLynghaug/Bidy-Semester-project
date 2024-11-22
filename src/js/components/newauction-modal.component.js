@@ -191,7 +191,7 @@ export function createNewAuction(listing) {
       e.preventDefault();
       const dataId = e.target.getAttribute("data-id");
       const selectedFormGroup = document.querySelector(
-        `#url-input-container${dataId}`,
+        `#url-input-container${dataId}`
       );
       selectedFormGroup.remove();
 
@@ -203,10 +203,10 @@ export function createNewAuction(listing) {
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const mediaInput = Array.from(
-      document.querySelectorAll('input[name^="mediaUrl"]'),
+      document.querySelectorAll('input[name^="mediaUrl"]')
     );
     const altInput = Array.from(
-      document.querySelectorAll('input[name^="mediaAlt"]'),
+      document.querySelectorAll('input[name^="mediaAlt"]')
     );
 
     const media = mediaInput.map((urlInput, index) => ({
@@ -226,6 +226,7 @@ export function createNewAuction(listing) {
       alert("Auction created successfully!");
       console.log("Auction result:", result);
       modalContainer.remove();
+      // TODO:lage et kort og rendre html.
     } catch (error) {
       console.error("Error creating auction:", error.message);
       alert("Failed to create auction. Please try again.");
