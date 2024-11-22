@@ -98,56 +98,59 @@ export function createNewAuction(listing) {
      />
    </div>
 
-   <div class="flex flex-col gap-4 w-full max-w-md mx-auto">
-  <!-- Initial Input Field with Label -->
-  <div class="url-input-container flex flex-col gap-2">
-    <div class="flex flex-col gap-2 w-full">
-      <label for="mediaUrl1" class="mb-1 text-gray-700 text-sm font-medium">
-        Image URL 1
-      </label>
-      <input
-        value="${imageUrl}"
-        id="mediaUrl1"
-        type="text"
-        name="mediaUrl1"
-        maxlength="255"
-        placeholder="Enter image URL"
-        class="border border-gray-300 rounded-md p-2 bg-gray-100 text-gray-800 placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-400 focus:outline-none w-full"
-      />
-    </div>
+<div class="flex flex-col gap-4 w-full max-w-md mx-auto">
+  <!-- Static Initial Input -->
+  <div class="flex flex-col gap-4 w-full">
+    <label for="mediaUrl1" class="mb-1 text-gray-700 text-sm font-medium"> Image URL 1</label>
+    <input
+      value="${imageUrl}"
+      id="mediaUrl1"
+      type="text"
+      name="mediaUrl1"
+      maxlength="255"
+      placeholder="Enter image URL"
+      class="border border-gray-300 rounded-md p-2 bg-gray-100 text-gray-800 placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-400 focus:outline-none w-full"
+    />
+    <label for="mediaAlt1" class="mb-1 text-gray-700 text-sm font-medium"></label>
+    <input
+      value="${imageAlt}"
+      id="mediaAlt1"
+      type="text"
+      name="mediaAlt1"
+      maxlength="255"
+      placeholder="Enter ALT text for the image"
+      class="border border-gray-300 rounded-md p-2 bg-gray-100 text-gray-800 placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-400 focus:outline-none w-full"
+    />
   </div>
 
-  <!-- Add Image Button -->
-  <button
-    id="add-image-button"
-    type="button"
-    class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 focus:outline-none"
-  >
-    Add URL
-  </button>
+    <!-- Dynamic Fields Container -->
+    <div class="url-input-container flex flex-col gap-4"></div>
+
+  <!-- Add Input Button -->
+    <button
+      id="add-image-button" type="button" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 focus:outline-none">Add URL
+   </button>
 </div>
 
 
 
-      <!-- time and date-->
-      <div class="flex flex-col">
-       <label for="meeting-time"> Auction Ending:</label>
+ <!-- time and date-->
+  <div class="flex flex-col">
+  <label for="meeting-time"> Auction Ending:</label>
 
-       <input required
-       value="${endTime}"
-         type="datetime-local"
-         id="meeting-time"
-         name="meeting-time"
-         
-         class="border border-gray-500 rounded-md p-2 bg-hoverGray text-textPrimary placeholder-gray-400 focus:border-linkColor focus:ring-2 focus:ring-linkColor focus:outline-none w-full" />
-     </div>
+  <input required
+    value="${endTime}"
+    type="datetime-local"
+    id="meeting-time"
+    name="meeting-time"
+    class="border border-gray-500 rounded-md p-2 bg-hoverGray text-textPrimary placeholder-gray-400 focus:border-linkColor focus:ring-2 focus:ring-linkColor focus:outline-none w-full" />
+  </div>
+
+
    <!-- Submit Button -->
-   <button
-     type="submit"
-     class="w-full bg-gradient-to-r from-teal-500 to-teal-600 text-white font-semibold px-5 py-2 rounded-md shadow-md hover:from-teal-400 hover:to-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-300 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-200 ease-in-out transform hover:-translate-y-0.5 active:scale-95"
-   >
-     Create Post
-   </button>
+  <button type="submit" 
+    class="w-full bg-gradient-to-r from-teal-500 to-teal-600 text-white font-semibold px-5 py-2 rounded-md shadow-md hover:from-teal-400 hover:to-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-300 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-200 ease-in-out transform hover:-translate-y-0.5 active:scale-95"> Create Post
+  </button>
 </div>`;
 
   document.body.append(modalContainer);
@@ -172,10 +175,13 @@ export function createNewAuction(listing) {
     event.preventDefault();
     console.log("clicked");
 
-    const newInputWithLabel = createInput(mediaInput);
-    mediaInput++;
+    // const newInputWithLabel = createInput(mediaInput);
+    // mediaInput++;
 
-    container.appendChild(newInputWithLabel);
+    // container.appendChild(newInputWithLabel);
+    const newInputWithAlt = createInput(mediaInput); // Create new input with ALT field
+    mediaInput++;
+    container.appendChild(newInputWithAlt);
   });
 
   const form = modalContainer.querySelector("#auction-form");
