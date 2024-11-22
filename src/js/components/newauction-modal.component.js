@@ -100,7 +100,7 @@ export function createNewAuction(listing) {
 
 <div class="flex flex-col gap-4 w-full max-w-md mx-auto">
   <!-- Static Initial Input -->
-  <div class="flex flex-col gap-4 w-full">
+  <div class="flex flex-col gap-1 w-full">
     <label for="mediaUrl1" class="mb-1 text-gray-700 text-sm font-medium"> Image URL 1</label>
     <input
       value="${imageUrl}"
@@ -121,6 +121,7 @@ export function createNewAuction(listing) {
       placeholder="Enter ALT text for the image"
       class="border border-gray-300 rounded-md p-2 bg-gray-100 text-gray-800 placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-400 focus:outline-none w-full"
     />
+    
   </div>
 
     <!-- Dynamic Fields Container -->
@@ -174,14 +175,23 @@ export function createNewAuction(listing) {
   btn.addEventListener("click", (event) => {
     event.preventDefault();
     console.log("clicked");
-
-    // const newInputWithLabel = createInput(mediaInput);
-    // mediaInput++;
-
-    // container.appendChild(newInputWithLabel);
-    const newInputWithAlt = createInput(mediaInput); // Create new input with ALT field
+    const newInputWithAlt = createInput(mediaInput);
     mediaInput++;
+
     container.appendChild(newInputWithAlt);
+  });
+
+  document.addEventListener("click", (e) => {
+    if (e.target.className.includes("media-url-remove-btn")) {
+      e.preventDefault();
+      const dataId = e.target.getAttribute("data-id");
+      const selectedFormGroup = document.querySelector(
+        `#url-input-container${dataId}`
+      );
+      selectedFormGroup.remove();
+
+      mediaInput--;
+    }
   });
 
   const form = modalContainer.querySelector("#auction-form");

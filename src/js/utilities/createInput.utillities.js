@@ -1,6 +1,7 @@
 export function createInput(num) {
   const wrapper = document.createElement("div");
   wrapper.className = "flex flex-col gap-2 w-full";
+  wrapper.id = `url-input-container${num}`;
 
   // Create the label for Image URL
   const label = document.createElement("label");
@@ -18,12 +19,6 @@ export function createInput(num) {
   input.className =
     "border border-gray-300 rounded-md p-2 bg-gray-100 text-gray-800 placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-400 focus:outline-none w-full";
 
-  // Create the label for ALT Text
-  const altLabel = document.createElement("label");
-  altLabel.setAttribute("for", `mediaAlt${num}`);
-  altLabel.className = "mb-1 text-gray-700 text-sm font-medium";
-  altLabel.textContent = `ALT Text ${num}`;
-
   // Create the input field for ALT Text
   const altInput = document.createElement("input");
   altInput.type = "text";
@@ -34,11 +29,19 @@ export function createInput(num) {
   altInput.className =
     "border border-gray-300 rounded-md p-2 bg-gray-100 text-gray-800 placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-400 focus:outline-none w-full";
 
+  // remove button
+  const btnRemove = document.createElement("button");
+  btnRemove.type = "button";
+  btnRemove.textContent = "Remove";
+  btnRemove.setAttribute("data-id", num);
+  btnRemove.className =
+    "media-url-remove-btn text-red-500 hover:text-red-700 text-sm px-2 py-1 rounded-md focus:outline-none";
+
   // Append all elements to the wrapper
   wrapper.appendChild(label);
   wrapper.appendChild(input);
-  wrapper.appendChild(altLabel);
   wrapper.appendChild(altInput);
+  wrapper.appendChild(btnRemove);
 
   return wrapper;
 }
