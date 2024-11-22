@@ -197,31 +197,37 @@ export function createNewAuction(listing) {
   const form = modalContainer.querySelector("#auction-form");
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
+    const mediaInput = Array.from(
+      document.querySelectorAll('input[name^="mediaUrl"]')
+    );
+    const altInput = Array.from(
+      document.querySelectorAll('input[name^="mediaAlt"]')
+    );
+
+    const media = mediaInput.map((urlInput, index) => ({
+      url: urlInput.value,
+      alt: altInput[index].value || "",
+    }));
 
     const formData = {
       title: form.title.value,
       description: form.body.value,
       tags: form.tags.value.split(" "),
-      media: [
-        {
-          url: form.media1.value,
-          alt: form.alt.value,
-        },
-      ],
+      media: media,
       endsAt: form["meeting-time"].value,
     };
 
     console.log("Form data:", formData);
     console.log("form", form);
 
-    // try {
-    //   const result = await createauction(formData);
-    //   alert("Auction created successfully!");
-    //   console.log("Auction result:", result);
-    //   modalContainer.remove();
-    // } catch (error) {
-    //   console.error("Error creating auction:", error.message);
-    //   alert("Failed to create auction. Please try again.");
-    // }
+    try {
+      const result = await createauction(formData);
+      alert("Auction created successfully!");
+      console.log("Auction result:", result);
+      modalContainer.remove();
+    } catch (error) {
+      console.error("Error creating auction:", error.message);
+      alert("Failed to create auction. Please try again.");
+    }
   });
 }
