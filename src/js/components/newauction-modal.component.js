@@ -24,8 +24,7 @@ export function createNewAuction(listing) {
     }
   }
   //se om du klarer deg uten list media url og alt. heller kjøre en loop.
-  // oppdatert de harkodete feltene som brukes til input av formet som lager nye poster. 
-  
+  // oppdatert de harkodete feltene som brukes til input av formet som lager nye poster.
 
   const modalContainer = document.createElement("section");
 
@@ -106,37 +105,13 @@ export function createNewAuction(listing) {
      >
      <input
      value="${imageUrl}"
-       id="media"
+       id="media1"
        type="text"
-       name="media"
+       name="media1"
        maxlength="255"
        placeholder="Enter image URL"
        class="border border-gray-500 rounded-md p-2 bg-hoverGray text-textPrimary placeholder-gray-400 focus:border-linkColor focus:ring-2 focus:ring-linkColor focus:outline-none w-full "
      />
-     <input
-     id="media"
-     type="text"
-     name="media"
-     maxlength="255"
-     placeholder="Enter image URL"
-     class="border border-gray-500 rounded-md p-2 bg-hoverGray text-textPrimary placeholder-gray-400 focus:border-linkColor focus:ring-2 focus:ring-linkColor focus:outline-none w-full"
-   />
-   <input
-   id="media"
-   type="text"
-   name="media"
-   maxlength="255"
-   placeholder="Enter image URL"
-   class="border border-gray-500 rounded-md p-2 bg-hoverGray text-textPrimary placeholder-gray-400 focus:border-linkColor focus:ring-2 focus:ring-linkColor focus:outline-none w-full"
- />
- <input
- id="media"
- type="text"
- name="media"
- maxlength="255"
- placeholder="Enter image URL"
- class="border border-gray-500 rounded-md p-2 bg-hoverGray text-textPrimary placeholder-gray-400 focus:border-linkColor focus:ring-2 focus:ring-linkColor focus:outline-none w-full"
-/>
    </div>
 
    <!-- Image ALT Text Field -->
@@ -197,17 +172,25 @@ export function createNewAuction(listing) {
       title: form.title.value,
       description: form.body.value,
       tags: form.tags.value.split(" "),
+      media: [
+        {
+          url: form.media1.value,
+          alt: form.alt.value,
+        },
+      ],
       endsAt: form["meeting-time"].value,
     };
+    console.log("Form data:", formData);
+    console.log("form", form);
 
-    try {
-      const result = await createauction(formData);
-      alert("Auction created successfully!");
-      console.log("Auction result:", result);
-      modalContainer.remove();
-    } catch (error) {
-      console.error("Error creating auction:", error.message);
-      alert("Failed to create auction. Please try again.");
-    }
+    // try {
+    //   const result = await createauction(formData);
+    //   alert("Auction created successfully!");
+    //   console.log("Auction result:", result);
+    //   modalContainer.remove();
+    // } catch (error) {
+    //   console.error("Error creating auction:", error.message);
+    //   alert("Failed to create auction. Please try again.");
+    // }
   });
 }

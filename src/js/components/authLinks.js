@@ -50,10 +50,6 @@ export function renderAuthLinks() {
       authLinks.appendChild(atag);
     }
   });
-
-  console.log(
-    token ? "Displayed user menu with logout" : "Displayed login/register links"
-  );
 }
 
 function handleLogout() {

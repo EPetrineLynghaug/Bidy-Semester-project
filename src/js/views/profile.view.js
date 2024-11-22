@@ -16,10 +16,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     const profile = await fetchProfile(username);
-    console.log("profile", profile);
 
     const updatedAuction = await updateAuction(username);
-    console.log("updatedAuction", updatedAuction);
 
     updatedAuction.map((listing) => {
       const listIthem = myAuctions(listing);
@@ -61,19 +59,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     coinsElement.textContent = profile.credits || "unkinown";
 
     //mobile menu//
-    let menuIsOpen = false;
-    const mobileMenu = document.querySelector("#mobile-menu");
+    //   let menuIsOpen = false;
+    //   const mobileMenu = document.querySelector("#mobile-menu");
 
-    document.getElementById("toggle-menu").addEventListener("click", () => {
-      if (menuIsOpen) {
-        mobileMenu.classList.add("hidden");
-        mobileMenu.classList.remove("flex");
-      } else {
-        mobileMenu.classList.remove("hidden");
-        mobileMenu.classList.add("flex");
-      }
-      menuIsOpen = !menuIsOpen;
-    });
+    //   document.getElementById("toggle-menu").addEventListener("click", () => {
+    //     if (menuIsOpen) {
+    //       mobileMenu.classList.add("hidden");
+    //       mobileMenu.classList.remove("flex");
+    //     } else {
+    //       mobileMenu.classList.remove("hidden");
+    //       mobileMenu.classList.add("flex");
+    //     }
+    //     menuIsOpen = !menuIsOpen;
+    //   });
   } catch (error) {
     console.error("Error fetching profile:", error.message);
   }

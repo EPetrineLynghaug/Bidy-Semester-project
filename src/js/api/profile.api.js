@@ -7,7 +7,7 @@ export async function fetchProfile(name) {
     if (!name) throw new Error("Username is required to fetch profile.");
 
     const url = `${API_PROFILE}/${name}`;
-    console.log(`Fetching profile for user: ${url}`);
+
     const response = await fetch(url, {
       method: "GET",
       headers: createHeaders(true),
@@ -30,7 +30,6 @@ export async function fetchProfile(name) {
 //Make new aution//
 
 export async function createauction(formData) {
-  console.log("Data sent to API:", formData);
   try {
     const response = await fetch(API_AUCTION_LISTINGS, {
       method: "POST",
@@ -43,7 +42,7 @@ export async function createauction(formData) {
     }
 
     const result = await response.json();
-    console.log("API response:", result);
+
     const data = result.data;
 
     return data;
@@ -64,7 +63,7 @@ export async function updateAuction(name) {
     }
 
     const result = await response.json();
-    console.log("API response:", result);
+
     const updatedAuction = result.data;
 
     return updatedAuction;

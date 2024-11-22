@@ -40,14 +40,16 @@ export function myAuctions(listing) {
   </div >
     `;
 
-  console.log(listing.id, listing);
-
-  // edit btn til en event l, skal skrives som om du vil lage en ny post.
-
   const editBtn = listIthem.querySelector(".edit-btn");
   editBtn.addEventListener("click", () => {
     createNewAuction(listing);
   });
+
+// const deleteBtn = listIthem.querySelector(".delete-btn");
+// deleteBtn.addEventListener("click", () => {
+
+// });
+
 
   return listIthem;
 }
