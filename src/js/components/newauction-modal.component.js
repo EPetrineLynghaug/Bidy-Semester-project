@@ -1,6 +1,9 @@
 import { createauction } from "../api/profile.api.js";
+import { createInput } from "../utilities/createInput.utillities.js";
 
 export function createNewAuction(listing) {
+  let mediaInput = 2;
+
   let imageUrl = "";
   let imageAlt = "";
   let endTime = "";
@@ -43,7 +46,6 @@ export function createNewAuction(listing) {
 
  <h1 class="font-semibold">New Auction</h1>
  <form name="createPost" id="auction-form" class="space-y-4">
-   <!-- Title Field -->
    <div class="flex flex-col ">
      <label
        for="title"
@@ -96,39 +98,37 @@ export function createNewAuction(listing) {
      />
    </div>
 
-   <!-- Image URL Field -->
-   <div class="flex flex-col gap-2 ">
-     <label
-       for="media"
-       class="mb-1 text-textSecondary text-sm font-medium "
-       >Image URL</label
-     >
-     <input
-     value="${imageUrl}"
-       id="media1"
-       type="text"
-       name="media1"
-       maxlength="255"
-       placeholder="Enter image URL"
-       class="border border-gray-500 rounded-md p-2 bg-hoverGray text-textPrimary placeholder-gray-400 focus:border-linkColor focus:ring-2 focus:ring-linkColor focus:outline-none w-full "
-     />
-   </div>
+   <div class="flex flex-col gap-4 w-full max-w-md mx-auto">
+  <!-- Initial Input Field with Label -->
+  <div class="url-input-container flex flex-col gap-2">
+    <div class="flex flex-col gap-2 w-full">
+      <label for="mediaUrl1" class="mb-1 text-gray-700 text-sm font-medium">
+        Image URL 1
+      </label>
+      <input
+        value="${imageUrl}"
+        id="mediaUrl1"
+        type="text"
+        name="mediaUrl1"
+        maxlength="255"
+        placeholder="Enter image URL"
+        class="border border-gray-300 rounded-md p-2 bg-gray-100 text-gray-800 placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-400 focus:outline-none w-full"
+      />
+    </div>
+  </div>
 
-   <!-- Image ALT Text Field -->
-   <div class="flex flex-col">
-     <label for="alt" class="mb-1 text-textSecondary text-sm font-medium"
-       >Image ALT</label
-     >
-     <input
-       value="${imageAlt}"
-       id="alt"
-       type="text"
-       name="alt"
-       maxlength="255"
-       placeholder="Enter image description (ALT)"
-       class="border border-gray-500 rounded-md p-2 bg-hoverGray text-textPrimary placeholder-gray-400 focus:border-linkColor focus:ring-2 focus:ring-linkColor focus:outline-none w-full"
-     />
-   </div>
+  <!-- Add Image Button -->
+  <button
+    id="add-image-button"
+    type="button"
+    class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+  >
+    Add URL
+  </button>
+</div>
+
+
+
       <!-- time and date-->
       <div class="flex flex-col">
        <label for="meeting-time"> Auction Ending:</label>
@@ -164,6 +164,20 @@ export function createNewAuction(listing) {
     }
   });
 
+  //media url
+  const btn = document.querySelector("#add-image-button");
+  const container = document.querySelector(".url-input-container");
+
+  btn.addEventListener("click", (event) => {
+    event.preventDefault();
+    console.log("clicked");
+
+    const newInputWithLabel = createInput(mediaInput);
+    mediaInput++;
+
+    container.appendChild(newInputWithLabel);
+  });
+
   const form = modalContainer.querySelector("#auction-form");
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -180,6 +194,7 @@ export function createNewAuction(listing) {
       ],
       endsAt: form["meeting-time"].value,
     };
+
     console.log("Form data:", formData);
     console.log("form", form);
 
