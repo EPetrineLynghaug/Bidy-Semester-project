@@ -1,4 +1,15 @@
-export function createInput(num) {
+export function createInput(num, media) {
+  let url = "";
+  let alt = "";
+  if (media) {
+    if (media.url) {
+      url = media.url;
+    }
+    if (media.alt) {
+      alt = media.alt;
+    }
+  }
+
   const wrapper = document.createElement("div");
   wrapper.className = "flex flex-col gap-2 w-full";
   wrapper.id = `url-input-container${num}`;
@@ -13,6 +24,7 @@ export function createInput(num) {
   const input = document.createElement("input");
   input.type = "text";
   input.id = `mediaUrl${num}`;
+  input.value = url;
   input.name = `mediaUrl${num}`;
   input.placeholder = "Enter image URL";
   input.maxLength = 255;
@@ -23,6 +35,7 @@ export function createInput(num) {
   const altInput = document.createElement("input");
   altInput.type = "text";
   altInput.id = `mediaAlt${num}`;
+  altInput.value = alt;
   altInput.name = `mediaAlt${num}`;
   altInput.placeholder = "Enter ALT text for the image";
   altInput.maxLength = 255;

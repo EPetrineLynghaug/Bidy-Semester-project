@@ -2,32 +2,20 @@ import { createauction } from "../api/profile.api.js";
 import { createInput } from "../utilities/createInput.utillities.js";
 
 export function createNewAuction(listing) {
-  let mediaInput = 2;
+  let mediaInput = 1;
 
-  let imageUrl = "";
-  let imageAlt = "";
-  let endTime = "";
   let title = "";
   let description = "";
   let tags = "";
-  console.log("listing", listing);
+  let endTime = "";
+
   if (listing) {
     endTime = listing.endsAt;
     endTime = String(endTime);
     title = listing.title;
     description = listing.description;
     tags = listing.tags;
-    if (listing.media && listing.media.length > 0) {
-      if (listing.media[0].url) {
-        imageUrl = listing.media[0].url;
-      }
-      if (listing.media[0].alt) {
-        imageAlt = listing.media[0].alt;
-      }
-    }
   }
-  //se om du klarer deg uten list media url og alt. heller kjøre en loop.
-  // oppdatert de harkodete feltene som brukes til input av formet som lager nye poster.
 
   const modalContainer = document.createElement("section");
 
@@ -37,7 +25,7 @@ export function createNewAuction(listing) {
   modalContainer.innerHTML = `
     <div class="bg-white rounded-md shadow-md p-10 px-16 max-h-screen overflow-y-auto relative">
 
- 
+
  <button id="close-button" class="w-8 h-8 absolute top-2 right-2 flex items-center justify-center bg-red-500 text-white rounded-full hover:bg-red-600 focus:outline-none">
    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -53,7 +41,7 @@ export function createNewAuction(listing) {
        >Title</label
      >
      <input
-      value="${title}" 
+      value="${title}"
        id="title"
        type="text"
        name="title"
@@ -103,17 +91,15 @@ export function createNewAuction(listing) {
   <div class="flex flex-col gap-1 w-full">
     <label for="mediaUrl1" class="mb-1 text-gray-700 text-sm font-medium"> Image URL 1</label>
     <input
-      value="${imageUrl}"
       id="mediaUrl1"
       type="text"
       name="mediaUrl1"
       maxlength="255"
       placeholder="Enter image URL"
-      class="border border-gray-300 rounded-md p-2 bg-gray-100 text-gray-800 placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-400 focus:outline-none w-full"
+      class="border  border-gray-300 rounded-md p-2 bg-gray-100 text-gray-800 placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-400 focus:outline-none w-full"
     />
     <label for="mediaAlt1" class="mb-1 text-gray-700 text-sm font-medium"></label>
     <input
-      value="${imageAlt}"
       id="mediaAlt1"
       type="text"
       name="mediaAlt1"
@@ -121,7 +107,7 @@ export function createNewAuction(listing) {
       placeholder="Enter ALT text for the image"
       class="border border-gray-300 rounded-md p-2 bg-gray-100 text-gray-800 placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-400 focus:outline-none w-full"
     />
-    
+
   </div>
 
     <!-- Dynamic Fields Container -->
@@ -149,16 +135,37 @@ export function createNewAuction(listing) {
 
 
    <!-- Submit Button -->
-  <button type="submit" 
+  <button type="submit"
     class="w-full bg-gradient-to-r from-teal-500 to-teal-600 text-white font-semibold px-5 py-2 rounded-md shadow-md hover:from-teal-400 hover:to-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-300 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-200 ease-in-out transform hover:-translate-y-0.5 active:scale-95"> Create Post
   </button>
 </div>`;
 
   document.body.append(modalContainer);
+  const container = document.querySelector(".url-input-container");
+
+  if (listing && listing.media.length > 0) {
+    listing.media.map((media, index) => {
+      if (index > 0) {
+        mediaInput++;
+        const newUrlInput = createInput(mediaInput, media);
+        container.appendChild(newUrlInput);
+      } else {
+        const mediaUrl = document.querySelector("#mediaUrl1");
+        const mediaAlt = document.querySelector("#mediaAlt1");
+
+        if (media.url) {
+          mediaUrl.value = media.url;
+        }
+        if (media.alt) {
+          mediaAlt.value = media.alt;
+        }
+      }
+    });
+  }
 
   const closeButton = modalContainer.querySelector("#close-button");
   closeButton.addEventListener("click", () => {
-    modalContainer.classList.add("hidden");
+    modalContainer.remove();
   });
 
   // Lukk modal ved å klikke utenfor innholdet
@@ -170,14 +177,12 @@ export function createNewAuction(listing) {
 
   //media url
   const btn = document.querySelector("#add-image-button");
-  const container = document.querySelector(".url-input-container");
 
   btn.addEventListener("click", (event) => {
     event.preventDefault();
     console.log("clicked");
-    const newInputWithAlt = createInput(mediaInput);
     mediaInput++;
-
+    const newInputWithAlt = createInput(mediaInput);
     container.appendChild(newInputWithAlt);
   });
 
@@ -186,7 +191,7 @@ export function createNewAuction(listing) {
       e.preventDefault();
       const dataId = e.target.getAttribute("data-id");
       const selectedFormGroup = document.querySelector(
-        `#url-input-container${dataId}`
+        `#url-input-container${dataId}`,
       );
       selectedFormGroup.remove();
 
@@ -198,10 +203,10 @@ export function createNewAuction(listing) {
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const mediaInput = Array.from(
-      document.querySelectorAll('input[name^="mediaUrl"]')
+      document.querySelectorAll('input[name^="mediaUrl"]'),
     );
     const altInput = Array.from(
-      document.querySelectorAll('input[name^="mediaAlt"]')
+      document.querySelectorAll('input[name^="mediaAlt"]'),
     );
 
     const media = mediaInput.map((urlInput, index) => ({
@@ -216,10 +221,6 @@ export function createNewAuction(listing) {
       media: media,
       endsAt: form["meeting-time"].value,
     };
-
-    console.log("Form data:", formData);
-    console.log("form", form);
-
     try {
       const result = await createauction(formData);
       alert("Auction created successfully!");

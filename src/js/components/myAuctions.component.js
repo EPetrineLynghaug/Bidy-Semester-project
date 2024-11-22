@@ -13,7 +13,7 @@ export function myAuctions(listing) {
     "auction-card   p-4  flex flex-row gap-4 border-b-2 border-blue-800 ";
 
   listIthem.innerHTML = `
-  <div class ="w-1/3 max-w-60">
+  <div class ="w-1/3 max-w-60 aspect-[16/9]">
     <img src="${
       media[0] ? media[0].url : "https://via.placeholder.com/400x300"
     }"
@@ -34,7 +34,9 @@ export function myAuctions(listing) {
   </div>
   <div class="flex gap-2 ">
   <button class="edit-btn bg-blue-500 text-white px-2 py-1 sm:px-3 sm:text-sm rounded hover:bg-blue-600 ">Edit </button>
-  <button class="details-btn bg-yellow-500 text-white px-2 py-2 sm:px-3 sm:text-sm rounded hover:bg-yellow-600">Details</button>
+  <a href="/listing?id=${
+    listing.id
+  }" class="bg-green-500 text-white px-2 py-1 sm:px-3 sm:text-sm rounded hover:bg-green-600">View</a>
   <button class="delete-btn bg-red-500 text-white  px-2 py-1 sm:px- 3 sm:text-sm rounded hover:bg-red-600">Delete</button>
   </div >
   </div >
@@ -45,11 +47,10 @@ export function myAuctions(listing) {
     createNewAuction(listing);
   });
 
-// const deleteBtn = listIthem.querySelector(".delete-btn");
-// deleteBtn.addEventListener("click", () => {
+  // const deleteBtn = listIthem.querySelector(".delete-btn");
+  // deleteBtn.addEventListener("click", () => {
 
-// });
-
+  // });
 
   return listIthem;
 }
