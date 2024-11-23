@@ -1,4 +1,4 @@
-import { fetchProfile, updateAuction } from "../api/profile.api.js";
+import { fetchProfile, getAllProfileAuction } from "../api/profile.api.js";
 
 import { renderAuthLinks } from "../components/authLinks.js";
 import { myAuctions } from "../components/myAuctions.component.js";
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const profile = await fetchProfile(username);
 
-    const updatedAuction = await updateAuction(username);
+    const updatedAuction = await getAllProfileAuction(username);
 
     updatedAuction.map((listing) => {
       const listIthem = myAuctions(listing);

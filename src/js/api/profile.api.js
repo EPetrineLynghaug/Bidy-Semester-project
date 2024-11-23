@@ -27,8 +27,29 @@ export async function fetchProfile(name) {
   }
 }
 
-//Make new aution//
+// update auction post//
+export async function getAllProfileAuction(name) {
+  try {
+    const response = await fetch(`${API_PROFILE}/${name}/listings`, {
+      method: "GET",
+      headers: createHeaders(true),
+    });
 
+    if (!response.ok) {
+      throw new Error(`Failed to update profile: ${response.status}`);
+    }
+
+    const result = await response.json();
+
+    const updatedAuction = result.data;
+
+    return updatedAuction;
+  } catch (error) {
+    console.log("error updating profile", error.message);
+  }
+}
+
+//Make new aution//
 export async function createauction(formData) {
   try {
     const response = await fetch(API_AUCTION_LISTINGS, {
@@ -50,25 +71,27 @@ export async function createauction(formData) {
     console.log("error creating auction listings", error.message);
   }
 }
-// update auction post//
-export async function updateAuction(name) {
+
+//edit auction
+export async function editAuction(id, formData) {
   try {
-    const response = await fetch(`${API_PROFILE}/${name}/listings`, {
-      method: "GET",
+    const response = await fetch(`${API_AUCTION_LISTINGS}/${id}`, {
+      method: "PUT",
       headers: createHeaders(true),
+      body: JSON.stringify(formData),
     });
 
     if (!response.ok) {
-      throw new Error(`Failed to update profile: ${response.status}`);
+      throw new Error(`Failed to update auction listing: ${response.status}`);
     }
 
     const result = await response.json();
 
-    const updatedAuction = result.data;
+    const data = result.data;
 
-    return updatedAuction;
+    return data;
   } catch (error) {
-    console.log("error updating profile", error.message);
+    console.log("error editing auction listings", error.message);
   }
 }
 

@@ -1,4 +1,4 @@
-import { createauction } from "../api/profile.api.js";
+import { createauction, editAuction } from "../api/profile.api.js";
 import { createInput } from "../utilities/createInput.utillities.js";
 
 export function createNewAuction(listing) {
@@ -10,11 +10,18 @@ export function createNewAuction(listing) {
   let endTime = "";
 
   if (listing) {
-    endTime = listing.endsAt;
-    endTime = String(endTime);
+    const [date, time] = listing.endsAt.split("T");
+    const [hour, minute] = time.split(":");
+    endTime = `${date}T${hour}:${minute}`;
+
     title = listing.title;
     description = listing.description;
     tags = listing.tags;
+  } else {
+    const today = new Date().toISOString();
+    const [date] = today.split("T");
+
+    endTime = `${date}T23:59`;
   }
 
   const modalContainer = document.createElement("section");
@@ -27,7 +34,7 @@ export function createNewAuction(listing) {
 
 
  <button id="close-button" class="w-8 h-8 absolute top-2 right-2 flex items-center justify-center bg-red-500 text-white rounded-full hover:bg-red-600 focus:outline-none">
-   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
    </svg>
  </button>
@@ -221,15 +228,28 @@ export function createNewAuction(listing) {
       media: media,
       endsAt: form["meeting-time"].value,
     };
-    try {
-      const result = await createauction(formData);
-      alert("Auction created successfully!");
-      console.log("Auction result:", result);
-      modalContainer.remove();
-      // TODO:lage et kort og rendre html.
-    } catch (error) {
-      console.error("Error creating auction:", error.message);
-      alert("Failed to create auction. Please try again.");
+    if (listing) {
+      try {
+        const result = await editAuction(listing.id, formData);
+        alert("Auction updated successfully!");
+        console.log("Auction result:", result);
+        modalContainer.remove();
+      } catch (error) {
+        console.error("Error updating auction:", error.message);
+        alert("Failed to update auction. Please try again.");
+      }
+    } else {
+      try {
+        const result = await createauction(formData);
+        alert("Auction created successfully!");
+        console.log("Auction result:", result);
+        modalContainer.remove();
+        // TODO:lage et kort og rendre html.
+      } catch (error) {
+        console.error("Error creating auction:", error.message);
+        alert("Failed to create auction. Please try again.");
+      }
     }
   });
 }
+//TODO: Refactor koden, mindre moduler.
