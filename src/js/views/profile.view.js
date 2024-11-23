@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     updatedAuction.map((listing) => {
       const listIthem = myAuctions(listing);
 
-      const container = document.querySelector("#my-auctions");
+      const container = document.querySelector("#my-auctions-container");
       container.appendChild(listIthem);
     });
 

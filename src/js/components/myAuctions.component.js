@@ -2,7 +2,7 @@ import { deleteAuction } from "../api/profile.api.js";
 import { createNewAuction } from "./newauction-modal.component.js";
 
 export function myAuctions(listing) {
-  const { bids = [], seller = {}, media = [] } = listing;
+  const { bids = [], media = [] } = listing;
 
   let currentBid = 0;
   if (bids.length > 0) {
@@ -51,7 +51,7 @@ export function myAuctions(listing) {
 
   deleteBtn.addEventListener("click", (event) => {
     let deliteAuctionPost = confirm(
-      "Are you sure you want to delete this Auction?"
+      "Are you sure you want to delete this Auction?",
     );
     if (deliteAuctionPost) {
       deleteAuction(listing.id);

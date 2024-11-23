@@ -1,5 +1,7 @@
 import { createauction, editAuction } from "../api/profile.api.js";
 import { createInput } from "../utilities/createInput.utillities.js";
+import { listingCardComponent } from "./listingCard.components.js";
+import { myAuctions } from "./myAuctions.component.js";
 
 export function createNewAuction(listing) {
   let mediaInput = 1;
@@ -137,13 +139,15 @@ export function createNewAuction(listing) {
     type="datetime-local"
     id="meeting-time"
     name="meeting-time"
-    class="border border-gray-500 rounded-md p-2 bg-hoverGray text-textPrimary placeholder-gray-400 focus:border-linkColor focus:ring-2 focus:ring-linkColor focus:outline-none w-full" />
+    ${listing ? "disabled" : ""}
+    class=" disabled:bg-gray-400 disabled:text-red-500  border border-gray-500 rounded-md p-2 bg-hoverGray text-textPrimary placeholder-gray-400 focus:border-linkColor focus:ring-2 focus:ring-linkColor focus:outline-none w-full" />
   </div>
 
 
    <!-- Submit Button -->
   <button type="submit"
-    class="w-full bg-gradient-to-r from-teal-500 to-teal-600 text-white font-semibold px-5 py-2 rounded-md shadow-md hover:from-teal-400 hover:to-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-300 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-200 ease-in-out transform hover:-translate-y-0.5 active:scale-95"> Create Post
+    class="w-full bg-gradient-to-r from-teal-500 to-teal-600 text-white font-semibold px-5 py-2 rounded-md shadow-md hover:from-teal-400 hover:to-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-300 focus:ring-offset-2 focus:ring-offset-gray-800 transition-all duration-200 ease-in-out transform hover:-translate-y-0.5 active:scale-95"> 
+   ${listing ? "Update Auction" : "Create Auction"}   
   </button>
 </div>`;
 
@@ -241,10 +245,17 @@ export function createNewAuction(listing) {
     } else {
       try {
         const result = await createauction(formData);
-        alert("Auction created successfully!");
-        console.log("Auction result:", result);
+        console.log(formData);
+        console.log(result);
+        const card = myAuctions(result);
+
+        const myAuctionsContainer = document.querySelector(
+          "#my-auctions-container"
+        );
+        myAuctionsContainer.prepend(card);
         modalContainer.remove();
-        // TODO:lage et kort og rendre html.
+
+        alert("Auction created successfully!");
       } catch (error) {
         console.error("Error creating auction:", error.message);
         alert("Failed to create auction. Please try again.");
