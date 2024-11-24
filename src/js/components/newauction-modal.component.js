@@ -128,8 +128,6 @@ export function createNewAuction(listing) {
    </button>
 </div>
 
-
-
  <!-- time and date-->
   <div class="flex flex-col">
   <label for="meeting-time"> Auction Ending:</label>

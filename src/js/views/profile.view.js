@@ -3,6 +3,7 @@ import { fetchProfile, getAllProfileAuction } from "../api/profile.api.js";
 import { renderAuthLinks } from "../components/authLinks.js";
 import { myAuctions } from "../components/myAuctions.component.js";
 import { createNewAuction } from "../components/newauction-modal.component.js";
+import { updateProfileModal } from "../components/updateProfile-modal.component.js";
 import { getStoredUserName } from "../utilities/storage.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -79,5 +80,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   const openModalButton = document.querySelector("#open-modal");
   openModalButton.addEventListener("click", () => {
     createNewAuction();
+  });
+
+  const openModalButtonProfile = document.querySelector("#open-modal-profile");
+  openModalButtonProfile.addEventListener("click", () => {
+    console.log("Open modal button clicked");
+    updateProfileModal();
+    console.log("Open modal button clicked");
   });
 });
