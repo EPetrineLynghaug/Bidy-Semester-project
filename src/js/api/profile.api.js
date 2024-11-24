@@ -123,21 +123,24 @@ export async function deleteAuction(id) {
     throw error;
   }
 }
-export async function upDateProfil(profileData) {
+export async function upDateProfil(name, profile) {
+  console.log("Profile data being sent:", name, profile);
   try {
-    const response = await fetch(`${API_URL}/profile`, {
+    const response = await fetch(`${API_PROFILE}/${name}`, {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(profileData),
+      headers: createHeaders(true),
+      body: JSON.stringify(profile),
     });
 
     if (!response.ok) {
       throw new Error(`Failed to update profile: ${response.status}`);
     }
 
-    return await response.json();
+    const result = await response.json();
+
+    const profileData = result.data;
+
+    return profileData;
   } catch (error) {
     console.error("Error updating profile:", error.message);
     throw error;

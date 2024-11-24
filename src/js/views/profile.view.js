@@ -1,4 +1,8 @@
-import { fetchProfile, getAllProfileAuction } from "../api/profile.api.js";
+import {
+  fetchProfile,
+  getAllProfileAuction,
+  upDateProfil,
+} from "../api/profile.api.js";
 
 import { renderAuthLinks } from "../components/authLinks.js";
 import { myAuctions } from "../components/myAuctions.component.js";
@@ -73,6 +77,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     //     }
     //     menuIsOpen = !menuIsOpen;
     //   });
+    const openModalButtonProfile = document.querySelector(
+      "#open-modal-profile"
+    );
+    openModalButtonProfile.addEventListener("click", () => {
+      console.log("Open modal button clicked");
+      updateProfileModal(profile);
+      console.log("Modal opened with profile data:", profile);
+    });
   } catch (error) {
     console.error("Error fetching profile:", error.message);
   }
@@ -80,12 +92,5 @@ document.addEventListener("DOMContentLoaded", async () => {
   const openModalButton = document.querySelector("#open-modal");
   openModalButton.addEventListener("click", () => {
     createNewAuction();
-  });
-
-  const openModalButtonProfile = document.querySelector("#open-modal-profile");
-  openModalButtonProfile.addEventListener("click", () => {
-    console.log("Open modal button clicked");
-    updateProfileModal();
-    console.log("Open modal button clicked");
   });
 });

@@ -1,10 +1,10 @@
 import { upDateProfil } from "../api/profile.api.js";
 export function updateProfileModal(profile) {
+  console.log(profile);
   const modalContainer = document.createElement("section");
   modalContainer.className =
     "fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-50 z-50";
 
-  // Modalens HTML-struktur
   modalContainer.innerHTML = `
       <div class="bg-white rounded-md shadow-md p-10 px-16 max-h-screen overflow-y-auto relative">
         <div class="flex justify-between items-center mb-6">
@@ -38,9 +38,16 @@ export function updateProfileModal(profile) {
   document.body.appendChild(modalContainer);
 
   if (profile) {
-    modalContainer.querySelector("#banner-url").value = profile.bannerUrl;
-    modalContainer.querySelector("#avatar-url").value = profile.avatarUrl;
-    modalContainer.querySelector("#bio").value = profile.bio;
+    console.log("Profile object:", profile);
+
+    modalContainer.querySelector("#banner-url").value =
+      profile.banner?.url || "https://via.placeholder.com/800x300";
+    modalContainer.querySelector("#avatar-url").value =
+      profile.avatar?.url || "https://via.placeholder.com/100";
+    modalContainer.querySelector("#bio").value =
+      profile.bio || "No bio available.";
+  } else {
+    console.error("Profile object is undefined or missing required fields.");
   }
 
   const closeModal = () => {
@@ -50,18 +57,32 @@ export function updateProfileModal(profile) {
     .querySelector("#close-modal")
     .addEventListener("click", closeModal);
 
+  // Håndter skjema-innsending
   const form = modalContainer.querySelector("#profile-update-form");
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const updatedProfile = {
-      bannerUrl: modalContainer.querySelector("#banner-url").value,
-      avatarUrl: modalContainer.querySelector("#avatar-url").value,
-      bio: modalContainer.querySelector("#bio").value,
+    const profileData = {
+      bannerUrl: form.querySelector("#banner-url").value,
+      avatarUrl: form.querySelector("#avatar-url").value,
+      bio: form.querySelector("#bio").value,
     };
 
+    //{
+    //   "bio": "string",
+    //   "avatar": {
+    //     "url": "https://picsum.photos/id/135/800/800",
+    //     "alt": ""
+    //   },
+    //   "banner": {
+    //     "url": "https://picsum.photos/id/888/1500/500",
+    //     "alt": ""
+    //   }
+
+    console.log("Form data:", profileData);
+    //  await updateprofile ( må ha to parametre.)
     try {
-      await upDateProfil(updatedProfile);
+      await upDateProfil(profile.name, profileData);
       closeModal();
       window.location.reload();
     } catch (error) {
