@@ -1,40 +1,67 @@
 import { upDateProfil } from "../api/profile.api.js";
 export function updateProfileModal(profile) {
   console.log(profile);
+
   const modalContainer = document.createElement("section");
   modalContainer.className =
-    "fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-50 z-50";
+    "fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50";
 
   modalContainer.innerHTML = `
-      <div class="bg-white rounded-md shadow-md p-10 px-16 max-h-screen overflow-y-auto relative">
-        <div class="flex justify-between items-center mb-6">
-          <h1 class="text-2xl font-bold text-gray-800">Update Profile</h1>
-          <button id="close-modal" class="w-8 h-8 absolute top-2 right-2 flex items-center justify-center bg-red-500 text-white rounded-full hover:bg-red-600 focus:outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-   </svg>
-          </button>
-           <div class="mb-4">
-       
-        
-        <form id="profile-update-form" class="space-y-4">
-          <div class="flex flex-col gap-4 w-full max-w-md mx-auto">
-            <div class="flex flex-col gap-1 w-full">
-              <label for="banner-url" class="mb-1 text-gray-700 text-sm font-medium">Banner URL</label>
-              <input id="banner-url" type="text" maxlength="255" placeholder="Enter banner URL" class="border border-gray-300 rounded-md p-2 w-full">
-            </div>
-            <div class="flex flex-col gap-1 w-full">
-              <label for="avatar-url" class="mb-1 text-gray-700 text-sm font-medium">Avatar URL</label>
-              <input id="avatar-url" type="text" maxlength="255" placeholder="Enter avatar URL" class="border border-gray-300 rounded-md p-2 w-full">
-            </div>
-            <div class="flex flex-col gap-1 w-full">
-              <label for="bio" class="mb-1 text-gray-700 text-sm font-medium">Bio</label>
-              <textarea id="bio" maxlength="200" placeholder="Enter bio" class="border border-gray-300 rounded-md p-2 w-full"></textarea>
-            </div>
-            <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Update Profile</button>
-          </div>
+    <div class="bg-white rounded-lg shadow-lg w-11/12 max-w-lg md:max-w-2xl lg:max-w-3xl p-6 relative">
+      <!-- Header -->
+      <div class="flex justify-between items-center border-b pb-4 mb-4">
+        <h1 class="text-lg md:text-xl lg:text-2xl font-semibold text-gray-800">Update Profile</h1>
+        <button id="close-modal" class="w-8 h-8 flex items-center justify-center bg-red-500 text-white rounded-full hover:bg-red-600 focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+  
+      <!-- Form -->
+      <form id="profile-update-form" class="space-y-6">
+        <!-- Banner URL -->
+        <div class="flex flex-col gap-1">
+          <label for="banner-url" class="block text-sm font-medium text-gray-700">Banner URL</label>
+          <input
+            id="banner-url"
+            type="text"
+            maxlength="255"
+            placeholder="Enter banner URL"
+            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+          />
+        </div>
+        <!-- Avatar URL -->
+        <div class="flex flex-col gap-1">
+          <label for="avatar-url" class="block text-sm font-medium text-gray-700">Avatar URL</label>
+          <input
+            id="avatar-url"
+            type="text"
+            maxlength="255"
+            placeholder="Enter avatar URL"
+            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+          />
+        </div>
+        <!-- Bio -->
+        <div class="flex flex-col gap-1">
+          <label for="bio" class="block text-sm font-medium text-gray-700">Bio</label>
+          <textarea
+            id="bio"
+            maxlength="200"
+            placeholder="Enter bio"
+            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+          ></textarea>
+        </div>
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium py-2 px-4 rounded-md shadow-sm hover:from-blue-400 hover:to-blue-500 focus:ring-2 focus:ring-blue-300 focus:outline-none transition-all"
+        >
+          Update Profile
+        </button>
       </form>
     </div>
+  
     `;
 
   document.body.appendChild(modalContainer);
@@ -66,17 +93,16 @@ export function updateProfileModal(profile) {
       bio: form.querySelector("#bio").value,
       avatar: {
         url: form.querySelector("#avatar-url").value,
-        alt: "", 
+        alt: "",
       },
       banner: {
         url: form.querySelector("#banner-url").value,
-        alt: "", 
+        alt: "",
       },
     };
 
-
     console.log("Form data:", profileData);
-    
+
     try {
       await upDateProfil(profile.name, profileData);
       closeModal();
