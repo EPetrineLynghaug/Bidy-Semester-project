@@ -14,7 +14,9 @@ export function updateProfileModal(profile) {
      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
    </svg>
           </button>
-        </div>
+           <div class="mb-4">
+       
+        
         <form id="profile-update-form" class="space-y-4">
           <div class="flex flex-col gap-4 w-full max-w-md mx-auto">
             <div class="flex flex-col gap-1 w-full">
@@ -31,21 +33,19 @@ export function updateProfileModal(profile) {
             </div>
             <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Update Profile</button>
           </div>
-        </form>
-      </div>
+      </form>
+    </div>
     `;
 
   document.body.appendChild(modalContainer);
 
   if (profile) {
     console.log("Profile object:", profile);
-
     modalContainer.querySelector("#banner-url").value =
-      profile.banner?.url || "https://via.placeholder.com/800x300";
+      profile.banner?.url ?? "";
     modalContainer.querySelector("#avatar-url").value =
-      profile.avatar?.url || "https://via.placeholder.com/100";
-    modalContainer.querySelector("#bio").value =
-      profile.bio || "No bio available.";
+      profile.avatar?.url ?? "";
+    modalContainer.querySelector("#bio").value = profile.bio ?? "";
   } else {
     console.error("Profile object is undefined or missing required fields.");
   }
@@ -63,24 +63,20 @@ export function updateProfileModal(profile) {
     event.preventDefault();
 
     const profileData = {
-      bannerUrl: form.querySelector("#banner-url").value,
-      avatarUrl: form.querySelector("#avatar-url").value,
       bio: form.querySelector("#bio").value,
+      avatar: {
+        url: form.querySelector("#avatar-url").value,
+        alt: "", 
+      },
+      banner: {
+        url: form.querySelector("#banner-url").value,
+        alt: "", 
+      },
     };
 
-    //{
-    //   "bio": "string",
-    //   "avatar": {
-    //     "url": "https://picsum.photos/id/135/800/800",
-    //     "alt": ""
-    //   },
-    //   "banner": {
-    //     "url": "https://picsum.photos/id/888/1500/500",
-    //     "alt": ""
-    //   }
 
     console.log("Form data:", profileData);
-    //  await updateprofile ( må ha to parametre.)
+    
     try {
       await upDateProfil(profile.name, profileData);
       closeModal();
