@@ -28,7 +28,7 @@ export function listingCardComponent(listing) {
       <img src="${seller.avatar.url || "https://via.placeholder.com/50"}"
            alt="${seller.name || "Unknown Author"}"
            class="auction-card__author-image w-8 h-8 rounded-full">
-      <a href="/src/views/profile.html?name=${seller?.name || ""}"
+      <a href="/profile?name=${seller?.name || ""}" 
          class="auction-card__author-name text-sm text-blue-500 hover:underline">
         ${seller.name || "Unknown Author"}
       </a>

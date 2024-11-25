@@ -117,7 +117,7 @@ export async function deleteAuction(id) {
     } else {
       console.error(
         "An unexpected error occurred while deleting the post:",
-        error.message
+        error.message,
       );
     }
     throw error;

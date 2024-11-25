@@ -18,3 +18,26 @@ export async function fetchAuctionListings(limit = 18, page = 1) {
   }
 }
 
+export async function readeProfiles(name, page = 1) {
+  try {
+    const url = `${API_AUCTION_LISTINGS}/${name}/listings?sort=created&sortOrder=desc&limit=18&page=${page}&_seller=true&_bids=true&_active=true`;
+
+    const response = await fetch(url, {
+      method: "GET",
+      headers: createHeaders(),
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch profile listings: ${response.status} - ${response.statusText}`
+      );
+    }
+
+    const result = await response.json();
+    return result.data;
+  } catch (error) {
+    console.error("Error fetching profile listings:", error.message);
+    throw error;
+  }
+}
+//overflødig

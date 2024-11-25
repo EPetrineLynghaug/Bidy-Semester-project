@@ -1,7 +1,7 @@
 import { deleteAuction } from "../api/profile.api.js";
 import { createNewAuction } from "./newauction-modal.component.js";
 
-export function myAuctions(listing) {
+export function myAuctions(listing, editAllowed) {
   const { bids = [], media = [] } = listing;
 
   let currentBid = 0;
@@ -34,11 +34,11 @@ export function myAuctions(listing) {
     }</p>
   </div>
   <div class="flex gap-2 ">
-  <button class="edit-btn bg-blue-500 text-white px-2 py-1 sm:px-3 sm:text-sm rounded hover:bg-blue-600 ">Edit </button>
+  <button class="${!editAllowed ? "hidden" : ""} edit-btn bg-blue-500 text-white px-2 py-1 sm:px-3 sm:text-sm rounded hover:bg-blue-600 ">Edit </button>
   <a href="/listing?id=${
     listing.id
   }" class="bg-green-500 text-white px-2 py-1 sm:px-3 sm:text-sm rounded hover:bg-green-600">View</a>
-  <button class="delete-btn bg-red-500 text-white  px-2 py-1 sm:px- 3 sm:text-sm rounded hover:bg-red-600">Delete</button>
+  <button class="${!editAllowed ? "hidden" : ""} delete-btn bg-red-500 text-white  px-2 py-1 sm:px- 3 sm:text-sm rounded hover:bg-red-600">Delete</button>
   </div >
   </div >
     `;

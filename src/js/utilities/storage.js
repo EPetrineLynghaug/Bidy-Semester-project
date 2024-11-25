@@ -42,3 +42,12 @@ export function getStoredUserName() {
   }
   return null;
 }
+export function removeUsername() {
+  try {
+    localStorage.removeItem("username");
+    return true;
+  } catch (error) {
+    console.error("Error removing token:", error);
+    return false;
+  }
+}
