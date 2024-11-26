@@ -1,28 +1,27 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Welcome</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-         
-        <script type="module" src="./src/js/views/index.view.js"></script>
-    </head>
-    <body class="bg-gray-100">
-        <!-- Navigasjonsmeny -->
-        <nav class="flex justify-end p-4 bg-gray-800 text-white">
-            <div id="auth-links" class="space-x-4"></div>
-        </nav>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="./src/js/views/index.view.js"></script>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Navigasjonsmeny -->
+    <header class="bg-gray-800 text-white p-4">
+      <nav id="auth-links" class="flex space-x-4"></nav>
+    </header>
 
-        <!-- Overskrift -->
-        <h1 class="text-3xl font-bold text-center my-4 text-gray-800">
-            Auction Listings
-        </h1>
+    <!-- Overskrift -->
+    <h1 class="text-3xl font-bold text-center my-4 text-gray-800">
+      Auction Listings
+    </h1>
 
-        <!-- Container for auksjonsoppføringer -->
-        <div
-            id="listings-container"
-            class="grid gap-6 p-4 sm:grid-cols-2 lg:grid-cols-3"
-        ></div>
-    </body>
+    <!-- Container for auksjonsoppføringer -->
+    <div
+      id="listings-container"
+      class="grid gap-6 p-4 sm:grid-cols-2 lg:grid-cols-3"
+    ></div>
+  </body>
 </html>

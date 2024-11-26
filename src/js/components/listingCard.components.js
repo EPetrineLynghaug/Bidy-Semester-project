@@ -1,5 +1,5 @@
 export function listingCardComponent(listing) {
-  const { bids, seller, media } = listing;
+  const { bids = [], seller = {}, media = [] } = listing;
 
   const card = document.createElement("div");
   card.className =
@@ -11,8 +11,7 @@ export function listingCardComponent(listing) {
 
     const images = media.slice(0, 4);
   }
-  console.log(listing.media);
-  console.log(listing);
+
   card.innerHTML = `
     <div class="carousel relative w-full h-48 flex items-center justify-center overflow-hidden">
       <img src="${
@@ -31,7 +30,7 @@ export function listingCardComponent(listing) {
       <img src="${seller.avatar.url || "https://via.placeholder.com/50"}"
            alt="${seller.name || "Unknown Author"}"
            class="auction-card__author-image w-8 h-8 rounded-full">
-      <a href="/src/views/profile.html?name=${seller?.name || ""}"
+      <a href="/profile?name=${seller?.name || ""}" 
          class="auction-card__author-name text-sm text-blue-500 hover:underline">
         ${seller.name || "Unknown Author"}
       </a>
@@ -43,7 +42,7 @@ export function listingCardComponent(listing) {
     <p class="text-sm text-gray-500">
       Current bid: ${currentBid}
     </p>
-    <a href="./listing/index.html?id=${listing.id}"
+    <a href="/listing?id=${listing.id}"
        class="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition block text-center">
       View Details
     </a>

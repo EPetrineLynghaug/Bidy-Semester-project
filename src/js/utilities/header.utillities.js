@@ -8,6 +8,7 @@ export function createHeaders(requireAuth = false) {
 
   if (requireAuth) {
     const token = localStorage.getItem(TOKEN_STORAGE_KEY);
+
     if (!token) throw new Error("Authorization required but no token found");
     headers.append("Authorization", `Bearer ${token}`);
   }

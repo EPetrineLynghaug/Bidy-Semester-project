@@ -4,16 +4,138 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script type="module" src="../src/js/views/single.viws.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="/src/js/views/single.view.js"></script>
   </head>
   <body>
-    <h1 class="text-3xl font-bold text-center my-4 text-gray-800">
+    <header class="bg-gray-800 text-white p-4">
+      <nav id="auth-links" class="flex space-x-4"></nav>
+    </header>
+
+    <h1 class="text-3xl font-bold text-center mb-6 text-gray-800">
       Auction Detail
     </h1>
-    <div
-      id="single-card-container"
-      class="grid gap-6 p-4 sm:grid-cols-2 lg:grid-cols-3"
-    ></div>
+
+    <div class="container mx-auto p-6">
+      <!-- Auction Image Section -->
+      <section class="image-section w-full">
+        <div class="relative w-full h-[300px] md:h-[400px] lg:h-[400px] p-2">
+          <img
+            id="auction-image"
+            src="https://via.placeholder.com/800x300"
+            alt="Auction image"
+            class="w-full h-full object-cover rounded-lg shadow-lg"
+          />
+        </div>
+      </section>
+
+   <!-- Seller Info -->
+        <div class="details-section flex flex-col gap-6 p-4">
+          <div class="seller-info flex items-center gap-4 p-2 border-b pb-4">
+            <img
+              id="seller-avatar"
+              src="https://via.placeholder.com/50"
+              alt="Seller Avatar"
+              class="w-12 h-12 rounded-full shadow"
+            />
+            <p id="seller-name" class="text-lg font-semibold text-gray-800">
+              Loading seller name...
+            </p>
+          </div>
+          <section class="auction-grid grid grid-cols-1 gap-6"></section>
+        <!-- Details Section -->
+
+
+        <div class="details-section flex flex-col gap-6 p-4">
+          <header class="auction-header">
+            <h2
+              id="auction-title"
+              class="text-2xl lg:text-3xl font-bold text-gray-800"
+            >
+              Loading...
+            </h2>
+            <p
+              id="auction-description"
+              class="text-gray-700 mt-2 text-base lg:text-lg"
+            >
+              Loading description...
+            </p>
+          </header>
+
+          <!-- Auction Info -->
+          <div class="auction-info text-gray-500 text-sm md:text-base">
+            <p id="auction-posted-date">Posted: Loading...</p>
+            <p id="auction-expiry-date">Expires: Loading...</p>
+            <p id="current-bid">Current bid: Loading...</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bid Section -->
+      <section class="info-card mt-8 border rounded-lg p-4 bg-gray-50">
+        <h2 class="text-lg font-bold mb-4">Place Your Bid</h2>
+        <form action="#" method="post">
+          <div class="info-card-options mb-4">
+            <div class="flex items-center gap-2">
+              <input type="radio" id="bid-5" name="bid-amount" value="5" />
+              <label for="bid-5" class="text-sm">5 Coins</label>
+            </div>
+            <div class="flex items-center gap-2">
+              <input type="radio" id="bid-10" name="bid-amount" value="10" />
+              <label for="bid-10" class="text-sm">10 Coins</label>
+            </div>
+            <div class="flex items-center gap-2">
+              <input type="radio" id="bid-15" name="bid-amount" value="15" />
+              <label for="bid-15" class="text-sm">15 Coins</label>
+            </div>
+          </div>
+          <div class="divider mb-4"></div>
+          <div class="info-card-actions">
+            <label for="custom-bid" class="text-sm block mb-2"
+              >Or Enter Custom Bid:</label
+            >
+            <div class="info-card-actions-input flex gap-2 items-center">
+              <input
+                type="text"
+                class="input border rounded-lg p-2 flex-1"
+                id="custom-bid"
+                name="custom-bid"
+                placeholder="Enter custom amount"
+              />
+              <button
+                type="submit"
+                class="btn btn-basic form-submit-btn px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+              >
+                Bid Now
+              </button>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <!-- Bid History Section -->
+      <section class="bid-history-section mt-8 p-4">
+        <h3 class="text-xl lg:text-2xl font-bold mb-4">Bid History</h3>
+        <table
+          class="w-full border-collapse border border-gray-300 text-sm lg:text-base"
+        >
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="border px-2 lg:px-4 py-2 text-left">Bid Amount</th>
+              <th class="border px-2 lg:px-4 py-2 text-left">Bidder</th>
+              <th class="border px-2 lg:px-4 py-2 text-left">Date</th>
+              <th class="border px-2 lg:px-4 py-2 text-left">Time</th>
+            </tr>
+          </thead>
+          <tbody id="bid-history-body">
+            <tr>
+              <td colspan="4" class="text-center p-4">
+                Loading bid history...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
   </body>
 </html>
