@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   }
 });
-function bidNow(id, auctionData) {
+function bidNow(id) {
   const bidForm = document.querySelector("#bid-form");
   const customBidInput = document.querySelector("#custom-bid");
   console.log(bidForm);
@@ -48,26 +48,14 @@ function bidNow(id, auctionData) {
       alert("Please select a valid bid amount.");
       return;
     }
-    try {
-      let result = await Bid(id, formData);
 
-      if (result) {
-        alert("Bid submitted successfully!");
+    let result = await Bid(id, formData);
 
-        if (!auctionData.bids) {
-          auctionData.bids = [];
-        }
-        auctionData.bids.push(result);
-
-        console.log(result);
-
-        renderAuctionDetails(auctionData);
-      } else {
-        alert("Failed to submit bid. Please try again.");
-      }
-    } catch (error) {
-      console.error("Error submitting bid:", error);
-      alert("An error occurred while submitting your bid. Please try again.");
+    if (result) {
+      alert("Bid submitted successfully!");
+    } else {
+      alert("Failed to submit bid. Please try again.");
     }
+    console.log(result);
   });
 }
