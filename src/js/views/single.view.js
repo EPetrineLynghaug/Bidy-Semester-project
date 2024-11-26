@@ -32,7 +32,7 @@ function bidNow(id) {
     console.error("Bid form or custom bid input not found.");
     return;
   }
-  bidForm.addEventListener("submit", (event) => {
+  bidForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     const selectedBid = document.querySelector(
       'input[name="bid-amount"]:checked'
@@ -49,14 +49,39 @@ function bidNow(id) {
       return;
     }
 
-    let result = Bid(id, formData);
-    console.log("Bid submitted:", formData);
+    let result = await Bid(id, formData);
+    console.log(result);
+    const updatedBid = result.bids;
 
     if (result) {
       alert("Bid submitted successfully!");
     } else {
       alert("Failed to submit bid. Please try again.");
     }
-    window.location.reload();
+    const bidHistoryTable = document.querySelector("#bid-history-body");
+    bidHistoryTable.innerHTML = "";
+
+    updatedBid.map((bid) => {
+      const bidDate = bid.created ? new Date(bid.created) : null;
+
+      const isValidDate = bidDate && !isNaN(bidDate);
+
+      const row = document.createElement("tr");
+      row.className = "extra-bid-row";
+
+      row.innerHTML = `
+         
+            <td class="border px-4 py-2">${bid.amount} Coins</td>
+            <td class="border px-4 py-2">${bid.bidder?.name || "Anonymous"}</td>
+            <td class="border px-4 py-2">${
+              isValidDate ? bidDate.toLocaleDateString() : "Unknown Date"
+            }</td>
+            <td class="border px-4 py-2">${
+              isValidDate ? bidDate.toLocaleTimeString() : "Unknown Time"
+            }</td>
+         
+        `;
+      bidHistoryTable.appendChild(row);
+    });
   });
 }
