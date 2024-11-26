@@ -26,3 +26,24 @@ export async function fetchSingleCardDetails(id) {
     return null;
   }
 }
+//bids//
+export async function Bid(id, Bid) {
+  try {
+    const response = await fetch(`${API_AUCTION_LISTINGS}/${id}/bids`, {
+      method: "POST",
+      headers: createHeaders(true),
+      body: JSON.stringify(Bid),
+    });
+    if (!response.ok) {
+      throw new Error(`Failed to create auction listing: ${response.status}`);
+    }
+
+    const result = await response.json();
+
+    const data = result.data;
+
+    return data;
+  } catch (error) {
+    console.log("error creating auction listings", error.message);
+  }
+}
