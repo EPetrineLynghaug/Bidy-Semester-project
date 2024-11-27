@@ -45,7 +45,7 @@ export async function searchAuctionListings(searchQuery) {
   const encodedSearchQuery = encodeURIComponent(searchQuery);
   try {
     const response = await fetch(
-      `${API_AUCTION_LISTINGS}/search?q=${encodedSearchQuery}&sort=created`,
+      `${API_AUCTION_LISTINGS}/search?sort=created&sortOrder=desc&limit=10&page=1&_seller=true&_bids=true&q=${encodedSearchQuery}`,
       {
         method: "GET",
         headers: createHeaders(),

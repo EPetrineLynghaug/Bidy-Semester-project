@@ -1,13 +1,15 @@
 import { searchAuctionListings } from "../api/auctionListings.api.js";
+import { listingCardComponent } from "../components/listingCard.components.js";
 
 export async function searchListing() {
   const searchInput = document.querySelector("#search-input");
   const searchButton = document.querySelector("#search-button");
   const resultsContainer = document.querySelector("#results-container");
+  const resultModal = document.querySelector("#results-modal");
 
   if (!searchInput || !searchButton || !resultsContainer) {
     console.error(
-      "Search input, search button, or results container not found.",
+      "Search input, search button, or results container not found."
     );
     return;
   }
@@ -31,6 +33,8 @@ export async function searchListing() {
       resultsContainer.innerHTML = "<p>Loading...</p>";
       resultsContainer.classList.remove("hidden");
 
+      resultModal.classList.remove("hidden");
+      resultModal.classList.add("flex");
       const listings = await searchAuctionListings(searchTerm);
 
       resultsContainer.innerHTML = "";
@@ -46,35 +50,9 @@ export async function searchListing() {
       closeButton.addEventListener("click", clearResults);
       resultsContainer.appendChild(closeButton);
 
-      listings.forEach((item) => {
-        const itemElement = document.createElement("div");
-        itemElement.classList.add(
-          "listing",
-          "border",
-          "rounded-lg",
-          "p-4",
-          "mb-2",
-          "cursor-pointer",
-          "hover:bg-gray-100",
-        );
-
-        itemElement.innerHTML = `
-          <h3 class="font-bold text-lg">${item.title}</h3>
-          <p class="text-gray-600">${item.description}</p>
-          ${
-            item.media && item.media[0]
-              ? `<img src="${item.media[0].url}" alt="${
-                  item.media[0].alt || "Listing image"
-                }" class="mt-2 max-h-40 object-cover" />`
-              : ""
-          }
-        `;
-
-        itemElement.addEventListener("click", () => {
-          alert(`Clicked on: ${item.title}`);
-        });
-
-        resultsContainer.appendChild(itemElement);
+      listings.forEach((listing) => {
+        const card = listingCardComponent(listing);
+        resultsContainer.appendChild(card);
       });
     } catch (error) {
       console.error("Error rendering results:", error);
