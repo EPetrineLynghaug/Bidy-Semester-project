@@ -41,11 +41,11 @@ export async function readeProfiles(name, page = 1) {
   }
 }
 //search//
-export async function searchAuctionListings(searchQuery) {
+export async function searchAuctionListings(searchQuery, page = 1, limit = 12) {
   const encodedSearchQuery = encodeURIComponent(searchQuery);
   try {
     const response = await fetch(
-      `${API_AUCTION_LISTINGS}/search?sort=created&sortOrder=desc&limit=10&page=1&_seller=true&_bids=true&q=${encodedSearchQuery}`,
+      `${API_AUCTION_LISTINGS}/search?sort=created&sortOrder=desc&limit=${limit}&page=${page}&_seller=true&_bids=true&q=${encodedSearchQuery}`,
       {
         method: "GET",
         headers: createHeaders(),
@@ -59,7 +59,30 @@ export async function searchAuctionListings(searchQuery) {
     }
 
     const result = await response.json();
-    return result.data;
+    console.log("result", result);
+    return {
+      listings: result.data,
+      pagination: {
+        current: result.meta.currentPage,
+        total: result.meta.pageCount,
+        next: result.meta.nextPage,
+        previous: result.meta.previousPage,
+      },
+    };
+
+    //       currentPage: 1
+    // ​​
+    // isFirstPage: true
+    // ​​
+    // isLastPage: false
+    // ​​
+    // nextPage: 2
+    // ​​
+    // pageCount: 55
+    // ​​
+    // previousPage: null
+    // ​​
+    // totalCount: 659
   } catch (error) {
     console.error("Error fetching search results:", error.message);
     throw error;
