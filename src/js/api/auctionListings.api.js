@@ -40,4 +40,28 @@ export async function readeProfiles(name, page = 1) {
     throw error;
   }
 }
-//overflødig
+//search//
+export async function searchAuctionListings(searchQuery) {
+  const encodedSearchQuery = encodeURIComponent(searchQuery);
+  try {
+    const response = await fetch(
+      `${API_AUCTION_LISTINGS}/search?q=${encodedSearchQuery}&sort=created`,
+      {
+        method: "GET",
+        headers: createHeaders(),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch search results: ${response.status} - ${response.statusText}`
+      );
+    }
+
+    const result = await response.json();
+    return result.data;
+  } catch (error) {
+    console.error("Error fetching search results:", error.message);
+    throw error;
+  }
+}

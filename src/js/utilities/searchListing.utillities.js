@@ -1,33 +1,24 @@
-export async function searchListing() {
-  console.log("searchListing initialized");
+import { searchAuctionListings } from "../api/auctionListings.api.js";
 
+export async function searchListing() {
   const searchInput = document.querySelector("#search-input");
   const searchButton = document.querySelector("#search-button");
   const resultsContainer = document.querySelector("#results-container");
 
   if (!searchInput || !searchButton || !resultsContainer) {
     console.error(
-      "Search input, search button, or results container not found."
+      "Search input, search button, or results container not found.",
     );
     return;
   }
 
-  // Mock data for testing
-  const mockListings = [
-    { id: 1, title: "Auction 1", description: "Description for auction 1" },
-    { id: 2, title: "Special Auction", description: "Limited time only" },
-    { id: 3, title: "Rare Item", description: "This is a rare item" },
-  ];
-
-  // Tømmer søkefeltet og resultatene
   const clearResults = () => {
     searchInput.value = "";
     resultsContainer.innerHTML = "";
     resultsContainer.classList.add("hidden");
   };
 
-  // Render resultater fra mock-data
-  const renderResults = (searchTerm) => {
+  const renderResults = async (searchTerm) => {
     clearResults();
 
     if (!searchTerm) {
@@ -36,53 +27,69 @@ export async function searchListing() {
       return;
     }
 
-    const filteredListings = mockListings.filter(
-      (item) =>
-        item.title.toLowerCase().includes(searchTerm) ||
-        searchTerm
-          .split("")
-          .some((char) => item.title.toLowerCase().includes(char))
-    );
-
-    if (filteredListings.length === 0) {
-      resultsContainer.innerHTML = "<p>No results found</p>";
+    try {
+      resultsContainer.innerHTML = "<p>Loading...</p>";
       resultsContainer.classList.remove("hidden");
-      return;
-    }
 
-    // Legger til close-knapp
-    const closeButton = document.createElement("button");
-    closeButton.textContent = "Close";
-    closeButton.className = "bg-red-500 text-white px-4 py-2 rounded-md mb-4";
-    closeButton.addEventListener("click", clearResults);
-    resultsContainer.appendChild(closeButton);
+      const listings = await searchAuctionListings(searchTerm);
 
-    // Render listings
-    filteredListings.forEach((item) => {
-      const itemElement = document.createElement("div");
-      itemElement.className =
-        "listing border rounded-lg p-4 mb-2 cursor-pointer hover:bg-gray-100";
-      itemElement.innerHTML = `
-        <h3 class="font-bold text-lg">${item.title}</h3>
-        <p class="text-gray-600">${item.description}</p>
-      `;
-      itemElement.addEventListener("click", () => {
-        alert(`Clicked on: ${item.title}`);
+      resultsContainer.innerHTML = "";
+
+      if (listings.length === 0) {
+        resultsContainer.innerHTML = "<p>No results found</p>";
+        return;
+      }
+
+      const closeButton = document.createElement("button");
+      closeButton.textContent = "Close";
+      closeButton.className = "bg-red-500 text-white px-4 py-2 rounded-md mb-4";
+      closeButton.addEventListener("click", clearResults);
+      resultsContainer.appendChild(closeButton);
+
+      listings.forEach((item) => {
+        const itemElement = document.createElement("div");
+        itemElement.classList.add(
+          "listing",
+          "border",
+          "rounded-lg",
+          "p-4",
+          "mb-2",
+          "cursor-pointer",
+          "hover:bg-gray-100",
+        );
+
+        itemElement.innerHTML = `
+          <h3 class="font-bold text-lg">${item.title}</h3>
+          <p class="text-gray-600">${item.description}</p>
+          ${
+            item.media && item.media[0]
+              ? `<img src="${item.media[0].url}" alt="${
+                  item.media[0].alt || "Listing image"
+                }" class="mt-2 max-h-40 object-cover" />`
+              : ""
+          }
+        `;
+
+        itemElement.addEventListener("click", () => {
+          alert(`Clicked on: ${item.title}`);
+        });
+
+        resultsContainer.appendChild(itemElement);
       });
-      resultsContainer.appendChild(itemElement);
-    });
-
-    resultsContainer.classList.remove("hidden");
+    } catch (error) {
+      console.error("Error rendering results:", error);
+      resultsContainer.innerHTML = `<p>An error occurred: ${error.message}</p>`;
+    }
   };
 
-  //  søk med Enter
+  // Event listeners for search actions
   searchInput.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
-      renderResults(searchInput.value.trim().toLowerCase());
+      renderResults(searchInput.value.trim());
     }
   });
 
   searchButton.addEventListener("click", () => {
-    renderResults(searchInput.value.trim().toLowerCase());
+    renderResults(searchInput.value.trim());
   });
 }
