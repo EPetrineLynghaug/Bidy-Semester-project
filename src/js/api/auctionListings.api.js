@@ -43,6 +43,9 @@ export async function readeProfiles(name, page = 1) {
 //search//
 export async function searchAuctionListings(searchQuery, page = 1, limit = 12) {
   const encodedSearchQuery = encodeURIComponent(searchQuery);
+  console.log(
+    `API Request - Search: ${searchQuery}, Page: ${page}, Limit: ${limit}`
+  );
   try {
     const response = await fetch(
       `${API_AUCTION_LISTINGS}/search?sort=created&sortOrder=desc&limit=${limit}&page=${page}&_seller=true&_bids=true&q=${encodedSearchQuery}`,

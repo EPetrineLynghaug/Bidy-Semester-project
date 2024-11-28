@@ -37,8 +37,19 @@ export async function searchListing() {
       }`;
       paginationBtn.disabled = isDisabled;
       paginationBtn.addEventListener("click", () => {
-        urlParams.page = page;
-        renderResults(searchInput.value.trim());
+        console.log(
+          `Clicked ${label} -> Page before update: ${urlParams.page}`
+        );
+        urlParams.page = page; // Oppdaterer sidenummer
+        console.log(`Updated urlParams.page: ${urlParams.page}`);
+        console.log(
+          `Clicked ${label} -> Page before update: ${urlParams.page}`
+        );
+        urlParams.page = page; // Oppdaterer sidenummer
+        console.log(`Updated urlParams.page: ${urlParams.page}`);
+        renderResults(urlParams.searchTerm); // Bruk lagret søketerm
+        // urlParams.page = page;
+        // renderResults(searchInput.value.trim());
       });
       return paginationBtn;
     };
@@ -89,6 +100,8 @@ export async function searchListing() {
 
       resultModal.classList.remove("hidden");
       resultModal.classList.add("flex");
+      console.log("Fetching results for:", searchTerm);
+      console.log("Current page:", urlParams.page);
 
       const result = await searchAuctionListings(
         searchTerm,
