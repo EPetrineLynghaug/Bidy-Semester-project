@@ -30,16 +30,20 @@ export async function fetchProfile(name) {
 // update auction post//
 export async function getAllProfileAuction(name) {
   try {
-    const response = await fetch(`${API_PROFILE}/${name}/listings`, {
-      method: "GET",
-      headers: createHeaders(true),
-    });
+    const response = await fetch(
+      `${API_PROFILE}/${name}/listings?_bids=true&_active=true`,
+      {
+        method: "GET",
+        headers: createHeaders(true),
+      }
+    );
 
     if (!response.ok) {
       throw new Error(`Failed to update profile: ${response.status}`);
     }
 
     const result = await response.json();
+    console.log(result);
 
     const updatedAuction = result.data;
 
@@ -117,12 +121,14 @@ export async function deleteAuction(id) {
     } else {
       console.error(
         "An unexpected error occurred while deleting the post:",
-        error.message,
+        error.message
       );
     }
     throw error;
   }
 }
+
+//update profile
 export async function upDateProfil(name, profile) {
   console.log("Profile data being sent:", name, profile);
   try {
@@ -144,5 +150,30 @@ export async function upDateProfil(name, profile) {
   } catch (error) {
     console.error("Error updating profile:", error.message);
     throw error;
+  }
+}
+
+export async function getProfileAuctionWins(name) {
+  try {
+    const response = await fetch(
+      `${API_PROFILE}/${name}/wins?_bids=true&_active=true`,
+      {
+        method: "GET",
+        headers: createHeaders(true),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch profile: ${response.status}`);
+    }
+
+    const result = await response.json();
+
+    const auctionWins = result.data;
+    console.log(result.data);
+
+    return auctionWins;
+  } catch (error) {
+    console.error("Error fetching profile:", error.message);
   }
 }
