@@ -40,4 +40,54 @@ export async function readeProfiles(name, page = 1) {
     throw error;
   }
 }
-//overflødig
+//search//
+export async function searchAuctionListings(searchQuery, page = 1, limit = 12) {
+  const encodedSearchQuery = encodeURIComponent(searchQuery);
+  console.log(
+    `API Request - Search: ${searchQuery}, Page: ${page}, Limit: ${limit}`
+  );
+  try {
+    const response = await fetch(
+      `${API_AUCTION_LISTINGS}/search?sort=created&sortOrder=desc&limit=${limit}&page=${page}&_seller=true&_bids=true&q=${encodedSearchQuery}`,
+      {
+        method: "GET",
+        headers: createHeaders(),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch search results: ${response.status} - ${response.statusText}`
+      );
+    }
+
+    const result = await response.json();
+    console.log("result", result);
+    return {
+      listings: result.data,
+      pagination: {
+        current: result.meta.currentPage,
+        total: result.meta.pageCount,
+        next: result.meta.nextPage,
+        previous: result.meta.previousPage,
+      },
+    };
+
+    //       currentPage: 1
+    // ​​
+    // isFirstPage: true
+    // ​​
+    // isLastPage: false
+    // ​​
+    // nextPage: 2
+    // ​​
+    // pageCount: 55
+    // ​​
+    // previousPage: null
+    // ​​
+    // totalCount: 659
+  } catch (error) {
+    console.error("Error fetching search results:", error.message);
+    throw error;
+  }
+}

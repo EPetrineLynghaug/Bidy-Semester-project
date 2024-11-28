@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     coinsElement.textContent = profile.credits || "unkinown";
 
     const openModalButtonProfile = document.querySelector(
-      "#open-modal-profile",
+      "#open-modal-profile"
     );
     if (isMyProfile) {
       openModalButtonProfile.addEventListener("click", () => {

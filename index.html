@@ -13,6 +13,50 @@
       <nav id="auth-links" class="flex space-x-4"></nav>
     </header>
 
+    <div class="flex justify-center">
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Search"
+        class="border rounded-lg p-2 w-full text-black text-lg"
+      />
+      <button
+        id="search-button"
+        class="w-10 h-10 flex items-center justify-center bg-blue-500 text-white hover:bg-red-600 focus:outline-none"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 pointer-events-none"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+    </div>
+    <div
+      id="results-modal"
+      class="fixed inset-0 items-center justify-center bg-gray-900 bg-opacity-50 z-50 hidden"
+    >
+      <div
+        class="bg-white overflow-auto overscroll-contain flex flex-col rounded-lg shadow-lg w-8/8 h-5/6 max-w-lg md:max-w-2xl lg:max-w-3xl relative"
+      >
+        <div
+          id="results-container"
+          class="overflow-auto overscroll-contain flex-1 p-6 relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
+        ></div>
+        <div
+          id="pagination-container"
+          class="flex justify-center space-x-2 p-4"
+        ></div>
+      </div>
+    </div>
     <!-- Overskrift -->
     <h1 class="text-3xl font-bold text-center my-4 text-gray-800">
       Auction Listings

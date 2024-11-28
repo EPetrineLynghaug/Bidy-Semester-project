@@ -2,24 +2,26 @@
 import { renderAuthLinks } from "../components/authLinks.js";
 import { listingCardComponent } from "../components/listingCard.components.js";
 import { fetchAuctionListings } from "../api/auctionListings.api.js";
+import { searchListing } from "../utilities/searchListing.utillities.js";
 
 function renderAuctionListings(container, listings) {
-  container.innerHTML = ""; // Fjern tidligere oppføringer
-
+  container.innerHTML = "";
   if (!listings || listings.length === 0) {
     container.innerHTML = "<p>No auction listings available.</p>";
     return;
   }
 
   listings.forEach((listing) => {
-    const card = listingCardComponent(listing); // Opprett DOM-element
-    container.appendChild(card); // Legg til elementet i containeren
+    const card = listingCardComponent(listing);
+    container.appendChild(card);
   });
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     renderAuthLinks();
+
+    searchListing();
 
     const listingsContainer = document.getElementById("listings-container");
     if (!listingsContainer) throw new Error("Listings container not found");
