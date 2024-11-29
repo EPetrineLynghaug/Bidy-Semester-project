@@ -70,6 +70,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const coinsElement = document.querySelector("#profile-coins");
     coinsElement.textContent = profile.credits || "unkinown";
 
+    // Modal buttons
     const openModalButtonProfile = document.querySelector(
       "#open-modal-profile"
     );
