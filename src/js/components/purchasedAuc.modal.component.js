@@ -67,9 +67,11 @@ export function purchasedAuctionModal(name) {
               ${win.description || "No description available..."}
             </p>
             <div class="flex justify-end mt-2">
-              <button class="view-details-btn text-red-500 hover:text-red-700 text-sm px-2 py-1 rounded-md focus:outline-none">
+              <a href="/listing?id=${
+                win.id
+              }" class="view-details-btn text-red-500 hover:text-red-700 text-sm px-2 py-1 rounded-md focus:outline-none">
                 View Details
-              </button>
+              </a>
             </div>
           </li>`
           )
