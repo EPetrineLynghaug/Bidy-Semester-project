@@ -2,6 +2,7 @@ import { fetchProfile, getAllProfileAuction } from "../api/profile.api.js";
 import { renderAuthLinks } from "../components/authLinks.js";
 import { myAuctions } from "../components/myAuctions.component.js";
 import { createNewAuction } from "../components/newauction-modal.component.js";
+import { purchasedAuctionModal } from "../components/purchasedAuc.modal.component.js";
 import { updateProfileModal } from "../components/updateProfile-modal.component.js";
 import { getStoredUserName } from "../utilities/storage.js";
 
@@ -33,8 +34,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const container = document.querySelector("#my-auctions-container");
       container.appendChild(listIthem);
+      console.log("Updated Auction Data:", updatedAuction);
     });
 
+    console.log(updatedAuction);
     if (!profile) {
       alert("Failed to fetch profile data!");
     }
@@ -67,6 +70,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const coinsElement = document.querySelector("#profile-coins");
     coinsElement.textContent = profile.credits || "unkinown";
 
+    // Modal buttons
     const openModalButtonProfile = document.querySelector(
       "#open-modal-profile"
     );
@@ -79,6 +83,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     } else {
       openModalButtonProfile.classList.add("hidden");
     }
+
     const openModalButton = document.querySelector("#open-modal");
     if (isMyProfile) {
       openModalButton.addEventListener("click", () => {
@@ -86,6 +91,19 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     } else {
       openModalButton.classList.add("hidden");
+    }
+
+    const openModalButtonPurchases = document.querySelector(
+      "#open-modal-purchases"
+    );
+
+    if (isMyProfile) {
+      openModalButtonPurchases.addEventListener("click", () => {
+        console.log("Opening Purchased Auctions modal...");
+        purchasedAuctionModal(username);
+      });
+    } else {
+      openModalButtonPurchases.classList.add("hidden");
     }
   } catch (error) {
     console.error("Error fetching profile:", error.message);

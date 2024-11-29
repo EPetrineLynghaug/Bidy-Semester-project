@@ -15,7 +15,7 @@ export async function searchListing() {
 
   if (!searchInput || !searchButton || !resultsContainer) {
     console.error(
-      "Search input, search button, or results container not found."
+      "Search input, search button, or results container not found.",
     );
     return;
   }
@@ -38,16 +38,11 @@ export async function searchListing() {
       paginationBtn.disabled = isDisabled;
       paginationBtn.addEventListener("click", () => {
         console.log(
-          `Clicked ${label} -> Page before update: ${urlParams.page}`
+          `Clicked ${label} -> Page before update: ${urlParams.page}`,
         );
-        urlParams.page = page; // Oppdaterer sidenummer
-        console.log(`Updated urlParams.page: ${urlParams.page}`);
-        console.log(
-          `Clicked ${label} -> Page before update: ${urlParams.page}`
-        );
-        urlParams.page = page; // Oppdaterer sidenummer
-        console.log(`Updated urlParams.page: ${urlParams.page}`);
-        renderResults(urlParams.searchTerm); // Bruk lagret søketerm
+        urlParams.page = page;
+
+        renderResults(urlParams.searchTerm);
         // urlParams.page = page;
         // renderResults(searchInput.value.trim());
       });
@@ -55,7 +50,7 @@ export async function searchListing() {
     };
 
     paginationContainer.appendChild(
-      createBtnPagination("Previous", currentPage - 1, currentPage === 1)
+      createBtnPagination("Previous", currentPage - 1, currentPage === 1),
     );
 
     const maxVisibleButtons = 5;
@@ -69,11 +64,11 @@ export async function searchListing() {
 
         if (isActive) {
           paginationContainer.appendChild(
-            createBtnPagination(i, i, false, true)
+            createBtnPagination(i, i, false, true),
           );
         } else {
           paginationContainer.appendChild(
-            createBtnPagination(i, i, false, false)
+            createBtnPagination(i, i, false, false),
           );
         }
 
@@ -82,9 +77,10 @@ export async function searchListing() {
     }
     // "Next" Button
     paginationContainer.appendChild(
-      createBtnPagination("Next", currentPage + 1, currentPage === totalPages)
+      createBtnPagination("Next", currentPage + 1, currentPage === totalPages),
     );
   };
+
   const renderResults = async (searchTerm) => {
     clearResults();
 
@@ -106,7 +102,7 @@ export async function searchListing() {
       const result = await searchAuctionListings(
         searchTerm,
         urlParams.page,
-        urlParams.limit
+        urlParams.limit,
       );
 
       // const listings = await searchAuctionListings(searchTerm);
@@ -117,12 +113,15 @@ export async function searchListing() {
         resultsContainer.innerHTML = "<p>No results found</p>";
         return;
       }
-
-      const closeButton = document.createElement("button");
-      closeButton.textContent = "Close";
-      closeButton.className = "bg-red-500 text-white px-4 py-2 rounded-md mb-4";
-      closeButton.addEventListener("click", clearResults);
-      resultsContainer.appendChild(closeButton);
+      // const closeButton = document.querySelector("#close-button");
+      // closeButton.addEventListener("click", () => {
+      //   console.log("Close button clicked");
+      // });
+      // const closeButton = document.createElement("button");
+      // closeButton.textContent = "Close";
+      // closeButton.className = "bg-red-500 text-white px-4 py-2 rounded-md mb-4";
+      // closeButton.addEventListener("click", clearResults);
+      // resultsContainer.appendChild(closeButton);
 
       result.listings.forEach((listing) => {
         const card = listingCardComponent(listing);

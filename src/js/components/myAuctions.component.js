@@ -34,11 +34,15 @@ export function myAuctions(listing, editAllowed) {
     }</p>
   </div>
   <div class="flex gap-2 ">
-  <button class="${!editAllowed ? "hidden" : ""} edit-btn bg-blue-500 text-white px-2 py-1 sm:px-3 sm:text-sm rounded hover:bg-blue-600 ">Edit </button>
+  <button class="${
+    !editAllowed ? "hidden" : ""
+  } edit-btn bg-blue-500 text-white px-2 py-1 sm:px-3 sm:text-sm rounded hover:bg-blue-600 ">Edit </button>
   <a href="/listing?id=${
     listing.id
   }" class="bg-green-500 text-white px-2 py-1 sm:px-3 sm:text-sm rounded hover:bg-green-600">View</a>
-  <button class="${!editAllowed ? "hidden" : ""} delete-btn bg-red-500 text-white  px-2 py-1 sm:px- 3 sm:text-sm rounded hover:bg-red-600">Delete</button>
+  <button class="${
+    !editAllowed ? "hidden" : ""
+  } delete-btn bg-red-500 text-white  px-2 py-1 sm:px- 3 sm:text-sm rounded hover:bg-red-600">Delete</button>
   </div >
   </div >
     `;
@@ -51,7 +55,7 @@ export function myAuctions(listing, editAllowed) {
 
   deleteBtn.addEventListener("click", (event) => {
     let deliteAuctionPost = confirm(
-      "Are you sure you want to delete this Auction?",
+      "Are you sure you want to delete this Auction?"
     );
     if (deliteAuctionPost) {
       deleteAuction(listing.id);

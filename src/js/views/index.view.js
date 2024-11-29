@@ -2,7 +2,7 @@
 import { renderAuthLinks } from "../components/authLinks.js";
 import { listingCardComponent } from "../components/listingCard.components.js";
 import { fetchAuctionListings } from "../api/auctionListings.api.js";
-import { searchListing } from "../utilities/searchListing.utillities.js";
+import { openSearchModal } from "../components/search-modal.component.js";
 
 function renderAuctionListings(container, listings) {
   container.innerHTML = "";
@@ -21,14 +21,19 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     renderAuthLinks();
 
-    searchListing();
-
     const listingsContainer = document.getElementById("listings-container");
     if (!listingsContainer) throw new Error("Listings container not found");
 
     const listings = await fetchAuctionListings(18, 1);
-    console.log("Fetched Listings:", listings);
     renderAuctionListings(listingsContainer, listings);
+
+    const searchInput = document.querySelector("#search-input");
+    const searchButton = document.querySelector("#search-button");
+
+    searchButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      openSearchModal(searchInput.value);
+    });
   } catch (error) {
     console.error("Error during initialization:", error.message);
   }
