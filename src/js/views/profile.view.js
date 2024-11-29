@@ -96,9 +96,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     const openModalButtonPurchases = document.querySelector(
       "#open-modal-purchases"
     );
+
     if (isMyProfile) {
       openModalButtonPurchases.addEventListener("click", () => {
-        purchasedAuctionModal();
+        console.log("Opening Purchased Auctions modal...");
+        purchasedAuctionModal(username);
       });
     } else {
       openModalButtonPurchases.classList.add("hidden");
