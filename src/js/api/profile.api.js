@@ -130,7 +130,6 @@ export async function deleteAuction(id) {
 
 //update profile
 export async function upDateProfil(name, profile) {
-  console.log("Profile data being sent:", name, profile);
   try {
     const response = await fetch(`${API_PROFILE}/${name}`, {
       method: "PUT",
@@ -154,7 +153,6 @@ export async function upDateProfil(name, profile) {
 }
 
 export async function getProfileAuctionWins(name) {
-  console.log("Fetching auction wins for:", name);
   try {
     const response = await fetch(
       `${API_PROFILE}/${name}/wins?_bids=true&_active=true`,
@@ -173,10 +171,6 @@ export async function getProfileAuctionWins(name) {
 
     const auctionWins = result.data;
     console.log("Auction Wins:", result.data);
-
-    // const auctionWins = result.data;
-    // console.log(result.data);
-
     return auctionWins;
   } catch (error) {
     console.error("Error fetching profile:", error.message);

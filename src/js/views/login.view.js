@@ -1,6 +1,8 @@
 import { renderAuthLinks } from "../components/authLinks.js";
 import { login } from "../api/login.api.js";
 import { setToken, storeUserName } from "../utilities/storage.js";
+import { showCustomAlert } from "../components/showCustomAlert.components.js";
+import { validateInput } from "../utilities/formValidation.utillities.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   initializeLoginPage();
@@ -19,26 +21,33 @@ async function handleLogin(event) {
   event.preventDefault();
 
   const loginForm = event.target;
-  const formData = new FormData(loginForm);
-  const email = formData.get("email");
-  const password = formData.get("password");
+  const email = loginForm.querySelector("[name='email']").value.trim();
+  const password = loginForm.querySelector("[name='password']").value.trim();
+
+  const existingAlert = loginForm.querySelector(".custom-alert");
+  if (existingAlert) existingAlert.remove();
+
+  if (!validateInput(email, password, loginForm)) {
+    return; // Validering feilet
+  }
 
   try {
     const user = await login(email, password);
-    console.log("User logged in:", user);
-
     setToken(user.accessToken);
     storeUserName(user.name);
 
     renderAuthLinks();
-    window.location.href = "/";
-  } catch (error) {
-    console.error("Login failed:", error.message);
+    showCustomAlert("Login successful! Redirecting...", "success", loginForm);
 
-    const errorContainer = document.getElementById("login-error");
-    if (errorContainer) {
-      errorContainer.textContent = "Login failed. Please try again.";
-      errorContainer.classList.remove("hidden");
-    }
+    setTimeout(() => {
+      window.location.href = "/";
+    }, 1500);
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message ||
+      error.message ||
+      "An unexpected error occurred. Please try again.";
+
+    showCustomAlert(errorMessage, "error", loginForm);
   }
 }

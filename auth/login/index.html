@@ -3,24 +3,57 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>Login Page</title>
     <script type="module" src="/src/js/views/login.view.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
-    <header class="bg-gray-800 text-white p-4">
-      <nav id="auth-links" class="flex space-x-4"></nav>
+  <body class="bg-gray-100 flex flex-col items-center justify-center h-screen">
+    <header class="bg-gray-800 text-white p-4 w-full">
+      <nav
+        id="auth-links"
+        class="flex space-x-4 justify-end container mx-auto"
+      ></nav>
     </header>
-    <h1>Login</h1>
-    <form name="login">
-      <div>
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required />
-      </div>
-      <div>
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required />
-      </div>
-      <button type="submit">Login</button>
-    </form>
+
+    <main class="flex flex-col items-center justify-center flex-1 w-full">
+      <form
+        name="login"
+        class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full"
+      >
+        <h1 class="text-xl font-bold mb-4">Login</h1>
+        <div class="mb-4">
+          <label for="email" class="block text-sm font-medium text-gray-700"
+            >Email</label
+          >
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email"
+            class="w-full p-2 border border-gray-300 rounded"
+            required
+          />
+        </div>
+        <div class="mb-4">
+          <label for="password" class="block text-sm font-medium text-gray-700"
+            >Password</label
+          >
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+            class="w-full p-2 border border-gray-300 rounded"
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          class="w-full bg-indigo-500 text-white py-2 px-4 rounded hover:bg-indigo-600"
+        >
+          Login
+        </button>
+      </form>
+    </main>
   </body>
 </html>
