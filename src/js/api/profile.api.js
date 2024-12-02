@@ -56,11 +56,14 @@ export async function getAllProfileAuction(name) {
 //Make new aution//
 export async function createauction(formData) {
   try {
-    const response = await fetch(API_AUCTION_LISTINGS, {
-      method: "POST",
-      headers: createHeaders(true),
-      body: JSON.stringify(formData),
-    });
+    const response = await fetch(
+      `${API_AUCTION_LISTINGS}?_bids=true&_seller=true`,
+      {
+        method: "POST",
+        headers: createHeaders(true),
+        body: JSON.stringify(formData),
+      }
+    );
 
     if (!response.ok) {
       throw new Error(`Failed to create auction listing: ${response.status}`);

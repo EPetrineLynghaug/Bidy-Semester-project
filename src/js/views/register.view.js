@@ -16,6 +16,7 @@ function initializeRegisterPage() {
   }
 }
 
+/// vurdeer noe annent enn try catch her ksn heller sjekkes emd en if else.
 async function handleRegister(event) {
   event.preventDefault();
 
@@ -34,7 +35,6 @@ async function handleRegister(event) {
   try {
     const newUser = await register(name, email, password);
     console.log("User registered:", newUser);
-    ///sjakk om new newuser eksisterer.
 
     showCustomAlert(
       "Registration successful! Redirecting to login...",

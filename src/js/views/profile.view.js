@@ -6,6 +6,7 @@ import { purchasedAuctionModal } from "../components/purchasedAuc.modal.componen
 import { updateProfileModal } from "../components/updateProfile-modal.component.js";
 import { getStoredUserName } from "../utilities/storage.js";
 
+//heller enkelte små if statmens. 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     renderAuthLinks();

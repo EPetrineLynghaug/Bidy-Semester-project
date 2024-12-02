@@ -245,11 +245,18 @@ export function createNewAuction(listing) {
         const result = await createauction(formData);
         console.log(formData);
         console.log(result);
-        const card = myAuctions(result);
+        let card = undefined;
+
+        if (window.location.pathname === "/") {
+          card = listingCardComponent(result);
+        } else {
+          card = myAuctions(result);
+        }
 
         const myAuctionsContainer = document.querySelector(
           "#my-auctions-container"
         );
+
         myAuctionsContainer.prepend(card);
         modalContainer.remove();
 

@@ -1,54 +1,54 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Welcome</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script type="module" src="./src/js/views/index.view.js"></script>
-    </head>
-    <body class="bg-gray-100">
-        <!-- Navigasjonsmeny -->
-        <header class="bg-gray-800 text-white p-4">
-            <nav id="auth-links" class="flex space-x-4"></nav>
-        </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="./src/js/views/index.view.js"></script>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Navigasjonsmeny -->
+    <header class="bg-gray-800 text-white p-4">
+      <nav id="auth-links" class="flex space-x-4"></nav>
+    </header>
 
-        <div class="flex justify-center">
-            <input
-                type="text"
-                id="search-input"
-                placeholder="Search"
-                class="border rounded-lg p-2 w-full text-black text-lg"
-            />
-            <button
-                id="search-button"
-                class="w-10 h-10 flex items-center justify-center bg-blue-500 text-white hover:bg-red-600 focus:outline-none"
-            >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5 pointer-events-none"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M6 18L18 6M6 6l12 12"
-                    />
-                </svg>
-            </button>
-        </div>
-        <!-- Overskrift -->
-        <h1 class="text-3xl font-bold text-center my-4 text-gray-800">
-            Auction Listings
-        </h1>
+    <div class="flex justify-center">
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Search"
+        class="border rounded-lg p-2 w-full text-black text-lg"
+      />
+      <button
+        id="search-button"
+        class="w-10 h-10 flex items-center justify-center bg-blue-500 text-white hover:bg-red-600 focus:outline-none"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 pointer-events-none"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+    </div>
+    <!-- Overskrift -->
+    <h1 class="text-3xl font-bold text-center my-4 text-gray-800">
+      Auction Listings
+    </h1>
 
-        <!-- Container for auksjonsoppføringer -->
-        <div
-            id="listings-container"
-            class="grid gap-6 p-4 sm:grid-cols-2 lg:grid-cols-3"
-        ></div>
-    </body>
+    <!-- Container for auksjonsoppføringer -->
+    <div
+      id="my-auctions-container"
+      class="grid gap-6 p-4 sm:grid-cols-2 lg:grid-cols-3"
+    ></div>
+  </body>
 </html>

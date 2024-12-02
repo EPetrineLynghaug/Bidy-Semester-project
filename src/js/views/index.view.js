@@ -21,11 +21,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     renderAuthLinks();
 
-    const listingsContainer = document.getElementById("listings-container");
-    if (!listingsContainer) throw new Error("Listings container not found");
+    const myAuctionsContainer = document.getElementById(
+      "my-auctions-container"
+    );
+    if (!myAuctionsContainer) throw new Error("myAuctions container not found");
 
     const listings = await fetchAuctionListings(18, 1);
-    renderAuctionListings(listingsContainer, listings);
+    renderAuctionListings(myAuctionsContainer, listings);
 
     const searchInput = document.querySelector("#search-input");
     const searchButton = document.querySelector("#search-button");
@@ -34,6 +36,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       e.preventDefault();
       openSearchModal(searchInput.value);
     });
+
+    // const myAuctionsContainer = document.querySelectorAll(
+    //   "#my-auctions-container"
+    // );
+    // console.log("myAuctionsContainer:", myAuctionsContainer);
   } catch (error) {
     console.error("Error during initialization:", error.message);
   }

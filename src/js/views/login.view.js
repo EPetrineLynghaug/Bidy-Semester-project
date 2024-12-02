@@ -44,6 +44,7 @@ async function handleLogin(event) {
     }, 1500);
   } catch (error) {
    
+
     let errorMessage = "An unexpected error occurred. Please try again.";
     if (error.response && error.response.data) {
       errorMessage = error.response.data.message;
