@@ -13,9 +13,12 @@ export async function login(email, password) {
 
     if (!response.ok) {
       const result = await response.json();
-      const errorMessage =
-        result.errors?.map((error) => error.message).join(", ") ||
-        "Unknown error";
+      let errorMessage = "An unexpected error occurred. Please try again.";
+
+      if (result.errors && Array.isArray(result.errors)) {
+        const errorMessages = result.errors.map((error) => error.message);
+        errorMessage = errorMessages.join(", ");
+      }
       throw new Error(errorMessage);
     }
     const result = await response.json();
@@ -38,10 +41,12 @@ export async function register(name, email, password) {
 
     if (!response.ok) {
       const result = await response.json();
-      const errorMessage =
-        result.errors?.map((error) => error.message).join(", ") ||
-        result.message ||
-        "Unknown error during registration.";
+      let errorMessage = "An unexpected error occurred. Please try again.";
+
+      if (result.errors && Array.isArray(result.errors)) {
+        const errorMessages = result.errors.map((error) => error.message);
+        errorMessage = errorMessages.join(", ");
+      }
       throw new Error(errorMessage);
     }
 

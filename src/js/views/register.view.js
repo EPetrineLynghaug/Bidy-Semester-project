@@ -34,6 +34,7 @@ async function handleRegister(event) {
   try {
     const newUser = await register(name, email, password);
     console.log("User registered:", newUser);
+    ///sjakk om new newuser eksisterer.
 
     showCustomAlert(
       "Registration successful! Redirecting to login...",
@@ -46,11 +47,12 @@ async function handleRegister(event) {
     }, 1500);
   } catch (error) {
     console.error("Registration failed:", error);
-
-    const errorMessage =
-      error.response?.data?.message ||
-      error.message ||
-      "An unexpected error occurred. Please try again.";
+    let errorMessage = "An unexpected error occurred. Please try again.";
+    if (error.response && error.response.data) {
+      errorMessage = error.response.data.message;
+    } else if (error.message) {
+      errorMessage = error.message;
+    }
     showCustomAlert(errorMessage, "error", registerForm);
   }
 }

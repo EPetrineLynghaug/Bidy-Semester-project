@@ -28,7 +28,7 @@ async function handleLogin(event) {
   if (existingAlert) existingAlert.remove();
 
   if (!validateInput(email, password, loginForm)) {
-    return; // Validering feilet
+    return;
   }
 
   try {
@@ -43,10 +43,13 @@ async function handleLogin(event) {
       window.location.href = "/";
     }, 1500);
   } catch (error) {
-    const errorMessage =
-      error.response?.data?.message ||
-      error.message ||
-      "An unexpected error occurred. Please try again.";
+   
+    let errorMessage = "An unexpected error occurred. Please try again.";
+    if (error.response && error.response.data) {
+      errorMessage = error.response.data.message;
+    } else if (error.message) {
+      errorMessage = error.message;
+    }
 
     showCustomAlert(errorMessage, "error", loginForm);
   }
