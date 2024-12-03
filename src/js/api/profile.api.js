@@ -31,7 +31,7 @@ export async function fetchProfile(name) {
 export async function getAllProfileAuction(name) {
   try {
     const response = await fetch(
-      `${API_PROFILE}/${name}/listings?_bids=true&_active=true`,
+      `${API_PROFILE}/${name}/listings?&_bids=true`,
       {
         method: "GET",
         headers: createHeaders(true),

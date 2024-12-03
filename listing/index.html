@@ -29,52 +29,49 @@
         </div>
       </section>
 
-   <!-- Seller Info -->
-        <div class="details-section flex flex-col gap-6 p-4">
-          <div class="seller-info flex items-center gap-4 p-2 border-b pb-4">
-            <img
-              id="seller-avatar"
-              src="https://via.placeholder.com/50"
-              alt="Seller Avatar"
-              class="w-12 h-12 rounded-full shadow"
-            />
-            <p id="seller-name" class="text-lg font-semibold text-gray-800">
-              Loading seller name...
-            </p>
-          </div>
-          <section class="auction-grid grid grid-cols-1 gap-6"></section>
-        <!-- Details Section -->
+      <!-- Seller Info -->
+      <div class="details-section flex flex-col gap-6 p-4">
+        <div class="seller-info flex items-center gap-4 p-2 border-b pb-4">
+          <img
+            id="seller-avatar"
+            src="https://via.placeholder.com/50"
+            alt="Seller Avatar"
+            class="w-12 h-12 rounded-full shadow"
+          />
+          <p id="seller-name" class="text-lg font-semibold text-gray-800">
+            Loading seller name...
+          </p>
+        </div>
+      </div>
 
+      <!-- Auction Details -->
+      <section class="auction-grid grid grid-cols-1 gap-6">
+        <header class="auction-header">
+          <h2
+            id="auction-title"
+            class="text-2xl lg:text-3xl font-bold text-gray-800"
+          >
+            Loading...
+          </h2>
+          <p
+            id="auction-description"
+            class="text-gray-700 mt-2 text-base lg:text-lg"
+          >
+            Loading description...
+          </p>
+        </header>
 
-        <div class="details-section flex flex-col gap-6 p-4">
-          <header class="auction-header">
-            <h2
-              id="auction-title"
-              class="text-2xl lg:text-3xl font-bold text-gray-800"
-            >
-              Loading...
-            </h2>
-            <p
-              id="auction-description"
-              class="text-gray-700 mt-2 text-base lg:text-lg"
-            >
-              Loading description...
-            </p>
-          </header>
-
-          <!-- Auction Info -->
-          <div class="auction-info text-gray-500 text-sm md:text-base">
-            <p id="auction-posted-date">Posted: Loading...</p>
-            <p id="auction-expiry-date">Expires: Loading...</p>
-            <p id="current-bid">Current bid: Loading...</p>
-          </div>
+        <div class="auction-info text-gray-500 text-sm md:text-base">
+          <p id="auction-posted-date">Posted: Loading...</p>
+          <p id="auction-expiry-date">Expires: Loading...</p>
+          <p id="current-bid">Current bid: Loading...</p>
         </div>
       </section>
 
       <!-- Bid Section -->
       <section class="info-card mt-8 border rounded-lg p-4 bg-gray-50">
         <h2 class="text-lg font-bold mb-4">Place Your Bid</h2>
-        <form name ="bid-form" id="bid-form">
+        <form name="bid-form" id="bid-form">
           <div class="info-card-options mb-4">
             <div class="flex items-center gap-2">
               <input type="radio" id="bid-5" name="bid-amount" value="5" />
@@ -96,11 +93,12 @@
             >
             <div class="info-card-actions-input flex gap-2 items-center">
               <input
-                type="text"
+                type="number"
                 class="input border rounded-lg p-2 flex-1"
                 id="custom-bid"
                 name="custom-bid"
                 placeholder="Enter custom amount"
+                min="1"
               />
               <button
                 type="submit"
@@ -133,7 +131,6 @@
                 Loading bid history...
               </td>
             </tr>
-            
           </tbody>
         </table>
       </section>

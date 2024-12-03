@@ -7,7 +7,7 @@ export async function fetchSingleCardDetails(id) {
     console.log(`Fetching details for card ID: ${id}`);
     const response = await fetch(url, {
       method: "GET",
-      headers: createHeaders(),
+      headers: createHeaders(true),
     });
 
     if (!response.ok) {
