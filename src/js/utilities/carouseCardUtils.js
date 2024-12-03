@@ -1,53 +1,45 @@
-// // src/utilities/carouselUtils.js
+export function initializeCarousel(images) {
+  const carouselContainer = document.querySelector("#carousel-images");
+  const carouselLabel = document.querySelector("#carousel-label");
+  const prevButton = document.querySelector("#carousel-prev");
+  const nextButton = document.querySelector("#carousel-next");
 
-// export function initializeCarousel(carouselElement, totalImages) {
-//   const carouselInner = carouselElement.querySelector(".carousel-inner");
-//   const prevBtn = carouselElement.querySelector(".prev");
-//   const nextBtn = carouselElement.querySelector(".next");
-//   let currentIndex = 0;
+  if (!carouselContainer || !carouselLabel || !prevButton || !nextButton) {
+    console.error("Carousel elements are missing.");
+    return;
+  }
 
-//   // Funksjon for å oppdatere karusellen
-//   function updateCarousel() {
-//     const translateX = -currentIndex * 100;
-//     carouselInner.style.transform = `translateX(${translateX}%)`;
-//   }
+  // Dynamisk legge til bilder i karusellen
+  carouselContainer.innerHTML = "";
+  images.forEach((image, index) => {
+    const img = document.createElement("img");
+    img.src = image.url;
+    img.alt = image.alt || `Image ${index + 1}`;
+    img.className = "w-full h-full object-cover flex-shrink-0";
+    carouselContainer.appendChild(img);
+  });
 
-//   // Event listener for forrige knapp
-//   prevBtn.addEventListener("click", () => {
-//     if (currentIndex > 0) {
-//       currentIndex--;
-//       updateCarousel();
-//     }
-//   });
+  let currentIndex = 0;
 
-//   nextBtn.addEventListener("click", () => {
-//     if (currentIndex < totalImages - 1) {
-//       currentIndex++;
-//       updateCarousel();
-//     }
-//   });
+  // Oppdater visningen av karusellen
+  function updateCarousel() {
+    const totalImages = images.length;
+    const translateX = -currentIndex * 100;
+    carouselContainer.style.transform = `translateX(${translateX}%)`;
+    carouselLabel.textContent = `${currentIndex + 1}/${totalImages}`;
+  }
 
-//   // Optional: Swipe gestures for mobile devices
-//   let startX = 0;
-//   let endX = 0;
+  // Navigasjonsknapper
+  prevButton.addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    updateCarousel();
+  });
 
-//   carouselElement.addEventListener("touchstart", (e) => {
-//     startX = e.changedTouches[0].screenX;
-//   });
+  nextButton.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % images.length;
+    updateCarousel();
+  });
 
-//   carouselElement.addEventListener("touchend", (e) => {
-//     endX = e.changedTouches[0].screenX;
-//     handleGesture();
-//   });
-
-//   function handleGesture() {
-//     if (endX < startX - 50 && currentIndex < totalImages - 1) {
-//       currentIndex++;
-//       updateCarousel();
-//     }
-//     if (endX > startX + 50 && currentIndex > 0) {
-//       currentIndex--;
-//       updateCarousel();
-//     }
-//   }
-// }
+  // Initial oppdatering
+  updateCarousel();
+}

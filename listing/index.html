@@ -12,25 +12,29 @@
       <nav id="auth-links" class="flex space-x-4"></nav>
     </header>
 
-    <h1 class="text-3xl font-bold text-center mb-6 text-gray-800">
-      Auction Detail
-    </h1>
+  <!-- Karusell -->
+<div class="relative w-full h-[300px] md:h-[400px] lg:h-[500px]">
+  <!-- Bildekarusellen -->
+  <div id="carousel-images" class="absolute flex w-full h-full transition-transform">
+    <img src="https://via.placeholder.com/800x300" alt="Image 1" class="w-full h-full object-cover">
+    <img src="https://via.placeholder.com/800x300" alt="Image 2" class="w-full h-full object-cover">
+    <img src="https://via.placeholder.com/800x300" alt="Image 3" class="w-full h-full object-cover">
+    <img src="https://via.placeholder.com/800x300" alt="Image 4" class="w-full h-full object-cover">
+  </div>
+  <!-- Karusellindikator -->
+  <span id="carousel-label" class="absolute top-4 left-4 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">1/4</span>
+  <!-- Forrige knappe -->
+  <button id="carousel-prev" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded-full">&#8592;</button>
+  <!-- Neste knappe -->
+  <button id="carousel-next" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 py-1 rounded-full">&#8594;</button>
+</div>
 
-    <div class="container mx-auto p-6">
-      <!-- Auction Image Section -->
-      <section class="image-section w-full">
-        <div class="relative w-full h-[300px] md:h-[400px] lg:h-[400px] p-2">
-          <img
-            id="auction-image"
-            src="https://via.placeholder.com/800x300"
-            alt="Auction image"
-            class="w-full h-full object-cover rounded-lg shadow-lg"
-          />
-        </div>
-      </section>
+      <h1 class="text-3xl font-bold text-center mb-6 text-gray-800">
+        Auction Detail
+      </h1>
 
-      <!-- Seller Info -->
       <div class="details-section flex flex-col gap-6 p-4">
+        <!-- Seller Info -->
         <div class="seller-info flex items-center gap-4 p-2 border-b pb-4">
           <img
             id="seller-avatar"
@@ -42,31 +46,31 @@
             Loading seller name...
           </p>
         </div>
+
+        <!-- Auction Details -->
+        <section class="auction-grid grid grid-cols-1 gap-6">
+          <header class="auction-header">
+            <h2
+              id="auction-title"
+              class="text-2xl lg:text-3xl font-bold text-gray-800"
+            >
+              Loading...
+            </h2>
+            <p
+              id="auction-description"
+              class="text-gray-700 mt-2 text-base lg:text-lg"
+            >
+              Loading description...
+            </p>
+          </header>
+
+          <div class="auction-info text-gray-500 text-sm md:text-base">
+            <p id="auction-posted-date">Posted: Loading...</p>
+            <p id="auction-expiry-date">Expires: Loading...</p>
+            <p id="current-bid">Current bid: Loading...</p>
+          </div>
+        </section>
       </div>
-
-      <!-- Auction Details -->
-      <section class="auction-grid grid grid-cols-1 gap-6">
-        <header class="auction-header">
-          <h2
-            id="auction-title"
-            class="text-2xl lg:text-3xl font-bold text-gray-800"
-          >
-            Loading...
-          </h2>
-          <p
-            id="auction-description"
-            class="text-gray-700 mt-2 text-base lg:text-lg"
-          >
-            Loading description...
-          </p>
-        </header>
-
-        <div class="auction-info text-gray-500 text-sm md:text-base">
-          <p id="auction-posted-date">Posted: Loading...</p>
-          <p id="auction-expiry-date">Expires: Loading...</p>
-          <p id="current-bid">Current bid: Loading...</p>
-        </div>
-      </section>
 
       <!-- Bid Section -->
       <section class="info-card mt-8 border rounded-lg p-4 bg-gray-50">

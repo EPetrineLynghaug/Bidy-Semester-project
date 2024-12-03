@@ -1,23 +1,40 @@
 import { renderAuthLinks } from "../components/authLinks.js";
 import { fetchSingleCardDetails, Bid } from "../api/single.api.js";
 import { renderAuctionDetails } from "../components/createSingleCard.js";
+import { initializeCarousel } from "../utilities/carouseCardUtils.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
+  const cardId = new URLSearchParams(window.location.search).get("id");
+  if (!cardId) {
+    document.querySelector("#auction-details").innerHTML =
+      "Invalid Auction ID.";
+    return;
+  }
+
   try {
     renderAuthLinks();
 
-    const cardId = new URLSearchParams(window.location.search).get("id");
-    if (!cardId) {
-      throw new Error("No auction ID provided in URL");
-    }
-
+    // Hent auksjonsdata
     const auctionData = await fetchSingleCardDetails(cardId);
     if (!auctionData) {
       throw new Error("Failed to fetch auction details");
     }
 
+    // Initialiser bildekarusellen
+    const images = auctionData.media?.map((media) => ({
+      url: media.url || "https://via.placeholder.com/800x300",
+      alt: media.alt || "Auction Image",
+    })) || [
+      {
+        url: "https://via.placeholder.com/800x300",
+        alt: "Default Image",
+      },
+    ];
+    initializeCarousel(images);
+
     renderAuctionDetails(auctionData);
-    bidNow(cardId);
+
+    bidNow(cardId, auctionData);
   } catch (error) {
     console.error("Error during initialization:", error.message);
     document.querySelector(
@@ -26,7 +43,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-function bidNow(id) {
+// Funksjon for å håndtere bud
+function bidNow(id, auctionData) {
   const bidForm = document.querySelector("#bid-form");
   const customBidInput = document.querySelector("#custom-bid");
 
@@ -43,6 +61,7 @@ function bidNow(id) {
     );
     let bidAmount;
 
+    // Prioriterer custom-bid dersom det er utfylt
     if (customBidInput.value) {
       bidAmount = customBidInput.value.trim();
     } else if (selectedBid) {
@@ -65,8 +84,10 @@ function bidNow(id) {
 
       if (result) {
         alert("Bid submitted successfully!");
-        const auctionData = await fetchSingleCardDetails(id); 
-        renderAuctionDetails(auctionData); 
+
+        const updatedAuctionData = await fetchSingleCardDetails(id);
+
+        renderAuctionDetails(updatedAuctionData);
       } else {
         alert("Failed to submit bid. Please try again.");
       }
@@ -76,65 +97,3 @@ function bidNow(id) {
     }
   });
 }
-
-// import { renderAuthLinks } from "../components/authLinks.js";
-// import { fetchSingleCardDetails, Bid } from "../api/single.api.js";
-// import { renderAuctionDetails } from "../components/createSingleCard.js";
-
-// document.addEventListener("DOMContentLoaded", async () => {
-//   try {
-//     renderAuthLinks();
-
-//     const cardId = new URLSearchParams(window.location.search).get("id");
-//     bidNow(cardId);
-//     if (!cardId) {
-//       throw new Error("No auction ID provided in URL");
-//     }
-
-//     const auctionData = await fetchSingleCardDetails(cardId);
-//     renderAuctionDetails(auctionData);
-//   } catch (error) {
-//     console.error("Error during initialization:", error.message);
-
-//     const container = document.querySelector(".container");
-//     if (container) {
-//       container.innerHTML = `<p class="text-red-500">Error loading page: ${error.message}</p>`;
-//     }
-//   }
-// });
-// function bidNow(id) {
-//   const bidForm = document.querySelector("#bid-form");
-//   const customBidInput = document.querySelector("#custom-bid");
-//   console.log(bidForm);
-//   console.log(customBidInput);
-//   if (!bidForm || !customBidInput) {
-//     console.error("Bid form or custom bid input not found.");
-//     return;
-//   }
-//   bidForm.addEventListener("submit", async (event) => {
-//     event.preventDefault();
-//     const selectedBid = document.querySelector(
-//       'input[name="bid-amount"]:checked'
-//     );
-
-//     let bidAmount = customBidInput.value || selectedBid.value;
-
-//     let formData = {
-//       amount: Number(bidAmount),
-//     };
-
-//     if (!bidAmount || isNaN(bidAmount) || bidAmount <= 0) {
-//       alert("Please select a valid bid amount.");
-//       return;
-//     }
-
-//     let result = await Bid(id, formData);
-
-//     if (result) {
-//       alert("Bid submitted successfully!");
-//     } else {
-//       alert("Failed to submit bid. Please try again.");
-//     }
-//     console.log(result);
-//   });
-// }
