@@ -26,15 +26,17 @@ export function listingCardComponent(listing) {
     <p class="text-sm text-gray-700 line-clamp-3">${
       listing.description || "No description available."
     }</p>
-    <div class="auction-card__author flex items-center gap-2">
-      <img src="${seller.avatar.url || "https://via.placeholder.com/50"}"
-           alt="${seller.name || "Unknown Author"}"
-           class="auction-card__author-image w-8 h-8 rounded-full">
-      <a href="/profile?name=${seller?.name || ""}" 
-         class="auction-card__author-name text-sm text-blue-500 hover:underline">
-        ${seller.name || "Unknown Author"}
-      </a>
-    </div>
+<div class="auction-card__author flex items-center gap-2">
+  <img src="${seller.avatar.url || "https://via.placeholder.com/50"}"
+       alt="${seller.avatar.alt || ""}"
+       class="auction-card__author-image w-8 h-8 rounded-full"
+       onerror="this.src='https://via.placeholder.com/50'; this.alt='Failed to load';" />
+
+  <a href="/profile?name=${seller?.name || ""}" 
+     class="auction-card__author-name text-sm text-blue-500 hover:underline">
+    ${seller.name || "Unknown Author"}
+  </a>
+</div>
     <div class="text-sm text-gray-500">
       <p>Posted: ${new Date(listing.created).toLocaleDateString()}</p>
       <p>Expires: ${new Date(listing.endsAt).toLocaleDateString()}</p>

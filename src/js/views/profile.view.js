@@ -6,7 +6,7 @@ import { purchasedAuctionModal } from "../components/purchasedAuc.modal.componen
 import { updateProfileModal } from "../components/updateProfile-modal.component.js";
 import { getStoredUserName } from "../utilities/storage.js";
 
-//heller enkelte små if statmens. 
+//heller enkelte små if statmens.
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     renderAuthLinks();
@@ -51,6 +51,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       bannerElement.src =
         profile.banner.url || "https://via.placeholder.com/800x300";
       bannerElement.alt = profile.banner.alt || "Banner image";
+      // Bruker onerror for å håndtere feil ved bildeinnlasting
+      bannerElement.onerror = () => {
+        bannerElement.src = "https://via.placeholder.com/800x300";
+        bannerElement.alt = "Failed to load banner image";
+      };
     }
 
     const avatarElement = document.querySelector("#profile-avatar");
@@ -58,8 +63,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       avatarElement.src =
         profile.avatar.url || "https://via.placeholder.com/100";
       avatarElement.alt = profile.avatar.alt || "Profile Avatar";
-    }
 
+      // Bruker onerror for å håndtere feil hvis avataren ikke kan lastes
+      avatarElement.onerror = () => {
+        avatarElement.src = "https://via.placeholder.com/100";
+        avatarElement.alt = "Failed to load profile avatar";
+      };
+    }
     const nameElement = document.querySelector("#profile-name");
     nameElement.textContent = profile.name || "Unknown User";
 
