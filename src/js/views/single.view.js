@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       "Invalid Auction ID.";
     return;
   }
-
+  //om du ikke er logget inn kan du queryselecte bids boksen så den er utilgjengelig.
   try {
     renderAuthLinks();
 

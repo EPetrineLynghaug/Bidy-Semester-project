@@ -9,8 +9,16 @@ export async function fetchSingleCardDetails(id) {
       method: "GET",
       headers: createHeaders(true),
     });
-
+    // Sjekk om svaret ikke er OK
     if (!response.ok) {
+      if (response.status === 401) {
+        // Brukeren er ikke logget inn
+        alert(
+          "You need to log in to access this page. Redirecting to login..."
+        );
+        window.location.href = "/login?error=not_logged_in";
+        return null;
+      }
       throw new Error(
         `Error fetching auction details (status: ${response.status})`
       );
