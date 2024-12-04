@@ -6,6 +6,7 @@ import { openSearchModal } from "../components/search-modal.component.js";
 
 function renderAuctionListings(container, listings) {
   container.innerHTML = "";
+
   if (!listings || listings.length === 0) {
     container.innerHTML = "<p>No auction listings available.</p>";
     return;
@@ -17,31 +18,42 @@ function renderAuctionListings(container, listings) {
   });
 }
 
-document.addEventListener("DOMContentLoaded", async () => {
-  try {
-    renderAuthLinks();
+function setupSearchFunctionality() {
+  const searchInput = document.querySelector("#search-input");
+  const searchButton = document.querySelector("#search-button");
 
-    const myAuctionsContainer = document.getElementById(
-      "my-auctions-container"
-    );
-    if (!myAuctionsContainer) throw new Error("myAuctions container not found");
+  if (!searchInput || !searchButton) return;
 
-    const listings = await fetchAuctionListings(18, 1);
-    renderAuctionListings(myAuctionsContainer, listings);
+  searchButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    const query = searchInput.value.trim();
+    if (query) {
+      openSearchModal(query);
+    }
+  });
+}
 
-    const searchInput = document.querySelector("#search-input");
-    const searchButton = document.querySelector("#search-button");
-
-    searchButton.addEventListener("click", (e) => {
-      e.preventDefault();
-      openSearchModal(searchInput.value);
-    });
-
-    // const myAuctionsContainer = document.querySelectorAll(
-    //   "#my-auctions-container"
-    // );
-    // console.log("myAuctionsContainer:", myAuctionsContainer);
-  } catch (error) {
-    console.error("Error during initialization:", error.message);
+async function loadAuctionListings() {
+  const container = document.getElementById("my-auctions-container");
+  if (!container) {
+    console.error("Auction container element not found.");
+    return;
   }
+
+  try {
+    const listings = await fetchAuctionListings(18, 1);
+    renderAuctionListings(container, listings);
+  } catch (error) {
+    console.error("Error fetching auction listings:", error.message);
+    container.innerHTML =
+      "<p>Failed to load auction listings. Please try again later.</p>";
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderAuthLinks(); // Render authentication links
+
+  setupSearchFunctionality(); // Setup search functionality
+
+  loadAuctionListings(); // Load auction listings
 });
