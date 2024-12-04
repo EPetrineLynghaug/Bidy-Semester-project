@@ -7,18 +7,10 @@ export async function fetchSingleCardDetails(id) {
     console.log(`Fetching details for card ID: ${id}`);
     const response = await fetch(url, {
       method: "GET",
-      headers: createHeaders(true),
+      headers: createHeaders(),
     });
     // Sjekk om svaret ikke er OK
     if (!response.ok) {
-      if (response.status === 401) {
-        // Brukeren er ikke logget inn
-        alert(
-          "You need to log in to access this page. Redirecting to login..."
-        );
-        window.location.href = "/login?error=not_logged_in";
-        return null;
-      }
       throw new Error(
         `Error fetching auction details (status: ${response.status})`
       );

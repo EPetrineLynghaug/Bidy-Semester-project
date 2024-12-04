@@ -59,6 +59,10 @@ export function renderAuctionDetails(auctionData) {
     console.error("No auction data provided to render.");
     return;
   }
+  let currentBid = 0;
+  if (auctionData.bids.length > 0) {
+    currentBid = auctionData.bids[auctionData.bids.length - 1].amount;
+  }
 
   // Oppdater grensesnittet med auksjonsdata
   updateElement("#seller-name", auctionData.seller?.name || "Unknown Seller");
@@ -80,10 +84,7 @@ export function renderAuctionDetails(auctionData) {
     "#auction-expiry-date",
     `Expires: ${new Date(auctionData.endsAt).toLocaleDateString()}`
   );
-  updateElement(
-    "#current-bid",
-    `Current bid: ${auctionData.highestBid || "0 Coins"}`
-  );
+  updateElement("#current-bid", `Current bid: ${currentBid || "0 Coins"}`);
   updateElement(
     "#auction-image",
     auctionData.media?.[0]?.url || "https://via.placeholder.com/400x300"
@@ -92,7 +93,7 @@ export function renderAuctionDetails(auctionData) {
   // Håndtere budhistorikk
   const bidHistoryBody = document.querySelector("#bid-history-body");
   const toggleContainer = document.querySelector(".toggle-container");
-  if (toggleContainer) toggleContainer.remove(); 
+  if (toggleContainer) toggleContainer.remove();
 
   bidHistoryBody.innerHTML = "";
 

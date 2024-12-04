@@ -8,8 +8,6 @@ export function listingCardComponent(listing) {
   let currentBid = 0;
   if (bids.length > 0) {
     currentBid = bids[bids.length - 1].amount;
-
-    const images = media.slice(0, 4);
   }
 
   card.innerHTML = `

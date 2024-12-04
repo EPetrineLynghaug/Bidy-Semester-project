@@ -2,23 +2,43 @@ import { renderAuthLinks } from "../components/authLinks.js";
 import { fetchSingleCardDetails, Bid } from "../api/single.api.js";
 import { renderAuctionDetails } from "../components/createSingleCard.js";
 import { initializeCarousel } from "../utilities/carouseCardUtils.js";
+import { getStoredUserName } from "../utilities/storage.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const cardId = new URLSearchParams(window.location.search).get("id");
+  let isLoggedIn = false;
+  const localStorageUsername = getStoredUserName();
+  if (localStorageUsername) {
+    isLoggedIn = true;
+    console.log("user is logged in", localStorageUsername);
+  }
+  if (!isLoggedIn) {
+    document.querySelectorAll(".info-card").forEach((section) => {
+      section.style.display = "none";
+    });
+    document.querySelectorAll(".bid-history-section").forEach((section) => {
+      section.style.display = "none";
+    });
+  }
+
   if (!cardId) {
     document.querySelector("#auction-details").innerHTML =
       "Invalid Auction ID.";
     return;
   }
-  //om du ikke er logget inn kan du queryselecte bids boksen så den er utilgjengelig.
   try {
     renderAuthLinks();
 
     // Hent auksjonsdata
-    const auctionData = await fetchSingleCardDetails(cardId);
+    const auctionData = await fetchSingleCardDetails(cardId, isLoggedIn);
     if (!auctionData) {
       throw new Error("Failed to fetch auction details");
     }
+    let currentBid = 0;
+    if (auctionData.bids.length > 0) {
+      currentBid = auctionData.bids[auctionData.bids.length - 1].amount;
+    }
+    console.log("Current bid:", currentBid);
 
     // Initialiser bildekarusellen
     const images = auctionData.media?.map((media) => ({
@@ -33,8 +53,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     initializeCarousel(images);
 
     renderAuctionDetails(auctionData);
-
-    bidNow(cardId, auctionData);
+    if (isLoggedIn) {
+      bidNow(cardId, auctionData);
+    }
   } catch (error) {
     console.error("Error during initialization:", error.message);
     document.querySelector(
