@@ -1,15 +1,13 @@
 export function initializeCarousel(images) {
   const carouselContainer = document.querySelector("#carousel-images");
   const carouselLabel = document.querySelector("#carousel-label");
-  const prevButton = document.querySelector("#carousel-prev");
-  const nextButton = document.querySelector("#carousel-next");
 
-  if (!carouselContainer || !carouselLabel || !prevButton || !nextButton) {
+  if (!carouselContainer || !carouselLabel) {
     console.error("Carousel elements are missing.");
     return;
   }
 
-  // Dynamisk legge til bilder i karusellen
+  // Dynamically add images
   carouselContainer.innerHTML = "";
   images.forEach((image, index) => {
     const img = document.createElement("img");
@@ -21,7 +19,6 @@ export function initializeCarousel(images) {
 
   let currentIndex = 0;
 
-  // Oppdater visningen av karusellen
   function updateCarousel() {
     const totalImages = images.length;
     const translateX = -currentIndex * 100;
@@ -29,17 +26,27 @@ export function initializeCarousel(images) {
     carouselLabel.textContent = `${currentIndex + 1}/${totalImages}`;
   }
 
-  // Navigasjonsknapper
-  prevButton.addEventListener("click", () => {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    updateCarousel();
-  });
-
-  nextButton.addEventListener("click", () => {
+  // Add click event to switch images on click
+  carouselContainer.addEventListener("click", () => {
     currentIndex = (currentIndex + 1) % images.length;
     updateCarousel();
   });
 
-  // Initial oppdatering
+  // Add swipe functionality for touch devices
+  let startX = 0;
+  carouselContainer.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  carouselContainer.addEventListener("touchend", (e) => {
+    const endX = e.changedTouches[0].clientX;
+    if (endX - startX > 50) {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+    } else if (startX - endX > 50) {
+      currentIndex = (currentIndex + 1) % images.length;
+    }
+    updateCarousel();
+  });
+
   updateCarousel();
 }
