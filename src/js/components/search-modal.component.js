@@ -6,6 +6,7 @@ const urlParams = {
   page: 1,
   total: 12,
 };
+
 function createPaginationButton(pagenumber, callback) {
   const btn = document.createElement("button");
   // Endrer klassen for aktiv og inaktiv knapp
@@ -169,6 +170,7 @@ function setupModalNavigation() {
 
   closeSearchModal.addEventListener("click", () => {
     document.querySelector("#searchModalBackdrop").remove();
+    document.getElementById("search-input").value = ""; // Clears search input field
   });
 
   previousPageButton.addEventListener("click", async (e) => {
@@ -197,3 +199,18 @@ async function getTotalPages() {
   );
   return { total: result.pagination.total };
 }
+
+// Function for triggering search
+function handleSearch() {
+  const searchTerm = document.getElementById("#search-input").value;
+  console.log("Searching for:", searchTerm);
+}
+// document
+//   .getElementById("#search-input")
+//   .addEventListener("keydown", function (event) {
+//     if (event.key === "Enter") {
+//       event.preventDefault(); // Prevent form submission or other default behavior
+//       handleSearch();
+//     }
+//   });
+// Add event listener for Enter key pr
