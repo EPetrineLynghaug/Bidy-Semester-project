@@ -6,67 +6,11 @@ import {
 } from "../utilities/storage.js";
 import { createNewAuction } from "./newauction-modal.component.js";
 
-// export function renderAuthLinks() {
-//   const authLinks = document.getElementById("auth-links");
-//   const token = getToken();
-
-//   const meny = token
-//     ? [
-//         { name: "Home", url: "/" },
-//         { name: "New Auction", action: createNewAuction },
-//         { name: "Profile", url: "/profile/" },
-//         { name: "Logout", action: handleLogout },
-//       ]
-//     : [
-//         { name: "Login", url: "/auth/login" },
-//         { name: "Register", url: "/auth/register" },
-//       ];
-
-//   authLinks.innerHTML = "";
-
-//   meny.forEach((item) => {
-//     if (item.action) {
-//       const button = document.createElement("button");
-//       button.innerText = item.name;
-//       button.classList.add(
-//         "bg-red-500",
-//         "text-white",
-//         "px-4",
-//         "py-2",
-//         "rounded",
-//         "hover:bg-red-700",
-//         "ml-4"
-//       );
-//       button.addEventListener("click", (e) => {
-//         item.action();
-//       });
-//       authLinks.appendChild(button);
-//     } else {
-//       const atag = document.createElement("a");
-//       atag.href = item.url;
-//       atag.innerText = item.name;
-//       atag.classList.add(
-//         "text-white",
-//         "hover:text-gray-300",
-//         "px-4",
-//         "py-2",
-//         "rounded"
-//       );
-//       authLinks.appendChild(atag);
-//     }
-//   });
-// }
-
-// function handleLogout() {
-//   removeToken();
-//   alert("You are now logged out");
-//   renderAuthLinks();
-// }
 export function renderAuthLinks() {
   const authLinks = document.getElementById("auth-links");
   authLinks.className = "relative";
-  let username = "";
 
+  let username = "";
   const token = getToken();
   if (token) {
     username = getStoredUserName();
@@ -92,7 +36,7 @@ export function renderAuthLinks() {
   toggleButton.className =
     "md:hidden flex items-center px-3 py-2 border rounded text-white border-white hover:text-gray-300 hover:border-gray-300";
   toggleButton.innerHTML = `
-    <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+    <svg class="fill-current h-5 w-5" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
       <title>Menu</title>
       <path d="M0 3h20v2H0zM0 9h20v2H0zM0 15h20v2H0z" />
     </svg>
@@ -102,30 +46,31 @@ export function renderAuthLinks() {
   // Menu Container
   const menuContainer = document.createElement("div");
   menuContainer.className =
-    "hidden md:flex flex-col md:flex-row md:items-center absolute md:static top-full left-0 w-full bg-gray-800 md:bg-transparent z-50";
+    "hidden md:flex flex-col md:flex-row md:items-center absolute md:static top-full left-0 w-full bg-[#0D47A1] z-50 rounded-lg md:rounded-none";
 
   toggleButton.addEventListener("click", () => {
     menuContainer.classList.toggle("hidden");
   });
 
   // Create menu items
-  meny.forEach((item) => {
+  meny.forEach((item, index) => {
     if (item.action) {
       const button = document.createElement("button");
       button.innerText = item.name;
       button.classList.add(
         "block",
         "md:inline-block",
-        "text-white",
-        "hover:text-gray-300",
+        "text-white", // Text color set to white
+        "hover:text-gray-300", // Subtle hover effect
         "px-4",
         "py-2",
-        "rounded",
+        "rounded-lg",
         "md:ml-4",
-        "bg-red-500",
-        "hover:bg-red-700",
-        "transition-all",
-        "duration-200",
+        "bg-transparent", // Transparent background
+        "border-0", // No border
+        "focus:outline-none",
+        "transition-all", // Smooth transition for hover
+        "duration-200"
       );
       button.addEventListener("click", () => {
         item.action();
@@ -139,16 +84,24 @@ export function renderAuthLinks() {
       atag.classList.add(
         "block",
         "md:inline-block",
-        "text-white",
-        "hover:text-gray-300",
+        "text-white", // Text color set to white
+        "hover:text-gray-300", // Subtle hover effect
         "px-4",
         "py-2",
-        "rounded",
+        "rounded-lg",
         "md:ml-4",
-        "transition-all",
+        "transition-all", // Smooth transition for hover
         "duration-200",
+        "focus:outline-none"
       );
       menuContainer.appendChild(atag);
+    }
+
+    // Add divider between menu items (if it's not the last item)
+    if (index < meny.length - 1) {
+      const divider = document.createElement("div");
+      divider.className = "border-b border-gray-300 my-2 md:hidden"; // Divider for mobile
+      menuContainer.appendChild(divider);
     }
   });
 
