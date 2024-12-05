@@ -6,10 +6,14 @@ const urlParams = {
   page: 1,
   total: 12,
 };
-
 function createPaginationButton(pagenumber, callback) {
   const btn = document.createElement("button");
-  btn.className = "bg-blue-400 py-2 px-4";
+  // Endrer klassen for aktiv og inaktiv knapp
+  btn.className =
+    pagenumber === urlParams.page
+      ? "bg-[#1565C0] text-white font-medium rounded-md py-2 px-3 shadow-md" // Aktiv knapp
+      : "bg-gray-300 text-gray-600 font-medium rounded-md py-2 px-3 hover:bg-gray-400 transition duration-300"; // Inaktiv knapp
+
   btn.innerText = pagenumber;
 
   btn.addEventListener("click", async (e) => {
@@ -30,7 +34,8 @@ function renderPaginationButtons(pagination, callback) {
   }
 
   const currentDiv = document.createElement("div");
-  currentDiv.className = "bg-gray-200 py-2 px-4";
+  currentDiv.className =
+    "bg-[#1565C0] text-white font-medium py-2 px-3 rounded-md shadow-md";
   currentDiv.innerText = current;
   paginationButtonDiv.append(currentDiv);
 
@@ -53,7 +58,18 @@ async function renderSearchResults() {
     if (result.listings.length > 0) {
       result.listings.forEach((listing) => {
         const newListingCard = listingCardComponent(listing);
-        newListingCard.classList.add("flex", "flex-col", "justify-between");
+        newListingCard.classList.add(
+          "flex",
+          "flex-col",
+          "justify-between",
+          "rounded-lg",
+          "border",
+          "shadow-sm",
+          "p-4",
+          "bg-white",
+          "hover:shadow-lg",
+          "transition-shadow"
+        );
         searchResultDiv.append(newListingCard);
       });
 
@@ -68,12 +84,12 @@ async function renderSearchResults() {
       });
     } else {
       searchResultDiv.innerHTML =
-        '<p class="text-gray-600">No results found for your search.</p>';
+        '<p class="text-gray-600 text-center">No results found for your search.</p>';
     }
   } catch (error) {
     console.error("Error fetching search results: ", error.message);
     document.querySelector("#searchResult").innerHTML =
-      "<p>Error loading search results. Please try again later.</p>";
+      "<p class='text-red-600 text-center'>Error loading search results. Please try again later.</p>";
   }
 }
 
@@ -90,29 +106,50 @@ export async function openSearchModal(searchTerm) {
       id="searchModalCard"
       class="bg-white flex flex-col rounded-lg shadow-lg w-11/12 h-5/6 max-w-lg md:max-w-2xl lg:max-w-3xl relative"
     >
-      <div class="flex justify-between flex-wrap w-full p-4">
-        <h2 class="text-xl">Search results for: ${searchTerm}</h2>
-        <button id="closeSearchModal" class="bg-red-400 py-2 px-4">
-          Close
+      <div class="flex justify-between flex-wrap w-full p-4 border-b relative">
+        <h2 class="text-xl font-bold text-gray-700">Search results for: <span class="text-blue-500">${searchTerm}</span></h2>
+        <button
+          id="closeSearchModal"
+          class="absolute top-4 right-4 bg-[#E53935] text-white w-10 h-10 max-h-12 max-w-12 rounded-full shadow-[0_4px_8px_rgba(0,0,0,0.2)] flex items-center justify-center border border-[#D32F2F] hover:bg-[#D32F2F] hover:shadow-[0_6px_12px_rgba(0,0,0,0.3)] hover:scale-105 active:scale-95 active:shadow-[0_2px_4px_rgba(0,0,0,0.2)] transition-all duration-200 ease-in-out md:top-6 md:right-6 md:w-12 md:h-12 lg:top-8 lg:right-8 lg:w-14 lg:h-14"
+          style="max-height: 48px; max-width: 48px;"
+          title="Close"
+          aria-label="Close"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 md:h-6 md:w-6 lg:h-7 lg:w-7"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+            role="img"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
         </button>
-        <div class="w-full">
+        <div class="w-full mt-2 text-sm text-gray-500">
           <p id="searchResultSummary"></p>
         </div>
       </div>
 
       <div id="searchResult" 
-           class="flex-1 overflow-auto grid gap-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-2">
+           class="flex-1 overflow-auto grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 p-4">
       </div>
 
-      <div id="searchPagination" class="flex gap-4 p-4">
-        <button id="previousPage" class="bg-gray-300 py-2 px-4">
+      <div id="searchPagination" class="flex gap-4 items-center justify-center p-4 border-t bg-gray-50">
+        <button id="previousPage" class="bg-[#1E88E5] text-white rounded-md py-2 px-4 hover:bg-[#1565C0] transition duration-300">
           Prev
         </button>
 
-        <div id="dynamicPagination" class="flex-1 flex align-center justify-center gap-4">
+        <div id="dynamicPagination" class="flex align-center justify-center gap-2">
         </div>
 
-        <button id="nextPage" class="bg-gray-300 py-2 px-4">
+        <button id="nextPage" class="bg-[#1E88E5] text-white rounded-md py-2 px-4 hover:bg-[#1565C0] transition duration-300">
           Next
         </button>
       </div>
@@ -160,5 +197,3 @@ async function getTotalPages() {
   );
   return { total: result.pagination.total };
 }
-
-//TODO: sette opp en sjekk for om de har bilde med eller ikke
