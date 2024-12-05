@@ -3,6 +3,7 @@ import { fetchSingleCardDetails, Bid } from "../api/single.api.js";
 import { renderAuctionDetails } from "../components/createSingleCard.js";
 import { initializeCarousel } from "../utilities/carouseCardUtils.js";
 import { getStoredUserName } from "../utilities/storage.js";
+import { showCustomAlert } from "../components/showCustomAlert.components.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const cardId = new URLSearchParams(window.location.search).get("id");
@@ -103,15 +104,29 @@ function setupBidForm(cardId) {
     try {
       const result = await Bid(cardId, { amount: bidAmount });
       if (result) {
-        alert("Bid submitted successfully!");
+        showCustomAlert(
+          "Your bid has been received successfully!",
+          "success",
+          bidForm
+        );
+
+        // Update auction details
         const updatedAuctionData = await fetchSingleCardDetails(cardId);
         renderAuctionDetails(updatedAuctionData, true);
       } else {
-        alert("Failed to submit bid. Please try again.");
+        showCustomAlert(
+          "Something went wrong. Please check your coin balance and try again.",
+          "error",
+          bidForm
+        );
       }
     } catch (error) {
       console.error("Error submitting bid:", error.message);
-      alert("An error occurred while submitting your bid.");
+      showCustomAlert(
+        "An error occurred while submitting your bid. Please try again later.",
+        "error",
+        bidForm
+      );
     }
   });
 }
@@ -124,13 +139,21 @@ function getBidAmount(customBidInput) {
     customBidInput.value.trim() || (selectedBid && selectedBid.value);
 
   if (!bidAmount) {
-    alert("Please select a bid amount or enter a custom bid.");
+    showCustomAlert(
+      "Please select a bid amount or enter a custom bid.",
+      "error",
+      document.querySelector("#bid-form")
+    );
     return null;
   }
 
   const amount = Number(bidAmount);
   if (isNaN(amount) || amount <= 0) {
-    alert("Please enter a valid bid amount greater than 0.");
+    showCustomAlert(
+      "Please enter a valid bid amount greater than 0.",
+      "error",
+      document.querySelector("#bid-form")
+    );
     return null;
   }
 
