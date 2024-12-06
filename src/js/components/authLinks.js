@@ -16,7 +16,7 @@ export function renderAuthLinks() {
     username = getStoredUserName();
   }
 
-  const commonMenu = [{ name: "Home", url: "/" }];
+  const commonMenu = [{ name: "Home", url: "/" }]; // Home alltid tilgjengelig
 
   const authMenu = token
     ? [
@@ -29,7 +29,7 @@ export function renderAuthLinks() {
         { name: "Register", url: "/auth/register" },
       ];
 
-  const meny = [...commonMenu, ...authMenu];
+  const meny = [...commonMenu, ...authMenu]; // Kombiner felles og spesifikk meny
 
   // Clear existing content
   authLinks.innerHTML = "";
@@ -100,9 +100,10 @@ export function renderAuthLinks() {
       menuContainer.appendChild(atag);
     }
 
+    // Add divider between menu items (if it's not the last item)
     if (index < meny.length - 1) {
       const divider = document.createElement("div");
-      divider.className = "border-b border-gray-300 my-2 md:hidden";
+      divider.className = "border-b border-gray-300 my-2 md:hidden"; // Divider for mobile
       menuContainer.appendChild(divider);
     }
   });
