@@ -65,17 +65,31 @@ export function renderAuctionDetails(auctionData) {
   }
 
   // Oppdater grensesnittet med auksjonsdata
+  // Oppdater grensesnittet med auksjonsdata
   updateElement("#seller-name", auctionData.seller?.name || "Unknown Seller");
+
+  // Oppdater selgerens avatar med onerror
   const sellerAvatar = document.querySelector("#seller-avatar");
   if (sellerAvatar) {
     sellerAvatar.src =
       auctionData.seller?.avatar?.url || "https://via.placeholder.com/50";
+    sellerAvatar.alt = auctionData.seller?.name || "Seller Avatar";
+
+    // Håndter feil ved avatarinnlasting
+    sellerAvatar.onerror = () => {
+      sellerAvatar.src = "https://via.placeholder.com/50";
+      sellerAvatar.alt = "Failed to load seller avatar";
+    };
   }
+
+  // Oppdater auksjonens tittel og beskrivelse
   updateElement("#auction-title", auctionData.title || "Untitled Auction");
   updateElement(
     "#auction-description",
     auctionData.description || "No description available."
   );
+
+  // Oppdater postet og utløpsdato
   updateElement(
     "#auction-posted-date",
     `Posted: ${new Date(auctionData.created).toLocaleDateString()}`
@@ -84,11 +98,21 @@ export function renderAuctionDetails(auctionData) {
     "#auction-expiry-date",
     `Expires: ${new Date(auctionData.endsAt).toLocaleDateString()}`
   );
+
   updateElement("#current-bid", `Current bid: ${currentBid || "0 Coins"}`);
-  updateElement(
-    "#auction-image",
-    auctionData.media?.[0]?.url || "https://via.placeholder.com/400x300"
-  );
+
+  // Oppdater auksjonsbildet med onerror
+  const auctionImage = document.querySelector("#auction-image");
+  if (auctionImage) {
+    auctionImage.src =
+      auctionData.media?.[0]?.url || "https://via.placeholder.com/400x300";
+    auctionImage.alt = auctionData.title || "Auction Image";
+
+    auctionImage.onerror = () => {
+      auctionImage.src = "https://via.placeholder.com/400x300";
+      auctionImage.alt = "Failed to load auction image";
+    };
+  }
 
   // Håndtere budhistorikk
   const bidHistoryBody = document.querySelector("#bid-history-body");

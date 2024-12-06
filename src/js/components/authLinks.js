@@ -16,9 +16,10 @@ export function renderAuthLinks() {
     username = getStoredUserName();
   }
 
-  const meny = token
+  const commonMenu = [{ name: "Home", url: "/" }];
+
+  const authMenu = token
     ? [
-        { name: "Home", url: "/" },
         { name: "New Auction", action: createNewAuction },
         { name: "Profile", url: `/profile?name=${username}` },
         { name: "Logout", action: handleLogout },
@@ -27,6 +28,8 @@ export function renderAuthLinks() {
         { name: "Login", url: "/auth/login" },
         { name: "Register", url: "/auth/register" },
       ];
+
+  const meny = [...commonMenu, ...authMenu];
 
   // Clear existing content
   authLinks.innerHTML = "";
@@ -60,16 +63,16 @@ export function renderAuthLinks() {
       button.classList.add(
         "block",
         "md:inline-block",
-        "text-white", // Text color set to white
-        "hover:text-gray-300", // Subtle hover effect
+        "text-white",
+        "hover:text-gray-300",
         "px-4",
         "py-2",
         "rounded-lg",
         "md:ml-4",
-        "bg-transparent", // Transparent background
-        "border-0", // No border
+        "bg-transparent",
+        "border-0",
         "focus:outline-none",
-        "transition-all", // Smooth transition for hover
+        "transition-all",
         "duration-200"
       );
       button.addEventListener("click", () => {
@@ -84,23 +87,22 @@ export function renderAuthLinks() {
       atag.classList.add(
         "block",
         "md:inline-block",
-        "text-white", // Text color set to white
-        "hover:text-gray-300", // Subtle hover effect
+        "text-white",
+        "hover:text-gray-300",
         "px-4",
         "py-2",
         "rounded-lg",
         "md:ml-4",
-        "transition-all", // Smooth transition for hover
+        "transition-all",
         "duration-200",
         "focus:outline-none"
       );
       menuContainer.appendChild(atag);
     }
 
-    // Add divider between menu items (if it's not the last item)
     if (index < meny.length - 1) {
       const divider = document.createElement("div");
-      divider.className = "border-b border-gray-300 my-2 md:hidden"; // Divider for mobile
+      divider.className = "border-b border-gray-300 my-2 md:hidden";
       menuContainer.appendChild(divider);
     }
   });

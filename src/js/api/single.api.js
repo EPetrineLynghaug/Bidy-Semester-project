@@ -1,5 +1,6 @@
 import { createHeaders } from "../utilities/header.utillities.js";
-import { API_AUCTION_LISTINGS } from "./constants.js";
+import { API_AUCTION_LISTINGS, API_PROFILE } from "./constants.js";
+import { getStoredUserName } from "../utilities/storage.js";
 
 export async function fetchSingleCardDetails(id) {
   try {
@@ -42,6 +43,7 @@ export async function Bid(id, Bid) {
     }
 
     const result = await response.json();
+    console.log("Bid placed successfully. Result:", result);
 
     const data = result.data;
 
