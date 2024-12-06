@@ -122,3 +122,18 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 //refacor hva du skal ha inni og utenfor try catch.
+
+//mobile menu//
+//   let menuIsOpen = false;
+//   const mobileMenu = document.querySelector("#mobile-menu");
+
+//   document.getElementById("toggle-menu").addEventListener("click", () => {
+//     if (menuIsOpen) {
+//       mobileMenu.classList.add("hidden");
+//       mobileMenu.classList.remove("flex");
+//     } else {
+//       mobileMenu.classList.remove("hidden");
+//       mobileMenu.classList.add("flex");
+//     }
+//     menuIsOpen = !menuIsOpen;
+//   });

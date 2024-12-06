@@ -34,12 +34,28 @@ export function createNewAuction(listing) {
   modalContainer.innerHTML = `
     <div class="bg-white rounded-md shadow-md p-10 px-16 max-h-screen overflow-y-auto relative">
 
+          <div class="flex justify-between items-center border-b pb-4 mb-4">
 
- <button id="close-button" class="w-8 h-8 absolute top-2 right-2 flex items-center justify-center bg-red-500 text-white rounded-full hover:bg-red-600 focus:outline-none">
-   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-   </svg>
- </button>
+        <h1 class="text-lg md:text-xl lg:text-2xl font-semibold text-gray-800">new auction</h1>
+  <button id="close-button" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center bg-red-500 text-white rounded-full border border-red-600 shadow-md hover:bg-red-600 hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 ease-in-out"
+          title="Close Modal"
+          aria-label="Close Modal"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 pointer-events-none"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+      </div>
 
  <h1 class="font-semibold">New Auction</h1>
  <form name="createPost" id="auction-form" class="space-y-4">
@@ -235,6 +251,9 @@ export function createNewAuction(listing) {
         const result = await editAuction(listing.id, formData);
         alert("Auction updated successfully!");
         console.log("Auction result:", result);
+
+        // Oppdater det eksisterende kortet i DOM
+        updateAuctionInDOM(result);
         modalContainer.remove();
       } catch (error) {
         console.error("Error updating auction:", error.message);
@@ -243,23 +262,15 @@ export function createNewAuction(listing) {
     } else {
       try {
         const result = await createauction(formData);
-        console.log(formData);
-        console.log(result);
-        let card = undefined;
-
-        if (window.location.pathname === "/") {
-          card = listingCardComponent(result);
-        } else {
-          card = myAuctions(result);
-        }
+        console.log("Created auction:", result);
 
         const myAuctionsContainer = document.querySelector(
           "#my-auctions-container"
         );
 
+        const card = myAuctions(result, true);
         myAuctionsContainer.prepend(card);
         modalContainer.remove();
-
         alert("Auction created successfully!");
       } catch (error) {
         console.error("Error creating auction:", error.message);
@@ -268,4 +279,3 @@ export function createNewAuction(listing) {
     }
   });
 }
-//TODO: Refactor koden, mindre moduler.

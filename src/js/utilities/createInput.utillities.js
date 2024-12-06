@@ -58,4 +58,3 @@ export function createInput(num, media) {
 
   return wrapper;
 }
-
