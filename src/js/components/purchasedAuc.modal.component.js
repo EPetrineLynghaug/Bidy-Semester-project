@@ -10,11 +10,24 @@ export function purchasedAuctionModal(name) {
       <!-- Header -->
       <div class="flex justify-between items-center border-b pb-4 mb-4">
         <h2 class="text-lg md:text-xl lg:text-2xl font-semibold text-gray-800">Purchased Auctions</h2>
-        <button id="close-modal" class="w-8 h-8 flex items-center justify-center bg-red-500 text-white rounded-full hover:bg-red-600 focus:outline-none">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        <button id="close-modal"       class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center bg-red-500 text-white rounded-full border border-red-600 shadow-md hover:bg-red-600 hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 ease-in-out"
+      title="Close Modal"
+      aria-label="Close Modal"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 pointer-events-none"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2">
+           <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
+      
       </div>
       <!-- Content -->
       <div id="purchased-auctions-content" class="space-y-6">

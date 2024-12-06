@@ -26,7 +26,7 @@ export function initializeCarousel(images) {
     carouselLabel.textContent = `${currentIndex + 1}/${totalImages}`;
   }
 
-  // Add click event to switch images on click
+  // Add click event to switch images
   carouselContainer.addEventListener("click", () => {
     currentIndex = (currentIndex + 1) % images.length;
     updateCarousel();
@@ -46,6 +46,18 @@ export function initializeCarousel(images) {
       currentIndex = (currentIndex + 1) % images.length;
     }
     updateCarousel();
+  });
+
+  // Keyboard navigation
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") {
+      currentIndex = (currentIndex + 1) % images.length;
+      updateCarousel();
+    }
+    if (e.key === "ArrowLeft") {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      updateCarousel();
+    }
   });
 
   updateCarousel();

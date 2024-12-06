@@ -8,23 +8,20 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-gray-100 flex flex-col items-center justify-center h-screen">
-    <header class="bg-gray-800 text-white p-4 w-full">
-      <nav
-        id="auth-links"
-        class="flex space-x-4 justify-end container mx-auto"
-      ></nav>
+    <header class="bg-[#0D47A1] text-white p-4 shadow-xl w-full">
+      <nav id="auth-links" class="flex justify-between max-w-7xl mx-auto"></nav>
     </header>
 
-    <main class="flex flex-col items-center justify-center flex-1 w-full">
+    <main class="flex flex-col items-center justify-center flex-1 w-full px-4">
       <form
         name="login"
         class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full"
       >
-        <h1 class="text-xl font-bold mb-4">Login</h1>
+        <h1 class="text-xl font-bold mb-4 text-center text-gray-800">Login</h1>
         <div class="mb-4">
-          <label for="email" class="block text-sm font-medium text-gray-700"
-            >Email</label
-          >
+          <label for="email" class="block text-sm font-medium text-gray-700">
+            Email
+          </label>
           <input
             type="email"
             name="email"
@@ -35,9 +32,9 @@
           />
         </div>
         <div class="mb-4">
-          <label for="password" class="block text-sm font-medium text-gray-700"
-            >Password</label
-          >
+          <label for="password" class="block text-sm font-medium text-gray-700">
+            Password
+          </label>
           <input
             type="password"
             name="password"
@@ -49,11 +46,22 @@
         </div>
         <button
           type="submit"
-          class="w-full bg-indigo-500 text-white py-2 px-4 rounded hover:bg-indigo-600"
+          class="w-full bg-indigo-500 text-white py-2 px-4 rounded hover:bg-indigo-600 transition-all duration-200"
         >
           Login
         </button>
       </form>
+
+      <!-- Registration Prompt -->
+      <p class="mt-4 text-gray-700 text-sm">
+        Don't have an account?
+        <a
+          href="/auth/register"
+          class="text-blue-600 hover:text-blue-800 font-medium"
+        >
+          Register here
+        </a>
+      </p>
     </main>
   </body>
 </html>

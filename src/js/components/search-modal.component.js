@@ -9,12 +9,10 @@ const urlParams = {
 
 function createPaginationButton(pagenumber, callback) {
   const btn = document.createElement("button");
-  // Endrer klassen for aktiv og inaktiv knapp
   btn.className =
     pagenumber === urlParams.page
-      ? "bg-[#1565C0] text-white font-medium rounded-md py-2 px-3 shadow-md" // Aktiv knapp
-      : "bg-gray-300 text-gray-600 font-medium rounded-md py-2 px-3 hover:bg-gray-400 transition duration-300"; // Inaktiv knapp
-
+      ? "bg-[#1565C0] text-white font-medium rounded-md py-2 px-3 shadow-md"
+      : "bg-gray-300 text-gray-600 font-medium rounded-md py-2 px-3 hover:bg-gray-400 transition duration-300";
   btn.innerText = pagenumber;
 
   btn.addEventListener("click", async (e) => {
@@ -31,7 +29,12 @@ function renderPaginationButtons(pagination, callback) {
   paginationButtonDiv.innerHTML = "";
 
   if (previous && previous > 0) {
-    paginationButtonDiv.append(createPaginationButton(previous, callback));
+    paginationButtonDiv.append(
+      createPaginationButton(previous, async (pagenumber) => {
+        callback(pagenumber);
+        setTimeout(scrollToTop, 50); // Ensure scroll after rendering
+      })
+    );
   }
 
   const currentDiv = document.createElement("div");
@@ -41,7 +44,12 @@ function renderPaginationButtons(pagination, callback) {
   paginationButtonDiv.append(currentDiv);
 
   if (next && next <= total) {
-    paginationButtonDiv.append(createPaginationButton(next, callback));
+    paginationButtonDiv.append(
+      createPaginationButton(next, async (pagenumber) => {
+        callback(pagenumber);
+        setTimeout(scrollToTop, 50); // Ensure scroll after rendering
+      })
+    );
   }
 }
 
@@ -82,6 +90,7 @@ async function renderSearchResults() {
       renderPaginationButtons(result.pagination, async (pagenumber) => {
         urlParams.page = pagenumber;
         await renderSearchResults();
+        setTimeout(scrollToTop, 50); // Ensure scroll after rendering
       });
     } else {
       searchResultDiv.innerHTML =
@@ -95,7 +104,9 @@ async function renderSearchResults() {
 }
 
 export async function openSearchModal(searchTerm) {
+  // Reset til side 1 for nytt søk
   urlParams.searchTerm = searchTerm;
+  urlParams.page = 1;
 
   const searchModal = document.createElement("div");
   searchModal.id = "searchModalBackdrop";
@@ -106,25 +117,23 @@ export async function openSearchModal(searchTerm) {
     <div
       id="searchModalCard"
       class="bg-white flex flex-col rounded-lg shadow-lg w-11/12 h-5/6 max-w-lg md:max-w-2xl lg:max-w-3xl relative"
+      role="dialog" aria-labelledby="searchResultSummary" aria-modal="true"
     >
       <div class="flex justify-between flex-wrap w-full p-4 border-b relative">
         <h2 class="text-xl font-bold text-gray-700">Search results for: <span class="text-blue-500">${searchTerm}</span></h2>
         <button
           id="closeSearchModal"
-          class="absolute top-4 right-4 bg-[#E53935] text-white w-10 h-10 max-h-12 max-w-12 rounded-full shadow-[0_4px_8px_rgba(0,0,0,0.2)] flex items-center justify-center border border-[#D32F2F] hover:bg-[#D32F2F] hover:shadow-[0_6px_12px_rgba(0,0,0,0.3)] hover:scale-105 active:scale-95 active:shadow-[0_2px_4px_rgba(0,0,0,0.2)] transition-all duration-200 ease-in-out md:top-6 md:right-6 md:w-12 md:h-12 lg:top-8 lg:right-8 lg:w-14 lg:h-14"
-          style="max-height: 48px; max-width: 48px;"
-          title="Close"
-          aria-label="Close"
+          class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center bg-red-500 text-white rounded-full border border-red-600 shadow-md hover:bg-red-600 hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 ease-in-out"
+          title="Close Modal"
+          aria-label="Close Modal"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 md:h-6 md:w-6 lg:h-7 lg:w-7"
+            class="h-5 w-5 pointer-events-none"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
             stroke-width="2"
-            role="img"
-            aria-hidden="true"
           >
             <path
               stroke-linecap="round"
@@ -178,6 +187,7 @@ function setupModalNavigation() {
     if (urlParams.page > 1) {
       urlParams.page--;
       await renderSearchResults();
+      setTimeout(scrollToTop, 50); // Ensure scroll after rendering
     }
   });
 
@@ -187,6 +197,7 @@ function setupModalNavigation() {
     if (urlParams.page < total) {
       urlParams.page++;
       await renderSearchResults();
+      setTimeout(scrollToTop, 50); // Ensure scroll after rendering
     }
   });
 }
@@ -200,17 +211,22 @@ async function getTotalPages() {
   return { total: result.pagination.total };
 }
 
-// Function for triggering search
-function handleSearch() {
-  const searchTerm = document.getElementById("#search-input").value;
-  console.log("Searching for:", searchTerm);
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth", // Smooth scrolling
+  });
 }
-// document
-//   .getElementById("#search-input")
-//   .addEventListener("keydown", function (event) {
-//     if (event.key === "Enter") {
-//       event.preventDefault(); // Prevent form submission or other default behavior
-//       handleSearch();
-//     }
-//   });
-// Add event listener for Enter key pr
+
+// Legg til støtte for Enter-tast i søkefeltet
+document
+  .getElementById("search-input")
+  .addEventListener("keypress", async (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      const searchTerm = e.target.value.trim();
+      if (searchTerm) {
+        await openSearchModal(searchTerm);
+      }
+    }
+  });
