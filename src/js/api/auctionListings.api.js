@@ -49,24 +49,29 @@ export async function readeProfiles(name, page = 1) {
 }
 //search//
 export async function searchAuctionListings(searchQuery, page = 1, limit = 12) {
+  if (!searchQuery || typeof searchQuery !== "string") {
+    throw new Error("Invalid search query provided.");
+  }
+
   const encodedSearchQuery = encodeURIComponent(searchQuery);
+  const url = `${API_AUCTION_LISTINGS}/search?sort=created&sortOrder=desc&limit=${limit}&page=${page}&_seller=true&_bids=true&q=${encodedSearchQuery}`;
 
   try {
-    const response = await fetch(
-      `${API_AUCTION_LISTINGS}/search?sort=created&sortOrder=desc&limit=${limit}&page=${page}&_seller=true&_bids=true&q=${encodedSearchQuery}`,
-      {
-        method: "GET",
-        headers: createHeaders(),
-      }
-    );
+    const response = await fetch(url, {
+      method: "GET",
+      headers: createHeaders(),
+    });
 
     if (!response.ok) {
       throw new Error(
-        `Failed to fetch search results: ${response.status} - ${response.statusText}`
+        `HTTP error! Status: ${response.status} - ${response.statusText}`
       );
     }
 
     const result = await response.json();
+    if (!result || typeof result !== "object") {
+      throw new Error("Unexpected response format: Data is not an object.");
+    }
     return {
       listings: result.data,
       pagination: {
