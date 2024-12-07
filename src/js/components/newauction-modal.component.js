@@ -11,14 +11,19 @@ export function createNewAuction(listing) {
   let tags = "";
   let endTime = "";
 
-  const today = new Date().toISOString();
-  const [date] = today.split("T");
-  endTime = `${date}T23:59`;
-
   if (listing) {
     const [date, time] = listing.endsAt.split("T");
-    endTime = `${date}T${time.slice(0, 5)}`;
-    ({ title, description, tags } = listing);
+    const [hour, minute] = time.split(":");
+    endTime = `${date}T${hour}:${minute}`;
+
+    title = listing.title;
+    description = listing.description;
+    tags = listing.tags;
+  } else {
+    const today = new Date().toISOString();
+    const [date] = today.split("T");
+
+    endTime = `${date}T23:59`;
   }
 
   const modalContainer = document.createElement("div");
@@ -97,125 +102,88 @@ export function createNewAuction(listing) {
   </form>
 </div>`;
 
-  document.body.appendChild(modalContainer);
+  document.body.append(modalContainer);
 
-  const container = document.querySelector(".url-input-container");
-
+  const container = modalContainer.querySelector(".url-input-container");
   if (listing && listing.media.length > 0) {
-    listing.media.map((media, index) => {
+    listing.media.forEach((media, index) => {
       if (index > 0) {
         mediaInput++;
         const newUrlInput = createInput(mediaInput, media);
         container.appendChild(newUrlInput);
       } else {
-        const mediaUrl = document.querySelector("#mediaUrl1");
-        const mediaAlt = document.querySelector("#mediaAlt1");
+        const mediaUrl = modalContainer.querySelector("#mediaUrl1");
+        const mediaAlt = modalContainer.querySelector("#mediaAlt1");
 
-        if (media.url) {
-          mediaUrl.value = media.url;
-        }
-        if (media.alt) {
-          mediaAlt.value = media.alt;
-        }
+        if (media.url) mediaUrl.value = media.url;
+        if (media.alt) mediaAlt.value = media.alt;
       }
     });
   }
 
-  const closeButton = modalContainer.querySelector("#close-button");
-  closeButton.addEventListener("click", () => {
-    modalContainer.remove();
-  });
+  modalContainer
+    .querySelector("#close-button")
+    .addEventListener("click", () => modalContainer.remove());
 
-  // Lukk modal ved å klikke utenfor innholdet
   modalContainer.addEventListener("click", (event) => {
-    if (event.target === modalContainer) {
-      modalContainer.classList.add("hidden");
-    }
-  });
-  const bodyTextarea = modalContainer.querySelector("#body");
-  const charCount = modalContainer.querySelector("#body-char-count");
-
-  bodyTextarea.addEventListener("input", () => {
-    const currentLength = bodyTextarea.value.length;
-    charCount.textContent = currentLength;
+    if (event.target === modalContainer) modalContainer.remove();
   });
 
-  //media url
-  const btn = document.querySelector("#add-image-button");
+  modalContainer
+    .querySelector("#add-image-button")
+    .addEventListener("click", () => {
+      mediaInput++;
+      const newInput = createInput(mediaInput);
+      container.appendChild(newInput);
+    });
 
-  btn.addEventListener("click", (event) => {
-    event.preventDefault();
-    console.log("clicked");
-    mediaInput++;
-    const newInputWithAlt = createInput(mediaInput);
-    container.appendChild(newInputWithAlt);
-  });
+  modalContainer
+    .querySelector("#auction-form")
+    .addEventListener("submit", async (event) => {
+      event.preventDefault();
 
-  document.addEventListener("click", (e) => {
-    if (e.target.className.includes("media-url-remove-btn")) {
-      e.preventDefault();
-      const dataId = e.target.getAttribute("data-id");
-      const selectedFormGroup = document.querySelector(
-        `#url-input-container${dataId}`
+      const mediaInput = Array.from(
+        document.querySelectorAll('input[name^="mediaUrl"]')
       );
-      selectedFormGroup.remove();
+      const altInput = Array.from(
+        document.querySelectorAll('input[name^="mediaAlt"]')
+      );
 
-      mediaInput--;
-    }
-  });
+      const media = mediaInput.map((urlInput, index) => ({
+        url: urlInput.value,
+        alt: altInput[index]?.value || "",
+      }));
 
-  const form = modalContainer.querySelector("#auction-form");
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    const mediaInput = Array.from(
-      document.querySelectorAll('input[name^="mediaUrl"]')
-    );
-    const altInput = Array.from(
-      document.querySelectorAll('input[name^="mediaAlt"]')
-    );
+      const formData = {
+        title: event.target.title.value,
+        description: event.target.body.value,
+        tags: event.target.tags.value.split(" ").filter(Boolean),
+        media,
+        endsAt: event.target["meeting-time"].value,
+      };
 
-    const media = mediaInput.map((urlInput, index) => ({
-      url: urlInput.value,
-      alt: altInput[index].value || "",
-    }));
-
-    const formData = {
-      title: form.title.value,
-      description: form.body.value,
-      tags: form.tags.value.split(" "),
-      media: media,
-      endsAt: form["meeting-time"].value,
-    };
-    if (listing) {
       try {
-        const result = await editAuction(listing.id, formData);
-        alert("Auction updated successfully!");
-        console.log("Auction result:", result);
+        if (listing) {
+          const result = await editAuction(listing.id, formData);
+          alert("Auction updated successfully!");
+          console.log("Auction result:", result);
+          modalContainer.remove();
+        } else {
+          const result = await createauction(formData);
+          console.log("Created auction:", result);
 
-        // Oppdater det eksisterende kortet i DOM
-        updateAuctionInDOM(result);
-        modalContainer.remove();
+          const myAuctionsContainer = document.querySelector(
+            "#my-auctions-container"
+          );
+          const card = myAuctions(result, true);
+          myAuctionsContainer.prepend(card);
+
+          modalContainer.remove();
+          alert("Auction created successfully!");
+        }
       } catch (error) {
-        console.error("Error updating auction:", error.message);
-        alert("Failed to update auction. Please try again.");
+        console.error("Error handling auction:", error.message);
+        alert("Failed to process auction. Please try again.");
       }
-    } else {
-      try {
-        const result = await createauction(formData);
-        console.log("Created auction:", result);
-
-        const myAuctionsContainer = document.querySelector(
-          "#my-auctions-container"
-        );
-
-        const card = myAuctions(result, true);
-        myAuctionsContainer.prepend(card);
-        modalContainer.remove();
-        alert("Auction created successfully!");
-      } catch (error) {
-        console.error("Error creating auction:", error.message);
-        alert("Failed to create auction. Please try again.");
-      }
-    }
-  });
+    });
 }
