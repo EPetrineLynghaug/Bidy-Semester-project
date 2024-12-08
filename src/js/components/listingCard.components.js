@@ -2,9 +2,8 @@ export function listingCardComponent(listing) {
   const { bids = [], seller = {}, media = [] } = listing;
 
   const card = document.createElement("div");
-  // Fjern "auction-card" hvis det ikke er definert
   card.className =
-    "border rounded-lg shadow-lg p-4 bg-white flex flex-col gap-4";
+    "auction-card border rounded-lg shadow-lg p-4 bg-white flex flex-col gap-4";
 
   let currentBid = 0;
   if (bids.length > 0) {
@@ -19,22 +18,23 @@ export function listingCardComponent(listing) {
            alt="${media[0] ? media[0].alt : "Auction image"}"
            class="w-full h-full object-cover rounded">
     </div>
-    <h1 class="text-lg font-bold text-gray-800 truncate">
-      ${listing.title || "Untitled Auction"}
-    </h1>
-    <p class="text-sm text-gray-700 line-clamp-3">
-      ${listing.description || "No description available."}
-    </p>
-    <div class="flex items-center gap-2">
-      <img src="${seller.avatar.url || "https://via.placeholder.com/50"}"
-           alt="${seller.avatar.alt || ""}"
-           class="w-8 h-8 rounded-full"
-           onerror="this.src='https://via.placeholder.com/50'; this.alt='Failed to load';" />
-      <a href="/profile?name=${seller?.name || ""}" 
-         class="text-sm text-blue-500 hover:underline">
-        ${seller.name || "Unknown Author"}
-      </a>
-    </div>
+    <h1 class="text-lg font-bold text-gray-800 truncate">${
+      listing.title || "Untitled Auction"
+    }</h1>
+    <p class="text-sm text-gray-700 line-clamp-3">${
+      listing.description || "No description available."
+    }</p>
+<div class="auction-card__author flex items-center gap-2">
+  <img src="${seller.avatar.url || "https://via.placeholder.com/50"}"
+       alt="${seller.avatar.alt || ""}"
+       class="auction-card__author-image w-8 h-8 rounded-full"
+       onerror="this.src='https://via.placeholder.com/50'; this.alt='Failed to load';" />
+
+  <a href="/profile?name=${seller?.name || ""}" 
+     class="auction-card__author-name text-sm text-blue-500 hover:underline">
+    ${seller.name || "Unknown Author"}
+  </a>
+</div>
     <div class="text-sm text-gray-500">
       <p>Posted: ${new Date(listing.created).toLocaleDateString()}</p>
       <p>Expires: ${new Date(listing.endsAt).toLocaleDateString()}</p>
