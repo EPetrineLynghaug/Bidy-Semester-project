@@ -14,67 +14,42 @@ document.addEventListener("DOMContentLoaded", async () => {
     const localStorageUsername = getStoredUserName();
 
     if (!username) {
-      alert("No username found. Redirecting to home...");
       location.href = "/";
-      return;
     }
 
     if (!localStorageUsername) {
-      alert("You need to log in to access this page. Redirecting...");
       location.href = "/auth/login";
-      return;
     }
 
     if (username === localStorageUsername) {
       isMyProfile = true;
     }
 
-    // Fetch Profile
-    let profile;
-    try {
-      profile = await fetchProfile(username);
-      if (!profile) {
-        throw new Error("Profile data is missing.");
-      }
-    } catch (error) {
-      console.error("Error fetching profile:", error.message);
-      alert("Failed to fetch profile data. Please try again later.");
-      return;
-    }
+    const profile = await fetchProfile(username);
+    const updatedAuction = await getAllProfileAuction(username);
 
-    // Fetch Auctions
-    let updatedAuction = [];
-    try {
-      updatedAuction = (await getAllProfileAuction(username)) || [];
-    } catch (error) {
-      console.error("Error fetching auctions:", error.message);
-      alert("Failed to fetch auction data. Showing available data only.");
-    }
+    updatedAuction.map((listing) => {
+      const listIthem = myAuctions(listing, isMyProfile);
 
-    // Render Auctions
-    const container = document.querySelector("#my-auctions-container");
-    if (!container) {
-      console.error("#my-auctions-container not found in DOM");
-      return;
-    }
-
-    if (updatedAuction.length > 0) {
-      updatedAuction.forEach((listing) => {
-        const listIthem = myAuctions(listing, isMyProfile);
-        container.appendChild(listIthem);
-      });
+      const container = document.querySelector("#my-auctions-container");
+      container.appendChild(listIthem);
       console.log("Updated Auction Data:", updatedAuction);
-    } else {
-      container.innerHTML =
-        "<p class='text-gray-500 text-center'>No auctions found.</p>";
+    });
+
+    console.log(updatedAuction);
+    if (!profile) {
+      alert("Failed to fetch profile data!");
+    }
+    if (!updatedAuction) {
+      alert("Failed to update post data!");
     }
 
-    // Render Profile Details
     const bannerElement = document.querySelector("#banner-image");
     if (bannerElement) {
       bannerElement.src =
-        profile.banner?.url || "https://via.placeholder.com/800x300";
-      bannerElement.alt = profile.banner?.alt || "Banner image";
+        profile.banner.url || "https://via.placeholder.com/800x300";
+      bannerElement.alt = profile.banner.alt || "Banner image";
+      // Bruker onerror for å håndtere feil ved bildeinnlasting
       bannerElement.onerror = () => {
         bannerElement.src = "https://via.placeholder.com/800x300";
         bannerElement.alt = "Failed to load banner image";
@@ -84,56 +59,62 @@ document.addEventListener("DOMContentLoaded", async () => {
     const avatarElement = document.querySelector("#profile-avatar");
     if (avatarElement) {
       avatarElement.src =
-        profile.avatar?.url || "https://via.placeholder.com/100";
-      avatarElement.alt = profile.avatar?.alt || "Profile Avatar";
+        profile.avatar.url || "https://via.placeholder.com/100";
+      avatarElement.alt = profile.avatar.alt || "Profile Avatar";
+
+      // Bruker onerror for å håndtere feil hvis avataren ikke kan lastes
       avatarElement.onerror = () => {
         avatarElement.src = "https://via.placeholder.com/100";
         avatarElement.alt = "Failed to load profile avatar";
       };
     }
+    const nameElement = document.querySelector("#profile-name");
+    nameElement.textContent = profile.name || "Unknown User";
 
-    document.querySelector("#profile-name").textContent =
-      profile.name || "Unknown User";
-    document.querySelector("#profile-bio").textContent =
+    const bioElement = document.querySelector("#profile-bio");
+    bioElement.textContent =
       profile.bio ||
       "Passionate about finding unique deals and rare items. Experienced in online auctions, with a focus on quality and customer satisfaction.";
-    document.querySelector("#profile-coins").textContent =
-      profile.credits || "Unknown";
 
-    // Modal Buttons
+    const coinsElement = document.querySelector("#profile-coins");
+    coinsElement.textContent = profile.credits || "unkinown";
+
+    // Modal buttons
     const openModalButtonProfile = document.querySelector(
       "#open-modal-profile"
     );
-    if (openModalButtonProfile && isMyProfile) {
+    if (isMyProfile) {
       openModalButtonProfile.addEventListener("click", () => {
+        console.log("Open modal button clicked");
         updateProfileModal(profile);
+        console.log("Modal opened with profile data:", profile);
       });
-    } else if (openModalButtonProfile) {
+    } else {
       openModalButtonProfile.classList.add("hidden");
     }
 
     const openModalButton = document.querySelector("#open-modal");
-    if (openModalButton && isMyProfile) {
+    if (isMyProfile) {
       openModalButton.addEventListener("click", () => {
         createNewAuction();
-        window.location.reload();
       });
-    } else if (openModalButton) {
+    } else {
       openModalButton.classList.add("hidden");
     }
 
     const openModalButtonPurchases = document.querySelector(
       "#open-modal-purchases"
     );
-    if (openModalButtonPurchases && isMyProfile) {
+
+    if (isMyProfile) {
       openModalButtonPurchases.addEventListener("click", () => {
+        console.log("Opening Purchased Auctions modal...");
         purchasedAuctionModal(username);
       });
-    } else if (openModalButtonPurchases) {
+    } else {
       openModalButtonPurchases.classList.add("hidden");
     }
   } catch (error) {
-    console.error("Unexpected error:", error.message);
-    alert("An unexpected error occurred. Please try again later.");
+    console.error("Error fetching profile:", error.message);
   }
 });

@@ -50,6 +50,11 @@ export function createInput(num, media) {
   btnRemove.className =
     "media-url-remove-btn text-red-500 hover:text-red-700 text-sm px-2 py-1 rounded-md focus:outline-none";
 
+  // Legg til event listener for å fjerne wrapperen
+  btnRemove.addEventListener("click", () => {
+    wrapper.remove();
+  });
+
   // Append elements to the wrapper
   wrapper.appendChild(urlLabel);
   wrapper.appendChild(input);

@@ -142,16 +142,16 @@ export function createNewAuction(listing) {
     .addEventListener("submit", async (event) => {
       event.preventDefault();
 
-      const mediaInput = Array.from(
-        document.querySelectorAll('input[name^="mediaUrl"]')
+      const mediaInputElements = Array.from(
+        modalContainer.querySelectorAll('input[name^="mediaUrl"]')
       );
-      const altInput = Array.from(
-        document.querySelectorAll('input[name^="mediaAlt"]')
+      const altInputElements = Array.from(
+        modalContainer.querySelectorAll('input[name^="mediaAlt"]')
       );
 
-      const media = mediaInput.map((urlInput, index) => ({
+      const media = mediaInputElements.map((urlInput, index) => ({
         url: urlInput.value,
-        alt: altInput[index]?.value || "",
+        alt: altInputElements[index]?.value || "",
       }));
 
       const formData = {
@@ -168,6 +168,9 @@ export function createNewAuction(listing) {
           alert("Auction updated successfully!");
           console.log("Auction result:", result);
           modalContainer.remove();
+
+          // Quick fix: Oppdater siden automatisk etter redigering
+          location.reload();
         } else {
           const result = await createauction(formData);
           console.log("Created auction:", result);

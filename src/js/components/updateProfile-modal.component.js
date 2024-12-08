@@ -8,6 +8,7 @@ export function updateProfileModal(profile) {
 
   modalContainer.innerHTML = `
     <div class="bg-white rounded-lg shadow-lg w-11/12 max-w-lg md:max-w-2xl lg:max-w-3xl p-6 relative">
+
       <div class="flex justify-between items-center border-b pb-4 mb-4">
         <h1 class="text-lg md:text-xl lg:text-2xl font-semibold text-gray-800">Update Profile</h1>
         <button id="close-modal" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center bg-red-500 text-white rounded-full border border-red-600 shadow-md hover:bg-red-600 hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 ease-in-out"
