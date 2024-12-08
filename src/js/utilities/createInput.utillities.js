@@ -11,16 +11,16 @@ export function createInput(num, media) {
   }
 
   const wrapper = document.createElement("div");
-  wrapper.className = "flex flex-col gap-2 w-full";
+  wrapper.className = "flex flex-col gap-4 w-full";
   wrapper.id = `url-input-container${num}`;
 
-  // Create the label for Image URL
-  const label = document.createElement("label");
-  label.setAttribute("for", `mediaUrl${num}`);
-  label.className = "mb-1 text-gray-700 text-sm font-medium";
-  label.textContent = `Image URL ${num}`;
+  // Label for Image URL
+  const urlLabel = document.createElement("label");
+  urlLabel.setAttribute("for", `mediaUrl${num}`);
+  urlLabel.className = "text-gray-700 text-sm font-medium";
+  urlLabel.textContent = `Image URL ${num}`;
 
-  // Create the input field for Image URL
+  // Input for Image URL
   const input = document.createElement("input");
   input.type = "text";
   input.id = `mediaUrl${num}`;
@@ -31,7 +31,7 @@ export function createInput(num, media) {
   input.className =
     "border border-gray-300 rounded-md p-2 bg-gray-100 text-gray-800 placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-400 focus:outline-none w-full";
 
-  // Create the input field for ALT Text
+  // Input for ALT Text (without label)
   const altInput = document.createElement("input");
   altInput.type = "text";
   altInput.id = `mediaAlt${num}`;
@@ -42,7 +42,7 @@ export function createInput(num, media) {
   altInput.className =
     "border border-gray-300 rounded-md p-2 bg-gray-100 text-gray-800 placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-400 focus:outline-none w-full";
 
-  // remove button
+  // Remove button
   const btnRemove = document.createElement("button");
   btnRemove.type = "button";
   btnRemove.textContent = "Remove";
@@ -50,8 +50,13 @@ export function createInput(num, media) {
   btnRemove.className =
     "media-url-remove-btn text-red-500 hover:text-red-700 text-sm px-2 py-1 rounded-md focus:outline-none";
 
-  // Append all elements to the wrapper
-  wrapper.appendChild(label);
+  // Legg til event listener for å fjerne wrapperen
+  btnRemove.addEventListener("click", () => {
+    wrapper.remove();
+  });
+
+  // Append elements to the wrapper
+  wrapper.appendChild(urlLabel);
   wrapper.appendChild(input);
   wrapper.appendChild(altInput);
   wrapper.appendChild(btnRemove);
