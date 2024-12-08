@@ -2,8 +2,8 @@
   "name": "your-project-name",
   "version": "1.0.0",
   "scripts": {
-    "build:css": "tailwindcss -i ./src/css/input.css -o ./dist/style.css --watch",
-    "build:css:prod": "tailwindcss -i ./src/css/input.css -o ./dist/style.css --minify"
+    "build:css": "tailwindcss -i ./src/css/input.css -o  ./src/css/output.css --watch",
+    "build:css:prod": "tailwindcss -i ./src/css/input.css -o  ./src/css/output.css --minify"
   },
   
   "devDependencies": {
