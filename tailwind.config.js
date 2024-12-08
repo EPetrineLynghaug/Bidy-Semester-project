@@ -4,8 +4,8 @@ module.exports = {
     "./*.html", // Inkluderer HTML-filer i rotmappen (f.eks., index.html)
     "./src/**/*.{js,jsx,ts,tsx,html}", // Inkluderer alle relevante filer i src-mappen
     "./profile/**/*.html", // Inkluderer alle HTML-filer i profile-mappen
-    "../auth/**/*.{html,js}", // Inkluderer filer i auth-mappen hvis relevant
-    "../listing/**/*.html", // Inkluderer filer i listing-mappen hvis relevant
+    "./auth/login/**/*.{*.html}", // Inkluderer filer i auth-mappen hvis relevant
+    "./listing/**/*.html", // Inkluderer filer i listing-mappen hvis relevant
     // Legg til andre relevante mapper hvis nødvendig
   ],
   theme: {
