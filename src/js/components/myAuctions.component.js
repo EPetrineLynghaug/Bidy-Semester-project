@@ -11,19 +11,31 @@ export function myAuctions(listing, editAllowed) {
     currentBid = bids[bids.length - 1].amount;
   }
 
+  // Check if the auction is active or expired
+  const isActive = new Date(listing.endsAt) > new Date(); // Auction is active if the end date is in the future
+
   // Create a container for the auction card
   const listIthem = document.createElement("div");
+
+  // Use different classes based on the auction's status
   listIthem.className =
     "auction-card p-4 flex flex-row gap-4 border-b-2 border-blue-800";
 
-  // Populate the container with auction details
+  // Fill the container with auction details
   listIthem.innerHTML = `
-  <div class="w-1/3 max-w-60 aspect-[16/9]">
+  <div class="w-1/3 max-w-60 aspect-[16/9] relative">
     <img src="${
       media[0] ? media[0].url : "https://via.placeholder.com/400x300"
     }"
     alt="${media[0] ? media[0].alt : "Auction image"}"
-    class="w-full h-full object-cover rounded-lg shadow-lg">
+    class="w-full h-full object-cover rounded-lg shadow-lg ${
+      isActive ? "" : "opacity-50"
+    }">
+    ${
+      isActive
+        ? ""
+        : '<div class="absolute inset-0 bg-black/50 flex items-center justify-center text-white text-lg font-bold">UNACTIVE</div>'
+    }
   </div>
   <div class="flex flex-col justify-between">
     <div class="flex flex-col gap-2 text-sm">
@@ -33,53 +45,55 @@ export function myAuctions(listing, editAllowed) {
       <p class="text-sm text-gray-700 line-clamp-3">${
         listing.description || "No description available."
       }</p>
-      <p class="text-sm text-gray-700 line-clamp-3">${
+      <p class="text-sm text-gray-700 line-clamp-3">Bids: ${
         currentBid || "No bids available."
       }</p>
     </div>
     <div class="flex gap-2">
-      <!-- Show edit and delete buttons only if editAllowed is true -->
-      <button class="${
-        !editAllowed ? "hidden" : ""
-      } edit-btn bg-blue-500 text-white px-2 py-1 sm:px-3 sm:text-sm rounded hover:bg-blue-600">Edit</button>
+      <!-- Show buttons based on the auction's status -->
+      ${
+        isActive && editAllowed
+          ? `<button class="edit-btn bg-blue-500 text-white px-2 py-1 sm:px-3 sm:text-sm rounded hover:bg-blue-600">Edit</button>`
+          : ""
+      }
       <a href="/listing?id=${
         listing.id
       }" class="bg-green-500 text-white px-2 py-1 sm:px-3 sm:text-sm rounded hover:bg-green-600">View</a>
-      <button class="${
-        !editAllowed ? "hidden" : ""
-      } delete-btn bg-red-500 text-white px-2 py-1 sm:px-3 sm:text-sm rounded hover:bg-red-600">Delete</button>
+      ${
+        editAllowed
+          ? `<button class="delete-btn bg-red-500 text-white px-2 py-1 sm:px-3 sm:text-sm rounded hover:bg-[#0D47A1]">Delete</button>`
+          : ""
+      }
     </div>
   </div>
   `;
 
   // Add event listener for edit button
   const editBtn = listIthem.querySelector(".edit-btn");
-  editBtn.addEventListener("click", () => {
-    // Open the auction creation modal for editing
-    createNewAuction(listing, (updatedListing) => {
-      // Replace the old card with the updated one in the DOM
-      const updatedCard = myAuctions(updatedListing, true);
-      listIthem.replaceWith(updatedCard);
-
-      // Reload the page to ensure changes are reflected
-      location.reload();
+  if (editBtn) {
+    editBtn.addEventListener("click", () => {
+      createNewAuction(listing, (updatedListing) => {
+        const updatedCard = myAuctions(updatedListing, true);
+        listIthem.replaceWith(updatedCard);
+        location.reload();
+      });
     });
-  });
+  }
 
   // Add event listener for delete button
   const deleteBtn = listIthem.querySelector(".delete-btn");
-  deleteBtn.addEventListener("click", (event) => {
-    // Ask for confirmation before deleting the auction
-    let deliteAuctionPost = confirm(
-      "Are you sure you want to delete this Auction?"
-    );
-    if (deliteAuctionPost) {
-      // Call delete function and remove the card from the DOM
-      deleteAuction(listing.id);
-      listIthem.remove();
-    }
-  });
+  if (deleteBtn) {
+    deleteBtn.addEventListener("click", () => {
+      const confirmDelete = confirm(
+        "Are you sure you want to delete this Auction?"
+      );
+      if (confirmDelete) {
+        deleteAuction(listing.id);
+        listIthem.remove();
+      }
+    });
+  }
 
-  // Return the auction card element
+  // Return the auction card
   return listIthem;
 }
