@@ -608,11 +608,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 0.5rem;
 }
 
-.my-3{
-  margin-top: 0.75rem;
-  margin-bottom: 0.75rem;
-}
-
 .mt-16{
   margin-top: 4rem;
 }
@@ -725,12 +720,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 100vh;
 }
 
-.h-48{
-  height: 12rem;
+.h-60{
+  height: 15rem;
 }
 
-.h-8{
-  height: 2rem;
+.h-auto{
+  height: auto;
 }
 
 .h-40{
@@ -771,10 +766,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .w-28{
   width: 7rem;
-}
-
-.w-8{
-  width: 2rem;
 }
 
 .w-1\/3{
@@ -827,6 +818,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .flex-shrink-0{
   flex-shrink: 0;
+}
+
+.flex-grow{
+  flex-grow: 1;
 }
 
 .table-auto{
@@ -1087,6 +1082,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(21 101 192 / var(--tw-bg-opacity));
 }
 
+.bg-\[\#28A745\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(40 167 69 / var(--tw-bg-opacity));
+}
+
 .bg-black\/50{
   background-color: rgb(0 0 0 / 0.5);
 }
@@ -1104,11 +1104,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-hoverGray{
   --tw-bg-opacity: 1;
   background-color: rgb(245 245 245 / var(--tw-bg-opacity));
-}
-
-.bg-\[\#28A745\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(40 167 69 / var(--tw-bg-opacity));
 }
 
 .bg-gray-300{
@@ -1310,6 +1305,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .font-medium{
   font-weight: 500;
+}
+
+.font-normal{
+  font-weight: 400;
 }
 
 .uppercase{
@@ -1572,6 +1571,11 @@ body{
 .hover\:bg-\[\#0D47A1\]:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(13 71 161 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-\[\#1e7e34\]:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(30 126 52 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-green-600:hover{
