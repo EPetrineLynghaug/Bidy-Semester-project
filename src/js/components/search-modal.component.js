@@ -47,7 +47,7 @@ function renderPaginationButtons(pagination, callback) {
     paginationButtonDiv.append(
       createPaginationButton(next, async (pagenumber) => {
         callback(pagenumber);
-        setTimeout(scrollToTop, 50); // Ensure scroll after rendering
+        setTimeout(scrollToTop, 50);
       })
     );
   }
@@ -66,7 +66,7 @@ async function renderSearchResults() {
 
     if (result.listings.length > 0) {
       result.listings.forEach((listing) => {
-        const newListingCard = listingCardComponent(listing);
+        const newListingCard = listingCardComponent(listing, "search");
         newListingCard.classList.add(
           "flex",
           "flex-col",
@@ -90,7 +90,7 @@ async function renderSearchResults() {
       renderPaginationButtons(result.pagination, async (pagenumber) => {
         urlParams.page = pagenumber;
         await renderSearchResults();
-        setTimeout(scrollToTop, 50); // Ensure scroll after rendering
+        setTimeout(scrollToTop, 50);
       });
     } else {
       searchResultDiv.innerHTML =
