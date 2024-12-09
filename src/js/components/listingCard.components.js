@@ -48,7 +48,7 @@ export function listingCardComponent(listing, context = "home") {
         ).toLocaleDateString()}</p>
       </div>
     </div>
-    <hr class="my-2 border-t-2" style="border-color: #42A5F5;">
+    <hr class="my-1 border-t-1" style="border-color: #42A5F5;">
     <div class="flex flex-col gap-1"> <!-- Fjernet flex-grow -->
       <h1 class="text-lg font-semibold text-gray-800 leading-snug truncate">
         ${listing.title || "Untitled Auction"}
@@ -57,7 +57,7 @@ export function listingCardComponent(listing, context = "home") {
         ${listing.description || "No description available."}
       </p>
     </div>
-    <hr class="my-2 border-t-2" style="border-color: #42A5F5;">
+    <hr class="my-1 border-t-1" style="border-color: #42A5F5;">
     <div class="flex items-center justify-between">
       <a href="/listing?id=${listing.id}"
         class="px-4 py-2 bg-[#28A745] text-white text-sm font-medium rounded-md hover:bg-[#1e7e34] transition-all duration-200 shadow-md">
