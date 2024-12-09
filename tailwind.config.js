@@ -18,7 +18,14 @@ module.exports = {
         linkColor: "#1565C0",
       },
       fontFamily: {
-        sans: ["Satoshi", "sans-serif"], // Legg til Satoshi som sans font
+        sans: ["Satoshi", "sans-serif"],
+      },
+      lineHeight: {
+        snug: "1.25",
+        relaxed: "1.6",
+      },
+      fontWeight: {
+        thin: "100", // Bruk Satoshi Thin
       },
     },
   },

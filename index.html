@@ -8,34 +8,32 @@
     <script type="module" src="./src/js/views/index.view.js"></script>
     <script src="https://unpkg.com/phosphor-icons"></script>
     <link
-      href="https://fonts.googleapis.com/css2?family=Satoshi:wght@400;600&display=swap"
       rel="stylesheet"
+      href="https://api.fontshare.com/v2/css?f[]=satoshi@1,2,3,4,5,6,7,8,9&display=swap"
     />
   </head>
-  <body class="bg-gray-100 font-satoshi">
+  <body class=bg-[#FAFAFA]font-satoshi">
     <!-- Navigasjonsmeny -->
     <header class="bg-[#0D47A1] text-white p-4 shadow-xl">
       <nav id="auth-links" class="flex space-x-4"></nav>
     </header>
 
     <!-- Søke-boks -->
-    <div
-      class="flex justify-center items-center space-x-0 sm:space-x-4 mt-4 w-full"
-    >
-      <div class="relative w-full max-w-xs md:max-w-md lg:max-w-2xl h-12">
+    <div class="flex justify-center items-center mt-16 w-full px-4">
+      <div class="relative w-full max-w-xs sm:max-w-md lg:max-w-3xl h-14">
         <input
           type="text"
           id="search-input"
           placeholder="Search"
-          class="border rounded-lg p-2 w-full h-full text-black text-lg pr-12 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+          class="border border-gray-300 rounded-lg p-4 w-full h-full text-black text-lg pr-16 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all font-thin"
         />
         <button
           id="search-button"
-          class="absolute right-3 top-1/2 transform -translate-y-1/2 bg-transparent text-gray-600 hover:text-blue-500 focus:outline-none"
+          class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-transparent text-gray-600 hover:text-blue-500 focus:outline-none"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5"
+            class="h-6 w-6"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -52,30 +50,25 @@
     </div>
 
     <!-- Introduksjonstekst -->
-    <div class="text-left mt-4 max-w-screen-xl mx-auto px-6">
+    <div class="text-left mt-16 max-w-screen-xl mx-auto px-6">
       <h1
-        class="text-3xl sm:text-4xl font-semibold text-gray-800 font-satoshi leading-snug mb-4"
+        class="text-4xl sm:text-5xl font-thin text-gray-800 leading-snug mb-6"
       >
         Welcome to Bidy - Find Your Next Great Deal!
       </h1>
-      <p
-        class="text-gray-600 text-lg mt-4 font-satoshi font-normal leading-relaxed mb-4"
-      >
+      <p class="text-gray-600 text-lg mt-4 font-thin leading-relaxed mb-6">
         Discover unique items, rare finds, and exclusive offers on Bidy. Browse
         our latest listings and join the bidding on the best deals from around
         the world.
       </p>
-      <p
-        class="text-gray-600 text-lg mt-4 font-satoshi font-light leading-relaxed mb-6"
-      >
-        Ready to start? Enter what you're looking for, or explore popular
-        categories.
+      <p class="text-gray-600 text-lg mt-4 font-thin leading-relaxed mb-12">
+        Ready to start? Enter what you're looking for, or explore new auctions.
       </p>
     </div>
 
     <!-- Overskrift for auksjoner -->
     <h2
-      class="text-3xl sm:text-4xl font-semibold text-left text-gray-800 font-satoshi leading-snug my-4 mt-4 max-w-screen-xl mx-auto px-6"
+      class="text-3xl sm:text-4xl font-thin text-left text-gray-800 leading-snug mb-4 max-w-screen-xl mx-auto px-6"
     >
       View all New Auctions
     </h2>
@@ -83,7 +76,7 @@
     <!-- Container for auksjonsoppføringer -->
     <div
       id="my-auctions-container"
-      class="grid gap-6 p-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-screen-xl mx-auto px-6"
+      class="grid gap-8 p-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-screen-xl mx-auto"
     ></div>
   </body>
 </html>
