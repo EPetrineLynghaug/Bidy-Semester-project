@@ -8,23 +8,36 @@
     <link href="/src/css/output.css" rel="stylesheet" />
   </head>
   <body class="bg-gray-100 flex flex-col items-center justify-center h-screen">
-    <!-- Header -->
     <header class="bg-[#0D47A1] text-white p-4 shadow-xl w-full">
       <nav id="auth-links" class="flex justify-between max-w-7xl mx-auto"></nav>
     </header>
-
-    <!-- Main Content -->
-    <main class="flex flex-col items-center justify-center flex-1 w-full px-4">
-      <!-- Registration Form -->
+    <main
+      class="flex flex-col items-center justify-start flex-1 w-full px-4 mt-8"
+      role="main"
+      aria-labelledby="register-title"
+    >
       <form
         name="register"
-        class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full"
+        class="bg-white p-6 rounded-lg shadow-lg w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg"
+        role="form"
+        aria-labelledby="register-title"
+        aria-describedby="register-instructions"
       >
-        <h1 class="text-xl font-bold mb-4 text-center text-gray-800">
+        <h1
+          id="register-title"
+          class="text-2xl font-bold text-center text-gray-800 mb-4"
+        >
           Register
         </h1>
+        <p id="register-instructions" class="sr-only">
+          Fill out this form to create an account.
+        </p>
         <div class="mb-4">
-          <label for="name" class="block text-sm font-medium text-gray-700">
+          <label
+            for="name"
+            class="block text-sm font-medium text-gray-700"
+            aria-label="Enter your name"
+          >
             Name
           </label>
           <input
@@ -32,12 +45,17 @@
             id="name"
             name="name"
             placeholder="Name"
-            class="w-full p-2 border border-gray-300 rounded"
+            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            aria-required="true"
             required
           />
         </div>
         <div class="mb-4">
-          <label for="email" class="block text-sm font-medium text-gray-700">
+          <label
+            for="email"
+            class="block text-sm font-medium text-gray-700"
+            aria-label="Enter your email"
+          >
             Email
           </label>
           <input
@@ -45,12 +63,17 @@
             id="email"
             name="email"
             placeholder="Email"
-            class="w-full p-2 border border-gray-300 rounded"
+            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            aria-required="true"
             required
           />
         </div>
-        <div class="mb-4">
-          <label for="password" class="block text-sm font-medium text-gray-700">
+        <div class="mb-6">
+          <label
+            for="password"
+            class="block text-sm font-medium text-gray-700"
+            aria-label="Enter your password"
+          >
             Password
           </label>
           <input
@@ -58,24 +81,26 @@
             id="password"
             name="password"
             placeholder="Password"
-            class="w-full p-2 border border-gray-300 rounded"
+            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            aria-required="true"
             required
           />
         </div>
         <button
           type="submit"
-          class="w-full bg-indigo-500 text-white py-2 px-4 rounded hover:bg-indigo-600 transition-all duration-200"
+          class="w-full bg-[#1565C0] text-white py-3 rounded-lg font-semibold hover:bg-[#0D47A1] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300"
+          aria-label="Submit your registration details"
         >
           Register
         </button>
       </form>
 
-      <!-- Login Prompt -->
-      <p class="mt-4 text-gray-700 text-sm">
+      <p class="mt-4 text-sm text-gray-700 text-center">
         Already have an account?
         <a
           href="/auth/login"
-          class="text-blue-600 hover:text-blue-800 font-medium"
+          class="text-blue-600 hover:text-blue-800 font-medium transition duration-300"
+          aria-label="Go to the login page"
         >
           Login here
         </a>
