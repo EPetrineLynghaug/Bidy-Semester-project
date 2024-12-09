@@ -6,14 +6,23 @@
     <title>Welcome</title>
     <link href="./src/css/output.css" rel="stylesheet" />
     <script type="module" src="./src/js/views/index.view.js"></script>
+    <script src="https://unpkg.com/phosphor-icons"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Satoshi:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body class="bg-gray-100">
+  <body class="bg-gray-100 font-satoshi">
     <!-- Navigasjonsmeny -->
     <header class="bg-[#0D47A1] text-white p-4 shadow-xl">
       <nav id="auth-links" class="flex space-x-4"></nav>
     </header>
-    <div class="flex justify-center items-center space-x-4 mt-4">
-      <div class="relative w-full max-w-xs md:max-w-md lg:max-w-lg h-12">
+
+    <!-- Søke-boks -->
+    <div
+      class="flex justify-center items-center space-x-0 sm:space-x-4 mt-4 w-full"
+    >
+      <div class="relative w-full max-w-xs md:max-w-md lg:max-w-2xl h-12">
         <input
           type="text"
           id="search-input"
@@ -41,15 +50,40 @@
         </button>
       </div>
     </div>
-    <!-- Overskrift -->
-    <h1 class="text-3xl font-bold text-center my-4 text-gray-800">
+
+    <!-- Introduksjonstekst -->
+    <div class="text-left mt-4 max-w-screen-xl mx-auto px-6">
+      <h1
+        class="text-3xl sm:text-4xl font-semibold text-gray-800 font-satoshi leading-snug mb-4"
+      >
+        Welcome to Bidy - Find Your Next Great Deal!
+      </h1>
+      <p
+        class="text-gray-600 text-lg mt-4 font-satoshi font-normal leading-relaxed mb-4"
+      >
+        Discover unique items, rare finds, and exclusive offers on Bidy. Browse
+        our latest listings and join the bidding on the best deals from around
+        the world.
+      </p>
+      <p
+        class="text-gray-600 text-lg mt-4 font-satoshi font-light leading-relaxed mb-6"
+      >
+        Ready to start? Enter what you're looking for, or explore popular
+        categories.
+      </p>
+    </div>
+
+    <!-- Overskrift for auksjoner -->
+    <h2
+      class="text-3xl sm:text-4xl font-semibold text-left text-gray-800 font-satoshi leading-snug my-4 mt-4 max-w-screen-xl mx-auto px-6"
+    >
       View all New Auctions
-    </h1>
+    </h2>
 
     <!-- Container for auksjonsoppføringer -->
     <div
       id="my-auctions-container"
-      class="grid gap-6 p-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+      class="grid gap-6 p-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-screen-xl mx-auto px-6"
     ></div>
   </body>
 </html>
