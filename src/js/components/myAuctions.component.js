@@ -65,21 +65,26 @@ export function myAuctions(listing, editAllowed) {
         }</p>
       </div>
       <div class="flex gap-2 mt-2">
-        <!-- Show buttons based on the auction's status -->
-        ${
-          isActive && editAllowed
-            ? `<button class="edit-btn bg-blue-500 text-white px-2 py-1 sm:px-3 sm:text-sm rounded hover:bg-blue-600">Edit</button>`
-            : ""
-        }
-        <a href="/listing?id=${
-          listing.id
-        }" class="bg-green-500 text-white px-2 py-1 sm:px-3 sm:text-sm rounded hover:bg-green-600">View</a>
-        ${
-          editAllowed
-            ? `<button class="delete-btn bg-red-500 text-white px-2 py-1 sm:px-3 sm:text-sm rounded hover:bg-red-600">Delete</button>`
-            : ""
-        }
-      </div>
+      ${
+        isActive && editAllowed
+          ? `<button class="edit-btn px-4 py-2 bg-[#5C9DED] text-white text-sm font-medium rounded-md hover:bg-[#3B82F6] transition-all duration-200 shadow-md">
+              Edit
+            </button>`
+          : ""
+      }
+      <a href="/listing?id=${
+        listing.id
+      }" class="px-4 py-2 bg-[#28A745] text-white text-sm font-medium rounded-md hover:bg-[#388E3C] transition-all duration-200 shadow-md">
+        View
+      </a>
+      ${
+        editAllowed
+          ? `<button class="delete-btn px-4 py-2 bg-[#E53935] text-white text-sm font-medium rounded-md hover:bg-[#D32F2F] transition-all duration-200 shadow-md">
+              Delete
+            </button>`
+          : ""
+      }
+    
     </div>
   `;
 
