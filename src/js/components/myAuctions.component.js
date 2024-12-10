@@ -31,91 +31,70 @@ export function myAuctions(listing, editAllowed) {
     : "No description available.";
   const desktopDescription = listing.description || "No description available.";
 
-  // Anvend styling og responsiv beskrivelse
   listIthem.className =
-    "auction-card p-4 flex flex-row gap-4 border-b-2 border-blue-800 max-w-screen-lg font-sans";
+    "auction-card p-4 flex flex-row gap-6 border-b-2 border-blue-800 max-w-screen-lg font-sans";
+  listIthem.dataset.id = listing.id;
   listIthem.innerHTML = `
-    <!-- Bildeseksjon -->
-    <div class="w-1/3 md:w-1/8 lg:w-2/1 aspect-[16/9] relative flex-shrink-0">
-      <img src="${
-        media[0] ? media[0].url : "https://via.placeholder.com/400x300"
-      }"
-        alt="${media[0] ? media[0].alt : "Auction image"}"
-        class="w-full h-full object-cover rounded-lg shadow-lg ${
-          isActive ? "" : "opacity-50"
-        }">
+  <!-- Bildeseksjon -->
+  <div class="w-1/3 md:w-1/4 lg:w-1/2 aspect-[16/9] relative flex-shrink-0">
+    <img src="${
+      media[0] ? media[0].url : "https://via.placeholder.com/400x300"
+    }"
+      alt="${media[0] ? media[0].alt : "Auction image"}"
+      class="w-full h-full object-cover rounded-lg shadow-lg ${
+        isActive ? "" : "opacity-50"
+      }">
+    ${
+      isActive
+        ? ""
+        : '<div class="absolute inset-0 bg-black/50 flex items-center justify-center rounded-lg shadow-lg text-white text-lg font-bold">INACTIVE</div>'
+    }
+  </div>
+
+  <!-- Innholdssseksjon -->
+  <div class="flex flex-col justify-between flex-1 max-w-md lg:max-w-lg gap-4">
+    <div class="flex flex-col gap-2 text-sm lg:text-base flex-grow">
+      <h1 class="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-800 leading-snug truncate">
+        ${listing.title || "Untitled Auction"}
+      </h1>
+      <p class="text-base sm:text-lg lg:text-xl text-gray-700 leading-snug font-normal line-clamp-2 sm:line-clamp-none">
+        ${
+          mobileDescription
+            ? mobileDescription.split(" ").slice(0, 5).join(" ") + "..."
+            : "No description available."
+        }
+      </p>
+      <p class="text-sm sm:text-base lg:text-lg text-gray-800 font-medium">
+        $${currentBid.toFixed(
+          2
+        )} <span class="text-gray-500">/ Current bid</span>
+      </p>
+    </div>
+
+    <!-- Knappeseksjon -->
+    <div class="flex gap-2 md:gap-4 mt-auto md:ml-auto md:justify-end">
       ${
-        isActive
-          ? ""
-          : '<div class="absolute inset-0 bg-black/50 flex items-center justify-center rounded-lg shadow-lg text-white text-lg font-bold">INACTIVE</div>'
+        isActive && editAllowed
+          ? `<button class="edit-btn px-4 py-2 lg:px-5 lg:py-2.5 bg-[#5C9DED] text-white text-sm sm:text-base lg:text-base font-medium rounded-md hover:bg-[#3B82F6] transition-all duration-200 shadow-md">
+              Edit
+            </button>`
+          : ""
+      }
+      <a href="/listing?id=${
+        listing.id
+      }" class="px-4 py-2 lg:px-5 lg:py-2.5 bg-[#28A745] text-white text-sm sm:text-base lg:text-base font-medium rounded-md hover:bg-[#1e7e34] transition-all duration-200 shadow-md">
+        View
+      </a>
+      ${
+        editAllowed
+          ? `<button id="delete-btn" class="delete-btn px-4 py-2 lg:px-5 lg:py-2.5 bg-[#E53935] text-white text-sm sm:text-base lg:text-base font-medium rounded-md hover:bg-[#D32F2F] transition-all duration-200 shadow-md">
+              Delete
+            </button>`
+          : ""
       }
     </div>
-    
-    <!-- Innholdssseksjon -->
-    <div class="flex flex-col justify-between flex-1 max-w-md">
-      <div class="flex flex-col gap-2 text-sm flex-grow">
-        <h1 class="font-normal text-gray-800 truncate">${
-          listing.title || "Untitled Auction"
-        }</h1>
-        <p class="text-sm text-gray-700 sm:hidden">${mobileDescription}</p>
-        <p class="hidden sm:block md:hidden text-sm text-gray-700">${tabletDescription}</p> 
-        <p class="hidden md:block text-sm text-gray-700 lg:line-clamp-2">${desktopDescription}</p> 
-        <p class="text-sm text-gray-700">Bids: ${
-          currentBid || "No bids available."
-        }</p>
-      </div>
-      
-      <!-- Knappeseksjon -->
-      <div class="flex gap-2 mt-auto md:ml-auto md:justify-end">
-        ${
-          isActive && editAllowed
-            ? `<button class="edit-btn px-4 py-2 bg-[#5C9DED] text-white text-sm font-medium rounded-md hover:bg-[#3B82F6] transition-all duration-200 shadow-md">
-                Edit
-              </button>`
-            : ""
-        }
-        <a href="/listing?id=${
-          listing.id
-        }" class="px-4 py-2 bg-[#28A745] text-white text-sm font-medium rounded-md hover:bg-[#388E3C] transition-all duration-200 shadow-md">
-          View
-        </a>
-        ${
-          editAllowed
-            ? `<button class="delete-btn px-4 py-2 bg-[#E53935] text-white text-sm font-medium rounded-md hover:bg-[#D32F2F] transition-all duration-200 shadow-md">
-                Delete
-              </button>`
-            : ""
-        }
-      </div>
-    </div>
-  `;
-
-  // Legg til event listener for edit-knappen
-  const editBtn = listIthem.querySelector(".edit-btn");
-  if (editBtn) {
-    editBtn.addEventListener("click", () => {
-      createNewAuction(listing, (updatedListing) => {
-        const updatedCard = myAuctions(updatedListing, true);
-        listIthem.replaceWith(updatedCard);
-        location.reload();
-      });
-    });
-  }
-
-  // Legg til event listener for delete-knappen
-  const deleteBtn = listIthem.querySelector(".delete-btn");
-  if (deleteBtn) {
-    deleteBtn.addEventListener("click", () => {
-      const confirmDelete = confirm(
-        "Are you sure you want to delete this Auction?"
-      );
-      if (confirmDelete) {
-        deleteAuction(listing.id);
-        listIthem.remove();
-      }
-    });
-  }
-
+  </div>
+`;
   // Returner auksjonskortet
   return listIthem;
 }

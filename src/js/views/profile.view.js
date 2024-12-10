@@ -1,10 +1,12 @@
 import { fetchProfile, getAllProfileAuction } from "../api/profile.api.js";
+import { deleteAuction } from "../api/profile.api.js";
 import { renderAuthLinks } from "../components/authLinks.js";
 import { myAuctions } from "../components/myAuctions.component.js";
 import { createNewAuction } from "../components/newauction-modal.component.js";
 import { purchasedAuctionModal } from "../components/purchasedAuc.modal.component.js";
 import { updateProfileModal } from "../components/updateProfile-modal.component.js";
 import { getStoredUserName } from "../utilities/storage.js";
+
 document.addEventListener("DOMContentLoaded", async () => {
   try {
     renderAuthLinks();
@@ -114,24 +116,51 @@ document.addEventListener("DOMContentLoaded", async () => {
     } else {
       openModalButtonPurchases.classList.add("hidden");
     }
+    // Event delegation for dynamically added buttons
+    // Event delegation for dynamically added buttons
+    document
+      .querySelector("#my-auctions-container")
+      .addEventListener("click", (event) => {
+        // Handle Edit button
+        if (event.target.classList.contains("edit-btn")) {
+          const auctionCard = event.target.closest(".auction-card");
+          const auctionId = auctionCard.dataset.id;
+          const listing = updatedAuction.find((item) => item.id === auctionId);
+          createNewAuction(listing, (updatedListing) => {
+            const updatedCard = myAuctions(updatedListing, true);
+            auctionCard.replaceWith(updatedCard);
+          });
+        }
+
+        // Handle Delete button
+        if (event.target.classList.contains("delete-btn")) {
+          const auctionCard = event.target.closest(".auction-card");
+          const auctionId = auctionCard.dataset.id;
+
+          // Show confirmation dialog
+          const confirmDelete = confirm(
+            "Are you sure you want to delete this Auction?"
+          );
+          if (confirmDelete) {
+            deleteAuction(auctionId)
+              .then(() => {
+                auctionCard.remove(); // Remove the card from DOM
+                const container = document.querySelector(
+                  "#my-auctions-container"
+                );
+                if (!container.querySelector(".auction-card")) {
+                  // If no more auctions, show a message
+                  container.innerHTML = "<p>No auctions available.</p>";
+                }
+              })
+              .catch((error) => {
+                console.error("Error deleting auction:", error);
+                alert("Failed to delete the auction. Please try again.");
+              });
+          }
+        }
+      });
   } catch (error) {
     console.error("Error fetching profile:", error.message);
   }
 });
-
-//refacor hva du skal ha inni og utenfor try catch.
-
-//mobile menu//
-//   let menuIsOpen = false;
-//   const mobileMenu = document.querySelector("#mobile-menu");
-
-//   document.getElementById("toggle-menu").addEventListener("click", () => {
-//     if (menuIsOpen) {
-//       mobileMenu.classList.add("hidden");
-//       mobileMenu.classList.remove("flex");
-//     } else {
-//       mobileMenu.classList.remove("hidden");
-//       mobileMenu.classList.add("flex");
-//     }
-//     menuIsOpen = !menuIsOpen;
-//   });

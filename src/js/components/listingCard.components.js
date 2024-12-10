@@ -2,7 +2,6 @@ export function listingCardComponent(listing, context = "home") {
   const { bids = [], seller = {}, media = [] } = listing;
   const card = document.createElement("div");
 
- 
   const cardClass =
     context === "home"
       ? "auction-card border shadow-lg bg-white flex flex-col gap-3 rounded-lg overflow-hidden w-full" // Kompakte kort på forsiden
@@ -71,7 +70,7 @@ export function listingCardComponent(listing, context = "home") {
   
     </div>
   </div>
-`;
+`; // Legg til event listener for delete-knappen
 
   return card;
 }
