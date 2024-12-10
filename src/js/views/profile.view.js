@@ -79,8 +79,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       "Passionate about finding unique deals and rare items. Experienced in online auctions, with a focus on quality and customer satisfaction.";
 
     const coinsElement = document.querySelector("#profile-coins");
-    coinsElement.textContent = profile.credits || "unkinown";
-
+    coinsElement.textContent = `${profile.credits || "0"} coins`;
     // Modal buttons
     const openModalButtonProfile = document.querySelector(
       "#open-modal-profile"
