@@ -617,6 +617,21 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 0.25rem;
 }
 
+.my-8{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.my-12{
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.my-10{
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
 .mt-16{
   margin-top: 4rem;
 }
@@ -679,6 +694,30 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .mb-0{
   margin-bottom: 0px;
+}
+
+.mb-7{
+  margin-bottom: 1.75rem;
+}
+
+.mb-8{
+  margin-bottom: 2rem;
+}
+
+.mt-6{
+  margin-top: 1.5rem;
+}
+
+.mt-11{
+  margin-top: 2.75rem;
+}
+
+.mt-20{
+  margin-top: 5rem;
+}
+
+.mb-10{
+  margin-bottom: 2.5rem;
 }
 
 .block{
@@ -767,6 +806,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .h-2{
   height: 0.5rem;
+}
+
+.h-16{
+  height: 4rem;
 }
 
 .max-h-\[90vh\]{
@@ -859,6 +902,18 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .max-w-screen-md{
   max-width: 768px;
+}
+
+.max-w-xl{
+  max-width: 36rem;
+}
+
+.max-w-4xl{
+  max-width: 56rem;
+}
+
+.max-w-3xl{
+  max-width: 48rem;
 }
 
 .flex-1{
@@ -1367,6 +1422,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   line-height: 1.75rem;
 }
 
+.text-5xl{
+  font-size: 3rem;
+  line-height: 1;
+}
+
 .font-thin{
   font-weight: 100;
 }
@@ -1856,8 +1916,20 @@ button#confirm-delete:hover {
     height: 7rem;
   }
 
+  .sm\:h-16{
+    height: 4rem;
+  }
+
+  .sm\:h-8{
+    height: 2rem;
+  }
+
   .sm\:w-28{
     width: 7rem;
+  }
+
+  .sm\:w-8{
+    width: 2rem;
   }
 
   .sm\:max-w-md{
@@ -1872,12 +1944,28 @@ button#confirm-delete:hover {
     max-width: 20rem;
   }
 
+  .sm\:max-w-lg{
+    max-width: 32rem;
+  }
+
+  .sm\:max-w-2xl{
+    max-width: 42rem;
+  }
+
+  .sm\:max-w-xl{
+    max-width: 36rem;
+  }
+
   .sm\:grid-cols-2{
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .sm\:p-10{
     padding: 2.5rem;
+  }
+
+  .sm\:p-5{
+    padding: 1.25rem;
   }
 
   .sm\:text-5xl{
@@ -1913,6 +2001,16 @@ button#confirm-delete:hover {
   .sm\:text-2xl{
     font-size: 1.5rem;
     line-height: 2rem;
+  }
+
+  .sm\:text-6xl{
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+
+  .sm\:text-3xl{
+    font-size: 1.875rem;
+    line-height: 2.25rem;
   }
 
   .sm\:line-clamp-none{
@@ -2042,6 +2140,10 @@ button#confirm-delete:hover {
     max-width: 42rem;
   }
 
+  .md\:max-w-3xl{
+    max-width: 48rem;
+  }
+
   .md\:flex-row{
     flex-direction: row;
   }
@@ -2064,6 +2166,16 @@ button#confirm-delete:hover {
 
   .md\:rounded-none{
     border-radius: 0px;
+  }
+
+  .md\:px-6{
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .md\:px-8{
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 
   .md\:text-left{
@@ -2093,6 +2205,31 @@ button#confirm-delete:hover {
   .md\:text-xl{
     font-size: 1.25rem;
     line-height: 1.75rem;
+  }
+
+  .md\:text-5xl{
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  .md\:text-3xl{
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
+  .md\:text-6xl{
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+
+  .md\:text-4xl{
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+
+  .md\:text-7xl{
+    font-size: 4.5rem;
+    line-height: 1;
   }
 }
 
@@ -2204,6 +2341,11 @@ button#confirm-delete:hover {
     padding-bottom: 0.5rem;
   }
 
+  .lg\:px-8{
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
   .lg\:text-base{
     font-size: 1rem;
     line-height: 1.5rem;
@@ -2227,5 +2369,25 @@ button#confirm-delete:hover {
   .lg\:text-2xl{
     font-size: 1.5rem;
     line-height: 2rem;
+  }
+
+  .lg\:text-6xl{
+    font-size: 3.75rem;
+    line-height: 1;
+  }
+
+  .lg\:text-4xl{
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+
+  .lg\:text-7xl{
+    font-size: 4.5rem;
+    line-height: 1;
+  }
+
+  .lg\:text-5xl{
+    font-size: 3rem;
+    line-height: 1;
   }
 }

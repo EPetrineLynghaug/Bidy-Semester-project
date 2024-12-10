@@ -12,65 +12,76 @@
       href="https://api.fontshare.com/v2/css?f[]=satoshi@1,2,3,4,5,6,7,8,9&display=swap"
     />
   </head>
-  <body class="bg-[#FAFAFA]font-satoshi">
+  <body class="bg-[#FAFAFA] font-satoshi">
     <!-- Navigasjonsmeny -->
     <header class="bg-[#0D47A1] text-white p-4 shadow-xl">
       <nav id="auth-links" class="flex space-x-4"></nav>
     </header>
 
-    <!-- Søke-boks -->
-    <div class="flex justify-center items-center mt-16 w-full px-4">
-      <div class="relative w-full max-w-xs sm:max-w-md lg:max-w-3xl h-14">
-        <input
-          type="text"
-          id="search-input"
-          placeholder="Search"
-          class="border border-gray-300 rounded-lg p-4 w-full h-full text-black text-lg pr-16 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all font-thin"
-        />
-        <button
-          id="search-button"
-          class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-transparent text-gray-600 hover:text-blue-500 focus:outline-none"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M21 21l-4.35-4.35M17 10a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
-        </button>
-      </div>
-    </div>
-
-    <!-- Introduksjonstekst -->
-    <div class="text-left mt-16 max-w-screen-xl mx-auto px-6">
+    <!-- Introduksjonstekst og Søke-boks -->
+    <div class="mt-20 max-w-3xl mx-auto px-6 md:px-8">
+      <!-- Overskrift -->
       <h1
-        class="text-4xl sm:text-5xl font-thin text-gray-800 leading-snug mb-6"
+        class="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-thin text-gray-800 leading-snug mb-6 text-left"
       >
-        Welcome to Bidy - Find Your Next Great Deal!
+        Welcome to Bidy
       </h1>
-      <p class="text-gray-600 text-lg mt-4 font-thin leading-relaxed mb-6">
+
+      <!-- Første paragraf -->
+      <p
+        class="text-gray-600 text-lg sm:text-xl md:text-2xl lg:text-xl mt-4 font-light leading-relaxed mb-6 text-left"
+      >
         Discover unique items, rare finds, and exclusive offers on Bidy. Browse
         our latest listings and join the bidding on the best deals from around
         the world.
       </p>
-      <p class="text-gray-600 text-lg mt-4 font-thin leading-relaxed mb-12">
+
+      <!-- Andre paragraf -->
+      <p
+        class="text-gray-600 text-lg sm:text-xl md:text-2xl lg:text-xl mt-4 font-light leading-relaxed mb-10 text-left"
+      >
         Ready to start? Enter what you're looking for, or explore new auctions.
       </p>
+
+      <!-- Søke-boks -->
+      <div class="flex justify-center items-center w-full my-8">
+        <div
+          class="relative w-full max-w-lg md:max-w-2xl lg:max-w-3xl h-14 sm:h-16"
+        >
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Search for items, categories, or deals"
+            class="border border-gray-300 rounded-lg p-4 sm:p-5 w-full h-full text-black text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all font-thin"
+          />
+          <button
+            id="search-button"
+            class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-transparent text-gray-600 hover:text-blue-500 focus:outline-none"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-6 w-6 sm:h-8 sm:w-8"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-4.35-4.35M17 10a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
     </div>
 
     <!-- Overskrift for auksjoner -->
     <h2
-      class="text-3xl sm:text-4xl font-thin text-left text-gray-800 leading-snug mb-4 max-w-screen-xl mx-auto px-6"
+      class="text-3xl sm:text-4xl md:text-5xl font-thin text-gray-800 leading-snug mb-8 mt-20 max-w-screen-xl mx-auto px-6"
     >
-      View all New Auctions
+      Newest Auctions
     </h2>
 
     <!-- Container for auksjonsoppføringer -->
