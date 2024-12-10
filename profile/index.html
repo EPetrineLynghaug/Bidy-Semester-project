@@ -44,21 +44,23 @@
         <div class="md:text-left flex-1">
           <h1
             id="profile-name"
-            class="text-3xl sm:text-4xl font-thin text-left text-gray-800 leading-snug mb-4 max-w-screen-xl mx-auto px-6"
+            class="text-3xl sm:text-4xl font-semibold text-left text-gray-800 leading-snug mb-4 max-w-screen-xl mx-auto px-6"
           >
             Loading...
           </h1>
           <p
             id="profile-bio"
-            class="mt-2 text-gray-600 text-xs sm md:text-base lg:text-base leading-relaxed"
+            class="mt-2 text-base sm:text-lg font-light text-left text-gray-800 leading-snug mb-4 max-w-screen-xl mx-auto px-6"
           >
-            Loading bio...
+            > Loading bio...
           </p>
 
-          <span id="profile-coins" class="mt-4 text-right block text-gray-500"
-            >Loading credits...</span
-          >
-        </div>
+          <span
+          id="profile-coins"
+          class="mt-4 text-right block text-gray-700 text-base sm:text-lg font-medium hover:text-blue-600 transition-colors duration-200"
+        >
+          Loading credits...
+        </span>
       </section>
 
       <section id="profile-actions" class="py-6">
@@ -67,18 +69,28 @@
         <div class="flex flex-col gap-4">
           <div class="border-blue-700 w-full mt-3"></div>
           <div class="flex justify-evenly items-center text-center gap-4">
-            <button id="open-modal" class="text-blue-600">
+            <button
+              id="open-modal"
+              class="text-gray-600 text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-left leading-snug hover:text-blue-600 hover:underline cursor-pointer transition-colors duration-200"
+            >
               Create new Auction
             </button>
-            <button id="open-modal-profile" class="text-yellow-600">
+            <button
+              id="open-modal-profile"
+              class="text-gray-600 text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-left leading-snug hover:text-blue-600 hover:underline cursor-pointer transition-colors duration-200"
+            >
               Edit Profile
             </button>
-            <button id="open-modal-purchases" class="text-green-600">
+            <button
+              id="open-modal-purchases"
+              class="text-gray-600 text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-left leading-snug hover:text-blue-600 hover:underline cursor-pointer transition-colors duration-200"
+            >
               Purchased Auctions
             </button>
           </div>
+          <div class="border-t-2 border-blue-700 w-full mt-3"></div>
         </div>
-        <div class="border-t-2 border-blue-700 w-full mt-3"></div>
+    
       </section>
 
       <section id="my-auctions" class="max-w-screen-xl mx-auto font-sans">
