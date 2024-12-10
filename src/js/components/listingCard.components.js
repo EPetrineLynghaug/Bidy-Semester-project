@@ -2,7 +2,7 @@ export function listingCardComponent(listing, context = "home") {
   const { bids = [], seller = {}, media = [] } = listing;
   const card = document.createElement("div");
 
-  // Juster kortet for å være litt mer kompakt
+ 
   const cardClass =
     context === "home"
       ? "auction-card border shadow-lg bg-white flex flex-col gap-3 rounded-lg overflow-hidden w-full" // Kompakte kort på forsiden
@@ -21,7 +21,7 @@ export function listingCardComponent(listing, context = "home") {
   </div>
 
   <!-- Content Section -->
-  <div class="relative bg-white p-3 flex flex-col h-auto"> <!-- Fjernet flex-grow på hovedcontainer -->
+  <div class="relative bg-white p-3 flex flex-col h-auto"> 
     <!-- Avatar, Name, Created Date, and Expiry Section -->
     <div class="flex justify-between items-center text-base">
       <div class="flex items-center gap-2">

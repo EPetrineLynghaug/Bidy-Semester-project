@@ -16,7 +16,7 @@ export function myAuctions(listing, editAllowed) {
 
   // Create a container for the auction card
   const listIthem = document.createElement("div");
-  // En funksjon for å forkorte teksten basert på antall ord
+  // Funksjon for å begrense antall ord i beskrivelsen
   function truncateWords(text, wordLimit) {
     const words = text.split(" ");
     return words.length > wordLimit
@@ -24,17 +24,20 @@ export function myAuctions(listing, editAllowed) {
       : text;
   }
 
-  // Forkort beskrivelsen til maks 5 ord på mobil
-  const description = listing.description
-    ? truncateWords(listing.description, 5)
+  // Forkort beskrivelsen basert på skjermstørrelse
+  const mobileDescription = listing.description
+    ? truncateWords(listing.description, 5) // Mobil: Maks 5 ord
     : "No description available.";
+  const tabletDescription = listing.description
+    ? truncateWords(listing.description, 10) // Tablet: Maks 10 ord
+    : "No description available.";
+  const desktopDescription = listing.description || "No description available.";
 
-  // Use different classes based on the auction's status
+  // Legg inn styling og responsiv beskrivelse
   listIthem.className =
-    "auction-card p-4 flex flex-row gap-4 border-b-2 border-blue-800";
-
+    "auction-card p-4 flex flex-row gap-4 border-b-2 border-blue-800 max-w-screen ";
   listIthem.innerHTML = `
-    <div class="w-1/3 max-w-60 aspect-[16/9] relative">
+    <div class="w-1/3  md:max-w-[200px]   aspect-[16/9] relative flex-shrink-0">
       <img src="${
         media[0] ? media[0].url : "https://via.placeholder.com/400x300"
       }"
@@ -48,17 +51,20 @@ export function myAuctions(listing, editAllowed) {
           : '<div class="absolute inset-0 bg-black/50 flex items-center justify-center text-white text-lg font-bold">UNACTIVE</div>'
       }
     </div>
-    <div class="flex flex-col justify-between">
+    <div class="flex flex-col justify-between flex-1">
       <div class="flex flex-col gap-2 text-sm">
         <h1 class="font-regular text-gray-800 truncate">${
           listing.title || "Untitled Auction"
         }</h1>
-        <p class="text-sm text-gray-700 line-clamp-1 sm:line-clamp-3">${description}</p>
+        <!-- Bruk Tailwind sin responsive klasser for tekst -->
+        <p class="text-sm text-gray-700 sm:hidden">${mobileDescription}</p> <!-- Mobil -->
+        <p class="hidden sm:block md:hidden text-sm text-gray-700">${tabletDescription}</p> <!-- Tablet -->
+        <p class="hidden md:block text-sm text-gray-700 lg:line-clamp-3">${desktopDescription}</p> <!-- Desktop -->
         <p class="text-sm text-gray-700">Bids: ${
           currentBid || "No bids available."
         }</p>
       </div>
-      <div class="flex gap-2">
+      <div class="flex gap-2 mt-2">
         <!-- Show buttons based on the auction's status -->
         ${
           isActive && editAllowed
