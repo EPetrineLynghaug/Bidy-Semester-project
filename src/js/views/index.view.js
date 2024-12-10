@@ -3,6 +3,7 @@ import { renderAuthLinks } from "../components/authLinks.js";
 import { listingCardComponent } from "../components/listingCard.components.js";
 import { fetchAuctionListings } from "../api/auctionListings.api.js";
 import { openSearchModal } from "../components/search-modal.component.js";
+import { renderFooter, scrollToTop } from "../components/footer.components.js";
 
 function renderAuctionListings(container, listings) {
   container.innerHTML = "";
@@ -56,4 +57,8 @@ document.addEventListener("DOMContentLoaded", () => {
   setupSearchFunctionality(); // Setup search functionality
 
   loadAuctionListings(); // Load auction listings
+
+  const footerContainer = document.createElement("div");
+  footerContainer.innerHTML = renderFooter();
+  document.body.appendChild(footerContainer);
 });
