@@ -48,23 +48,22 @@ export function myAuctions(listing, editAllowed) {
       ${
         isActive
           ? ""
-          : '<div class="absolute inset-0 bg-black/50 flex items-center justify-center text-white text-lg font-bold">UNACTIVE</div>'
+          : '<div class="absolute inset-0 bg-black/50 flex items-center justify-center rounded-lg shadow-lg text-white text-lg font-bold">UNACTIVE</div>'
       }
     </div>
-    <div class="flex flex-col justify-between flex-1">
+    <div class="flex flex-col justify-between flex-1  max-w-md">
       <div class="flex flex-col gap-2 text-sm">
         <h1 class="font-regular text-gray-800 truncate">${
           listing.title || "Untitled Auction"
         }</h1>
-        <!-- Bruk Tailwind sin responsive klasser for tekst -->
-        <p class="text-sm text-gray-700 sm:hidden">${mobileDescription}</p> <!-- Mobil -->
-        <p class="hidden sm:block md:hidden text-sm text-gray-700">${tabletDescription}</p> <!-- Tablet -->
-        <p class="hidden md:block text-sm text-gray-700 lg:line-clamp-3">${desktopDescription}</p> <!-- Desktop -->
+        <p class="text-sm text-gray-700 sm:hidden">${mobileDescription}</p>
+        <p class="hidden sm:block md:hidden text-sm text-gray-700">${tabletDescription}</p> 
+        <p class="hidden md:block text-sm text-gray-700 lg:line-clamp-1">${desktopDescription}</p> 
         <p class="text-sm text-gray-700">Bids: ${
           currentBid || "No bids available."
         }</p>
       </div>
-      <div class="flex gap-2 mt-2">
+      <div class="flex gap-2 mt-2  ">
       ${
         isActive && editAllowed
           ? `<button class="edit-btn px-4 py-2 bg-[#5C9DED] text-white text-sm font-medium rounded-md hover:bg-[#3B82F6] transition-all duration-200 shadow-md">
