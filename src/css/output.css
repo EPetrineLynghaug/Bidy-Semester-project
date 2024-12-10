@@ -677,6 +677,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 7rem;
 }
 
+.mb-0{
+  margin-bottom: 0px;
+}
+
 .block{
   display: block;
 }
@@ -759,6 +763,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .h-32{
   height: 8rem;
+}
+
+.h-2{
+  height: 0.5rem;
 }
 
 .max-h-\[90vh\]{
@@ -1844,6 +1852,14 @@ button#confirm-delete:hover {
 }
 
 @media (min-width: 640px){
+  .sm\:h-28{
+    height: 7rem;
+  }
+
+  .sm\:w-28{
+    width: 7rem;
+  }
+
   .sm\:max-w-md{
     max-width: 28rem;
   }
@@ -1892,6 +1908,11 @@ button#confirm-delete:hover {
   .sm\:text-sm{
     font-size: 0.875rem;
     line-height: 1.25rem;
+  }
+
+  .sm\:text-2xl{
+    font-size: 1.5rem;
+    line-height: 2rem;
   }
 
   .sm\:line-clamp-none{
