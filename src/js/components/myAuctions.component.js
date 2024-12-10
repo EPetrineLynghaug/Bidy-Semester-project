@@ -21,7 +21,6 @@ export function myAuctions(listing, editAllowed) {
   listIthem.className =
     "auction-card p-4 flex flex-row gap-4 border-b-2 border-blue-800";
 
-  // Fill the container with auction details
   listIthem.innerHTML = `
   <div class="w-1/3 max-w-60 aspect-[16/9] relative">
     <img src="${
@@ -42,10 +41,10 @@ export function myAuctions(listing, editAllowed) {
       <h1 class="font-regular text-gray-800 truncate">${
         listing.title || "Untitled Auction"
       }</h1>
-      <p class="text-sm text-gray-700 line-clamp-3">${
+      <p class="text-sm text-gray-700 line-clamp-1 sm:line-clamp-3">${
         listing.description || "No description available."
       }</p>
-      <p class="text-sm text-gray-700 line-clamp-3">Bids: ${
+      <p class="text-sm text-gray-700">Bids: ${
         currentBid || "No bids available."
       }</p>
     </div>
@@ -61,7 +60,7 @@ export function myAuctions(listing, editAllowed) {
       }" class="bg-green-500 text-white px-2 py-1 sm:px-3 sm:text-sm rounded hover:bg-green-600">View</a>
       ${
         editAllowed
-          ? `<button class="delete-btn bg-red-500 text-white px-2 py-1 sm:px-3 sm:text-sm rounded hover:bg-[#0D47A1]">Delete</button>`
+          ? `<button class="delete-btn bg-red-500 text-white px-2 py-1 sm:px-3 sm:text-sm rounded hover:bg-red-600">Delete</button>`
           : ""
       }
     </div>

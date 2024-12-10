@@ -16,6 +16,25 @@ module.exports = {
         textPrimary: "#333333",
         textSecondary: "#555555",
         linkColor: "#1565C0",
+        primary: {
+          DEFAULT: "#1565C0", // Blå farge
+          hover: "#0D47A1", // Hover for detaljknappen
+        },
+        secondary: {
+          DEFAULT: "#42A5F5", // Blåfarge nr 2
+        },
+        edit: {
+          DEFAULT: "#5C9DED", // Edit farge
+          hover: "#3B82F6", // Hover for edit-knappen
+        },
+        bidNow: {
+          DEFAULT: "#28A745", // Bid now farge
+          hover: "#388E3C", // Hover for bid now-knappen
+        },
+        delete: {
+          DEFAULT: "#E53935", // Slett farge
+          hover: "#D32F2F", // Hover for slett-knappen
+        },
       },
       fontFamily: {
         sans: ["Satoshi", "sans-serif"],
@@ -25,7 +44,7 @@ module.exports = {
         relaxed: "1.6",
       },
       fontWeight: {
-        thin: "100", // Bruk Satoshi Thin
+        thin: "100",
       },
     },
   },
