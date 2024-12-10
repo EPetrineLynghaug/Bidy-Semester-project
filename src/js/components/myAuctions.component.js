@@ -16,55 +16,65 @@ export function myAuctions(listing, editAllowed) {
 
   // Create a container for the auction card
   const listIthem = document.createElement("div");
+  // En funksjon for å forkorte teksten basert på antall ord
+  function truncateWords(text, wordLimit) {
+    const words = text.split(" ");
+    return words.length > wordLimit
+      ? words.slice(0, wordLimit).join(" ") + "..."
+      : text;
+  }
+
+  // Forkort beskrivelsen til maks 5 ord på mobil
+  const description = listing.description
+    ? truncateWords(listing.description, 5)
+    : "No description available.";
 
   // Use different classes based on the auction's status
   listIthem.className =
     "auction-card p-4 flex flex-row gap-4 border-b-2 border-blue-800";
 
   listIthem.innerHTML = `
-  <div class="w-1/3 max-w-60 aspect-[16/9] relative">
-    <img src="${
-      media[0] ? media[0].url : "https://via.placeholder.com/400x300"
-    }"
-    alt="${media[0] ? media[0].alt : "Auction image"}"
-    class="w-full h-full object-cover rounded-lg shadow-lg ${
-      isActive ? "" : "opacity-50"
-    }">
-    ${
-      isActive
-        ? ""
-        : '<div class="absolute inset-0 bg-black/50 flex items-center justify-center text-white text-lg font-bold">UNACTIVE</div>'
-    }
-  </div>
-  <div class="flex flex-col justify-between">
-    <div class="flex flex-col gap-2 text-sm">
-      <h1 class="font-regular text-gray-800 truncate">${
-        listing.title || "Untitled Auction"
-      }</h1>
-      <p class="text-sm text-gray-700 line-clamp-1 sm:line-clamp-3">${
-        listing.description || "No description available."
-      }</p>
-      <p class="text-sm text-gray-700">Bids: ${
-        currentBid || "No bids available."
-      }</p>
-    </div>
-    <div class="flex gap-2">
-      <!-- Show buttons based on the auction's status -->
+    <div class="w-1/3 max-w-60 aspect-[16/9] relative">
+      <img src="${
+        media[0] ? media[0].url : "https://via.placeholder.com/400x300"
+      }"
+      alt="${media[0] ? media[0].alt : "Auction image"}"
+      class="w-full h-full object-cover rounded-lg shadow-lg ${
+        isActive ? "" : "opacity-50"
+      }">
       ${
-        isActive && editAllowed
-          ? `<button class="edit-btn bg-blue-500 text-white px-2 py-1 sm:px-3 sm:text-sm rounded hover:bg-blue-600">Edit</button>`
-          : ""
-      }
-      <a href="/listing?id=${
-        listing.id
-      }" class="bg-green-500 text-white px-2 py-1 sm:px-3 sm:text-sm rounded hover:bg-green-600">View</a>
-      ${
-        editAllowed
-          ? `<button class="delete-btn bg-red-500 text-white px-2 py-1 sm:px-3 sm:text-sm rounded hover:bg-red-600">Delete</button>`
-          : ""
+        isActive
+          ? ""
+          : '<div class="absolute inset-0 bg-black/50 flex items-center justify-center text-white text-lg font-bold">UNACTIVE</div>'
       }
     </div>
-  </div>
+    <div class="flex flex-col justify-between">
+      <div class="flex flex-col gap-2 text-sm">
+        <h1 class="font-regular text-gray-800 truncate">${
+          listing.title || "Untitled Auction"
+        }</h1>
+        <p class="text-sm text-gray-700 line-clamp-1 sm:line-clamp-3">${description}</p>
+        <p class="text-sm text-gray-700">Bids: ${
+          currentBid || "No bids available."
+        }</p>
+      </div>
+      <div class="flex gap-2">
+        <!-- Show buttons based on the auction's status -->
+        ${
+          isActive && editAllowed
+            ? `<button class="edit-btn bg-blue-500 text-white px-2 py-1 sm:px-3 sm:text-sm rounded hover:bg-blue-600">Edit</button>`
+            : ""
+        }
+        <a href="/listing?id=${
+          listing.id
+        }" class="bg-green-500 text-white px-2 py-1 sm:px-3 sm:text-sm rounded hover:bg-green-600">View</a>
+        ${
+          editAllowed
+            ? `<button class="delete-btn bg-red-500 text-white px-2 py-1 sm:px-3 sm:text-sm rounded hover:bg-red-600">Delete</button>`
+            : ""
+        }
+      </div>
+    </div>
   `;
 
   // Add event listener for edit button
