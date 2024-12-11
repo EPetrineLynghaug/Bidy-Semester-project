@@ -434,7 +434,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
 
-.shadow-xl, .shadow-md, .shadow-\[0_4px_6px_rgba\(0\2c 0\2c 0\2c 0\.3\)\], .shadow-\[0_4px_8px_rgba\(0\2c 0\2c 0\2c 0\.2\)\], .shadow, .shadow-lg, .shadow-sm, .hover\:shadow-\[0_8px_12px_rgba\(0\2c 0\2c 0\2c 0\.3\)\], .hover\:shadow-\[0_6px_12px_rgba\(0\2c 0\2c 0\2c 0\.3\)\], .hover\:shadow-xl, .hover\:shadow-lg, .active\:shadow-\[0_2px_4px_rgba\(0\2c 0\2c 0\2c 0\.2\)\]{
+.shadow-xl, .shadow-\[0_4px_6px_rgba\(0\2c 0\2c 0\2c 0\.3\)\], .shadow-\[0_4px_8px_rgba\(0\2c 0\2c 0\2c 0\.2\)\], .shadow, .shadow-lg, .shadow-md, .shadow-sm, .hover\:shadow-\[0_8px_12px_rgba\(0\2c 0\2c 0\2c 0\.3\)\], .hover\:shadow-\[0_6px_12px_rgba\(0\2c 0\2c 0\2c 0\.3\)\], .hover\:shadow-xl, .hover\:shadow-lg, .active\:shadow-\[0_2px_4px_rgba\(0\2c 0\2c 0\2c 0\.2\)\]{
   --tw-ring-offset-shadow: 0 0 #0000;
   --tw-ring-shadow: 0 0 #0000;
   --tw-shadow: 0 0 #0000;
@@ -630,16 +630,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 2.5rem;
 }
 
-.mt-8{
-  margin-top: 2rem;
-}
-
 .mb-36{
   margin-bottom: 9rem;
 }
 
 .mt-2{
   margin-top: 0.5rem;
+}
+
+.mt-8{
+  margin-top: 2rem;
 }
 
 .-mt-\[132px\]{
@@ -672,14 +672,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .mb-2{
   margin-bottom: 0.5rem;
-}
-
-.mt-20{
-  margin-top: 5rem;
-}
-
-.mb-8{
-  margin-bottom: 2rem;
 }
 
 .block{
@@ -850,10 +842,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   max-width: 42rem;
 }
 
-.max-w-3xl{
-  max-width: 48rem;
-}
-
 .flex-1{
   flex: 1 1 0%;
 }
@@ -935,8 +923,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   gap: 0.5rem;
 }
 
-.gap-8{
-  gap: 2rem;
+.gap-10{
+  gap: 2.5rem;
 }
 
 .gap-6{
@@ -953,22 +941,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .gap-1{
   gap: 0.25rem;
-}
-
-.gap-7{
-  gap: 1.75rem;
-}
-
-.gap-10{
-  gap: 2.5rem;
-}
-
-.gap-16{
-  gap: 4rem;
-}
-
-.gap-20{
-  gap: 5rem;
 }
 
 .space-x-4 > :not([hidden]) ~ :not([hidden]){
@@ -1126,14 +1098,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: transparent;
 }
 
-.bg-white{
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
 .bg-\[\#737373\]{
   --tw-bg-opacity: 1;
   background-color: rgb(115 115 115 / var(--tw-bg-opacity));
+}
+
+.bg-white{
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 .bg-blue-500{
@@ -1311,20 +1283,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 0.25rem;
 }
 
-.pb-4{
-  padding-bottom: 1rem;
-}
-
 .pl-8{
   padding-left: 2rem;
 }
 
-.pl-10{
-  padding-left: 2.5rem;
-}
-
 .pl-32{
   padding-left: 8rem;
+}
+
+.pb-4{
+  padding-bottom: 1rem;
 }
 
 .text-left{
@@ -1353,19 +1321,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   line-height: 1.75rem;
 }
 
-.text-2xl{
-  font-size: 1.5rem;
-  line-height: 2rem;
-}
-
 .text-base{
   font-size: 1rem;
   line-height: 1.5rem;
 }
 
-.text-3xl{
-  font-size: 1.875rem;
-  line-height: 2.25rem;
+.text-2xl{
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 
 .text-xs{
@@ -1381,6 +1344,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-xl{
   font-size: 1.25rem;
   line-height: 1.75rem;
+}
+
+.text-3xl{
+  font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 
 .text-5xl{
@@ -1529,12 +1497,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.shadow-md{
-  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
 .shadow-\[0_4px_6px_rgba\(0\2c 0\2c 0\2c 0\.3\)\]{
   --tw-shadow: 0 4px 6px rgba(0,0,0,0.3);
   --tw-shadow-colored: 0 4px 6px var(--tw-shadow-color);
@@ -1556,6 +1518,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 .shadow-lg{
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.shadow-md{
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
@@ -1975,9 +1943,9 @@ html, body{
     line-height: 1.75rem;
   }
 
-  .sm\:text-4xl{
-    font-size: 2.25rem;
-    line-height: 2.5rem;
+  .sm\:text-3xl{
+    font-size: 1.875rem;
+    line-height: 2.25rem;
   }
 
   .sm\:text-2xl{
@@ -1990,6 +1958,11 @@ html, body{
     line-height: 1.5rem;
   }
 
+  .sm\:text-4xl{
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+  }
+
   .sm\:text-6xl{
     font-size: 3.75rem;
     line-height: 1;
@@ -1998,11 +1971,6 @@ html, body{
   .sm\:text-sm{
     font-size: 0.875rem;
     line-height: 1.25rem;
-  }
-
-  .sm\:text-3xl{
-    font-size: 1.875rem;
-    line-height: 2.25rem;
   }
 
   .sm\:line-clamp-none{
@@ -2124,11 +2092,6 @@ html, body{
     padding-right: 3rem;
   }
 
-  .md\:px-8{
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-
   .md\:text-left{
     text-align: left;
   }
@@ -2143,9 +2106,9 @@ html, body{
     line-height: 2rem;
   }
 
-  .md\:text-5xl{
-    font-size: 3rem;
-    line-height: 1;
+  .md\:text-4xl{
+    font-size: 2.25rem;
+    line-height: 2.5rem;
   }
 
   .md\:text-sm{
@@ -2168,9 +2131,9 @@ html, body{
     line-height: 1.75rem;
   }
 
-  .md\:text-4xl{
-    font-size: 2.25rem;
-    line-height: 2.5rem;
+  .md\:text-5xl{
+    font-size: 3rem;
+    line-height: 1;
   }
 }
 
@@ -2267,11 +2230,6 @@ html, body{
     padding-bottom: 0.5rem;
   }
 
-  .lg\:px-20{
-    padding-left: 5rem;
-    padding-right: 5rem;
-  }
-
   .lg\:text-6xl{
     font-size: 3.75rem;
     line-height: 1;
@@ -2280,6 +2238,11 @@ html, body{
   .lg\:text-xl{
     font-size: 1.25rem;
     line-height: 1.75rem;
+  }
+
+  .lg\:text-5xl{
+    font-size: 3rem;
+    line-height: 1;
   }
 
   .lg\:text-base{
@@ -2300,15 +2263,5 @@ html, body{
   .lg\:text-2xl{
     font-size: 1.5rem;
     line-height: 2rem;
-  }
-
-  .lg\:text-7xl{
-    font-size: 4.5rem;
-    line-height: 1;
-  }
-
-  .lg\:text-5xl{
-    font-size: 3rem;
-    line-height: 1;
   }
 }

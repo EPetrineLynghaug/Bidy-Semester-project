@@ -24,9 +24,11 @@
   <body class="bg-[#FAFAFA] font-satoshi">
     <!-- Navigasjonsmeny -->
     <header class="bg-[#0D47A1] text-white p-4 shadow-xl">
-      <nav id="auth-links" class="flex space-x-4" aria-label="Main navigation">
-        <!-- Hvis det er navigasjonslenker, kan du legge dem til her -->
-      </nav>
+      <nav
+        id="auth-links"
+        class="flex space-x-4"
+        aria-label="Main navigation"
+      ></nav>
     </header>
 
     <!-- Introduksjonstekst og Søke-boks -->
@@ -103,21 +105,20 @@
           </button>
         </div>
       </div>
+
+      <!-- Overskrift for auksjoner -->
+      <h2
+        class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-thin text-gray-800 leading-snug mb-6 text-left pl-8"
+      >
+        Newest Auctions
+      </h2>
+
+      <!-- Container for auksjonsoppføringer -->
+      <div
+        id="my-auctions-container"
+        class="grid gap-10 p-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-screen-xl mx-auto mb-36"
+      ></div>
     </main>
-
-    <!-- Overskrift for auksjoner -->
-    <h2
-      class="text-left pl-32 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-thin text-gray-800 leading-snug mb-6"
-    >
-      Newest Auctions
-    </h2>
-
-    <!-- Container for auksjonsoppføringer -->
-    <div
-      id="my-auctions-container"
-      class="grid gap-10 p-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-screen-xl mx-auto mb-36"
-    ></div>
-
     <footer id="footer-container"></footer>
   </body>
 </html>
