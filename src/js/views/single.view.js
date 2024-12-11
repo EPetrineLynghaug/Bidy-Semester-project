@@ -4,7 +4,10 @@ import { renderAuctionDetails } from "../components/createSingleCard.js";
 import { initializeCarousel } from "../utilities/carouseCardUtils.js";
 import { getStoredUserName } from "../utilities/storage.js";
 import { showCustomAlert } from "../components/showCustomAlert.components.js";
+import { fetchProfile } from "../api/profile.api.js";
+import { renderFooter } from "../components/footer.components.js";
 
+// Main logic - waiting for DOM to load
 document.addEventListener("DOMContentLoaded", async () => {
   const cardId = new URLSearchParams(window.location.search).get("id");
 
@@ -16,8 +19,22 @@ document.addEventListener("DOMContentLoaded", async () => {
   const isLoggedIn = checkUserLogin();
   toggleBidSectionsVisibility(isLoggedIn);
 
+  const coinsElement = document.querySelector("#profile-coins");
+  const balanceBox = document.querySelector("#balance-box");
+
+  if (isLoggedIn) {
+    const profile = await fetchProfile(getStoredUserName());
+    if (profile?.credits !== undefined) {
+      coinsElement.textContent = `${profile.credits} coins`;
+      balanceBox.style.display = "block";
+    }
+  } else {
+    balanceBox.style.display = "none";
+  }
+
   try {
     renderAuthLinks();
+    renderFooter();
 
     const auctionData = await fetchSingleCardDetails(cardId);
     if (!auctionData) throw new Error("Failed to fetch auction details");
@@ -34,8 +51,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 // Helper Functions
 
 function checkUserLogin() {
-  const username = getStoredUserName();
-  return !!username;
+  return !!getStoredUserName();
 }
 
 function toggleBidSectionsVisibility(isLoggedIn) {
@@ -51,7 +67,7 @@ function toggleBidSectionsVisibility(isLoggedIn) {
     if (auctionDetailsContainer) {
       const loginPrompt = document.createElement("p");
       loginPrompt.className =
-        "text-center mt-4 p-4 bg-yellow-100 border border-yellow-400 rounded text-yellow-700 font-medium";
+        "text-center mt-4 mb-20 p-4 bg-yellow-100 border border-yellow-400 rounded text-yellow-700 font-medium";
       loginPrompt.textContent =
         "Log in or register to bid, view profiles, or see bid history.";
       auctionDetailsContainer.appendChild(loginPrompt);
@@ -90,10 +106,7 @@ function setupBidForm(cardId) {
   const bidForm = document.querySelector("#bid-form");
   const customBidInput = document.querySelector("#custom-bid");
 
-  if (!bidForm || !customBidInput) {
-    console.error("Bid form or custom bid input not found.");
-    return;
-  }
+  if (!bidForm || !customBidInput) return;
 
   bidForm.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -109,8 +122,6 @@ function setupBidForm(cardId) {
           "success",
           bidForm
         );
-
-        // Update auction details
         const updatedAuctionData = await fetchSingleCardDetails(cardId);
         renderAuctionDetails(updatedAuctionData, true);
       } else {

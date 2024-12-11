@@ -674,6 +674,22 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 0.5rem;
 }
 
+.mt-6{
+  margin-top: 1.5rem;
+}
+
+.-mt-24{
+  margin-top: -6rem;
+}
+
+.mb-20{
+  margin-bottom: 5rem;
+}
+
+.mb-24{
+  margin-bottom: 6rem;
+}
+
 .block{
   display: block;
 }
@@ -943,6 +959,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   gap: 0.25rem;
 }
 
+.gap-8{
+  gap: 2rem;
+}
+
 .space-x-4 > :not([hidden]) ~ :not([hidden]){
   --tw-space-x-reverse: 0;
   margin-right: calc(1rem * var(--tw-space-x-reverse));
@@ -1180,6 +1200,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-yellow-100{
   --tw-bg-opacity: 1;
   background-color: rgb(254 249 195 / var(--tw-bg-opacity));
+}
+
+.bg-blue-100{
+  --tw-bg-opacity: 1;
+  background-color: rgb(219 234 254 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-50{
@@ -1465,6 +1490,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-yellow-700{
   --tw-text-opacity: 1;
   color: rgb(161 98 7 / var(--tw-text-opacity));
+}
+
+.text-blue-800{
+  --tw-text-opacity: 1;
+  color: rgb(30 64 175 / var(--tw-text-opacity));
 }
 
 .placeholder-gray-400::-moz-placeholder{
@@ -2135,6 +2165,11 @@ html, body{
     font-size: 3rem;
     line-height: 1;
   }
+
+  .md\:text-3xl{
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
 }
 
 @media (min-width: 1024px){
@@ -2263,5 +2298,10 @@ html, body{
   .lg\:text-2xl{
     font-size: 1.5rem;
     line-height: 2rem;
+  }
+
+  .lg\:text-4xl{
+    font-size: 2.25rem;
+    line-height: 2.5rem;
   }
 }

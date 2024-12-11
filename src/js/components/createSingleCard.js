@@ -1,4 +1,4 @@
-// Hjelpefunksjon for å oppdatere DOM-elementer
+// Helper function to update DOM elements
 const updateElement = (selector, value, isHTML = false) => {
   const element = document.querySelector(selector);
   if (element) {
@@ -6,7 +6,7 @@ const updateElement = (selector, value, isHTML = false) => {
   }
 };
 
-// Funksjon for å generere budrader
+// Generate bid rows for the bid history
 const generateBidRow = (bid) => {
   const bidDate = new Date(bid.created);
   return `
@@ -18,7 +18,7 @@ const generateBidRow = (bid) => {
     </tr>`;
 };
 
-// Funksjon for å håndtere visning og skjuling av eldre bud
+// Handle the visibility and toggling of older bids
 const createToggleForOlderBids = (bidHistoryBody, remainingBids) => {
   const newToggleContainer = document.createElement("div");
   newToggleContainer.className = "text-center mt-4 toggle-container";
@@ -32,12 +32,10 @@ const createToggleForOlderBids = (bidHistoryBody, remainingBids) => {
 
   toggleButton.addEventListener("click", () => {
     if (isExpanded) {
-      // Skjul eldre bud
       const rows = bidHistoryBody.querySelectorAll(".extra-bid-row");
       rows.forEach((row) => row.remove());
       toggleButton.innerHTML = "View More ↓";
     } else {
-      // Vis eldre bud
       remainingBids.forEach((bid) => {
         const row = document.createElement("tr");
         row.className = "extra-bid-row";
@@ -53,43 +51,35 @@ const createToggleForOlderBids = (bidHistoryBody, remainingBids) => {
   bidHistoryBody.parentElement.appendChild(newToggleContainer);
 };
 
-// Funksjon for å oppdatere auksjonsdetaljer og budhistorikk
+// Render auction details and bid history
 export function renderAuctionDetails(auctionData) {
-  if (!auctionData) {
-    console.error("No auction data provided to render.");
-    return;
-  }
-  let currentBid = 0;
-  if (auctionData.bids.length > 0) {
-    currentBid = auctionData.bids[auctionData.bids.length - 1].amount;
-  }
+  if (!auctionData) return;
 
-  // Oppdater grensesnittet med auksjonsdata
-  // Oppdater grensesnittet med auksjonsdata
+  let currentBid =
+    auctionData.bids.length > 0
+      ? auctionData.bids[auctionData.bids.length - 1].amount
+      : 0;
+
+  // Update auction data elements
   updateElement("#seller-name", auctionData.seller?.name || "Unknown Seller");
 
-  // Oppdater selgerens avatar med onerror
   const sellerAvatar = document.querySelector("#seller-avatar");
   if (sellerAvatar) {
     sellerAvatar.src =
       auctionData.seller?.avatar?.url || "https://via.placeholder.com/50";
     sellerAvatar.alt = auctionData.seller?.name || "Seller Avatar";
 
-    // Håndter feil ved avatarinnlasting
     sellerAvatar.onerror = () => {
       sellerAvatar.src = "https://via.placeholder.com/50";
       sellerAvatar.alt = "Failed to load seller avatar";
     };
   }
 
-  // Oppdater auksjonens tittel og beskrivelse
   updateElement("#auction-title", auctionData.title || "Untitled Auction");
   updateElement(
     "#auction-description",
     auctionData.description || "No description available."
   );
-
-  // Oppdater postet og utløpsdato
   updateElement(
     "#auction-posted-date",
     `Posted: ${new Date(auctionData.created).toLocaleDateString()}`
@@ -98,10 +88,8 @@ export function renderAuctionDetails(auctionData) {
     "#auction-expiry-date",
     `Expires: ${new Date(auctionData.endsAt).toLocaleDateString()}`
   );
-
   updateElement("#current-bid", `Current bid: ${currentBid || "0 Coins"}`);
 
-  // Oppdater auksjonsbildet med onerror
   const auctionImage = document.querySelector("#auction-image");
   if (auctionImage) {
     auctionImage.src =
@@ -114,7 +102,7 @@ export function renderAuctionDetails(auctionData) {
     };
   }
 
-  // Håndtere budhistorikk
+  // Handle bid history
   const bidHistoryBody = document.querySelector("#bid-history-body");
   const toggleContainer = document.querySelector(".toggle-container");
   if (toggleContainer) toggleContainer.remove();
@@ -126,12 +114,10 @@ export function renderAuctionDetails(auctionData) {
     const topBids = sortedBids.slice(0, 3);
     const remainingBids = sortedBids.slice(3);
 
-    // Legg til de tre høyeste budene
     topBids.forEach((bid) => {
       bidHistoryBody.innerHTML += generateBidRow(bid);
     });
 
-    // Legg til toggle-knapp for eldre bud
     if (remainingBids.length > 0) {
       createToggleForOlderBids(bidHistoryBody, remainingBids);
     }
