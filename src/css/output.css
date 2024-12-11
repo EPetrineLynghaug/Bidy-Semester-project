@@ -418,7 +418,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 
-.-translate-y-1\/2, .transform, .back-to-top, .arrow-icon, .hover\:scale-105, .active\:scale-95{
+.-translate-y-1\/2, .transform, .back-to-top, .arrow-icon, .hover\:scale-105, .hover\:scale-110, .active\:scale-95{
   --tw-translate-x: 0;
   --tw-translate-y: 0;
   --tw-rotate: 0;
@@ -1343,6 +1343,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   line-height: 1.75rem;
 }
 
+.text-5xl{
+  font-size: 3rem;
+  line-height: 1;
+}
+
 .font-thin{
   font-weight: 100;
 }
@@ -1671,23 +1676,24 @@ html, body{
   content: '';
   position: absolute;
   top: -200px;
-  /* Plasserer gradienten over footeren */
   left: 0;
   width: 100%;
-  /* Gradienten dekker hele bredden */
   height: 400px;
-  /* Øker høyden for mer utstrekning */
   background: linear-gradient(to top, rgba(0, 0, 0, 0.2), #FAFAFA);
   /* Myk overgang */
   pointer-events: none;
-  /* Hindrer interaksjon med gradienten */
   z-index: -1;
-  /* Gradient ligger bak footeren */
 }
 
 .hover\:scale-105:hover{
   --tw-scale-x: 1.05;
   --tw-scale-y: 1.05;
+  transform: var(--tw-transform);
+}
+
+.hover\:scale-110:hover{
+  --tw-scale-x: 1.1;
+  --tw-scale-y: 1.1;
   transform: var(--tw-transform);
 }
 
@@ -1947,6 +1953,11 @@ html, body{
   .sm\:text-sm{
     font-size: 0.875rem;
     line-height: 1.25rem;
+  }
+
+  .sm\:text-6xl{
+    font-size: 3.75rem;
+    line-height: 1;
   }
 
   .sm\:line-clamp-none{

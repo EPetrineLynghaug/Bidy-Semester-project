@@ -62,11 +62,11 @@ html, body {
 .footer::before {
   content: '';
   position: absolute;
-  top: -200px; /* Plasserer gradienten over footeren */
+  top: -200px; 
   left: 0;
-  width: 100%; /* Gradienten dekker hele bredden */
-  height: 400px; /* Øker høyden for mer utstrekning */
+  width: 100%; 
+  height: 400px; 
   background: linear-gradient(to top, rgba(0, 0, 0, 0.2), #FAFAFA); /* Myk overgang */
-  pointer-events: none; /* Hindrer interaksjon med gradienten */
-  z-index: -1; /* Gradient ligger bak footeren */
+  pointer-events: none; 
+  z-index: -1;
 }

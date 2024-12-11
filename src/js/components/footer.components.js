@@ -5,12 +5,10 @@ export function scrollToTop() {
 export function renderFooter() {
   const footerHTML = `
 <footer class="footer bg-gray-800 text-white py-8 font-sans">
-  <!-- Back to Top Arrow -->
-  <div class="back-to-top" role="button" aria-label="Scroll to top">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" class="arrow-icon w-12 h-12 mx-auto mb-4">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
-    </svg>
-  </div>
+<!-- Back to Top Arrow -->
+<div class="back-to-top" role="button" aria-label="Scroll to top">
+  <i class="ph ph-caret-up text-white text-5xl sm:text-6xl mx-auto mb-4 transform transition-transform duration-200 ease-in-out hover:scale-110"></i>
+</div>
 
   <!-- Footer Image -->
   <div class="footer-image w-full flex justify-center mb-4">
