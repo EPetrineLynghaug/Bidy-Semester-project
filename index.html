@@ -3,11 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome</title>
+    <meta
+      name="description"
+      content="Welcome to Bidy, your ultimate online auction platform. Discover unique items, rare finds, and exclusive deals. Join the bidding action today and start selling to earn coins. Explore all new auctions and find your next treasure!"
+    />
+    <title>Home | Bidy - View All New Auctions</title>
     <link href="./src/css/output.css" rel="stylesheet" />
     <script type="module" src="./src/js/views/index.view.js"></script>
     <script src="https://unpkg.com/phosphor-icons"></script>
     <link
+      rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/phosphor-icons@2.0.0/dist/phosphor-icons.css"
       rel="stylesheet"
     />
@@ -15,53 +20,71 @@
       rel="stylesheet"
       href="https://api.fontshare.com/v2/css?f[]=satoshi@1,2,3,4,5,6,7,8,9&display=swap"
     />
-    <script src="footer.js"></script>
   </head>
   <body class="bg-[#FAFAFA] font-satoshi">
     <!-- Navigasjonsmeny -->
     <header class="bg-[#0D47A1] text-white p-4 shadow-xl">
-      <nav id="auth-links" class="flex space-x-4"></nav>
+      <nav id="auth-links" class="flex space-x-4" aria-label="Main navigation">
+        <!-- Hvis det er navigasjonslenker, kan du legge dem til her -->
+      </nav>
     </header>
 
     <!-- Introduksjonstekst og Søke-boks -->
-    <div class="mt-20 max-w-3xl mx-auto px-6 md:px-8">
-      <!-- Overskrift -->
+    <main class="max-w-screen-xl mx-auto px-6 md:px-12 lg:px-16 mt-16">
       <h1
-        class="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-thin text-gray-800 leading-snug mb-6 text-left"
+        class="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-thin text-gray-800 leading-snug mb-6 text-left pl-8"
       >
         Welcome to Bidy
       </h1>
 
       <!-- Første paragraf -->
       <p
-        class="text-gray-600 text-lg sm:text-xl md:text-2xl lg:text-xl mt-4 font-light leading-relaxed mb-6 text-left"
+        class="text-gray-600 text-lg sm:text-xl md:text-2xl lg:text-xl mt-4 font-light leading-relaxed mb-6 text-left pl-8"
       >
         Discover unique items, rare finds, and exclusive offers on Bidy. Browse
         our latest listings and join the bidding on the best deals from around
         the world.
       </p>
 
+      <p
+        class="text-gray-600 text-lg sm:text-xl md:text-2xl lg:text-xl mt-4 font-light leading-relaxed mb-6 text-left pl-8"
+      >
+        All new users receive
+        <span class="inline-flex items-center gap-2">
+          <i class="ph ph-currency-circle-dollar text-gray-800 text-1xl"></i>
+          1000 coins
+        </span>
+        when they register. These coins can be used to bid on auctions. To earn
+        more coins, you must sell items at the auction.
+      </p>
+
       <!-- Andre paragraf -->
       <p
-        class="text-gray-600 text-lg sm:text-xl md:text-2xl lg:text-xl mt-4 font-light leading-relaxed mb-10 text-left"
+        class="text-gray-600 text-lg sm:text-xl md:text-2xl lg:text-xl mt-4 font-light leading-relaxed mb-10 text-left pl-8"
       >
         Ready to start? Enter what you're looking for, or explore new auctions.
       </p>
 
       <!-- Søke-boks -->
-      <div class="flex justify-center items-center w-full my-8">
+      <div class="flex justify-center items-center w-full my-8 pl-8">
         <div
           class="relative w-full max-w-lg md:max-w-2xl lg:max-w-3xl h-14 sm:h-16"
+          role="search"
         >
+          <label for="search-input" class="sr-only"
+            >Search for items, categories, or deals</label
+          >
           <input
             type="text"
             id="search-input"
+            aria-placeholder="Search for items, categories, or deals"
             placeholder="Search for items, categories, or deals"
             class="border border-gray-300 rounded-lg p-4 sm:p-5 w-full h-full text-black text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all font-thin"
           />
           <button
             id="search-button"
             class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-transparent text-gray-600 hover:text-blue-500 focus:outline-none"
+            aria-label="Search"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -80,11 +103,11 @@
           </button>
         </div>
       </div>
-    </div>
+    </main>
 
     <!-- Overskrift for auksjoner -->
     <h2
-      class="text-3xl sm:text-4xl md:text-5xl font-thin text-gray-800 leading-snug mb-8 mt-20 max-w-screen-xl mx-auto px-6"
+      class="text-left pl-32 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-thin text-gray-800 leading-snug mb-6"
     >
       Newest Auctions
     </h2>
@@ -92,8 +115,9 @@
     <!-- Container for auksjonsoppføringer -->
     <div
       id="my-auctions-container"
-      class="grid gap-8 p-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-screen-xl mx-auto mb-36"
+      class="grid gap-10 p-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-screen-xl mx-auto mb-36"
     ></div>
-    <div id="footer-container"></div>
+
+    <footer id="footer-container"></footer>
   </body>
 </html>

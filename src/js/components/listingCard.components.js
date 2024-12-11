@@ -4,8 +4,8 @@ export function listingCardComponent(listing, context = "home") {
 
   const cardClass =
     context === "home"
-      ? "auction-card border shadow-lg bg-white flex flex-col gap-3 rounded-lg overflow-hidden w-full" // Kompakte kort på forsiden
-      : "auction-card border-b-2 p-3 bg-gray-100 max-w-xs mx-auto"; // Redusert padding for modalen
+      ? "auction-card border shadow-lg bg-white flex flex-col gap-3 rounded-lg overflow-hidden w-full"
+      : "auction-card border-b-2 p-3 bg-gray-100 max-w-xs mx-auto";
 
   card.className = cardClass;
 
@@ -60,15 +60,19 @@ export function listingCardComponent(listing, context = "home") {
         class="px-4 py-2 bg-[#28A745] text-white text-sm font-medium rounded-md hover:bg-[#1e7e34] transition-all duration-200 shadow-md">
         Bid Now
       </a>
-      <p class="text-lg font-normal text-gray-800">
-        $${currentBid.toFixed(
-          2
-        )} <span class="text-xs text-gray-500">/ Current bid</span>
-      </p>
   
-    </div>
+  <p class="flex items-center text-base font-normal text-gray-800 gap-1">
+    <!-- Currency Icon -->
+    <i class="ph ph-currency-circle-dollar text-gray-800 text-xl"></i> 
+    <!-- Current Bid Text -->
+    ${currentBid.toFixed(
+      2
+    )} <span class="text-xs text-gray-500">/ Current bid</span>
+  </p>
+</div>
+  
   </div>
-`; // Legg til event listener for delete-knappen
+`;
 
   return card;
 }
