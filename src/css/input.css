@@ -18,7 +18,7 @@ html, body {
   margin-top: auto; 
   position: relative;
   box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
-  height: 250px;
+  height: 300px;
 
 }
 
@@ -28,19 +28,25 @@ html, body {
   border-radius: 120px 120px 0 0; 
   
 }
-
 /* Arrow Icon */
 .arrow-icon {
-  @apply w-12 h-12; 
+  @apply w-12 h-12 transition-transform duration-200 ease-in-out;
 }
+
+/* Hover State for Arrow Icon */
+.back-to-top:hover .arrow-icon {
+  @apply scale-110;
+}
+
+
 
 /* Footer Content */
 .footer-content {
-  @apply mt-16; /* Avstand mellom knapp og footer-innhold */
+  @apply mt-6; 
 }
 
 .footer-content p {
-  @apply text-sm;
+  @apply mb-1;
 }
 
 .footer-content .email-link {
