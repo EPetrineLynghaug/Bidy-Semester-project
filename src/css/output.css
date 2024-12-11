@@ -634,6 +634,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 2rem;
 }
 
+.mb-36{
+  margin-bottom: 9rem;
+}
+
 .mt-2{
   margin-top: 0.5rem;
 }
@@ -1554,19 +1558,28 @@ Ensure the default browser behavior of the `hidden` attribute.
   -webkit-line-clamp: 2;
 }
 
-body{
+/* Sikrer at siden fyller skjermen */
+
+html, body{
   font-family: Satoshi, sans-serif;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Footer Container */
+
 .footer{
-  position: relative;
   --tw-bg-opacity: 1;
-  background-color: rgb(21 101 192 / var(--tw-bg-opacity));
+  background-color: rgb(13 71 161 / var(--tw-bg-opacity));
   text-align: center;
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
   padding: 50px 20px 20px;
-  margin-top: 80px;
+  margin-top: auto;
+  position: relative;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+  height: 250px;
 }
 
 /* Back to Top Button */
@@ -1585,7 +1598,7 @@ body{
   align-items: center;
   justify-content: center;
   --tw-bg-opacity: 1;
-  background-color: rgb(21 101 192 / var(--tw-bg-opacity));
+  background-color: rgb(13 71 161 / var(--tw-bg-opacity));
   border-radius: 120px 120px 0 0;
 }
 
@@ -1600,7 +1613,7 @@ body{
 
 .footer-content{
   margin-top: 4rem;
-  /* Holder avstanden til innholdet internt i footeren */
+  /* Avstand mellom knapp og footer-innhold */
 }
 
 .footer-content p{
@@ -1620,6 +1633,26 @@ body{
 
 .footer-content .email-link:hover{
   text-decoration: underline;
+}
+
+/* Gradient Above Footer */
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  /* Plasserer gradienten over footeren */
+  left: 0;
+  width: 100%;
+  /* Gradienten dekker hele bredden */
+  height: 400px;
+  /* Øker høyden for mer utstrekning */
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.2), #FAFAFA);
+  /* Myk overgang */
+  pointer-events: none;
+  /* Hindrer interaksjon med gradienten */
+  z-index: -1;
+  /* Gradient ligger bak footeren */
 }
 
 .hover\:scale-105:hover{

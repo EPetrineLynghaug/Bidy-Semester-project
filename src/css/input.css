@@ -3,21 +3,30 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+/* Sikrer at siden fyller skjermen */
+html, body {
   @apply font-sans;
+  min-height: 100%; 
+  display: flex;
+  flex-direction: column;
 }
 
-
+/* Footer Container */
 .footer {
-  @apply relative bg-primary text-white text-center;
+  @apply relative bg-primary-hover text-white text-center;
   padding: 50px 20px 20px;
-  margin-top: 80px; 
+  margin-top: auto; 
+  position: relative;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+  height: 250px;
+
 }
 
 /* Back to Top Button */
 .back-to-top {
-  @apply absolute top-[-60px] left-1/2 transform -translate-x-1/2 w-[180px] h-[90px] bg-primary flex items-center justify-center cursor-pointer z-10;
-  border-radius: 120px 120px 0 0;
+  @apply absolute top-[-60px] left-1/2 transform -translate-x-1/2 w-[180px] h-[90px] bg-primary-hover flex items-center justify-center cursor-pointer z-10;
+  border-radius: 120px 120px 0 0; 
+  
 }
 
 /* Arrow Icon */
@@ -27,7 +36,7 @@ body {
 
 /* Footer Content */
 .footer-content {
-  @apply mt-16; /* Holder avstanden til innholdet internt i footeren */
+  @apply mt-16; /* Avstand mellom knapp og footer-innhold */
 }
 
 .footer-content p {
@@ -41,4 +50,17 @@ body {
 
 .footer-content .email-link:hover {
   @apply underline;
+}
+
+/* Gradient Above Footer */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: -200px; /* Plasserer gradienten over footeren */
+  left: 0;
+  width: 100%; /* Gradienten dekker hele bredden */
+  height: 400px; /* Øker høyden for mer utstrekning */
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.2), #FAFAFA); /* Myk overgang */
+  pointer-events: none; /* Hindrer interaksjon med gradienten */
+  z-index: -1; /* Gradient ligger bak footeren */
 }
