@@ -58,7 +58,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
   loadAuctionListings(); // Load auction listings
 
-  const footerContainer = document.createElement("div");
-  footerContainer.innerHTML = renderFooter();
-  document.body.appendChild(footerContainer);
+  renderFooter();
 });
