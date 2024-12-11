@@ -662,6 +662,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: 0.25rem;
 }
 
+.-mt-1{
+  margin-top: -0.25rem;
+}
+
 .mt-auto{
   margin-top: auto;
 }
@@ -672,6 +676,22 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .mb-2{
   margin-bottom: 0.5rem;
+}
+
+.-mt-7{
+  margin-top: -1.75rem;
+}
+
+.-mt-3\.5{
+  margin-top: -0.875rem;
+}
+
+.-mt-3{
+  margin-top: -0.75rem;
+}
+
+.mt-7{
+  margin-top: 1.75rem;
 }
 
 .block{
@@ -941,6 +961,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .gap-1{
   gap: 0.25rem;
+}
+
+.gap-5{
+  gap: 1.25rem;
 }
 
 .space-x-4 > :not([hidden]) ~ :not([hidden]){
@@ -1950,14 +1974,14 @@ html, body{
     line-height: 1.5rem;
   }
 
-  .sm\:text-sm{
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-  }
-
   .sm\:text-6xl{
     font-size: 3.75rem;
     line-height: 1;
+  }
+
+  .sm\:text-sm{
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 
   .sm\:line-clamp-none{

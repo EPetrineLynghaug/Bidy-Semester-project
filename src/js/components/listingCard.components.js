@@ -37,14 +37,12 @@ export function listingCardComponent(listing, context = "home") {
           ).toLocaleDateString()}</p>
         </div>
       </div>
-      <div class="flex items-center gap-1">
-        <!-- Timeglass Icon -->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" class="w-5 h-5 text-gray-700">
-          <path d="M184,48H72A8,8,0,0,0,64,56V76a48,48,0,0,0,19.2,38.4l25.6,19.2-25.6,19.2A48,48,0,0,0,64,180v20a8,8,0,0,0,8,8H184a8,8,0,0,0,8-8V180a48,48,0,0,0-19.2-38.4L147.2,122.4l25.6-19.2A48,48,0,0,0,192,76V56A8,8,0,0,0,184,48Zm0,136H72V180a32,32,0,0,1,12.8-25.6l31.2-23.4,31.2,23.4A32,32,0,0,1,184,180Zm0-108a32,32,0,0,1-12.8,25.6L140,116.6l-31.2-23.4A32,32,0,0,1,72,76V56H184Z"></path>
-        </svg>
-        <p class="text-sm text-gray-500 leading-tight font-normal">Expires: ${new Date(
-          listing.endsAt
-        ).toLocaleDateString()}</p>
+      <div class="flex items-center gap-1 mt-7 ">
+  
+       <i class="ph ph-clock text-gray-700 w-5 h-5"></i>
+          <p class="text-sm text-gray-500 leading-tight font-normal">Expires: ${new Date(
+            listing.endsAt
+          ).toLocaleDateString()}</p>
       </div>
     </div>
     <hr class="my-1 border-t-1" style="border-color: #42A5F5;">
