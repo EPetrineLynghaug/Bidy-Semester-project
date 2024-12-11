@@ -3,10 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="View single auction details and place bids."
-    />
+    <meta name="description" content="View " />
     <title>Auction| Bidy - View Single Auction</title>
     <script type="module" src="/src/js/views/single.view.js"></script>
     <link href="../src/css/output.css" rel="stylesheet" />
@@ -21,7 +18,7 @@
     />
   </head>
 
-  <body>
+   <body class="bg-[#FAFAFA] font-satoshi">
     <header class="bg-[#0D47A1] text-white p-4 shadow-xl">
       <nav
         id="auth-links"
@@ -58,11 +55,7 @@
         <i class="ph ph-caret-left text-xl md:text-2xl lg:text-3xl"></i>
       </button>
     </div>
-
-    <main
-      class="details-section flex flex-col gap-8 p-6"
-      aria-labelledby="auction-title"
-    >
+    <main class="details-section flex flex-col gap-8 p-8 lg:p-12" aria-labelledby="auction-title">
       <div
         class="seller-info flex items-center gap-4 p-4 border-b pb-4 shadow-md rounded-lg bg-white"
         role="region"
@@ -130,23 +123,24 @@
             </p>
           </div>
         </div>
+        </section>
 
-        <div
-          class="balance-box p-4 bg-blue-100 text-blue-800 rounded-lg shadow-md mt-6"
-          id="balance-box"
-          style="display: none"
-          aria-live="polite"
-        >
-          <h3 class="text-lg font-semibold">Your Balance</h3>
-          <p class="text-xl mt-2">
-            <i
-              class="ph ph-currency-circle-dollar text-2xl"
-              aria-hidden="true"
-            ></i>
-            <span id="profile-coins">Loading...</span>
-          </p>
-        </div>
-      </section>
+      <!-- Your Balance Box (Visible on larger screens) -->
+  <div class="flex items-center gap-3 md:ml-auto mt-4 md:mt-0 md:w-[300px]">
+    <div
+      class="balance-box p-6 bg-blue-100 text-blue-800 rounded-lg shadow-md w-full max-w-[300px]"
+      id="balance-box"
+      style="display: none"
+      aria-live="polite"
+    >
+      <h3 class="text-lg font-semibold">Your Balance</h3>
+      <p class="text-xl mt-2">
+        <i class="ph ph-currency-circle-dollar text-2xl" aria-hidden="true"></i>
+        <span id="profile-coins">Loading...</span>
+      </p>
+    </div>
+  </div>
+</div>
     </main>
 
     <section
@@ -238,7 +232,7 @@
             />
             <button
               type="submit"
-              class="btn btn-basic px-6 py-3 bg-[#28A745] text-white text-sm font-medium rounded-md hover:bg-[#1e7e34] hover:shadow-lg transition-all duration-200 ease-in-out w-full"
+              class="btn btn-basic px-6 py-3 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 hover:shadow-lg transition-all duration-200 ease-in-out w-full"
               aria-label="Submit your bid"
             >
               Bid Now
