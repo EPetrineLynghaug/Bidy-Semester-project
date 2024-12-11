@@ -1,15 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Satoshi:wght@400;500;700&display=swap");
 
-@tailwind base;
-
-@tailwind components;
-
-@tailwind utilities;
-
-body{
-  font-family: Satoshi, sans-serif;
-}
-
 /*
 ! tailwindcss v3.0.0 | MIT License | https://tailwindcss.com
 */
@@ -1564,45 +1554,53 @@ Ensure the default browser behavior of the `hidden` attribute.
   -webkit-line-clamp: 2;
 }
 
-/* Footer Container */
+body{
+  font-family: Satoshi, sans-serif;
+}
 
 .footer{
   position: relative;
-  margin-top: 3rem;
   --tw-bg-opacity: 1;
-  background-color: rgb(30 58 138 / var(--tw-bg-opacity));
+  background-color: rgb(21 101 192 / var(--tw-bg-opacity));
   text-align: center;
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
   padding: 50px 20px 20px;
+  margin-top: 80px;
 }
+
+/* Back to Top Button */
 
 .back-to-top{
   position: absolute;
-  top: -40px;
+  top: -60px;
   left: 50%;
   z-index: 10;
   display: flex;
-  height: 60px;
-  width: 120px;
+  height: 90px;
+  width: 180px;
   --tw-translate-x: -50%;
   transform: var(--tw-transform);
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  border-top-left-radius: 9999px;
-  border-top-right-radius: 9999px;
   --tw-bg-opacity: 1;
-  background-color: rgb(30 58 138 / var(--tw-bg-opacity));
+  background-color: rgb(21 101 192 / var(--tw-bg-opacity));
+  border-radius: 120px 120px 0 0;
 }
 
+/* Arrow Icon */
+
 .arrow-icon{
-  height: 2.25rem;
-  width: 2.25rem;
+  height: 3rem;
+  width: 3rem;
 }
+
+/* Footer Content */
 
 .footer-content{
   margin-top: 4rem;
+  /* Holder avstanden til innholdet internt i footeren */
 }
 
 .footer-content p{
@@ -1618,7 +1616,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
   text-decoration: none;
-  /* Custom style siden @apply ikke støtter dette */
 }
 
 .footer-content .email-link:hover{
@@ -2161,4 +2158,3 @@ Ensure the default browser behavior of the `hidden` attribute.
     line-height: 2rem;
   }
 }
-

@@ -6,29 +6,28 @@
 body {
   @apply font-sans;
 }
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
-/* Footer Container */
+
 .footer {
-  @apply relative bg-blue-900 text-white text-center mt-12;
-  padding: 50px 20px 20px; 
+  @apply relative bg-primary text-white text-center;
+  padding: 50px 20px 20px;
+  margin-top: 80px; 
 }
 
-
+/* Back to Top Button */
 .back-to-top {
-  @apply absolute top-[-40px] left-1/2 transform -translate-x-1/2 w-[120px] h-[60px] bg-blue-900 rounded-t-full flex items-center justify-center cursor-pointer z-10;
+  @apply absolute top-[-60px] left-1/2 transform -translate-x-1/2 w-[180px] h-[90px] bg-primary flex items-center justify-center cursor-pointer z-10;
+  border-radius: 120px 120px 0 0;
 }
 
-
+/* Arrow Icon */
 .arrow-icon {
-  @apply w-9 h-9;
+  @apply w-12 h-12; 
 }
 
-
+/* Footer Content */
 .footer-content {
-  @apply mt-16;
+  @apply mt-16; /* Holder avstanden til innholdet internt i footeren */
 }
 
 .footer-content p {
@@ -37,10 +36,9 @@ body {
 
 .footer-content .email-link {
   @apply text-sm block mt-1 text-white;
-  text-decoration: none; /* Custom style siden @apply ikke støtter dette */
+  text-decoration: none;
 }
 
 .footer-content .email-link:hover {
   @apply underline;
 }
-
