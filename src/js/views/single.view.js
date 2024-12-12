@@ -119,20 +119,6 @@ function updateBalance(bidAmount) {
   }
 }
 
-// Reset form inputs after successful submission
-function resetBidForm(form) {
-  const radioButtons = form.querySelectorAll('input[name="bid-amount"]');
-  const customBidInput = form.querySelector("#custom-bid");
-
-  // Uncheck all radio buttons
-  radioButtons.forEach((radio) => (radio.checked = false));
-
-  // Clear custom bid input
-  if (customBidInput) {
-    customBidInput.value = "";
-  }
-}
-
 // Set up bid form to handle submissions
 function setupBidForm(cardId) {
   const bidForm = document.querySelector("#bid-form");
@@ -163,7 +149,7 @@ function setupBidForm(cardId) {
         updateBalance(bidAmount);
 
         // Clear form inputs
-        resetBidForm(bidForm);
+        clearFormInputs(bidForm);
 
         const updatedAuctionData = await fetchSingleCardDetails(cardId);
         renderAuctionDetails(updatedAuctionData, true);
@@ -187,6 +173,20 @@ function setupBidForm(cardId) {
       bidNowButton.textContent = originalText;
     }
   });
+}
+
+// Clear form inputs after successful submission
+function clearFormInputs(form) {
+  const radioButtons = form.querySelectorAll('input[name="bid-amount"]');
+  const customBidInput = form.querySelector("#custom-bid");
+
+  // Reset radio buttons
+  radioButtons.forEach((radio) => (radio.checked = false));
+
+  // Reset custom bid input
+  if (customBidInput) {
+    customBidInput.value = "";
+  }
 }
 
 // Get the bid amount from the form
