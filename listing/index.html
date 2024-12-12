@@ -18,8 +18,10 @@
     />
   </head>
 
-   <body class="bg-[#FAFAFA] font-satoshi">
-    <header class="bg-[#0D47A1] text-white p-4 shadow-xl">
+  <body class="bg-[#FAFAFA] font-satoshi">
+    <header
+      class="bg-[#0D47A1] text-white p-4 shadow-xl flex justify-between items-center"
+    >
       <nav
         id="auth-links"
         class="flex space-x-4"
@@ -28,7 +30,7 @@
     </header>
 
     <div
-      class="relative w-full h-[350px] md:h-[450px] lg:h-[600px]"
+      class="relative w-full h-[350px] sm:h-[400px] md:h-[450px] lg:h-[600px]"
       role="region"
       aria-label="Image Carousel"
     >
@@ -40,7 +42,7 @@
 
       <span
         id="carousel-label"
-        class="absolute bottom-4 left-4 bg-[#737373] text-white text-xs md:text-sm lg:text-base px-4 py-2 rounded-full shadow-[0_4px_6px_rgba(0,0,0,0.3)] border border-gray-600 hover:shadow-[0_8px_12px_rgba(0,0,0,0.3)] transition-all duration-200 ease-out"
+        class="absolute bottom-4 left-4 bg-[#737373] text-white text-xs md:text-sm lg:text-base px-4 py-2 rounded-full shadow-lg border border-gray-600 hover:shadow-xl transition-all duration-200 ease-out"
         aria-live="polite"
       >
         1/4
@@ -48,16 +50,19 @@
 
       <button
         onclick="window.location.href='/';"
-        class="absolute top-4 left-4 bg-white text-gray-600 w-10 h-10 rounded-full shadow-[0_4px_8px_rgba(0,0,0,0.2)] flex items-center justify-center border border-gray-300 hover:shadow-[0_6px_12px_rgba(0,0,0,0.3)] hover:scale-105 active:scale-95 active:shadow-[0_2px_4px_rgba(0,0,0,0.2)] transition-all duration-200 ease-in-out md:top-6 md:left-6 md:w-12 md:h-12 lg:top-8 lg:left-8 lg:w-14 lg:h-14"
+        class="absolute top-4 left-4 bg-white text-gray-600 w-10 h-10 rounded-full shadow-md flex items-center justify-center border border-gray-300 hover:shadow-lg hover:scale-105 active:scale-95 active:shadow-sm transition-all duration-200 ease-in-out md:top-6 md:left-6 md:w-12 md:h-12 lg:top-8 lg:left-8 lg:w-14 lg:h-14"
         title="Back to Index"
         aria-label="Back to Index"
       >
         <i class="ph ph-caret-left text-xl md:text-2xl lg:text-3xl"></i>
       </button>
     </div>
-    <main class="details-section flex flex-col gap-8 p-8 lg:p-12" aria-labelledby="auction-title">
+
+    <main
+      class="details-section max-w-screen-xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16 mt-8 md:mt-16 grid grid-cols-1 md:grid-cols-3 gap-6"
+    >
       <div
-        class="seller-info flex items-center gap-4 p-4 border-b pb-4 shadow-md rounded-lg bg-white"
+        class="seller-info col-span-1 md:col-span-2 flex items-center gap-4 p-4 border-b pb-4 shadow-md rounded-lg bg-white"
         role="region"
         aria-labelledby="seller-name"
       >
@@ -65,7 +70,7 @@
           id="seller-avatar"
           src="https://via.placeholder.com/50"
           alt="Seller Avatar"
-          class="w-12 h-12 rounded-full shadow-lg"
+          class="w-12 h-12 md:w-16 md:h-16 rounded-full shadow-lg"
         />
         <p id="seller-name" class="text-lg font-semibold text-gray-800">
           Loading seller name...
@@ -73,13 +78,13 @@
       </div>
 
       <section
-        class="auction-grid grid grid-cols-1 gap-6"
+        class="auction-grid col-span-1 md:col-span-2"
         aria-labelledby="auction-title"
       >
-        <header class="auction-header">
+        <header class="auction-header mb-6">
           <h2
             id="auction-title"
-            class="text-2xl lg:text-3xl font-bold text-gray-800 mb-2"
+            class="text-2xl md:text-3xl font-bold text-gray-800 mb-2"
             aria-live="polite"
           >
             Loading...
@@ -123,24 +128,22 @@
             </p>
           </div>
         </div>
-        </section>
+      </section>
 
-      <!-- Your Balance Box (Visible on larger screens) -->
-  <div class="flex items-center gap-3 md:ml-auto mt-4 md:mt-0 md:w-[300px]">
-    <div
-      class="balance-box p-6 bg-blue-100 text-blue-800 rounded-lg shadow-md w-full max-w-[300px]"
-      id="balance-box"
-      style="display: none"
-      aria-live="polite"
-    >
-      <h3 class="text-lg font-semibold">Your Balance</h3>
-      <p class="text-xl mt-2">
-        <i class="ph ph-currency-circle-dollar text-2xl" aria-hidden="true"></i>
-        <span id="profile-coins">Loading...</span>
-      </p>
-    </div>
-  </div>
-</div>
+      <div
+        class="balance-box col-span-1 hidden md:block bg-blue-100 text-blue-800 rounded-lg shadow-md p-6 max-w-[300px] mx-auto"
+        id="balance-box"
+        aria-live="polite"
+      >
+        <h3 class="text-lg font-semibold">Your Balance</h3>
+        <p class="text-xl mt-2">
+          <i
+            class="ph ph-currency-circle-dollar text-2xl"
+            aria-hidden="true"
+          ></i>
+          <span id="profile-coins">Loading...</span>
+        </p>
+      </div>
     </main>
 
     <section
@@ -149,7 +152,7 @@
     >
       <h2
         id="place-your-bid"
-        class="text-2xl font-bold mb-6 text-gray-800 text-center max-w-[90%] mx-auto leading-tight"
+        class="text-2xl font-bold mb-6 text-gray-800 text-center leading-tight"
       >
         Place Your Bid
       </h2>
@@ -159,9 +162,10 @@
         aria-describedby="bid-options"
         class="flex flex-col gap-6"
       >
+        <!-- Radio Options -->
         <div
           id="bid-options"
-          class="info-card-options grid grid-cols-1 gap-4"
+          class="info-card-options grid grid-cols-1 sm:grid-cols-2 gap-4"
           aria-labelledby="bid-options"
         >
           <div class="flex items-center gap-3">
@@ -177,8 +181,9 @@
               for="bid-5"
               id="label-bid-5"
               class="text-sm md:text-base text-gray-700 cursor-pointer"
-              >5 Coins</label
             >
+              5 Coins
+            </label>
           </div>
           <div class="flex items-center gap-3">
             <input
@@ -193,8 +198,9 @@
               for="bid-10"
               id="label-bid-10"
               class="text-sm md:text-base text-gray-700 cursor-pointer"
-              >10 Coins</label
             >
+              10 Coins
+            </label>
           </div>
           <div class="flex items-center gap-3">
             <input
@@ -209,15 +215,37 @@
               for="bid-15"
               id="label-bid-15"
               class="text-sm md:text-base text-gray-700 cursor-pointer"
-              >15 Coins</label
             >
+              15 Coins
+            </label>
+          </div>
+          <div class="flex items-center gap-3">
+            <input
+              type="radio"
+              id="bid-20"
+              name="bid-amount"
+              value="20"
+              class="cursor-pointer focus:ring focus:ring-blue-300 h-6 w-6"
+              aria-labelledby="label-bid-20"
+            />
+            <label
+              for="bid-20"
+              id="label-bid-20"
+              class="text-sm md:text-base text-gray-700 cursor-pointer"
+            >
+              20 Coins
+            </label>
           </div>
         </div>
+
+        <!-- Divider -->
         <div class="divider border-t border-gray-300"></div>
+
+        <!-- Custom Bid -->
         <div class="info-card-actions flex flex-col gap-4">
-          <label for="custom-bid" class="text-sm md:text-base text-gray-700"
-            >Or Enter Custom Bid:</label
-          >
+          <label for="custom-bid" class="text-sm md:text-base text-gray-700">
+            Or Enter Custom Bid:
+          </label>
           <div
             class="info-card-actions-input flex flex-col gap-4 items-stretch"
           >
@@ -241,7 +269,6 @@
         </div>
       </form>
     </section>
-
     <section
       class="bid-history-section mt-8 mb-20 border rounded-lg p-6 bg-white shadow-lg md:max-w-screen-lg lg:max-w-screen-xl mx-auto"
       aria-labelledby="bid-history-title"
@@ -300,7 +327,6 @@
         </table>
       </div>
     </section>
-
-    <footer id="footer-container" role="contentinfo"></footer>
+    <footer id="footer-container"></footer>
   </body>
 </html>
