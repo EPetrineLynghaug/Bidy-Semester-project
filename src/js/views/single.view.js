@@ -102,6 +102,24 @@ function handleError(error) {
   ).innerHTML = `<p class="text-red-500">Error loading page: ${error.message}</p>`;
 }
 
+// Update user balance dynamically
+function updateBalance(bidAmount) {
+  const balanceElement = document.querySelector("#profile-coins");
+  if (balanceElement) {
+    const currentBalance = parseInt(balanceElement.textContent, 10);
+    if (!isNaN(currentBalance) && currentBalance >= bidAmount) {
+      balanceElement.textContent = `${currentBalance - bidAmount} coins`;
+    } else {
+      showCustomAlert(
+        "Insufficient balance to place this bid.",
+        "error",
+        document.querySelector("#bid-form")
+      );
+    }
+  }
+}
+
+// Set up bid form to handle submissions
 function setupBidForm(cardId) {
   const bidForm = document.querySelector("#bid-form");
   const customBidInput = document.querySelector("#custom-bid");
@@ -122,6 +140,7 @@ function setupBidForm(cardId) {
           "success",
           bidForm
         );
+        updateBalance(bidAmount); // Subtract bid amount from balance
         const updatedAuctionData = await fetchSingleCardDetails(cardId);
         renderAuctionDetails(updatedAuctionData, true);
       } else {
@@ -142,6 +161,7 @@ function setupBidForm(cardId) {
   });
 }
 
+// Get the bid amount from the form
 function getBidAmount(customBidInput) {
   const selectedBid = document.querySelector(
     'input[name="bid-amount"]:checked'
