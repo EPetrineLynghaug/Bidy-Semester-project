@@ -19,9 +19,7 @@
   </head>
 
   <body class="bg-[#FAFAFA] font-satoshi">
-    <header
-      class="bg-[#0D47A1] text-white p-4 shadow-xl flex justify-between items-center"
-    >
+    <header class="bg-[#0D47A1] text-white p-4 shadow-xl">
       <nav
         id="auth-links"
         class="flex space-x-4"
@@ -148,192 +146,195 @@
         </div>
       </section>
 
-      <!-- Your Balance Box -->
       <div
-        class="balance-box mt-8 sm:mt-10 p-4 sm:p-6 md:p-8 bg-blue-100 text-blue-800 rounded-lg shadow-lg w-full max-w-md mx-auto"
+        class="balance-box mt-6 sm:mt-8 p-4 bg-blue-50 text-blue-900 rounded-md shadow-md w-full max-w-sm mx-auto flex flex-col items-center"
         id="balance-box"
         aria-live="polite"
       >
-        <h3 class="text-lg sm:text-xl md:text-2xl font-semibold text-center">
+        <h3 class="text-lg sm:text-xl font-medium text-center mb-2">
           Your Balance
         </h3>
-        <p
-          class="text-xl sm:text-2xl md:text-3xl mt-4 flex items-center gap-2 justify-center"
-        >
+        <p class="text-xl sm:text-2xl mt-2 flex items-center gap-1">
           <i
-            class="ph ph-currency-circle-dollar text-2xl sm:text-3xl md:text-4xl"
+            class="ph ph-currency-circle-dollar text-blue-700 text-2xl sm:text-3xl"
             aria-hidden="true"
           ></i>
-          <span id="profile-coins">Loading...</span>
+          <span id="profile-coins" class="font-semibold">Loading...</span>
         </p>
       </div>
     </main>
-    <section
-      class="info-card mt-8 mb-16 border rounded-lg p-4 sm:p-6 md:p-8 bg-white shadow-lg transition-all duration-300 ease-in-out hover:shadow-xl max-w-md md:max-w-lg lg:max-w-xl mx-auto"
-      aria-labelledby="place-your-bid"
+    <div
+      class="bid-section-container grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8 max-w-screen-lg mx-auto mb-20"
     >
-      <h2
-        id="place-your-bid"
-        class="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-5 text-gray-800 text-center leading-tight"
+      <!-- Place Your Bid -->
+      <section
+        class="info-card border rounded-lg p-4 sm:p-6 md:p-8 bg-white shadow-lg transition-all duration-300 ease-in-out hover:shadow-xl max-w-md mx-auto lg:mx-0"
+        aria-labelledby="place-your-bid"
       >
-        Place Your Bid
-      </h2>
-      <form
-        name="bid-form"
-        id="bid-form"
-        aria-describedby="bid-options"
-        class="flex flex-col gap-4"
-      >
-        <!-- Radio Options -->
-        <div
-          id="bid-options"
-          class="info-card-options grid grid-cols-1 gap-4"
-          aria-labelledby="bid-options"
+        <h2
+          id="place-your-bid"
+          class="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-5 text-gray-800 text-center leading-tight"
         >
-          <div class="flex items-center gap-3">
-            <input
-              type="radio"
-              id="bid-5"
-              name="bid-amount"
-              value="5"
-              class="cursor-pointer focus:ring focus:ring-blue-300 h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7"
-              aria-labelledby="label-bid-5"
-            />
-            <label
-              for="bid-5"
-              id="label-bid-5"
-              class="text-base sm:text-lg md:text-xl text-gray-700 cursor-pointer"
-            >
-              5 Coins
-            </label>
-          </div>
-          <div class="flex items-center gap-3">
-            <input
-              type="radio"
-              id="bid-10"
-              name="bid-amount"
-              value="10"
-              class="cursor-pointer focus:ring focus:ring-blue-300 h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7"
-              aria-labelledby="label-bid-10"
-            />
-            <label
-              for="bid-10"
-              id="label-bid-10"
-              class="text-base sm:text-lg md:text-xl text-gray-700 cursor-pointer"
-            >
-              10 Coins
-            </label>
-          </div>
-          <div class="flex items-center gap-3">
-            <input
-              type="radio"
-              id="bid-15"
-              name="bid-amount"
-              value="15"
-              class="cursor-pointer focus:ring focus:ring-blue-300 h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7"
-              aria-labelledby="label-bid-15"
-            />
-            <label
-              for="bid-15"
-              id="label-bid-15"
-              class="text-base sm:text-lg md:text-xl text-gray-700 cursor-pointer"
-            >
-              15 Coins
-            </label>
-          </div>
-        </div>
-
-        <!-- Divider -->
-        <div class="divider border-t border-gray-300"></div>
-
-        <!-- Custom Bid -->
-        <div class="info-card-actions flex flex-col gap-4">
-          <label
-            for="custom-bid"
-            class="text-base sm:text-lg md:text-xl text-gray-700"
-          >
-            Or Enter Custom Bid:
-          </label>
-          <div class="info-card-actions-input flex flex-col gap-4">
-            <input
-              type="number"
-              class="input border rounded-lg p-3 sm:p-4 md:p-5 focus:ring focus:ring-blue-300 text-base sm:text-lg md:text-xl"
-              id="custom-bid"
-              name="custom-bid"
-              placeholder="Enter custom amount"
-              min="1"
-              aria-label="Custom bid amount"
-            />
-            <button
-              type="submit"
-              class="btn btn-basic px-4 py-2 sm:py-3 md:py-4 sm:text-lg md:text-xl bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 hover:shadow-lg transition-all duration-200 ease-in-out w-full"
-              aria-label="Submit your bid"
-            >
-              Bid Now
-            </button>
-          </div>
-        </div>
-      </form>
-    </section>
-
-    <section
-      class="bid-history-section mt-8 mb-20 border rounded-lg p-4 sm:p-6 md:p-8 bg-white shadow-lg md:max-w-3xl lg:max-w-4xl mx-auto"
-      aria-labelledby="bid-history-title"
-    >
-      <h3
-        id="bid-history-title"
-        class="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 mb-4 sm:mb-6 text-center"
-      >
-        Bid History
-      </h3>
-      <div class="overflow-x-auto">
-        <table
-          class="w-full border-collapse table-auto text-sm sm:text-base md:text-lg"
-          role="grid"
-          aria-describedby="bid-history-title"
+          Place Your Bid
+        </h2>
+        <form
+          name="bid-form"
+          id="bid-form"
+          aria-describedby="bid-options"
+          class="flex flex-col gap-4"
         >
-          <thead>
-            <tr class="bg-gray-100">
-              <th
-                scope="col"
-                class="px-3 py-2 sm:px-4 sm:py-3 text-left font-medium text-gray-600 border"
-              >
-                Bid Amount
-              </th>
-              <th
-                scope="col"
-                class="px-3 py-2 sm:px-4 sm:py-3 text-left font-medium text-gray-600 border"
-              >
-                Bidder
-              </th>
-              <th
-                scope="col"
-                class="px-3 py-2 sm:px-4 sm:py-3 text-left font-medium text-gray-600 border"
-              >
-                Date
-              </th>
-              <th
-                scope="col"
-                class="px-3 py-2 sm:px-4 sm:py-3 text-left font-medium text-gray-600 border"
-              >
-                Time
-              </th>
-            </tr>
-          </thead>
-          <tbody
-            id="bid-history-body"
-            role="rowgroup"
-            class="divide-y divide-gray-200"
+          <!-- Radio Options -->
+          <div
+            id="bid-options"
+            class="info-card-options grid grid-cols-1 gap-4"
+            aria-labelledby="bid-options"
           >
-            <tr>
-              <td colspan="4" class="text-center py-4 text-gray-500">
-                Loading bid history...
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+            <div class="flex items-center gap-3">
+              <input
+                type="radio"
+                id="bid-5"
+                name="bid-amount"
+                value="5"
+                class="cursor-pointer focus:ring focus:ring-blue-300 h-5 w-5 sm:h-6 sm:w-6"
+                aria-labelledby="label-bid-5"
+              />
+              <label
+                for="bid-5"
+                id="label-bid-5"
+                class="text-base sm:text-lg md:text-xl text-gray-700 cursor-pointer"
+              >
+                5 Coins
+              </label>
+            </div>
+            <div class="flex items-center gap-3">
+              <input
+                type="radio"
+                id="bid-10"
+                name="bid-amount"
+                value="10"
+                class="cursor-pointer focus:ring focus:ring-blue-300 h-5 w-5 sm:h-6 sm:w-6"
+                aria-labelledby="label-bid-10"
+              />
+              <label
+                for="bid-10"
+                id="label-bid-10"
+                class="text-base sm:text-lg md:text-xl text-gray-700 cursor-pointer"
+              >
+                10 Coins
+              </label>
+            </div>
+            <div class="flex items-center gap-3">
+              <input
+                type="radio"
+                id="bid-15"
+                name="bid-amount"
+                value="15"
+                class="cursor-pointer focus:ring focus:ring-blue-300 h-5 w-5 sm:h-6 sm:w-6"
+                aria-labelledby="label-bid-15"
+              />
+              <label
+                for="bid-15"
+                id="label-bid-15"
+                class="text-base sm:text-lg md:text-xl text-gray-700 cursor-pointer"
+              >
+                15 Coins
+              </label>
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div class="divider border-t border-gray-300"></div>
+
+          <!-- Custom Bid -->
+          <div class="info-card-actions flex flex-col gap-4">
+            <label
+              for="custom-bid"
+              class="text-base sm:text-lg md:text-xl text-gray-700"
+            >
+              Or Enter Custom Bid:
+            </label>
+            <div class="info-card-actions-input flex flex-col gap-4">
+              <input
+                type="number"
+                class="input border rounded-lg p-3 sm:p-4 md:p-5 focus:ring focus:ring-blue-300 text-base sm:text-lg"
+                id="custom-bid"
+                name="custom-bid"
+                placeholder="Enter custom amount"
+                min="1"
+                aria-label="Custom bid amount"
+              />
+              <button
+                type="submit"
+                class="btn btn-basic px-4 py-2 sm:py-3 md:py-4 sm:text-lg md:text-xl bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 hover:shadow-lg transition-all duration-200 ease-in-out w-full"
+                aria-label="Submit your bid"
+              >
+                Bid Now
+              </button>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <!-- Bid History -->
+      <section
+        class="bid-history-section border rounded-lg p-4 sm:p-6 md:p-8 bg-white shadow-lg max-w-md mx-auto lg:mx-0"
+        aria-labelledby="bid-history-title"
+      >
+        <h3
+          id="bid-history-title"
+          class="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 mb-4 sm:mb-6 text-center"
+        >
+          Bid History
+        </h3>
+        <div class="overflow-x-auto">
+          <table
+            class="w-full border-collapse table-auto text-sm sm:text-base md:text-lg"
+            role="grid"
+            aria-describedby="bid-history-title"
+          >
+            <thead>
+              <tr class="bg-gray-100 mb-20">
+                <th
+                  scope="col"
+                  class="px-3 py-2 sm:px-4 sm:py-3 text-left font-medium text-gray-600 border"
+                >
+                  Bid Amount
+                </th>
+                <th
+                  scope="col"
+                  class="px-3 py-2 sm:px-4 sm:py-3 text-left font-medium text-gray-600 border"
+                >
+                  Bidder
+                </th>
+                <th
+                  scope="col"
+                  class="px-3 py-2 sm:px-4 sm:py-3 text-left font-medium text-gray-600 border"
+                >
+                  Date
+                </th>
+                <th
+                  scope="col"
+                  class="px-3 py-2 sm:px-4 sm:py-3 text-left font-medium text-gray-600 border"
+                >
+                  Time
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              id="bid-history-body"
+              role="rowgroup"
+              class="divide-y divide-gray-200"
+            >
+              <tr>
+                <td colspan="4" class="text-center py-4 text-gray-500">
+                  Loading bid history...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
     <footer id="footer-container"></footer>
   </body>
 </html>
