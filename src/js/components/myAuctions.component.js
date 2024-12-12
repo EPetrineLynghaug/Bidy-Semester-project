@@ -60,7 +60,7 @@ export function myAuctions(listing, editAllowed) {
       <p class="text-base sm:text-lg lg:text-xl text-gray-700 leading-snug font-normal line-clamp-2 sm:line-clamp-none">
         ${
           mobileDescription
-            ? mobileDescription.split(" ").slice(0, 5).join(" ") + "..."
+            ? mobileDescription.split(" ").slice(0, 3).join(" ") + "..."
             : "No description available."
         }
       </p>
