@@ -429,7 +429,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.divide-y > *, .border, .border-0, .border-2, .border-b, .border-t, .border-t-2, .border-b-2{
+.divide-y > *, .border, .border-0, .border-2, .border-4, .border-b, .border-t, .border-t-2, .border-b-2{
   --tw-border-opacity: 1;
   border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
@@ -674,6 +674,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 0.75rem;
 }
 
+.mb-8{
+  margin-bottom: 2rem;
+}
+
 .mb-1{
   margin-bottom: 0.25rem;
 }
@@ -688,6 +692,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .mt-1{
   margin-top: 0.25rem;
+}
+
+.-mt-14{
+  margin-top: -3.5rem;
 }
 
 .block{
@@ -935,6 +943,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   justify-content: space-between;
 }
 
+.justify-around{
+  justify-content: space-around;
+}
+
 .justify-evenly{
   justify-content: space-evenly;
 }
@@ -1042,6 +1054,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .border-2{
   border-width: 2px;
+}
+
+.border-4{
+  border-width: 4px;
 }
 
 .border-b{
@@ -1305,6 +1321,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .pb-4{
   padding-bottom: 1rem;
+}
+
+.pb-12{
+  padding-bottom: 3rem;
+}
+
+.pb-8{
+  padding-bottom: 2rem;
 }
 
 .text-left{
@@ -1594,6 +1618,13 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+}
+
+.line-clamp-3{
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 
 /* Sikrer at siden fyller skjermen */
@@ -2061,6 +2092,10 @@ html, body{
     margin-left: auto;
   }
 
+  .md\:-mt-20{
+    margin-top: -5rem;
+  }
+
   .md\:inline-block{
     display: inline-block;
   }
@@ -2145,6 +2180,12 @@ html, body{
     gap: 1rem;
   }
 
+  .md\:space-y-0 > :not([hidden]) ~ :not([hidden]){
+    --tw-space-y-reverse: 0;
+    margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(0px * var(--tw-space-y-reverse));
+  }
+
   .md\:rounded-none{
     border-radius: 0px;
   }
@@ -2178,6 +2219,10 @@ html, body{
 
   .md\:pb-6{
     padding-bottom: 1.5rem;
+  }
+
+  .md\:pl-8{
+    padding-left: 2rem;
   }
 
   .md\:text-left{
@@ -2222,6 +2267,11 @@ html, body{
   .md\:text-base{
     font-size: 1rem;
     line-height: 1.5rem;
+  }
+
+  .md\:text-4xl{
+    font-size: 2.25rem;
+    line-height: 2.5rem;
   }
 
   .md\:leading-normal{

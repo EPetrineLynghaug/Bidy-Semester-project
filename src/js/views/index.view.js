@@ -3,7 +3,7 @@ import { renderAuthLinks } from "../components/authLinks.js";
 import { listingCardComponent } from "../components/listingCard.components.js";
 import { fetchAuctionListings } from "../api/auctionListings.api.js";
 import { openSearchModal } from "../components/search-modal.component.js";
-import { renderFooter, scrollToTop } from "../components/footer.components.js";
+import { renderFooter } from "../components/footer.components.js";
 
 function renderAuctionListings(container, listings) {
   container.innerHTML = "";

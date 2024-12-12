@@ -64,11 +64,10 @@ export function myAuctions(listing, editAllowed) {
             : "No description available."
         }
       </p>
-      <p class="text-sm sm:text-base lg:text-lg text-gray-800 font-medium">
-        $${currentBid.toFixed(
-          2
-        )} <span class="text-gray-500">/ Current bid</span>
-      </p>
+  <p class="text-sm sm:text-base lg:text-lg text-gray-800 font-medium flex items-center gap-1">
+  <i class="ph ph-currency-circle-dollar text-gray-800 text-xl"></i>
+  ${currentBid.toFixed(2)} <span class="text-gray-500">/ Current bid</span>
+</p>
     </div>
 
     <!-- Knappeseksjon -->
