@@ -163,12 +163,14 @@
         </p>
       </div>
     </main>
+
+    <!-- Place Your Bid -->
     <div
-      class="bid-section-container grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8 max-w-screen-lg mx-auto mb-20"
+      class="bid-section-container grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8 max-w-screen-lg mx-auto mb-20"
     >
       <!-- Place Your Bid -->
       <section
-        class="info-card border rounded-lg p-4 sm:p-6 md:p-8 bg-white shadow-lg transition-all duration-300 ease-in-out hover:shadow-xl max-w-md mx-auto lg:mx-0"
+        class="info-card border rounded-lg p-4 sm:p-6 md:p-8 bg-white shadow-lg transition-all duration-300 ease-in-out hover:shadow-xl max-w-md w-full lg:w-auto mx-auto lg:mx-0"
         aria-labelledby="place-your-bid"
       >
         <h2
@@ -277,44 +279,46 @@
 
       <!-- Bid History -->
       <section
-        class="bid-history-section border rounded-lg p-4 sm:p-6 md:p-8 bg-white shadow-lg max-w-md mx-auto lg:mx-0"
+        class="bid-history-section border rounded-lg p-2 sm:p-4 bg-white shadow-lg w-full max-w-md lg:w-auto mx-auto lg:mx-0"
         aria-labelledby="bid-history-title"
       >
         <h3
           id="bid-history-title"
-          class="text-lg sm:text-xl md:text-2xl font-bold text-gray-800 mb-4 sm:mb-6 text-center"
+          class="text-sm font-bold text-gray-800 mb-3 text-center"
         >
           Bid History
         </h3>
-        <div class="overflow-x-auto">
+        <div
+          class="overflow-y-auto max-h-[300px] scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100"
+        >
           <table
-            class="w-full border-collapse table-auto text-sm sm:text-base md:text-lg"
+            class="w-full border-collapse table-auto text-xs sm:text-sm"
             role="grid"
             aria-describedby="bid-history-title"
           >
             <thead>
-              <tr class="bg-gray-100 mb-20">
+              <tr class="bg-gray-100">
                 <th
                   scope="col"
-                  class="px-3 py-2 sm:px-4 sm:py-3 text-left font-medium text-gray-600 border"
+                  class="px-1 py-1 text-left font-medium text-gray-600 border"
                 >
                   Bid Amount
                 </th>
                 <th
                   scope="col"
-                  class="px-3 py-2 sm:px-4 sm:py-3 text-left font-medium text-gray-600 border"
+                  class="px-1 py-1 text-left font-medium text-gray-600 border"
                 >
                   Bidder
                 </th>
                 <th
                   scope="col"
-                  class="px-3 py-2 sm:px-4 sm:py-3 text-left font-medium text-gray-600 border"
+                  class="px-1 py-1 text-left font-medium text-gray-600 border"
                 >
                   Date
                 </th>
                 <th
                   scope="col"
-                  class="px-3 py-2 sm:px-4 sm:py-3 text-left font-medium text-gray-600 border"
+                  class="px-1 py-1 text-left font-medium text-gray-600 border"
                 >
                   Time
                 </th>
@@ -326,7 +330,7 @@
               class="divide-y divide-gray-200"
             >
               <tr>
-                <td colspan="4" class="text-center py-4 text-gray-500">
+                <td colspan="4" class="text-center py-2 text-gray-500">
                   Loading bid history...
                 </td>
               </tr>
@@ -335,6 +339,7 @@
         </div>
       </section>
     </div>
+
     <footer id="footer-container"></footer>
   </body>
 </html>
