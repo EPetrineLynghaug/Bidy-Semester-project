@@ -52,13 +52,15 @@ const createToggleForOlderBids = (bidHistoryBody, remainingBids) => {
 };
 
 // Render auction details and bid history
+// Render auction details and bid history
 export function renderAuctionDetails(auctionData) {
   if (!auctionData) return;
 
-  let currentBid =
-    auctionData.bids.length > 0
-      ? auctionData.bids[auctionData.bids.length - 1].amount
-      : 0;
+  // Sort bids by amount in descending order to get the highest bids
+  const sortedBids = auctionData.bids.sort((a, b) => b.amount - a.amount);
+
+  // Get the highest bid for the current bid display
+  const currentBid = sortedBids.length > 0 ? sortedBids[0].amount : 0;
 
   // Update auction data elements
   updateElement("#seller-name", auctionData.seller?.name || "Unknown Seller");
@@ -109,8 +111,7 @@ export function renderAuctionDetails(auctionData) {
 
   bidHistoryBody.innerHTML = "";
 
-  if (auctionData.bids && auctionData.bids.length > 0) {
-    const sortedBids = auctionData.bids.sort((a, b) => b.amount - a.amount);
+  if (sortedBids.length > 0) {
     const topBids = sortedBids.slice(0, 3);
     const remainingBids = sortedBids.slice(3);
 
