@@ -8,8 +8,7 @@ import { createNewAuction } from "./newauction-modal.component.js";
 
 export function renderAuthLinks() {
   const authLinks = document.getElementById("auth-links");
-  authLinks.className = "relative";
-
+  authLinks.className = "relative flex items-center justify-between";
   let username = "";
   const token = getToken();
   if (token) {
@@ -31,7 +30,6 @@ export function renderAuthLinks() {
 
   const meny = [...commonMenu, ...authMenu]; // Kombiner felles og spesifikk meny
 
-  // Clear existing content
   authLinks.innerHTML = "";
 
   // Hamburger Button
@@ -109,6 +107,14 @@ export function renderAuthLinks() {
   });
 
   authLinks.appendChild(menuContainer);
+
+  // Add a logo/image to the right side
+  const logo = document.createElement("img");
+  logo.src = "/src/media/processed_mobile-removebg-preview.png";
+  logo.alt = "Logo";
+  logo.className = "h-16 w-auto ml-auto mr-8";
+  logo.style.flexShrink = "0";
+  authLinks.appendChild(logo);
 }
 
 function handleLogout() {
