@@ -2,8 +2,11 @@
   "name": "your-project-name",
   "version": "1.0.0",
   "scripts": {
-    "build:css": "tailwindcss -i ./src/css/input.css -o  ./src/css/output.css --watch",
-    "build:css:prod": "tailwindcss -i ./src/css/input.css -o  ./src/css/output.css --minify"
+    "build:css": "tailwindcss -i ./src/css/input.css -o ./src/css/output.css --watch",
+    "build:css:prod": "tailwindcss -i ./src/css/input.css -o ./src/css/output.css --minify",
+    "serve": "browser-sync start --server --files './src/**/*' --watch",
+    "start": "npm run build:css & npm run serve",
+    "build": "npm run build:css:prod"
   },
   "devDependencies": {
     "@tailwindcss/line-clamp": "^0.4.4",
