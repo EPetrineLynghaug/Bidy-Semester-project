@@ -43,5 +43,17 @@ export function renderFooter() {
     if (backToTopButton) {
       backToTopButton.addEventListener("click", scrollToTop);
     }
+
+    // Last inn Phosphor Icons dynamisk hvis ikke allerede inkludert
+    if (
+      !document.querySelector('script[src="https://unpkg.com/phosphor-icons"]')
+    ) {
+      const script = document.createElement("script");
+      script.src = "https://unpkg.com/phosphor-icons";
+      script.defer = true;
+      document.body.appendChild(script);
+    }
   }
 }
+
+renderFooter();
