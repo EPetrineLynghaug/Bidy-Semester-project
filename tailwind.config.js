@@ -1,11 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./*.html", // Inkluder HTML-filer i rotmappen
-    "./src/**/*.{js,jsx,ts,tsx,html}", // Inkluderer alle filer i src-mappen
-    "./profile/**/*.html", // HTML-filer i profile-mappen
-    "./auth/**/*.html", // HTML-filer i auth-mappen
-    "./listing/**/*.html", // HTML-filer i listing-mappen
+    "./*.html", // Inkluderer HTML-filer i rotmappen (f.eks., index.html)
+    "./src/**/*.{js,jsx,ts,tsx,html}", // Inkluderer alle relevante filer i src-mappen
+    "./profile/**/*.html", // Inkluderer alle HTML-filer i profile-mappen
+    // "./auth/**/**/*.html", // Inkluderer filer i auth-mappen hvis relevant
+    "./auth/**/*.html", // Inkluderer filer i auth-mappen hvis relevant
+    "./listing/**/*.html", // Inkluderer filer i listing-mappen hvis relevant
+    // Legg til andre relevante mapper hvis nødvendig
   ],
   theme: {
     extend: {
@@ -46,7 +48,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require("@tailwindcss/line-clamp"), // Plugin for tekstklipping
-  ],
+  plugins: [require("@tailwindcss/line-clamp")],
 };

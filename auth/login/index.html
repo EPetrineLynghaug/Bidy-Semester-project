@@ -9,64 +9,67 @@
   </head>
   <body
     class="flex flex-col items-center justify-center h-screen bg-[#FAFAFA] font-sans"
-  ></body>
-
-  <header class="bg-[#0D47A1] text-white p-4 shadow-xl w-full">
-    <nav id="auth-links" class="flex justify-between max-w-7xl mx-auto"></nav>
-  </header>
-  <main
-    class="flex flex-col items-center justify-start flex-1 w-full px-4 mt-8"
   >
-    <form
-      name="login"
-      class="bg-white p-6 rounded-lg shadow-lg w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg"
+    <header class="bg-gray-800 text-white p-4 shadow-xl w-full">
+      <nav id="auth-links" class="flex justify-between max-w-7xl mx-auto"></nav>
+    </header>
+    <main
+      class="flex flex-col items-center justify-start flex-1 w-full px-4 mt-8"
     >
-      <h1 class="text-2xl font-bold text-center text-gray-800 mb-4">Login</h1>
-      <div class="mb-4">
-        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
-          Email
-        </label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          placeholder="Enter your email"
-          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
-          required
-        />
-      </div>
-      <div class="mb-6">
-        <label
-          for="password"
-          class="block text-sm font-medium text-gray-700 mb-1"
+      <form
+        name="login"
+        class="bg-white p-6 rounded-lg shadow-lg w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg"
+      >
+        <h1 class="text-2xl font-bold text-center text-gray-800 mb-4">Login</h1>
+        <div class="mb-4">
+          <label
+            for="email"
+            class="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Email
+          </label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Enter your email"
+            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            required
+          />
+        </div>
+        <div class="mb-6">
+          <label
+            for="password"
+            class="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Password
+          </label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Enter your password"
+            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          class="w-full bg-[#1565C0] text-white py-3 rounded-lg font-semibold hover:bg-[#0D47A1] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300"
         >
-          Password
-        </label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="Enter your password"
-          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
-          required
-        />
-      </div>
-      <button
-        type="submit"
-        class="w-full bg-[#1565C0] text-white py-3 rounded-lg font-semibold hover:bg-[#0D47A1] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300"
-      >
-        Login
-      </button>
-    </form>
+          Login
+        </button>
+      </form>
 
-    <p class="mt-4 text-sm text-gray-700 text-center">
-      Don't have an account?
-      <a
-        href="/auth/register"
-        class="text-blue-600 hover:text-blue-800 font-medium transition duration-300"
-      >
-        Register here
-      </a>
-    </p>
-  </main>
+      <p class="mt-4 text-sm text-gray-700 text-center">
+        Don't have an account?
+        <a
+          href="/auth/register"
+          class="text-blue-600 hover:text-blue-800 font-medium transition duration-300"
+        >
+          Register here
+        </a>
+      </p>
+    </main>
+  </body>
 </html>
