@@ -8,14 +8,14 @@ import { createNewAuction } from "./newauction-modal.component.js";
 
 export function renderAuthLinks() {
   const authLinks = document.getElementById("auth-links");
-  authLinks.className = "relative flex items-center justify-between";
+  authLinks.className = "relative flex items-center justify-between px-4";
   let username = "";
   const token = getToken();
   if (token) {
     username = getStoredUserName();
   }
 
-  const commonMenu = [{ name: "Home", url: "/" }]; // Home alltid tilgjengelig
+  const commonMenu = [{ name: "Home", url: "/" }];
 
   const authMenu = token
     ? [
@@ -32,23 +32,19 @@ export function renderAuthLinks() {
 
   authLinks.innerHTML = "";
 
-  // Hamburger Button
+  // Hamburger Button with Phosphor Icon
   const toggleButton = document.createElement("button");
   toggleButton.className =
-    "md:hidden flex items-center px-3 py-2 border rounded text-white border-white hover:text-gray-300 hover:border-gray-300";
-  toggleButton.innerHTML = `
-    <svg class="fill-current h-5 w-5" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-      <title>Menu</title>
-      <path d="M0 3h20v2H0zM0 9h20v2H0zM0 15h20v2H0z" />
-    </svg>
-  `;
+    "md:hidden flex items-center px-2 py-1 border rounded text-white border-white hover:text-gray-300 hover:border-gray-300";
+  toggleButton.innerHTML = `<i class="ph ph-list text-xl"></i>`; // Phosphor Icon (litt mindre ikon)
   authLinks.appendChild(toggleButton);
 
   // Menu Container
   const menuContainer = document.createElement("div");
   menuContainer.className =
-    "hidden md:flex flex-col md:flex-row md:items-center absolute md:static top-full left-0 w-full bg-[#0D47A1] z-50 rounded-lg md:rounded-none";
+    "hidden md:flex flex-col md:flex-row md:items-center absolute md:static top-full left-0 w-[calc(100%-5px)] bg-gray-800 z-50 rounded-lg md:rounded-none"; // Gjør menyen 5 px smalere
 
+  // Toggle visibility on click
   toggleButton.addEventListener("click", () => {
     menuContainer.classList.toggle("hidden");
   });
@@ -101,14 +97,13 @@ export function renderAuthLinks() {
     // Add divider between menu items (if it's not the last item)
     if (index < meny.length - 1) {
       const divider = document.createElement("div");
-      divider.className = "border-b border-gray-300 my-2 md:hidden"; // Divider for mobile
+      divider.className = "border-b border-gray-700 my-2 md:hidden";
       menuContainer.appendChild(divider);
     }
   });
 
   authLinks.appendChild(menuContainer);
 
-  // Add a logo/image to the right side
   const logo = document.createElement("img");
   logo.src = "/src/media/processed_mobile-removebg-preview.png";
   logo.alt = "Logo";
