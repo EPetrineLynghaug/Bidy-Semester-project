@@ -122,4 +122,5 @@ function handleLogout() {
   removeUsername();
   alert("You are now logged out");
   renderAuthLinks();
+  window.location.href = "/";
 }
