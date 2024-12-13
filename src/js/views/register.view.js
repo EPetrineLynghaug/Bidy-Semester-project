@@ -16,7 +16,6 @@ function initializeRegisterPage() {
   }
 }
 
-/// vurdeer noe annent enn try catch her ksn heller sjekkes emd en if else.
 async function handleRegister(event) {
   event.preventDefault();
 
@@ -42,17 +41,20 @@ async function handleRegister(event) {
       registerForm
     );
 
+    // Redirect after a short delay to allow users to read the success message
     setTimeout(() => {
       window.location.href = "/auth/login";
     }, 1500);
   } catch (error) {
     console.error("Registration failed:", error);
+
     let errorMessage = "An unexpected error occurred. Please try again.";
-    if (error.response && error.response.data) {
+    if (error.response && error.response.data && error.response.data.message) {
       errorMessage = error.response.data.message;
     } else if (error.message) {
       errorMessage = error.message;
     }
+
     showCustomAlert(errorMessage, "error", registerForm);
   }
 }
