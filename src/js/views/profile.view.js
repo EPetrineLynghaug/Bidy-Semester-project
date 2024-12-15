@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Fetch profile data
     const profile = await fetchProfile(username);
     if (!profile) {
-      location.href = "/"; // Redirect to home if profile does not exist
+      location.href = "/";
       return;
     }
 
@@ -51,39 +51,51 @@ document.addEventListener("DOMContentLoaded", async () => {
     handleAuctionActions(updatedAuction, isMyProfile);
   } catch (error) {
     console.error("Error fetching profile:", error.message);
-    location.href = "/"; // Redirect to home on error
+    document.querySelector(
+      ".container"
+    ).innerHTML = `<p class="text-red-500 text-center mt-4">Failed to load profile data. Please try again later.</p>`;
   }
 });
 
 // Helper function to update profile UI
 function updateProfileUI(profile, isMyProfile) {
   const bannerElement = document.querySelector("#banner-image");
+  const avatarElement = document.querySelector("#profile-avatar");
+
+  // Handle Banner URL
   if (bannerElement) {
-    bannerElement.src =
-      profile.banner?.url || "https://via.placeholder.com/800x300";
-    bannerElement.alt = profile.banner?.alt || "Banner image";
+    if (isValidUrl(profile.banner?.url)) {
+      bannerElement.src = profile.banner.url;
+      bannerElement.alt = profile.banner.alt || "Banner image";
+    } else {
+      bannerElement.src = "https://via.placeholder.com/800x300";
+      bannerElement.alt = "Placeholder banner image";
+    }
     bannerElement.onerror = () => {
       bannerElement.src = "https://via.placeholder.com/800x300";
       bannerElement.alt = "Failed to load banner image";
     };
   }
 
-  const avatarElement = document.querySelector("#profile-avatar");
+  // Handle Avatar URL
   if (avatarElement) {
-    avatarElement.src =
-      profile.avatar?.url || "https://via.placeholder.com/100";
-    avatarElement.alt = profile.avatar?.alt || "Profile Avatar";
+    if (isValidUrl(profile.avatar?.url)) {
+      avatarElement.src = profile.avatar.url;
+      avatarElement.alt = profile.avatar.alt || "Profile avatar";
+    } else {
+      avatarElement.src = "https://via.placeholder.com/100";
+      avatarElement.alt = "Placeholder avatar image";
+    }
     avatarElement.onerror = () => {
       avatarElement.src = "https://via.placeholder.com/100";
-      avatarElement.alt = "Failed to load profile avatar";
+      avatarElement.alt = "Failed to load avatar image";
     };
   }
 
   document.querySelector("#profile-name").textContent =
     profile.name || "Unknown User";
   document.querySelector("#profile-bio").textContent =
-    profile.bio ||
-    "Passionate about finding unique deals and rare items. Experienced in online auctions, with a focus on quality and customer satisfaction.";
+    profile.bio || "No bio available.";
 
   const coinsElement = document.querySelector("#profile-coins");
   if (isMyProfile) {
@@ -160,4 +172,14 @@ function handleAuctionActions(updatedAuction, isMyProfile) {
         }
       }
     });
+}
+
+// Helper function to validate URLs
+function isValidUrl(url) {
+  try {
+    const parsedUrl = new URL(url);
+    return parsedUrl.protocol === "http:" || parsedUrl.protocol === "https:";
+  } catch {
+    return false;
+  }
 }
