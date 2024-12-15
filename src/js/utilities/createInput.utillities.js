@@ -18,7 +18,7 @@ export function createInput(num, media) {
   const urlLabel = document.createElement("label");
   urlLabel.setAttribute("for", `mediaUrl${num}`);
   urlLabel.className = "text-gray-700 text-sm font-medium";
-  urlLabel.textContent = `Image URL ${num}`;
+  urlLabel.textContent = `Image URL`; // Statisk tekst uten nummer
 
   // Input for Image URL
   const input = document.createElement("input");
@@ -31,7 +31,12 @@ export function createInput(num, media) {
   input.className =
     "border border-gray-300 rounded-md p-2 bg-gray-100 text-gray-800 placeholder-gray-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-400 focus:outline-none w-full";
 
-  // Input for ALT Text (without label)
+  // Input for ALT Text (with a label)
+  const altLabel = document.createElement("label");
+  altLabel.setAttribute("for", `mediaAlt${num}`);
+  altLabel.className = "text-gray-700 text-sm font-medium";
+  altLabel.textContent = "ALT Text";
+
   const altInput = document.createElement("input");
   altInput.type = "text";
   altInput.id = `mediaAlt${num}`;
@@ -58,6 +63,7 @@ export function createInput(num, media) {
   // Append elements to the wrapper
   wrapper.appendChild(urlLabel);
   wrapper.appendChild(input);
+  wrapper.appendChild(altLabel); 
   wrapper.appendChild(altInput);
   wrapper.appendChild(btnRemove);
 
