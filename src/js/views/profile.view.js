@@ -7,6 +7,7 @@ import { purchasedAuctionModal } from "../components/purchasedAuc.modal.componen
 import { updateProfileModal } from "../components/updateProfile-modal.component.js";
 import { getStoredUserName } from "../utilities/storage.js";
 import { renderFooter } from "../components/footer.components.js";
+import { showToast } from "../components/showCustomAlert.components.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
@@ -145,14 +146,28 @@ function handleAuctionActions(updatedAuction, isMyProfile) {
       const auctionCard = event.target.closest(".auction-card");
       const auctionId = auctionCard?.dataset.id;
 
+      // Handle Edit Button
       if (event.target.classList.contains("edit-btn")) {
         const listing = updatedAuction.find((item) => item.id === auctionId);
-        createNewAuction(listing, (updatedListing) => {
-          const updatedCard = myAuctions(updatedListing, true);
-          auctionCard.replaceWith(updatedCard);
-        });
+        if (listing) {
+          createNewAuction(listing, (updatedListing) => {
+            if (updatedListing) {
+              const updatedCard = myAuctions(updatedListing, true);
+              auctionCard.replaceWith(updatedCard);
+              showToast("Auction edited successfully!", "success");
+            } else {
+              showToast(
+                "Failed to edit the auction. Please try again.",
+                "error"
+              );
+            }
+          });
+        } else {
+          showToast("Failed to find the auction to edit.", "error");
+        }
       }
 
+      // Handle Delete Button
       if (event.target.classList.contains("delete-btn")) {
         if (confirm("Are you sure you want to delete this Auction?")) {
           deleteAuction(auctionId)
@@ -164,10 +179,14 @@ function handleAuctionActions(updatedAuction, isMyProfile) {
               if (!container.querySelector(".auction-card")) {
                 container.innerHTML = "<p>No auctions available.</p>";
               }
+              showToast("Auction deleted successfully!", "success");
             })
             .catch((error) => {
               console.error("Error deleting auction:", error);
-              alert("Failed to delete the auction. Please try again.");
+              showToast(
+                "Failed to delete the auction. Please try again.",
+                "error"
+              );
             });
         }
       }
