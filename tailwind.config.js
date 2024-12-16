@@ -1,52 +1,53 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./*.html", // Inkluderer HTML-filer i rotmappen (f.eks., index.html)
-    "./src/**/*.{js,jsx,ts,tsx,html}", // Inkluderer alle relevante filer i src-mappen
-    "./profile/**/*.html", // Inkluderer alle HTML-filer i profile-mappen
-    // "./auth/**/**/*.html", // Inkluderer filer i auth-mappen hvis relevant
-    "./auth/**/*.html", // Inkluderer filer i auth-mappen hvis relevant
-    "./listing/**/*.html", // Inkluderer filer i listing-mappen hvis relevant
-    // Legg til andre relevante mapper hvis nødvendig
+    "./*.html", // Include HTML files in the root directory (e.g., index.html)
+    "./src/**/*.{js,jsx,ts,tsx,html}", // Include all relevant files in the src folder
+    "./profile/**/*.html", // Include all HTML files in the profile folder
+    "./auth/**/*.html", // Include all HTML files in the auth folder
+    "./listing/**/*.html", // Include all HTML files in the listing folder
+    // Add additional folders or file patterns if necessary
   ],
   theme: {
     extend: {
       colors: {
-        hoverGray: "#f5f5f5",
-        textPrimary: "#333333",
-        textSecondary: "#555555",
-        linkColor: "#1565C0",
+        hoverGray: "#f5f5f5", // Subtle gray for hover effects
+        textPrimary: "#333333", // Primary text color
+        textSecondary: "#555555", // Secondary text color
+        linkColor: "#1565C0", // Link and primary action color
         primary: {
-          DEFAULT: "#1565C0", // Blå farge
-          hover: "#0D47A1", // Hover for detaljknappen
+          DEFAULT: "#1565C0", // Primary blue color
+          hover: "#0D47A1", // Darker blue for hover states
         },
         secondary: {
-          DEFAULT: "#42A5F5", // Blåfarge nr 2
+          DEFAULT: "#42A5F5", // Secondary blue color
         },
         edit: {
-          DEFAULT: "#5C9DED", // Edit farge
-          hover: "#3B82F6", // Hover for edit-knappen
+          DEFAULT: "#5C9DED", // Blue for edit actions
+          hover: "#3B82F6", // Hover state for edit buttons
         },
         bidNow: {
-          DEFAULT: "#28A745", // Bid now farge
-          hover: "#388E3C", // Hover for bid now-knappen
+          DEFAULT: "#28A745", // Green for "Bid Now" actions
+          hover: "#388E3C", // Hover state for "Bid Now" buttons
         },
         delete: {
-          DEFAULT: "#E53935", // Slett farge
-          hover: "#D32F2F", // Hover for slett-knappen
+          DEFAULT: "#E53935", // Red for delete actions
+          hover: "#D32F2F", // Hover state for delete buttons
         },
       },
       fontFamily: {
-        sans: ["Satoshi", "sans-serif"],
+        sans: ["Satoshi", "sans-serif"], // Custom font family
       },
       lineHeight: {
-        snug: "1.25",
-        relaxed: "1.6",
+        snug: "1.25", // Tighter line height for better spacing
+        relaxed: "1.6", // Relaxed line height for readable content
       },
       fontWeight: {
-        thin: "100",
+        thin: "100", // Ultra-thin font weight
       },
     },
   },
-  plugins: [require("@tailwindcss/line-clamp")],
+  plugins: [
+    require("@tailwindcss/line-clamp"), // Plugin for text truncation
+  ],
 };

@@ -10,10 +10,53 @@
     <title>Home | Bidy - View All New Auctions</title>
     <link href="./src/css/output.css" rel="stylesheet" />
     <script type="module" src="./src/js/views/index.view.js"></script>
+    <!-- Favicon and App Icons -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="/apple-icon-114x114.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="/apple-icon-120x120.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="/apple-icon-144x144.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="/apple-icon-152x152.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/apple-icon-180x180.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="/android-icon-192x192.png"
+    />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+    <meta name="theme-color" content="#ffffff" />
   </head>
   <body class="bg-[#FAFAFA] font-sans">
     <!-- Navigasjonsmeny -->
-    <header class="relative bg-gray-800 text-white p-4 shadow-xl">
+    <header class="relative bg-gray-800 text-white p-4 shadow-xl" role="banner">
       <nav
         id="auth-links"
         class="flex space-x-4"
@@ -29,9 +72,8 @@
         Welcome to Bidy
       </h1>
 
-      <!-- Første paragraf -->
       <p
-        class="text-gray-600 text-lg sm:text-xl md:text-2xl lg:text-xl mt-4 font-light leading-relaxed mb-6 text-left pl-8"
+        class="text-gray-700 text-lg sm:text-xl md:text-2xl lg:text-xl mt-4 font-light leading-relaxed mb-6 text-left pl-8"
       >
         Discover unique items, rare finds, and exclusive offers on Bidy. Browse
         our latest listings and join the bidding on the best deals from around
@@ -39,20 +81,22 @@
       </p>
 
       <p
-        class="text-gray-600 text-lg sm:text-xl md:text-2xl lg:text-xl mt-4 font-light leading-relaxed mb-6 text-left pl-8"
+        class="text-gray-700 text-lg sm:text-xl md:text-2xl lg:text-xl mt-4 font-light leading-relaxed mb-6 text-left pl-8"
       >
         All new users receive
         <span class="inline-flex items-center gap-2">
-          <i class="ph ph-currency-circle-dollar text-gray-800 text-1xl"></i>
+          <i
+            class="ph ph-currency-circle-dollar text-gray-800 text-1xl"
+            aria-hidden="true"
+          ></i>
           1000 coins
         </span>
         when they register. These coins can be used to bid on auctions. To earn
         more coins, you must sell items at the auction.
       </p>
 
-      <!-- Andre paragraf -->
       <p
-        class="text-gray-600 text-lg sm:text-xl md:text-2xl lg:text-xl mt-4 font-light leading-relaxed mb-10 text-left pl-8"
+        class="text-gray-700 text-lg sm:text-xl md:text-2xl lg:text-xl mt-4 font-light leading-relaxed mb-10 text-left pl-8"
       >
         Ready to start? Enter what you're looking for, or explore new auctions.
       </p>
@@ -69,7 +113,6 @@
           <input
             type="text"
             id="search-input"
-            aria-placeholder="Search for items, categories, or deals"
             placeholder="Search for items, categories, or deals"
             class="border border-gray-300 rounded-lg p-4 sm:p-5 w-full h-full text-black text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all font-thin"
           />
@@ -78,20 +121,10 @@
             class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-transparent text-gray-600 hover:text-blue-500 focus:outline-none"
             aria-label="Search"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 sm:h-8 sm:w-8"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M21 21l-4.35-4.35M17 10a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
+            <i
+              class="ph ph-magnifying-glass text-3xl sm:text-4xl"
+              aria-hidden="true"
+            ></i>
           </button>
         </div>
       </div>
@@ -99,6 +132,7 @@
       <!-- Overskrift for auksjoner -->
       <h2
         class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-thin text-gray-800 leading-snug mb-6 text-left pl-8"
+        id="auctions-heading"
       >
         Newest Auctions
       </h2>
@@ -107,6 +141,8 @@
       <div
         id="my-auctions-container"
         class="grid gap-10 p-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-screen-xl mx-auto mb-36"
+        aria-labelledby="auctions-heading"
+        role="region"
       ></div>
     </main>
     <footer id="footer-container"></footer>
