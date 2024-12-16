@@ -28,7 +28,7 @@ export function createNewAuction(listing) {
 
   const modalContainer = document.createElement("div");
   modalContainer.className =
-    "modal-container fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-[2147483647]";
+    "modal-container fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-50";
 
   modalContainer.innerHTML = `
     <div class="bg-white rounded-md shadow-md p-6 sm:p-10 w-[90%] max-w-2xl max-h-[90vh] overflow-y-auto relative" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-desc">

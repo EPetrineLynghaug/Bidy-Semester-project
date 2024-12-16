@@ -75,7 +75,7 @@ function scrollToTop() {
   }
 
   // Fallback: Scroll the entire window to top
-  window.scrollTo({
+  document.querySelector("#searchResult").scrollTo({
     top: 0,
     behavior: "smooth",
   });

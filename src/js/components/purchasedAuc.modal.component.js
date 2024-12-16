@@ -3,14 +3,14 @@ import { getProfileAuctionWins } from "../api/profile.api.js";
 export function purchasedAuctionModal(name) {
   const modalContainer = document.createElement("section");
   modalContainer.className =
-    "modal-container fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center";
+    "modal-container fixed top-0 left-0 w-screen h-screen bg-black/50 flex justify-center items-center z-50";
 
   modalContainer.innerHTML = `
-    <div class="bg-white rounded-lg shadow-md p-6 max-h-screen w-11/12 md:max-w-2xl lg:max-w-3xl overflow-y-auto relative">
+    <div class="bg-white rounded-lg shadow-md p-6 max-h-[90vh] w-11/12 md:max-w-2xl lg:max-w-3xl overflow-y-auto relative">
       <!-- Header -->
       <div class="flex justify-between items-center border-b pb-4 mb-4">
         <h2 class="text-lg md:text-xl lg:text-2xl font-semibold text-gray-800">Purchased Auctions</h2>
-        <button id="close-modal"       class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center bg-red-500 text-white rounded-full border border-red-600 shadow-md hover:bg-red-600 hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 ease-in-out"
+        <button id="close-modal" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center bg-red-500 text-white rounded-full border border-red-600 shadow-md hover:bg-red-600 hover:shadow-lg hover:scale-105 active:scale-95 transition-all duration-200 ease-in-out"
       title="Close Modal"
       aria-label="Close Modal"
       >

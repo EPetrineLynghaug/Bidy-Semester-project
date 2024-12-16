@@ -50,7 +50,7 @@ export function renderAuthLinks() {
   // Menu Container
   const menuContainer = document.createElement("div");
   menuContainer.className =
-    "hidden md:flex flex-col md:flex-row md:items-center absolute md:static top-full left-0 w-full bg-gray-800 z-50 rounded-lg md:rounded-none";
+    "hidden md:flex flex-col md:flex-row md:items-center absolute md:static top-full left-0 w-full bg-gray-800 z-10 rounded-lg md:rounded-none";
 
   // Toggle visibility on click
   toggleButton.addEventListener("click", () => {
