@@ -113,7 +113,7 @@ body {
   @apply flex justify-center space-x-6 mb-6;
 }
 
-.icons-container a {
+.icons-container .icon {
   @apply text-[#FAFAFA] hover:text-gray-200 transition-colors duration-300;
 }
 
