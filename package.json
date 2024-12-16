@@ -1,5 +1,5 @@
 {
-  "name": "your-project-name",
+  "name": "bidy",
   "version": "1.0.0",
   "scripts": {
     "build:css": "tailwindcss -i ./src/css/input.css -o ./src/css/output.css --watch",
