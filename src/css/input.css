@@ -1,80 +1,62 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
-html,
-body {
-  @apply font-sans;
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
+/* Font-face deklarasjoner */
+@font-face {
+  font-family: "Satoshi";
+  font-style: normal;
+  font-weight: 300; /* Light */
+  src: local("Satoshi Light"), url("../fonts/Satoshi-Light.woff") format("woff");
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Satoshi";
   font-style: normal;
-  font-weight: 300; /*Light*/
-  src: local("Satoshi Light"), url("/fonts/Satoshi-Light.woff") format("woff");
+  font-weight: 400; /* Regular */
+  src: local("Satoshi Regular"), url("../fonts/Satoshi-Regular.woff") format("woff");
   font-display: swap;
 }
-
 
 @font-face {
-  font-family: "Satoshi";
-  font-style: normal;
-  font-weight: 400; /*Regular */
-  src: local("Satoshi Regular"),
-    url("/fonts/Satoshi-Regular.woff") format("woff");
-  font-display: swap;
-}
-
-
-
- @font-face {
   font-family: "Satoshi";
   font-style: normal;
   font-weight: 500; /* Medium */
-  src: local("Satoshi Medium"), url("/fonts/Satoshi-Medium.woff") format("woff");
+  src: local("Satoshi Medium"), url("../fonts/Satoshi-Medium.woff") format("woff");
   font-display: swap;
 }
 
- @font-face {
+@font-face {
   font-family: "Satoshi";
   font-style: normal;
   font-weight: 700; /* Bold */
-   src: local("Satoshi Bold"), url("/fonts/Satoshi-Bold.woff") format("woff");
-  font-display: swap;
-} 
- 
-
-
- @font-face {
-  font-family: "Satoshi";
-  font-style: normal;
-  font-weight: 900; /* Black */
-   src: local("Satoshi Black"), url("/fonts/Satoshi-Black.woff") format("woff");
+  src: local("Satoshi Bold"), url("../fonts/Satoshi-Bold.woff") format("woff");
   font-display: swap;
 }
 
-/* Footer Styling */
+@font-face {
+  font-family: "Satoshi";
+  font-style: normal;
+  font-weight: 900; /* Black */
+  src: local("Satoshi Black"), url("../fonts/Satoshi-Black.woff") format("woff");
+  font-display: swap;
+}
+
+/* Egen tilpasset CSS */
 .footer {
-  @apply bg-gray-800 text-white text-center relative mt-auto shadow-md;
-  @apply p-10 md:p-16;
+  @apply bg-gray-800 text-white text-center relative mt-auto shadow-md p-10 md:p-16;
   position: relative;
   height: auto;
 }
 
-/* Gradient Above Footer for Visual Transition */
 .footer::before {
   content: "";
-  @apply absolute top-[-100px] left-0 w-full h-[200px];
+  @apply absolute -top-[100px] left-0 w-full h-[200px];
   background: linear-gradient(to top, rgba(0, 0, 0, 0.3), #fafafa);
   pointer-events: none;
   z-index: -1;
 }
-
 /* Back to Top Button */
 .back-to-top {
   @apply absolute -top-12 left-1/2 transform -translate-x-1/2 w-[160px] h-[80px] bg-gray-800 flex items-center justify-center cursor-pointer z-10 rounded-t-full;
