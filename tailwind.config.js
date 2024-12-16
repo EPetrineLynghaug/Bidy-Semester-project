@@ -45,6 +45,10 @@ module.exports = {
       fontWeight: {
         thin: "100", // Ultra-thin font weight
       },
+      zIndex: {
+        9999: "9999", // Add z-9999 for modals or high-priority elements
+        max: "2147483647", // Add max z-index for absolute top-level elements
+      },
     },
   },
   plugins: [
