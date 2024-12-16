@@ -1357,6 +1357,10 @@ video {
   padding: 1.5rem;
 }
 
+.p-20 {
+  padding: 5rem;
+}
+
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
@@ -1412,6 +1416,10 @@ video {
 
 .pl-8 {
   padding-left: 2rem;
+}
+
+.pt-20 {
+  padding-top: 5rem;
 }
 
 .text-left {

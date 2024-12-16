@@ -2,7 +2,7 @@
 module.exports = {
   content: [
     "./*.html", // Include HTML files in the root directory (e.g., index.html)
-    "./src/**/*.{js,jsx,ts,tsx,html}", // Include all relevant files in the src folder
+    "./src/**/*.{js,html}", // Include all relevant files in the src folder
     "./profile/**/*.html", // Include all HTML files in the profile folder
     "./auth/**/*.html", // Include all HTML files in the auth folder
     "./listing/**/*.html", // Include all HTML files in the listing folder
