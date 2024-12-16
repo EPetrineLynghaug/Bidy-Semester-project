@@ -44,7 +44,6 @@ export function renderFooter() {
       backToTopButton.addEventListener("click", scrollToTop);
     }
 
-    // Last inn Phosphor Icons dynamisk hvis ikke allerede inkludert
     if (
       !document.querySelector('script[src="https://unpkg.com/phosphor-icons"]')
     ) {

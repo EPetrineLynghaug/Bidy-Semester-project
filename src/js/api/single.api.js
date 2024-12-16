@@ -1,16 +1,15 @@
 import { createHeaders } from "../utilities/header.utillities.js";
 import { API_AUCTION_LISTINGS, API_PROFILE } from "./constants.js";
-import { getStoredUserName } from "../utilities/storage.js";
 
 export async function fetchSingleCardDetails(id) {
   try {
     const url = `${API_AUCTION_LISTINGS}/${id}?_seller=true&_bids=true`;
-    console.log(`Fetching details for card ID: ${id}`);
+
     const response = await fetch(url, {
       method: "GET",
       headers: createHeaders(),
     });
-    // Sjekk om svaret ikke er OK
+
     if (!response.ok) {
       throw new Error(
         `Error fetching auction details (status: ${response.status})`
@@ -43,12 +42,11 @@ export async function Bid(id, Bid) {
     }
 
     const result = await response.json();
-    console.log("Bid placed successfully. Result:", result);
 
     const data = result.data;
 
     return data;
   } catch (error) {
-    console.log("error creating auction listings", error.message);
+    console.error("error creating auction listings", error.message);
   }
 }

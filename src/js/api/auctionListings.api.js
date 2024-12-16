@@ -11,7 +11,7 @@ export async function fetchAuctionListings(limit = 18, page = 1) {
         headers: createHeaders(),
       }
     );
-    console.log(response);
+
     if (!response.ok) {
       const errorMessage = `Failed to fetch listings: ${response.status} ${response.statusText}`;
       console.error(errorMessage);

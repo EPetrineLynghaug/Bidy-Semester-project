@@ -47,8 +47,6 @@ export function purchasedAuctionModal(name) {
 
   getProfileAuctionWins(name)
     .then((wins) => {
-      console.log("Auction Wins in Frontend:", wins);
-
       const contentContainer = modalContainer.querySelector(
         "#purchased-auctions-content"
       );
@@ -59,7 +57,6 @@ export function purchasedAuctionModal(name) {
       }
 
       if (wins.length > 0) {
-        console.log("Displaying auction wins:", wins);
         const auctionContent = wins
           .map(
             (win) => `
@@ -92,7 +89,6 @@ export function purchasedAuctionModal(name) {
 
         contentContainer.innerHTML = `<ul class="purchased-auctions-list space-y-4">${auctionContent}</ul>`;
       } else {
-        console.log("No auction wins found.");
         contentContainer.innerHTML = `<p class="text-gray-500 text-center">No purchased auctions found.</p>`;
       }
     })

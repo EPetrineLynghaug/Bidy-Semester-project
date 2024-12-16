@@ -52,7 +52,6 @@ const createToggleForOlderBids = (bidHistoryBody, remainingBids) => {
 };
 
 // Render auction details and bid history
-// Render auction details and bid history
 export function renderAuctionDetails(auctionData) {
   if (!auctionData) return;
 

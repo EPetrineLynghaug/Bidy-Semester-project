@@ -230,7 +230,6 @@ export function createNewAuction(listing) {
             "success",
             modalContainer.querySelector("#auction-form")
           );
-          console.log("Auction result:", result);
 
           setTimeout(() => {
             modalContainer.remove();
@@ -238,7 +237,6 @@ export function createNewAuction(listing) {
           }, 2000);
         } else {
           const result = await createauction(formData);
-          console.log("Created auction:", result);
 
           const myAuctionsContainer = document.querySelector(
             "#my-auctions-container"

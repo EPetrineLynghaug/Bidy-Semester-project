@@ -106,7 +106,7 @@ export function renderAuthLinks() {
     // Legg til en delingslinje mellom menyelementer på mobile
     if (index < meny.length - 1) {
       const divider = document.createElement("div");
-      divider.className = "border-b border-gray-700 my-2 md:hidden"; // Divider for mobile
+      divider.className = "border-b border-gray-700 my-2 md:hidden";
       menuContainer.appendChild(divider);
     }
   });

@@ -43,14 +43,11 @@ export async function getAllProfileAuction(name) {
     }
 
     const result = await response.json();
-    console.log(result);
 
     const updatedAuction = result.data;
 
     return updatedAuction;
-  } catch (error) {
-    console.log("error updating profile", error.message);
-  }
+  } catch (error) {}
 }
 
 //Make new aution//
@@ -74,9 +71,7 @@ export async function createauction(formData) {
     const data = result.data;
 
     return data;
-  } catch (error) {
-    console.log("error creating auction listings", error.message);
-  }
+  } catch (error) {}
 }
 
 //edit auction
@@ -98,7 +93,7 @@ export async function editAuction(id, formData) {
 
     return data;
   } catch (error) {
-    console.log("error editing auction listings", error.message);
+    console.error("error editing auction listings", error.message);
   }
 }
 
@@ -170,10 +165,9 @@ export async function getProfileAuctionWins(name) {
     }
 
     const result = await response.json();
-    console.log("Full API Response:", result);
 
     const auctionWins = result.data;
-    console.log("Auction Wins:", result.data);
+
     return auctionWins;
   } catch (error) {
     console.error("Error fetching profile:", error.message);

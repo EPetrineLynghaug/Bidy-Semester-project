@@ -33,7 +33,6 @@ async function handleRegister(event) {
 
   try {
     const newUser = await register(name, email, password);
-    console.log("User registered:", newUser);
 
     showCustomAlert(
       "Registration successful! Redirecting to login...",
