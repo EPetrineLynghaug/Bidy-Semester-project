@@ -1,60 +1,90 @@
 import { searchAuctionListings } from "../api/auctionListings.api.js";
 import { listingCardComponent } from "./listingCard.components.js";
 
+// URL Parameters for handling search, pagination, and total items per page
 const urlParams = {
-  searchTerm: undefined,
-  page: 1,
-  total: 12,
+  searchTerm: undefined, // Search term entered by the user
+  page: 1, // Current page number
+  total: 12, // Total items per page
 };
 
+// Helper function to create a pagination button
 function createPaginationButton(pagenumber, callback) {
   const btn = document.createElement("button");
+
+  // Apply active styles for the current page
   btn.className =
     pagenumber === urlParams.page
       ? "bg-[#1565C0] text-white font-medium rounded-md py-2 px-3 shadow-md"
       : "bg-gray-300 text-gray-600 font-medium rounded-md py-2 px-3 hover:bg-gray-400 transition duration-300";
+
   btn.innerText = pagenumber;
 
+  // Add click event listener to the button
   btn.addEventListener("click", async (e) => {
     e.preventDefault();
-    callback(pagenumber);
+    callback(pagenumber); // Invoke the callback function with the page number
   });
 
   return btn;
 }
 
+// Renders pagination buttons dynamically based on pagination data
 function renderPaginationButtons(pagination, callback) {
   const { current, previous, next, total } = pagination;
   const paginationButtonDiv = document.querySelector("#dynamicPagination");
-  paginationButtonDiv.innerHTML = "";
+  paginationButtonDiv.innerHTML = ""; // Clear existing pagination buttons
 
+  // Add "Previous" button if available
   if (previous && previous > 0) {
     paginationButtonDiv.append(
       createPaginationButton(previous, async (pagenumber) => {
         callback(pagenumber);
-        setTimeout(scrollToTop, 50); // Ensure scroll after rendering
       })
     );
   }
 
+  // Highlight the current page
   const currentDiv = document.createElement("div");
   currentDiv.className =
     "bg-[#1565C0] text-white font-medium py-2 px-3 rounded-md shadow-md";
   currentDiv.innerText = current;
   paginationButtonDiv.append(currentDiv);
 
+  // Add "Next" button if available
   if (next && next <= total) {
     paginationButtonDiv.append(
       createPaginationButton(next, async (pagenumber) => {
         callback(pagenumber);
-        setTimeout(scrollToTop, 50);
       })
     );
   }
 }
 
+// Scroll the modal or window to the top
+function scrollToTop() {
+  const modalContent = document.querySelector("#searchModalCard");
+  const modalInnerContent = document.querySelector("#searchResult");
+
+  if (modalContent) {
+    modalContent.scrollTop = 0; // Scroll modal container to top
+  }
+
+  if (modalInnerContent) {
+    modalInnerContent.scrollTop = 0; // Scroll modal content to top
+  }
+
+  // Fallback: Scroll the entire window to top
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+}
+
+// Render search results dynamically into the modal
 async function renderSearchResults() {
   try {
+    // Fetch search results from the API
     const result = await searchAuctionListings(
       urlParams.searchTerm,
       urlParams.page,
@@ -62,9 +92,10 @@ async function renderSearchResults() {
     );
 
     const searchResultDiv = document.querySelector("#searchResult");
-    searchResultDiv.innerHTML = "";
+    searchResultDiv.innerHTML = ""; // Clear existing results
 
     if (result.listings.length > 0) {
+      // Render each listing card
       result.listings.forEach((listing) => {
         const newListingCard = listingCardComponent(listing, "search");
         newListingCard.classList.add(
@@ -82,20 +113,25 @@ async function renderSearchResults() {
         searchResultDiv.append(newListingCard);
       });
 
+      // Update search result summary
       const searchResultSummary = document.querySelector(
         "#searchResultSummary"
       );
       searchResultSummary.innerText = `Showing ${result.listings.length} results on page ${urlParams.page} of ${result.pagination.total} pages`;
 
+      // Render pagination buttons
       renderPaginationButtons(result.pagination, async (pagenumber) => {
-        urlParams.page = pagenumber;
-        await renderSearchResults();
-        setTimeout(scrollToTop, 50);
+        urlParams.page = pagenumber; // Update current page
+        await renderSearchResults(); // Re-render results for the selected page
+        scrollToTop(); // Scroll to top after rendering
       });
     } else {
+      // Display a message if no results are found
       searchResultDiv.innerHTML =
         '<p class="text-gray-600 text-center">No results found for your search.</p>';
     }
+
+    scrollToTop(); // Ensure we scroll to the top after rendering
   } catch (error) {
     console.error("Error fetching search results: ", error.message);
     document.querySelector("#searchResult").innerHTML =
@@ -103,10 +139,10 @@ async function renderSearchResults() {
   }
 }
 
+// Opens the search modal and initializes the first search
 export async function openSearchModal(searchTerm) {
-  // Reset til side 1 for nytt søk
   urlParams.searchTerm = searchTerm;
-  urlParams.page = 1;
+  urlParams.page = 1; // Always start from page 1 for a new search
 
   const searchModal = document.createElement("div");
   searchModal.id = "searchModalBackdrop";
@@ -116,7 +152,7 @@ export async function openSearchModal(searchTerm) {
   searchModal.innerHTML = `
     <div
       id="searchModalCard"
-      class="bg-white flex flex-col rounded-lg shadow-lg w-11/12 h-5/6 max-w-lg md:max-w-2xl lg:max-w-3xl relative"
+      class="bg-white flex flex-col rounded-lg shadow-lg w-11/12 h-5/6 max-w-lg md:max-w-2xl lg:max-w-3xl relative overflow-hidden"
       role="dialog" aria-labelledby="searchResultSummary" aria-modal="true"
     >
       <div class="flex justify-between flex-wrap w-full p-4 border-b relative">
@@ -167,11 +203,11 @@ export async function openSearchModal(searchTerm) {
   `;
   document.body.append(searchModal);
 
-  await renderSearchResults();
-
+  await renderSearchResults(); // Initial search render
   setupModalNavigation();
 }
 
+// Sets up navigation and actions for modal buttons
 function setupModalNavigation() {
   const previousPageButton = document.querySelector("#previousPage");
   const nextPageButton = document.querySelector("#nextPage");
@@ -179,15 +215,14 @@ function setupModalNavigation() {
 
   closeSearchModal.addEventListener("click", () => {
     document.querySelector("#searchModalBackdrop").remove();
-    document.getElementById("search-input").value = ""; // Clears search input field
+    document.getElementById("search-input").value = ""; // Clear search input
   });
 
   previousPageButton.addEventListener("click", async (e) => {
     e.preventDefault();
     if (urlParams.page > 1) {
       urlParams.page--;
-      await renderSearchResults();
-      setTimeout(scrollToTop, 50); // Ensure scroll after rendering
+      await renderSearchResults(); // Fetch results for the previous page
     }
   });
 
@@ -196,12 +231,12 @@ function setupModalNavigation() {
     const { total } = await getTotalPages();
     if (urlParams.page < total) {
       urlParams.page++;
-      await renderSearchResults();
-      setTimeout(scrollToTop, 50); // Ensure scroll after rendering
+      await renderSearchResults(); // Fetch results for the next page
     }
   });
 }
 
+// Gets the total number of pages for the current search
 async function getTotalPages() {
   const result = await searchAuctionListings(
     urlParams.searchTerm,
@@ -211,14 +246,7 @@ async function getTotalPages() {
   return { total: result.pagination.total };
 }
 
-function scrollToTop() {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth", // Smooth scrolling
-  });
-}
-
-// Legg til støtte for Enter-tast i søkefeltet
+// Adds support for Enter key in the search input field
 document
   .getElementById("search-input")
   .addEventListener("keypress", async (e) => {
