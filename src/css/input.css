@@ -7,7 +7,7 @@
   font-family: "Satoshi";
   font-style: normal;
   font-weight: 300; /* Light */
-  src: local("Satoshi Light"), url("../fonts/Satoshi-Light.woff") format("woff");
+  src: local("Satoshi Light"), url("/fonts/Satoshi-Light.woff") format("woff");
   font-display: swap;
 }
 
@@ -15,7 +15,7 @@
   font-family: "Satoshi";
   font-style: normal;
   font-weight: 400; /* Regular */
-  src: local("Satoshi Regular"), url("../fonts/Satoshi-Regular.woff") format("woff");
+  src: local("Satoshi Regular"), url("/fonts/Satoshi-Regular.woff") format("woff");
   font-display: swap;
 }
 
@@ -23,7 +23,7 @@
   font-family: "Satoshi";
   font-style: normal;
   font-weight: 500; /* Medium */
-  src: local("Satoshi Medium"), url("../fonts/Satoshi-Medium.woff") format("woff");
+  src: local("Satoshi Medium"), url("/fonts/Satoshi-Medium.woff") format("woff");
   font-display: swap;
 }
 
@@ -31,7 +31,7 @@
   font-family: "Satoshi";
   font-style: normal;
   font-weight: 700; /* Bold */
-  src: local("Satoshi Bold"), url("../fonts/Satoshi-Bold.woff") format("woff");
+  src: local("Satoshi Bold"), url("/fonts/Satoshi-Bold.woff") format("woff");
   font-display: swap;
 }
 
@@ -39,7 +39,7 @@
   font-family: "Satoshi";
   font-style: normal;
   font-weight: 900; /* Black */
-  src: local("Satoshi Black"), url("../fonts/Satoshi-Black.woff") format("woff");
+  src: local("Satoshi Black"), url("/fonts/Satoshi-Black.woff") format("woff");
   font-display: swap;
 }
 
