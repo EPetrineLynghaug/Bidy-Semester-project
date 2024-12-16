@@ -108,3 +108,19 @@ I aimed to improve my design skills by focusing on a popping style, where icons 
 The search functionality is also implemented as a modal. It retrieves listings containing the searched keyword and includes pagination, which I implemented for the first time.
 
 </details>
+
+## Figma design
+
+![Figma Design](mediaReadme/home.png)
+![Figma Design](mediaReadme/profile.png)
+![Figma Design](mediaReadme/listning.png)
+![Figma Design](mediaReadme/profile.png)
+![Figma Design](mediaReadme/bid.png)
+![Figma Design](mediaReadme/footer.png)
+![Figma Design](mediaReadme/stylesheet.pnf)
+
+
+
+## Lighthouse 
+![Validation](mediaReadme/testing1.png)
+![Validation](mediaReadme/testing2.png)
