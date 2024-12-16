@@ -111,16 +111,16 @@ The search functionality is also implemented as a modal. It retrieves listings c
 
 ## Figma design
 
-![Figma Design](mediaReadme/home.png)
-![Figma Design](mediaReadme/profile.png)
-![Figma Design](mediaReadme/listning.png)
-![Figma Design](mediaReadme/profile.png)
-![Figma Design](mediaReadme/bid.png)
-![Figma Design](mediaReadme/footer.png)
-![Figma Design](mediaReadme/stylesheet.pnf)
+![Figma Design](src/mediaReadme/home.png)
+![Figma Design](src/mediaReadme/listning.png)
+![Figma Design](src/mediaReadme/profile.png)
+![Figma Design](src/mediaReadme/bid.png)
+![Figma Design](src/mediaReadme/footer.png)
+![Figma Design](src/mediaReadme/stylesheet.png)
+
 
 
 
 ## Lighthouse 
-![Validation](mediaReadme/testing1.png)
-![Validation](mediaReadme/testing2.png)
+![Validation](src/mediaReadme/testing1.png)
+![Validation](src/mediaReadme/testing2.png)
