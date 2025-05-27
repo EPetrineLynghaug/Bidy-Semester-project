@@ -245,16 +245,3 @@ async function getTotalPages() {
   );
   return { total: result.pagination.total };
 }
-
-// Adds support for Enter key in the search input field
-document
-  .getElementById("search-input")
-  .addEventListener("keypress", async (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      const searchTerm = e.target.value.trim();
-      if (searchTerm) {
-        await openSearchModal(searchTerm);
-      }
-    }
-  });
