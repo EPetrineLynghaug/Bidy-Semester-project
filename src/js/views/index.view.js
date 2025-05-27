@@ -52,10 +52,10 @@ async function loadAuctionListings() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  renderAuthLinks(); 
+  renderAuthLinks();
 
   setupSearchFunctionality();
 
-  loadAuctionListings(); 
+  loadAuctionListings();
   renderFooter();
 });
