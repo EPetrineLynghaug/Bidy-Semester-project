@@ -11,14 +11,14 @@
     <link href="./src/css/output.css" rel="stylesheet" />
     <script type="module" src="./src/js/views/index.view.js"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <!-- Favicon and App Icons -->
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <meta name="msapplication-TileColor" content="#2D3748" />
     <meta name="theme-color" content="#2D3748" />
   </head>
+
   <body class="bg-[#FAFAFA] font-sans">
     <!-- Navigasjonsmeny -->
-    <header class="relative bg-gray-900 text-white p-4 shadow-xl" role="banner">
+    <header class="relative bg-gray-900 text-white shadow-xl" role="banner">
       <nav
         id="auth-links"
         class="flex space-x-4"
@@ -26,87 +26,72 @@
       ></nav>
     </header>
 
-    <!-- Introduksjonstekst og Søke-boks -->
-    <main class="max-w-screen-xl mx-auto px-6 md:px-12 lg:px-16 mt-16">
-      <h1
-        class="text-4xl sm:text-5xl md:text-6xl lg:text-6xl font-thin text-gray-800 leading-snug mb-6 text-left pl-8"
-      >
-        Welcome to Bidy
-      </h1>
-
-      <p
-        class="text-gray-700 text-lg sm:text-xl md:text-2xl lg:text-xl mt-4 font-light leading-relaxed mb-6 text-left pl-8"
-      >
-        Discover unique items, rare finds, and exclusive offers on Bidy. Browse
-        our latest listings and join the bidding on the best deals from around
-        the world.
-      </p>
-
-      <p
-        class="text-gray-700 text-lg sm:text-xl md:text-2xl lg:text-xl mt-4 font-light leading-relaxed mb-6 text-left pl-8"
-      >
-        All new users receive
-        <span class="inline-flex items-center gap-2">
-          <i
-            class="ph ph-currency-circle-dollar text-gray-800 text-1xl"
-            aria-hidden="true"
-          ></i>
-          1000 coins
-        </span>
-        when they register. These coins can be used to bid on auctions. To earn
-        more coins, you must sell items at the auction.
-      </p>
-
-      <p
-        class="text-gray-700 text-lg sm:text-xl md:text-2xl lg:text-xl mt-4 font-light leading-relaxed mb-10 text-left pl-8"
-      >
-        Ready to start? Enter what you're looking for, or explore new auctions.
-      </p>
-
-      <!-- Søke-boks
-      <div class="flex justify-center items-center w-full my-8 pl-8">
-        <div
-          class="relative w-full max-w-lg md:max-w-2xl lg:max-w-3xl h-14 sm:h-16"
-          role="search"
-        >
-          <label for="search-input" class="sr-only"
-            >Search for items, categories, or deals</label
+    <!-- Hovedinnhold -->
+    <main
+      class="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16 mt-16 sm:mt-24 py-12 sm:py-20"
+    >
+      <!-- Introseksjon -->
+      <section class="mb-16">
+        <div class="sm:pl-8 sm:border-l-2 border-gray-200">
+          <h1
+            class="text-3xl sm:text-4xl md:text-5xl font-light tracking-wide text-gray-800 mb-6 leading-tight sm:leading-snug"
           >
-          <input
-            type="text"
-            id="search-input"
-            placeholder="Search for items, categories, or deals"
-            class="border border-gray-300 rounded-lg p-4 sm:p-5 w-full h-full text-black text-base sm:text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all font-thin"
-          />
-          <button
-            id="search-button"
-            class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-transparent text-gray-600 hover:text-blue-500 focus:outline-none"
-            aria-label="Search"
-          >
-            <i
-              class="ph ph-magnifying-glass text-3xl sm:text-4xl"
-              aria-hidden="true"
-            ></i>
-          </button>
-        </div> -->
-      </div>
+            Welcome to <span class="text-gray-900 tracking-widest">Bidy</span>
+          </h1>
 
-      <!-- Overskrift for auksjoner -->
+          <p
+            class="text-gray-700 text-base sm:text-lg md:text-xl font-light leading-relaxed mb-6 sm:max-w-2xl"
+          >
+            Discover
+            <span class="font-normal text-gray-800">unique items</span>,
+            <span class="font-normal text-gray-800">rare finds</span>, and
+            <span class="font-normal text-gray-800">exclusive offers</span> on
+            Bidy. Explore carefully curated listings and take part in auctions
+            from around the world.
+          </p>
+
+          <p
+            class="text-gray-700 text-base sm:text-lg md:text-xl font-light leading-relaxed mb-6 sm:max-w-2xl"
+          >
+            As a welcome gift, all new users receive
+            <span
+              class="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm tracking-wide ml-1 shadow-sm"
+            >
+              <i
+                class="ph ph-currency-circle-dollar text-base opacity-70"
+                aria-hidden="true"
+              ></i>
+              1000 coins </span
+            >. Use them to place your first bids – and earn more by selling your
+            own treasures.
+          </p>
+
+          <p
+            class="text-gray-700 text-base sm:text-lg md:text-xl font-light leading-relaxed sm:max-w-2xl mb-10"
+          >
+            <span class="text-gray-800 font-medium">Ready to begin?</span>
+            Browse our handpicked auctions now.
+          </p>
+        </div>
+      </section>
+
+      <!-- Overskrift for nye auksjoner -->
       <h2
-        class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-thin text-gray-800 leading-snug mb-6 text-left pl-8"
+        class="mt-10 text-2xl sm:text-3xl md:text-4xl font-light text-gray-800 mb-8 sm:pl-8"
         id="auctions-heading"
       >
         Newest Auctions
       </h2>
 
-      <!-- Container for auksjonsoppføringer -->
+      <!-- Auksjonsrutenett -->
       <div
         id="my-auctions-container"
-        class="grid gap-10 p-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-screen-xl mx-auto mb-36"
+        class="grid gap-10 px-2 sm:px-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-screen-xl mx-auto mb-36"
         aria-labelledby="auctions-heading"
         role="region"
       ></div>
     </main>
+
     <footer id="footer-container"></footer>
   </body>
 </html>
