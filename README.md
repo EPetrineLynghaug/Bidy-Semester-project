@@ -26,7 +26,63 @@ command:
  ```bash
 npm run build:css:prod
 ```
-<pre markdown> ``` BIDY-SEMESTER-PROJECT/ ├── .vscode/ ├── auth/ │ ├── login/ │ └── register/ ├── fonts/ │ ├── Satoshi-Black.woff │ ├── Satoshi-Bold.woff │ ├── Satoshi-Light.woff │ └── Satoshi-Medium.woff ├── listing/ │ ├── index.html │ └── node_modules/ ├── node_modules/ ├── profile/ │ └── index.html ├── src/ │ ├── input.css │ ├── output.css │ ├── css/ │ ├── js/ │ │ ├── api/ │ │ ├── components/ │ │ │ ├── authLinks.js │ │ │ ├── createSingleCard.js │ │ │ ├── footer.components.js │ │ │ ├── listingCard.components.js │ │ │ ├── myAuctions.component.js │ │ │ ├── newauction-modal.component.js │ │ │ ├── purchasedAuc.modal.component.js │ │ │ ├── search-modal.component.js │ │ │ ├── showCustomAlert.components.js │ │ │ └── updateProfile-modal.component.js │ │ ├── utilities/ │ │ │ ├── carouseCardUtils.js │ │ │ ├── createInput.utilities.js │ │ │ ├── formValidation.utilities.js │ │ │ ├── header.utilities.js │ │ │ └── storage.js │ │ └── views/ │ ├── media/ │ └── mediaReadme/ ├── .gitignore ├── favicon.ico ├── index.html ├── package-lock.json ├── package.json ├── README.md └── tailwind.config.js ``` </pre>
+
+## 📁 Project Structure
+<details>
+  <summary><strong>Click to read more</strong></summary>
+
+```bash
+BIDY-SEMESTER-PROJECT/
+├── .vscode/
+├── auth/
+│   ├── login/
+│   └── register/
+├── fonts/
+│   ├── Satoshi-Black.woff
+│   ├── Satoshi-Bold.woff
+│   ├── Satoshi-Light.woff
+│   └── Satoshi-Medium.woff
+├── listing/
+│   ├── index.html
+│   └── node_modules/
+├── node_modules/
+├── profile/
+│   └── index.html
+├── src/
+│   ├── input.css
+│   ├── output.css
+│   ├── css/
+│   ├── js/
+│   │   ├── api/
+│   │   ├── components/
+│   │   │   ├── authLinks.js
+│   │   │   ├── createSingleCard.js
+│   │   │   ├── footer.components.js
+│   │   │   ├── listingCard.components.js
+│   │   │   ├── myAuctions.component.js
+│   │   │   ├── newauction-modal.component.js
+│   │   │   ├── purchasedAuc.modal.component.js
+│   │   │   ├── search-modal.component.js
+│   │   │   ├── showCustomAlert.components.js
+│   │   │   └── updateProfile-modal.component.js
+│   │   ├── utilities/
+│   │   │   ├── carouseCardUtils.js
+│   │   │   ├── createInput.utilities.js
+│   │   │   ├── formValidation.utilities.js
+│   │   │   ├── header.utilities.js
+│   │   │   └── storage.js
+│   │   └── views/
+│   ├── media/
+│   └── mediaReadme/
+├── .gitignore
+├── favicon.ico
+├── index.html
+├── package-lock.json
+├── package.json
+├── README.md
+└── tailwind.config.js
+```
+</details>
 
 
 ## Description
