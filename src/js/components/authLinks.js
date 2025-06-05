@@ -39,7 +39,7 @@ export function renderAuthLinks() {
         aria-label="Search auctions"
         placeholder="Search auctions..."
         maxlength="50"
-        class="block w-full pl-3 pr-10 py-2 border border-gray-700 bg-gray-800 text-white
+        class="block w-full pl-3 pr-10 py-2 border border-gray-700 bg-gray-900 text-white
                rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
       />
 
